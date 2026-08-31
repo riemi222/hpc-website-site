@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>硬核玩家輕裝行 — Hokkaido Powder Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     storage.html — B套餐「硬核玩家輕裝行」專屬頁
+     雪具倉儲會員：真實三階定價（BASIC/PLUS/VIP）+ 首次會員費 +
+     出入庫手續費 + 加購保養，全部即時試算
+     追雪包車：沿用觀光包車的「填路線→人工報價」模式（同一項服務，
+     只是對硬核玩家這裡用「追雪」的說法）
+     ============================================================ */
+  .hpc-storage {
+    --snow: #F0EEE8; --ice: #C8D8E4; --deep: #0B1117; --charcoal: #141C24; --slate: #1E2A36;
+    --accent: #5B9EC9; --accent-bright: #7DBDE8; --rose: #D98BA0; --warm: #D4A96A; --warm-soft: #E0BD87;
+    --muted: #8A99A8; --line: rgba(138,153,168,0.18);
+    background: var(--deep); color: var(--snow);
+    font-family: 'DM Sans','Noto Sans TC', sans-serif; font-weight:300;
+    min-height: 100vh;
+  }
+  .hpc-storage *, .hpc-storage *::before, .hpc-storage *::after { box-sizing: border-box; }
+  .hpc-storage .cjk{ font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage a{ color: var(--accent-bright); }
+
+  .hpc-storage__wrap{ max-width: 640px; margin:0 auto; padding: 0 20px 80px; }
+  .hpc-storage__back{ display:inline-block; padding:20px 0 0; font-size:13px; color:var(--muted); text-decoration:none; }
+  .hpc-storage__back:hover{ color:var(--accent-bright); }
+
+  .hpc-storage__hero{ text-align:center; padding:32px 0 8px; }
+  .hpc-storage__badge{ width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg, var(--warm-soft), var(--warm)); color:var(--deep); font-family:'Bebas Neue', sans-serif; font-size:20px; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; }
+  .hpc-storage__eyebrow{ font-family:'Bebas Neue', sans-serif; font-size:13px; letter-spacing:.16em; color:var(--warm-soft); display:block; margin-bottom:8px; }
+  .hpc-storage__h1{ font-family:'Noto Sans TC', sans-serif; font-size:26px; font-weight:900; margin:0 0 8px; line-height:1.3; }
+  .hpc-storage__tagline{ font-size:13px; color:var(--accent-bright); letter-spacing:.02em; margin:0 0 14px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage__intro{ font-size:14px; color:var(--muted); line-height:1.7; max-width:480px; margin:0 auto; font-family:'Noto Sans TC', sans-serif; }
+
+  .hpc-storage__section{ padding:36px 0 0; }
+  .hpc-storage__section-title{ font-size:12px; font-family:'Bebas Neue', sans-serif; letter-spacing:.12em; color:var(--muted); margin:0 0 14px; }
+
+  .hpc-storage__cards{ display:flex; flex-direction:column; gap:10px; }
+  .hpc-storage__card{ background:var(--charcoal); border:1px solid var(--line); border-radius:14px; padding:16px 18px; }
+  .hpc-storage__card h3{ font-family:'Noto Sans TC', sans-serif; font-size:15px; margin:0 0 6px; }
+  .hpc-storage__card p{ font-family:'Noto Sans TC', sans-serif; font-size:13px; color:var(--muted); line-height:1.65; margin:0; }
+
+  .hpc-storage__panel{ background:var(--charcoal); border:1px solid var(--line); border-radius:16px; padding:20px; margin-top:14px; }
+  .hpc-storage__panel-toggle{ display:flex; align-items:center; justify-content:space-between; cursor:pointer; }
+  .hpc-storage__panel-toggle h3{ font-family:'Noto Sans TC', sans-serif; font-size:16px; margin:0; }
+  .hpc-storage__switch{ position:relative; width:42px; height:24px; flex-shrink:0; margin-left:14px; }
+  .hpc-storage__switch input{ opacity:0; width:100%; height:100%; margin:0; cursor:pointer; position:absolute; z-index:2; }
+  .hpc-storage__switch-track{ position:absolute; inset:0; background:var(--slate); border:1px solid var(--line); border-radius:20px; transition:background .2s; }
+  .hpc-storage__switch-thumb{ position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%; background:var(--muted); transition:transform .2s, background .2s; }
+  .hpc-storage__switch input:checked ~ .hpc-storage__switch-track{ background: rgba(212,169,106,0.22); border-color:var(--warm); }
+  .hpc-storage__switch input:checked ~ .hpc-storage__switch-track .hpc-storage__switch-thumb{ transform:translateX(18px); background:var(--warm); }
+
+  .hpc-storage__panel-body{ margin-top:18px; display:none; }
+  .hpc-storage__panel-body.is-open{ display:block; }
+
+  .hpc-storage__field{ margin-bottom:16px; }
+  .hpc-storage__field:last-child{ margin-bottom:0; }
+  .hpc-storage__label{ display:block; font-size:13px; font-weight:700; margin-bottom:7px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage__hint{ display:block; font-size:11.5px; color:var(--muted); margin-top:5px; line-height:1.6; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage__input, .hpc-storage__textarea{ width:100%; background:var(--slate); border:1px solid var(--line); border-radius:10px; padding:11px 12px; color:var(--snow); font-size:14px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage__textarea{ resize:vertical; min-height:80px; }
+  .hpc-storage__input:focus, .hpc-storage__textarea:focus{ outline:2px solid var(--accent-bright); outline-offset:1px; }
+
+  .hpc-storage__radio-group{ display:flex; flex-direction:column; gap:8px; }
+  .hpc-storage__radio{ display:flex; align-items:flex-start; gap:10px; background:var(--slate); border:1px solid var(--line); border-radius:10px; padding:11px 12px; cursor:pointer; font-size:13px; }
+  .hpc-storage__radio input{ margin-top:3px; accent-color:var(--warm); }
+  .hpc-storage__radio-text strong{ display:block; font-size:13.5px; margin-bottom:2px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage__radio-text span{ color:var(--muted); font-size:12px; font-family:'Noto Sans TC', sans-serif; }
+
+  .hpc-storage__checkbox{ display:flex; align-items:flex-start; gap:9px; font-size:13px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage__checkbox input{ accent-color:var(--warm); width:16px; height:16px; margin-top:2px; flex-shrink:0; }
+
+  .hpc-storage__summary{ background:var(--slate); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin-top:18px; }
+  .hpc-storage__summary-row{ display:flex; justify-content:space-between; font-size:13px; color:var(--muted); padding:5px 0; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage__summary-row span:last-child{ color:var(--snow); }
+  .hpc-storage__summary-total{ display:flex; justify-content:space-between; align-items:baseline; border-top:1px solid var(--line); margin-top:8px; padding-top:12px; }
+  .hpc-storage__summary-total span:first-child{ font-size:13px; color:var(--muted); font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage__summary-total span:last-child{ font-size:22px; font-weight:900; color:var(--warm-soft); font-family:'Bebas Neue', sans-serif; }
+  .hpc-storage__disclaimer{ font-size:11px; color:var(--muted); line-height:1.6; margin-top:10px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage__quote-note{ background:rgba(212,169,106,0.12); border:1px solid var(--warm); border-radius:10px; padding:12px 14px; font-size:12.5px; color:var(--warm-soft); line-height:1.7; margin-top:16px; font-family:'Noto Sans TC', sans-serif; }
+
+  .hpc-storage__submit{ all:unset; cursor:pointer; display:block; width:100%; text-align:center; background:var(--accent); color:var(--deep); font-weight:500; font-size:15px; padding:15px; border-radius:12px; margin-top:20px; font-family:'DM Sans', sans-serif; }
+  .hpc-storage__submit:hover{ background:var(--accent-bright); }
+  .hpc-storage__submit:focus-visible{ outline:2px solid var(--accent-bright); outline-offset:2px; }
+
+  .hpc-storage__confirm{ display:none; text-align:center; padding:40px 20px; }
+  .hpc-storage__confirm.is-active{ display:block; }
+  .hpc-storage__confirm h2{ font-family:'Noto Sans TC', sans-serif; font-size:20px; margin:0 0 10px; }
+  .hpc-storage__confirm p{ font-family:'Noto Sans TC', sans-serif; font-size:14px; color:var(--muted); line-height:1.7; margin-bottom:6px; }
+
+  @media (min-width:560px){ .hpc-storage__cards{ flex-direction:row; } .hpc-storage__card{ flex:1; } }
+</style>
+</head>
+<body>
+<div class="hpc-storage">
+  <div class="hpc-storage__wrap">
+
+    <a class="hpc-storage__back" href="index.html">← 返回首頁</a>
+
+    <div class="hpc-storage__hero">
+      <div class="hpc-storage__badge">B</div>
+      <span class="hpc-storage__eyebrow">HARDCORE RIDER</span>
+      <h1 class="hpc-storage__h1 cjk">硬核玩家輕裝行</h1>
+      <p class="hpc-storage__tagline cjk">雪板倉儲 ・ 專業打蠟保養 ・ 追雪包車</p>
+      <p class="hpc-storage__intro cjk">裝備幫你顧好，你只管追今天哪裡在下雪。</p>
+    </div>
+
+    <div class="hpc-storage__section">
+      <p class="hpc-storage__section-title">這頁提供什麼</p>
+      <div class="hpc-storage__cards">
+        <div class="hpc-storage__card">
+          <h3 class="cjk">雪具倉儲會員</h3>
+          <p class="cjk">溫控除濕全年倉儲，三個層級，PLUS 以上含開封板保養打蠟。</p>
+        </div>
+        <div class="hpc-storage__card">
+          <h3 class="cjk">住宿</h3>
+          <p class="cjk">依人數與晚數即時試算住宿費。</p>
+        </div>
+        <div class="hpc-storage__card">
+          <h3 class="cjk">滑雪課程・導滑</h3>
+          <p class="cjk">依人數配教練，季節自動判斷平旺季報價。</p>
+        </div>
+        <div class="hpc-storage__card">
+          <h3 class="cjk">追雪包車</h3>
+          <p class="cjk">每人每趟來回 ¥10,000，即時試算。</p>
+        </div>
+      </div>
+    </div>
+
+    <form id="storageForm">
+      <div class="hpc-storage__section">
+        <p class="hpc-storage__section-title">試算 / 預約</p>
+
+        <!-- 雪具倉儲會員 -->
+        <div class="hpc-storage__panel">
+          <label class="hpc-storage__panel-toggle">
+            <h3 class="cjk">雪具倉儲會員</h3>
+            <span class="hpc-storage__switch">
+              <input type="checkbox" id="stStorageToggle" checked>
+              <span class="hpc-storage__switch-track"><span class="hpc-storage__switch-thumb"></span></span>
+            </span>
+          </label>
+
+          <div class="hpc-storage__panel-body is-open" id="stStorageBody">
+            <div class="hpc-storage__field">
+              <label class="hpc-storage__checkbox">
+                <input type="checkbox" id="stFirstTime" checked>
+                第一次加入會員（基本會員費 ¥10,000，只收一次）
+              </label>
+            </div>
+
+            <div class="hpc-storage__field">
+              <label class="hpc-storage__label">會員方案（存倉費／年，含雪板袋30kg以下）</label>
+              <div class="hpc-storage__radio-group">
+                <label class="hpc-storage__radio">
+                  <input type="radio" name="stTier" value="basic" checked>
+                  <span class="hpc-storage__radio-text"><strong>BASIC ¥16,000／年</strong><span>溫控除濕倉儲，安心寄放雪板與雪具</span></span>
+                </label>
+                <label class="hpc-storage__radio">
+                  <input type="radio" name="stTier" value="plus">
+                  <span class="hpc-storage__radio-text"><strong>PLUS ¥25,000／年</strong><span>包含封板、開板保養與專業打蠟</span></span>
+                </label>
+                <label class="hpc-storage__radio">
+                  <input type="radio" name="stTier" value="vip">
+                  <span class="hpc-storage__radio-text"><strong>VIP ¥36,000／年</strong><span>享有 PLUS 全部服務，再加雪具袋無限次免費寄送</span></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="hpc-storage__field">
+              <label class="hpc-storage__label">出入庫手續費</label>
+              <div class="hpc-storage__radio-group">
+                <label class="hpc-storage__radio">
+                  <input type="radio" name="stHandling" value="single">
+                  <span class="hpc-storage__radio-text"><strong>單次 ¥1,500</strong></span>
+                </label>
+                <label class="hpc-storage__radio">
+                  <input type="radio" name="stHandling" value="round" checked>
+                  <span class="hpc-storage__radio-text"><strong>來回 ¥3,000</strong><span>當季會再次出入庫，建議選這個</span></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="hpc-storage__field">
+              <label class="hpc-storage__checkbox">
+                <input type="checkbox" id="stMaintIn">
+                加購：入庫保養（鋼邊防銹＋封板蠟）¥6,500
+              </label>
+              <span class="hpc-storage__hint">PLUS／VIP 已含開封板保養打蠟，這項通常給 BASIC 會員或想額外加做的人</span>
+            </div>
+            <div class="hpc-storage__field">
+              <label class="hpc-storage__checkbox">
+                <input type="checkbox" id="stMaintOut">
+                加購：出庫保養（修鋼邊＋開板打蠟）¥6,500
+              </label>
+            </div>
+
+            <div class="hpc-storage__summary">
+              <div class="hpc-storage__summary-row" id="stFeeRow" style="display:none;"><span>基本會員費（首次）</span><span>¥10,000</span></div>
+              <div class="hpc-storage__summary-row"><span>存倉費／年</span><span id="stTierPrice">¥16,000</span></div>
+              <div class="hpc-storage__summary-row"><span>出入庫手續費</span><span id="stHandlingPrice">¥3,000</span></div>
+              <div class="hpc-storage__summary-row" id="stMaintInRow" style="display:none;"><span>入庫保養</span><span>¥6,500</span></div>
+              <div class="hpc-storage__summary-row" id="stMaintOutRow" style="display:none;"><span>出庫保養</span><span>¥6,500</span></div>
+              <div class="hpc-storage__summary-total"><span>試算總價</span><span id="stStorageTotal">—</span></div>
+              <p class="hpc-storage__disclaimer">超過30kg、新潟縣以南寄送費用另計。為系統試算參考價，實際報價以正式確認為準。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 包車包住 -->
+        <div class="hpc-storage__panel">
+          <label class="hpc-storage__panel-toggle">
+            <h3 class="cjk">住宿</h3>
+            <span class="hpc-storage__switch">
+              <input type="checkbox" id="stLodgeToggle">
+              <span class="hpc-storage__switch-track"><span class="hpc-storage__switch-thumb"></span></span>
+            </span>
+          </label>
+
+          <div class="hpc-storage__panel-body" id="stLodgeBody">
+            <div class="hpc-storage__field">
+              <label class="hpc-storage__label">房型</label>
+              <div class="hpc-storage__radio-group">
+                <label class="hpc-storage__radio">
+                  <input type="radio" name="stLodgeRoom" value="japanese" checked>
+                  <span class="hpc-storage__radio-text"><strong>日式平價房</strong><span>一人一間，¥10,000／人／晚</span></span>
+                </label>
+                <label class="hpc-storage__radio">
+                  <input type="radio" name="stLodgeRoom" value="capsule">
+                  <span class="hpc-storage__radio-text"><strong>太空艙房</strong><span>基礎2人¥66,000／晚，第3人起+¥8,800／晚，最多5人</span></span>
+                </label>
+              </div>
+            </div>
+            <div class="hpc-storage__field">
+              <div class="hpc-storage__row" style="display:flex; gap:10px;">
+                <div style="flex:1;">
+                  <label class="hpc-storage__label" for="stLodgeCheckin">入住日期</label>
+                  <input class="hpc-storage__input" type="date" id="stLodgeCheckin" min="2026-12-01" max="2027-04-30" value="2027-01-10">
+                </div>
+                <div style="flex:1;">
+                  <label class="hpc-storage__label" for="stLodgeCheckout">退房日期</label>
+                  <input class="hpc-storage__input" type="date" id="stLodgeCheckout" min="2026-12-02" max="2027-05-01" value="2027-01-13">
+                </div>
+              </div>
+            </div>
+            <div class="hpc-storage__field">
+              <label class="hpc-storage__label" for="stLodgePeople">人數</label>
+              <select class="hpc-storage__select" id="stLodgePeople">
+                <option value="1">1 人</option>
+                <option value="2" selected>2 人</option>
+                <option value="3">3 人</option>
+                <option value="4">4 人</option>
+                <option value="5">5 人</option>
+              </select>
+              <span class="hpc-storage__hint">太空艙最多5人；日式平價每人一間，人數不限</span>
+            </div>
+            <div class="hpc-storage__summary">
+              <div class="hpc-storage__summary-row"><span>住宿費（<span id="stLodgeNightsCount">—</span> 晚）</span><span id="stLodgeRoomPrice">—</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 滑雪課程・導滑 -->
+        <div class="hpc-storage__panel">
+          <label class="hpc-storage__panel-toggle">
+            <h3 class="cjk">滑雪課程・導滑</h3>
+            <span class="hpc-storage__switch">
+              <input type="checkbox" id="stCourseToggle">
+              <span class="hpc-storage__switch-track"><span class="hpc-storage__switch-thumb"></span></span>
+            </span>
+          </label>
+
+          <div class="hpc-storage__panel-body" id="stCourseBody">
+            <div class="hpc-storage__field">
+              <label class="hpc-storage__label" for="stCourseDate">預計上課日期</label>
+              <input class="hpc-storage__input" type="date" id="stCourseDate" min="2026-12-01" max="2027-04-30" value="2027-01-10">
+              <span class="hpc-storage__hint">季節：<span class="hpc-storage__season-tag" id="stCourseSeasonTag">平季</span>（依日期自動判斷）</span>
+            </div>
+            <div class="hpc-storage__field">
+              <label class="hpc-storage__label" for="stCoursePeople">上課人數（教練:學員）</label>
+              <select class="hpc-storage__select" id="stCoursePeople">
+                <option value="1">1 人（1對1）</option>
+                <option value="2" selected>2 人（1對2）</option>
+                <option value="3">3 人（1對3）</option>
+                <option value="4">4 人（1對4）</option>
+              </select>
+              <span class="hpc-storage__hint">上限 1對4；5人以上請備註或聯繫客服</span>
+            </div>
+            <div class="hpc-storage__field">
+              <label class="hpc-storage__label" for="stCourseHours">課程時數</label>
+              <select class="hpc-storage__select" id="stCourseHours">
+                <option value="6">6 小時（初階／進階通用）</option>
+              </select>
+            </div>
+            <div class="hpc-storage__summary">
+              <div class="hpc-storage__summary-row"><span>課程費（1對<span id="stCourseDetail">2</span>）</span><span id="stCoursePrice">—</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 追雪包車 -->
+        <div class="hpc-storage__panel">
+          <label class="hpc-storage__panel-toggle">
+            <h3 class="cjk">追雪包車</h3>
+            <span class="hpc-storage__switch">
+              <input type="checkbox" id="stCharterToggle">
+              <span class="hpc-storage__switch-track"><span class="hpc-storage__switch-thumb"></span></span>
+            </span>
+          </label>
+
+          <div class="hpc-storage__panel-body" id="stCharterBody">
+            <div class="hpc-storage__field">
+              <label class="hpc-storage__label" for="stCharterPeople">人數</label>
+              <select class="hpc-storage__select" id="stCharterPeople">
+                <option value="1">1 人</option>
+                <option value="2" selected>2 人</option>
+                <option value="3">3 人</option>
+                <option value="4">4 人</option>
+                <option value="5">5 人</option>
+              </select>
+            </div>
+            <div class="hpc-storage__summary">
+              <div class="hpc-storage__summary-row"><span>追雪包車（人數 × ¥10,000／來回）</span><span id="stCharterPrice">—</span></div>
+            </div>
+            <div class="hpc-storage__hint" style="margin-top:10px;">追雪包車需搭配「住宿」或「滑雪課程・導滑」才能預訂（方便接送，一早直衝第一波粉雪）——請至少選其中一項，兩項都選也可以。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hpc-storage__section">
+        <p class="hpc-storage__section-title">聯絡資訊</p>
+        <div class="hpc-storage__panel">
+          <div class="hpc-storage__field">
+            <label class="hpc-storage__label" for="stName">姓名</label>
+            <input class="hpc-storage__input" type="text" id="stName" required>
+          </div>
+          <div class="hpc-storage__field">
+            <label class="hpc-storage__label" for="stContact">聯絡方式（Email 或 LINE ID）</label>
+            <input class="hpc-storage__input" type="text" id="stContact" required>
+          </div>
+          <div class="hpc-storage__field">
+            <label class="hpc-storage__label" for="stNote">備註</label>
+            <input class="hpc-storage__input" type="text" id="stNote" placeholder="其他需求（選填）">
+          </div>
+        </div>
+      </div>
+
+      <p class="hpc-storage__hint" id="stFormError" style="display:none; color:var(--rose); text-align:center; margin-top:10px;"></p>
+      <button type="submit" class="hpc-storage__submit">送出預約</button>
+    </form>
+
+    <div class="hpc-storage__confirm" id="stConfirm">
+      <h2 class="cjk">已收到你的預約需求</h2>
+      <p class="cjk" id="stConfirmDetail"></p>
+      <p class="cjk">我們會盡快跟你確認實際報價與細節。</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var TIER = { basic: 16000, plus: 25000, vip: 36000 };
+  var HANDLING = { single: 1500, round: 3000 };
+  var MEMBER_FEE = 10000;
+  var MAINT_FEE = 6500;
+  var CHARTER_RATE_PER_PERSON = 10000;
+  var COURSE = {
+    offpeak: { 1: { 3: 55000, 4: 70000, 6: 98000 }, 2: { 3: 65000, 4: 80000, 6: 108000 }, 3: { 3: 75000, 4: 90000, 6: 118000 }, 4: { 3: 85000, 4: 100000, 6: 128000 } },
+    peak: { 1: { 3: 65000, 4: 90000, 6: 118000 }, 2: { 3: 75000, 4: 100000, 6: 128000 }, 3: { 3: 85000, 4: 110000, 6: 138000 }, 4: { 3: 95000, 4: 120000, 6: 148000 } }
+  };
+  var PEAK_RANGES = [['2026-12-23','2027-01-03'],['2027-02-03','2027-02-15'],['2027-02-26','2027-03-02'],['2027-04-02','2027-04-06']];
+
+  function yen(n) { return '¥' + n.toLocaleString('ja-JP'); }
+  function isPeak(dateStr) {
+    var d = new Date(dateStr);
+    return PEAK_RANGES.some(function (r) { return d >= new Date(r[0]) && d <= new Date(r[1]); });
+  }
+  function nightsBetween(inStr, outStr) {
+    var ms = new Date(outStr) - new Date(inStr);
+    var n = Math.round(ms / 86400000);
+    return n > 0 ? n : 0;
+  }
+  function roomPrice(type, people, nights) {
+    if (type === 'japanese') return people * 10000 * nights;
+    var extra = Math.max(0, people - 2);
+    return (66000 + extra * 8800) * nights;
+  }
+
+  var els = {
+    storageToggle: document.getElementById('stStorageToggle'),
+    storageBody: document.getElementById('stStorageBody'),
+    lodgeToggle: document.getElementById('stLodgeToggle'),
+    lodgeBody: document.getElementById('stLodgeBody'),
+    courseToggle: document.getElementById('stCourseToggle'),
+    courseBody: document.getElementById('stCourseBody'),
+    charterToggle: document.getElementById('stCharterToggle'),
+    charterBody: document.getElementById('stCharterBody'),
+    firstTime: document.getElementById('stFirstTime'),
+    feeRow: document.getElementById('stFeeRow'),
+    tierPrice: document.getElementById('stTierPrice'),
+    handlingPrice: document.getElementById('stHandlingPrice'),
+    maintIn: document.getElementById('stMaintIn'),
+    maintInRow: document.getElementById('stMaintInRow'),
+    maintOut: document.getElementById('stMaintOut'),
+    maintOutRow: document.getElementById('stMaintOutRow'),
+    total: document.getElementById('stStorageTotal'),
+
+    lodgeCheckin: document.getElementById('stLodgeCheckin'),
+    lodgeCheckout: document.getElementById('stLodgeCheckout'),
+    lodgePeople: document.getElementById('stLodgePeople'),
+    lodgeNightsCount: document.getElementById('stLodgeNightsCount'),
+    lodgeRoomPrice: document.getElementById('stLodgeRoomPrice'),
+
+    charterPeople: document.getElementById('stCharterPeople'),
+    charterPrice: document.getElementById('stCharterPrice'),
+
+    courseDate: document.getElementById('stCourseDate'),
+    courseSeasonTag: document.getElementById('stCourseSeasonTag'),
+    coursePeople: document.getElementById('stCoursePeople'),
+    courseHours: document.getElementById('stCourseHours'),
+    courseDetail: document.getElementById('stCourseDetail'),
+    coursePrice: document.getElementById('stCoursePrice'),
+
+    form: document.getElementById('storageForm'),
+    confirm: document.getElementById('stConfirm'),
+    confirmDetail: document.getElementById('stConfirmDetail')
+  };
+
+  function getTier() { return document.querySelector('input[name="stTier"]:checked').value; }
+  function getHandling() { return document.querySelector('input[name="stHandling"]:checked').value; }
+  function getLodgeRoom() { return document.querySelector('input[name="stLodgeRoom"]:checked').value; }
+
+  function toggleBody(toggleEl, bodyEl) { bodyEl.classList.toggle('is-open', toggleEl.checked); }
+
+  function recalcStorage() {
+    if (!els.storageToggle.checked) return;
+    var total = 0;
+    els.feeRow.style.display = els.firstTime.checked ? '' : 'none';
+    if (els.firstTime.checked) total += MEMBER_FEE;
+
+    var tier = getTier();
+    els.tierPrice.textContent = yen(TIER[tier]);
+    total += TIER[tier];
+
+    var handling = getHandling();
+    els.handlingPrice.textContent = yen(HANDLING[handling]);
+    total += HANDLING[handling];
+
+    els.maintInRow.style.display = els.maintIn.checked ? '' : 'none';
+    if (els.maintIn.checked) total += MAINT_FEE;
+    els.maintOutRow.style.display = els.maintOut.checked ? '' : 'none';
+    if (els.maintOut.checked) total += MAINT_FEE;
+
+    els.total.textContent = yen(total);
+  }
+
+  function recalcLodge() {
+    if (!els.lodgeToggle.checked) return;
+    els.lodgeCheckout.min = els.lodgeCheckin.value;
+    var nights = nightsBetween(els.lodgeCheckin.value, els.lodgeCheckout.value);
+    var people = parseInt(els.lodgePeople.value, 10);
+    var room = getLodgeRoom();
+    var roomCost = nights > 0 ? roomPrice(room, people, nights) : 0;
+
+    els.lodgeNightsCount.textContent = nights || '—';
+    els.lodgeRoomPrice.textContent = nights > 0 ? yen(roomCost) : '請選擇日期';
+  }
+
+  function recalcCharter() {
+    if (!els.charterToggle.checked) return;
+    var people = parseInt(els.charterPeople.value, 10);
+    els.charterPrice.textContent = yen(people * CHARTER_RATE_PER_PERSON);
+  }
+
+  function recalcCourse() {
+    if (!els.courseToggle.checked) return;
+    var peak = isPeak(els.courseDate.value);
+    els.courseSeasonTag.textContent = peak ? '旺季' : '平季';
+    els.courseSeasonTag.classList.toggle('is-peak', peak);
+    var coursePeople = parseInt(els.coursePeople.value, 10);
+    els.courseDetail.textContent = coursePeople;
+    var course = COURSE[peak ? 'peak' : 'offpeak'][coursePeople][parseInt(els.courseHours.value,10)];
+    els.coursePrice.textContent = yen(course);
+  }
+
+  function recalc() {
+    recalcStorage();
+    recalcLodge();
+    recalcCourse();
+    recalcCharter();
+  }
+
+  els.storageToggle.addEventListener('change', function () { toggleBody(els.storageToggle, els.storageBody); });
+  els.lodgeToggle.addEventListener('change', function () { toggleBody(els.lodgeToggle, els.lodgeBody); });
+  els.courseToggle.addEventListener('change', function () { toggleBody(els.courseToggle, els.courseBody); });
+  els.charterToggle.addEventListener('change', function () { toggleBody(els.charterToggle, els.charterBody); });
+  els.form.addEventListener('change', recalc);
+  els.form.addEventListener('input', recalc);
+
+  // TODO: 接到你實際的後台 / Notion
+  function submitBooking(payload) {
+    console.log('[combo-b booking]', payload);
+    // fetch('/api/storage-booking', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+  }
+
+  els.form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var wantsStorage = els.storageToggle.checked;
+    var wantsLodge = els.lodgeToggle.checked;
+    var wantsCourse = els.courseToggle.checked;
+    var wantsCharter = els.charterToggle.checked;
+    var errorEl = document.getElementById('stFormError');
+
+    if (wantsCharter && !wantsLodge && !wantsCourse) {
+      errorEl.textContent = '追雪包車需要搭配「住宿」或「滑雪課程・導滑」（可以只選一項，也可以兩項都選），請至少勾選一項再送出。';
+      errorEl.style.display = '';
+      errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    errorEl.style.display = 'none';
+
+    var payload = {
+      storage: wantsStorage ? {
+        firstTime: els.firstTime.checked, tier: getTier(), handling: getHandling(),
+        maintIn: els.maintIn.checked, maintOut: els.maintOut.checked, total: els.total.textContent
+      } : null,
+      lodge: wantsLodge ? {
+        room: getLodgeRoom(), checkin: els.lodgeCheckin.value, checkout: els.lodgeCheckout.value,
+        people: els.lodgePeople.value, total: els.lodgeRoomPrice.textContent
+      } : null,
+      course: wantsCourse ? {
+        date: els.courseDate.value, people: els.coursePeople.value, hours: els.courseHours.value,
+        price: els.coursePrice.textContent
+      } : null,
+      charter: wantsCharter ? { people: els.charterPeople.value, price: els.charterPrice.textContent } : null,
+      name: document.getElementById('stName').value,
+      contact: document.getElementById('stContact').value,
+      note: document.getElementById('stNote').value
+    };
+    submitBooking(payload);
+
+    var lines = [];
+    if (wantsStorage) lines.push('倉儲試算 ' + payload.storage.total);
+    if (wantsLodge) lines.push('住宿試算 ' + payload.lodge.total);
+    if (wantsCourse) lines.push('課程試算 ' + payload.course.price);
+    if (wantsCharter) lines.push('追雪包車試算 ' + payload.charter.price);
+
+    els.form.style.display = 'none';
+    els.confirmDetail.textContent = payload.name + '，' + lines.join('；');
+    els.confirm.classList.add('is-active');
+  });
+
+  recalc();
+})();
+</script>
+</body>
+</html>

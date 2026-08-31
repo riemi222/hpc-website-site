@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新千歲機場接送・北海道觀光包車 — Hokkaido Powder Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     transfer.html — kit 01 專屬頁
+     新千歲機場接送：真實定價表，自動試算
+     北海道觀光包車：無固定定價，客人填路線後由 Emi 人工回信報價
+     兩個服務用 checkbox 各自開關，可以只選一個，也可以兩個都要
+     配色沿用網站真實token，跟 index.html / package-a.html 同一套
+     ============================================================ */
+  .hpc-transfer {
+    --snow: #F0EEE8; --ice: #C8D8E4; --deep: #0B1117; --charcoal: #141C24; --slate: #1E2A36;
+    --accent: #5B9EC9; --accent-bright: #7DBDE8; --rose: #D98BA0; --warm: #D4A96A; --warm-soft: #E0BD87;
+    --muted: #8A99A8; --line: rgba(138,153,168,0.18);
+    background: var(--deep); color: var(--snow);
+    font-family: 'DM Sans','Noto Sans TC', sans-serif; font-weight:300;
+    min-height: 100vh;
+  }
+  .hpc-transfer *, .hpc-transfer *::before, .hpc-transfer *::after { box-sizing: border-box; }
+  .hpc-transfer .cjk{ font-family:'Noto Sans TC', sans-serif; }
+  .hpc-transfer a{ color: var(--accent-bright); }
+
+  .hpc-transfer__wrap{ max-width: 640px; margin:0 auto; padding: 0 20px 80px; }
+  .hpc-transfer__back{ display:inline-block; padding:20px 0 0; font-size:13px; color:var(--muted); text-decoration:none; }
+  .hpc-transfer__back:hover{ color:var(--accent-bright); }
+
+  .hpc-transfer__hero{ text-align:center; padding:32px 0 8px; }
+  .hpc-transfer__badge{ width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg, var(--accent-bright), var(--accent)); color:var(--deep); font-family:'Bebas Neue', sans-serif; font-size:20px; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; }
+  .hpc-transfer__eyebrow{ font-family:'Bebas Neue', sans-serif; font-size:13px; letter-spacing:.16em; color:var(--accent-bright); display:block; margin-bottom:8px; }
+  .hpc-transfer__h1{ font-family:'Noto Sans TC', sans-serif; font-size:26px; font-weight:900; margin:0 0 8px; line-height:1.3; }
+  .hpc-transfer__tagline{ font-size:13px; color:var(--accent-bright); letter-spacing:.02em; margin:0 0 14px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-transfer__intro{ font-size:14px; color:var(--muted); line-height:1.7; max-width:480px; margin:0 auto; font-family:'Noto Sans TC', sans-serif; }
+
+  .hpc-transfer__section{ padding:36px 0 0; }
+  .hpc-transfer__section-title{ font-size:12px; font-family:'Bebas Neue', sans-serif; letter-spacing:.12em; color:var(--muted); margin:0 0 14px; }
+
+  .hpc-transfer__cards{ display:flex; flex-direction:column; gap:10px; }
+  .hpc-transfer__card{ background:var(--charcoal); border:1px solid var(--line); border-radius:14px; padding:16px 18px; }
+  .hpc-transfer__card h3{ font-family:'Noto Sans TC', sans-serif; font-size:15px; margin:0 0 6px; }
+  .hpc-transfer__card p{ font-family:'Noto Sans TC', sans-serif; font-size:13px; color:var(--muted); line-height:1.65; margin:0; }
+  .hpc-transfer__card .price-tag{ font-family:'Bebas Neue', sans-serif; font-size:15px; color:var(--accent-bright); margin-top:8px; display:block; }
+
+  .hpc-transfer__panel{ background:var(--charcoal); border:1px solid var(--line); border-radius:16px; padding:20px; margin-top:14px; }
+  .hpc-transfer__panel-toggle{ display:flex; align-items:center; justify-content:space-between; cursor:pointer; }
+  .hpc-transfer__panel-toggle h3{ font-family:'Noto Sans TC', sans-serif; font-size:16px; margin:0; }
+  .hpc-transfer__panel-toggle .price-tag{ font-family:'Bebas Neue', sans-serif; font-size:14px; color:var(--accent-bright); }
+  .hpc-transfer__switch{ position:relative; width:42px; height:24px; flex-shrink:0; margin-left:14px; }
+  .hpc-transfer__switch input{ opacity:0; width:100%; height:100%; margin:0; cursor:pointer; position:absolute; z-index:2; }
+  .hpc-transfer__switch-track{ position:absolute; inset:0; background:var(--slate); border:1px solid var(--line); border-radius:20px; transition:background .2s; }
+  .hpc-transfer__switch-thumb{ position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%; background:var(--muted); transition:transform .2s, background .2s; }
+  .hpc-transfer__switch input:checked ~ .hpc-transfer__switch-track{ background: rgba(125,189,232,0.25); border-color:var(--accent-bright); }
+  .hpc-transfer__switch input:checked ~ .hpc-transfer__switch-track .hpc-transfer__switch-thumb{ transform:translateX(18px); background:var(--accent-bright); }
+
+  .hpc-transfer__panel-body{ margin-top:18px; display:none; }
+  .hpc-transfer__panel-body.is-open{ display:block; }
+
+  .hpc-transfer__field{ margin-bottom:16px; }
+  .hpc-transfer__field:last-child{ margin-bottom:0; }
+  .hpc-transfer__label{ display:block; font-size:13px; font-weight:700; margin-bottom:7px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-transfer__hint{ display:block; font-size:11.5px; color:var(--muted); margin-top:5px; line-height:1.6; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-transfer__select, .hpc-transfer__input, .hpc-transfer__textarea{ width:100%; background:var(--slate); border:1px solid var(--line); border-radius:10px; padding:11px 12px; color:var(--snow); font-size:14px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-transfer__textarea{ resize:vertical; min-height:90px; }
+  .hpc-transfer__select:focus, .hpc-transfer__input:focus, .hpc-transfer__textarea:focus{ outline:2px solid var(--accent-bright); outline-offset:1px; }
+  .hpc-transfer__row{ display:flex; gap:10px; }
+  .hpc-transfer__row > *{ flex:1; }
+
+  .hpc-transfer__radio-group{ display:flex; flex-direction:column; gap:8px; }
+  .hpc-transfer__radio{ display:flex; align-items:flex-start; gap:10px; background:var(--slate); border:1px solid var(--line); border-radius:10px; padding:11px 12px; cursor:pointer; font-size:13px; }
+  .hpc-transfer__radio input{ margin-top:3px; accent-color:var(--accent-bright); }
+  .hpc-transfer__radio-text strong{ display:block; font-size:13.5px; margin-bottom:2px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-transfer__radio-text span{ color:var(--muted); font-size:12px; font-family:'Noto Sans TC', sans-serif; }
+
+  .hpc-transfer__checkbox{ display:flex; align-items:center; gap:9px; font-size:13px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-transfer__checkbox input{ accent-color:var(--accent-bright); width:16px; height:16px; }
+
+  .hpc-transfer__summary{ background:var(--slate); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin-top:18px; }
+  .hpc-transfer__summary-row{ display:flex; justify-content:space-between; font-size:13px; color:var(--muted); padding:5px 0; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-transfer__summary-row span:last-child{ color:var(--snow); }
+  .hpc-transfer__summary-total{ display:flex; justify-content:space-between; align-items:baseline; border-top:1px solid var(--line); margin-top:8px; padding-top:12px; }
+  .hpc-transfer__summary-total span:first-child{ font-size:13px; color:var(--muted); font-family:'Noto Sans TC', sans-serif; }
+  .hpc-transfer__summary-total span:last-child{ font-size:22px; font-weight:900; color:var(--accent-bright); font-family:'Bebas Neue', sans-serif; }
+  .hpc-transfer__disclaimer{ font-size:11px; color:var(--muted); line-height:1.6; margin-top:10px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-transfer__quote-note{ background:rgba(212,169,106,0.12); border:1px solid var(--warm); border-radius:10px; padding:12px 14px; font-size:12.5px; color:var(--warm-soft); line-height:1.7; margin-top:16px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-transfer__quickpick{ all:unset; cursor:pointer; font-family:'Noto Sans TC', sans-serif; font-size:12.5px; color:var(--accent-bright); background:var(--slate); border:1px solid var(--line); border-radius:20px; padding:6px 14px; transition:border-color .2s, background .2s; }
+  .hpc-transfer__quickpick:hover{ border-color:var(--accent-bright); }
+  .hpc-transfer__quickpick:focus-visible{ outline:2px solid var(--accent-bright); outline-offset:2px; }
+
+  .hpc-transfer__submit{ all:unset; cursor:pointer; display:block; width:100%; text-align:center; background:var(--accent); color:var(--deep); font-weight:500; font-size:15px; padding:15px; border-radius:12px; margin-top:20px; font-family:'DM Sans', sans-serif; }
+  .hpc-transfer__submit:hover{ background:var(--accent-bright); }
+  .hpc-transfer__submit:focus-visible{ outline:2px solid var(--accent-bright); outline-offset:2px; }
+
+  .hpc-transfer__confirm{ display:none; text-align:center; padding:40px 20px; }
+  .hpc-transfer__confirm.is-active{ display:block; }
+  .hpc-transfer__confirm h2{ font-family:'Noto Sans TC', sans-serif; font-size:20px; margin:0 0 10px; }
+  .hpc-transfer__confirm p{ font-family:'Noto Sans TC', sans-serif; font-size:14px; color:var(--muted); line-height:1.7; margin-bottom:6px; }
+
+  @media (min-width:560px){ .hpc-transfer__cards{ flex-direction:row; } .hpc-transfer__card{ flex:1; } }
+</style>
+</head>
+<body>
+<div class="hpc-transfer">
+  <div class="hpc-transfer__wrap">
+
+    <a class="hpc-transfer__back" href="index.html">← 返回首頁</a>
+
+    <div class="hpc-transfer__hero">
+      <div class="hpc-transfer__badge">01</div>
+      <span class="hpc-transfer__eyebrow">FIRST ARRIVAL</span>
+      <h1 class="hpc-transfer__h1 cjk">新千歲機場接送<br>北海道觀光包車</h1>
+      <p class="hpc-transfer__tagline cjk">再也不用拖著行李轉車</p>
+      <p class="hpc-transfer__intro cjk">機場接送即時試算，馬上知道價格；觀光包車依你的路線人工報價，兩個都可以只選一個或一起訂。</p>
+    </div>
+
+    <div class="hpc-transfer__section">
+      <p class="hpc-transfer__section-title">這頁提供什麼</p>
+      <div class="hpc-transfer__cards">
+        <div class="hpc-transfer__card">
+          <h3 class="cjk">新千歲機場接送</h3>
+          <p class="cjk">機場 ↔ 雪場／指定飯店，專車直達，依路線固定報價。</p>
+          <span class="price-tag">¥55,000 起／趟</span>
+        </div>
+        <div class="hpc-transfer__card">
+          <h3 class="cjk">北海道觀光包車</h3>
+          <p class="cjk">行程與停留時間彈性安排，依你的路線人工報價。不限同時預訂住宿或課程／導滑的客人，可以單純包車觀光。</p>
+          <span class="price-tag">¥50,000 起／來回</span>
+        </div>
+      </div>
+    </div>
+
+    <form id="transferForm">
+      <div class="hpc-transfer__section">
+        <p class="hpc-transfer__section-title">試算 / 預約</p>
+
+        <!-- 機場接送：即時試算 -->
+        <div class="hpc-transfer__panel">
+          <label class="hpc-transfer__panel-toggle">
+            <h3 class="cjk">新千歲機場接送</h3>
+            <span class="hpc-transfer__switch">
+              <input type="checkbox" id="ttTransferToggle" checked>
+              <span class="hpc-transfer__switch-track"><span class="hpc-transfer__switch-thumb"></span></span>
+            </span>
+          </label>
+
+          <div class="hpc-transfer__panel-body is-open" id="ttTransferBody">
+            <div class="hpc-transfer__field">
+              <label class="hpc-transfer__label">車型</label>
+              <div class="hpc-transfer__radio-group">
+                <label class="hpc-transfer__radio">
+                  <input type="radio" name="ttVehicle" value="small" checked>
+                  <span class="hpc-transfer__radio-text"><strong>小型車</strong><span>Alphard 等級</span></span>
+                </label>
+                <label class="hpc-transfer__radio">
+                  <input type="radio" name="ttVehicle" value="large">
+                  <span class="hpc-transfer__radio-text"><strong>大型車</strong><span>Hiace 等級，行李空間較大</span></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="hpc-transfer__field">
+              <label class="hpc-transfer__checkbox">
+                <input type="checkbox" id="ttPickupToggle" checked>
+                接機：新千歲機場 → 目的地
+              </label>
+              <div id="ttPickupSub" style="margin-top:10px; padding-left:26px;">
+                <label class="hpc-transfer__label" for="ttPickupResort">接機目的地</label>
+                <select class="hpc-transfer__select" id="ttPickupResort">
+                  <optgroup label="TOMAMU・二世谷・留壽都・Kiroro">
+                    <option value="TOMAMU" data-group="1">TOMAMU</option>
+                    <option value="二世谷 Niseko" data-group="1">二世谷 Niseko</option>
+                    <option value="留壽都 Rusutsu" data-group="1">留壽都 Rusutsu</option>
+                    <option value="Kiroro" data-group="1">Kiroro</option>
+                  </optgroup>
+                  <optgroup label="手稲・札幌国際">
+                    <option value="手稲滑雪場" data-group="2">手稲滑雪場</option>
+                    <option value="札幌国際滑雪場" data-group="2">札幌国際滑雪場</option>
+                  </optgroup>
+                  <optgroup label="小樽">
+                    <option value="小樽" data-group="3">小樽</option>
+                  </optgroup>
+                  <optgroup label="富良野・旭川">
+                    <option value="富良野" data-group="4">富良野</option>
+                    <option value="旭川" data-group="5">旭川</option>
+                  </optgroup>
+                </select>
+                <div class="hpc-transfer__row" style="margin-top:10px;">
+                  <input class="hpc-transfer__input" type="date" id="ttPickupDate" min="2026-12-01" max="2027-04-30">
+                </div>
+                <label class="hpc-transfer__checkbox" style="margin-top:8px;">
+                  <input type="checkbox" id="ttPickupNight">
+                  此趟為 22:00～05:00 時段（+¥20,000）
+                </label>
+              </div>
+            </div>
+
+            <div class="hpc-transfer__field">
+              <label class="hpc-transfer__checkbox">
+                <input type="checkbox" id="ttDropoffToggle">
+                送機：目的地 → 新千歲機場
+              </label>
+              <div id="ttDropoffSub" style="display:none; margin-top:10px; padding-left:26px;">
+                <label class="hpc-transfer__label" for="ttDropoffResort">送機出發地</label>
+                <select class="hpc-transfer__select" id="ttDropoffResort">
+                  <optgroup label="TOMAMU・二世谷・留壽都・Kiroro">
+                    <option value="TOMAMU" data-group="1">TOMAMU</option>
+                    <option value="二世谷 Niseko" data-group="1">二世谷 Niseko</option>
+                    <option value="留壽都 Rusutsu" data-group="1">留壽都 Rusutsu</option>
+                    <option value="Kiroro" data-group="1">Kiroro</option>
+                  </optgroup>
+                  <optgroup label="手稲・札幌国際">
+                    <option value="手稲滑雪場" data-group="2">手稲滑雪場</option>
+                    <option value="札幌国際滑雪場" data-group="2">札幌国際滑雪場</option>
+                  </optgroup>
+                  <optgroup label="小樽">
+                    <option value="小樽" data-group="3">小樽</option>
+                  </optgroup>
+                  <optgroup label="富良野・旭川">
+                    <option value="富良野" data-group="4">富良野</option>
+                    <option value="旭川" data-group="5">旭川</option>
+                  </optgroup>
+                </select>
+                <div class="hpc-transfer__row">
+                  <input class="hpc-transfer__input" type="date" id="ttDropoffDate" min="2026-12-01" max="2027-04-30">
+                </div>
+                <label class="hpc-transfer__checkbox" style="margin-top:8px;">
+                  <input type="checkbox" id="ttDropoffNight">
+                  此趟為 22:00～05:00 時段（+¥20,000）
+                </label>
+              </div>
+            </div>
+
+            <div class="hpc-transfer__summary">
+              <div class="hpc-transfer__summary-row" id="ttPickupRow"><span>接機（新千歲機場 → 目的地）</span><span id="ttPickupPrice">—</span></div>
+              <div class="hpc-transfer__summary-row" id="ttDropoffRow" style="display:none;"><span>送機（目的地 → 新千歲機場）</span><span id="ttDropoffPrice">—</span></div>
+              <div class="hpc-transfer__summary-total"><span>試算總價</span><span id="ttTransferTotal">—</span></div>
+              <p class="hpc-transfer__disclaimer">單趟報價，接機／送機可各自單獨預約或一起訂。為系統試算參考價，實際報價以正式確認為準。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 北海道觀光包車：人工報價 -->
+        <div class="hpc-transfer__panel">
+          <label class="hpc-transfer__panel-toggle">
+            <h3 class="cjk">北海道觀光包車</h3>
+            <span class="hpc-transfer__switch">
+              <input type="checkbox" id="ttCharterToggle">
+              <span class="hpc-transfer__switch-track"><span class="hpc-transfer__switch-thumb"></span></span>
+            </span>
+          </label>
+
+          <div class="hpc-transfer__panel-body" id="ttCharterBody">
+            <div class="hpc-transfer__field">
+              <label class="hpc-transfer__label" for="ttRoute">想去的路線／景點</label>
+              <div style="display:flex; gap:8px; margin-bottom:8px;">
+                <button type="button" class="hpc-transfer__quickpick" data-fill="旭川市區觀光">旭川</button>
+                <button type="button" class="hpc-transfer__quickpick" data-fill="富良野薰衣草田／花海觀光">富良野</button>
+              </div>
+              <textarea class="hpc-transfer__textarea" id="ttRoute" placeholder="例：旭川出發 → 富良野薰衣草田 → 美瑛青池 → 當日返回旭川"></textarea>
+              <span class="hpc-transfer__hint">寫下起訖點與想去的地方，我們會依路線人工報價；也可以點上面的快速選填</span>
+            </div>
+            <div class="hpc-transfer__field">
+              <label class="hpc-transfer__label">預計時長</label>
+              <div class="hpc-transfer__radio-group">
+                <label class="hpc-transfer__radio">
+                  <input type="radio" name="ttDuration" value="half" checked>
+                  <span class="hpc-transfer__radio-text"><strong>半天</strong></span>
+                </label>
+                <label class="hpc-transfer__radio">
+                  <input type="radio" name="ttDuration" value="full">
+                  <span class="hpc-transfer__radio-text"><strong>全天</strong></span>
+                </label>
+                <label class="hpc-transfer__radio">
+                  <input type="radio" name="ttDuration" value="flex">
+                  <span class="hpc-transfer__radio-text"><strong>彈性／還沒確定</strong></span>
+                </label>
+              </div>
+            </div>
+            <div class="hpc-transfer__field">
+              <label class="hpc-transfer__label" for="ttCharterDate">預計日期</label>
+              <input class="hpc-transfer__input" type="date" id="ttCharterDate" min="2026-12-01" max="2027-04-30">
+            </div>
+            <div class="hpc-transfer__quote-note">起價 ¥50,000／來回，我們會依照你填的路線於 1 個工作天內回信報價，這裡不會自動算出金額。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hpc-transfer__section">
+        <p class="hpc-transfer__section-title">聯絡資訊</p>
+        <div class="hpc-transfer__panel">
+          <div class="hpc-transfer__field">
+            <label class="hpc-transfer__label" for="ttName">姓名</label>
+            <input class="hpc-transfer__input" type="text" id="ttName" required>
+          </div>
+          <div class="hpc-transfer__field">
+            <label class="hpc-transfer__label" for="ttContact">聯絡方式（Email 或 LINE ID）</label>
+            <input class="hpc-transfer__input" type="text" id="ttContact" required>
+          </div>
+          <div class="hpc-transfer__field">
+            <label class="hpc-transfer__label" for="ttFlight">抵達航班／時間（機場接送適用）</label>
+            <input class="hpc-transfer__input" type="text" id="ttFlight" placeholder="例：CI130 / 1/10 14:20 抵達">
+          </div>
+          <div class="hpc-transfer__field">
+            <label class="hpc-transfer__label" for="ttNote">備註</label>
+            <input class="hpc-transfer__input" type="text" id="ttNote" placeholder="其他需求（選填）">
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="hpc-transfer__submit">送出預約</button>
+    </form>
+
+    <div class="hpc-transfer__confirm" id="ttConfirm">
+      <h2 class="cjk">已收到你的預約需求</h2>
+      <p class="cjk" id="ttConfirmDetail"></p>
+      <p class="cjk">我們會盡快跟你確認實際報價與細節。</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var TRANSFER = { '1': { small: 90000, large: 95000 }, '2': { small: 55000, large: 60000 }, '3': { small: 60000, large: 65000 }, '4': { small: 90000, large: 95000 }, '5': { small: 85000, large: 90000 } };
+  var NIGHT_SURCHARGE = 20000;
+  function yen(n) { return '¥' + n.toLocaleString('ja-JP'); }
+
+  var els = {
+    transferToggle: document.getElementById('ttTransferToggle'),
+    transferBody: document.getElementById('ttTransferBody'),
+    charterToggle: document.getElementById('ttCharterToggle'),
+    charterBody: document.getElementById('ttCharterBody'),
+    pickupResort: document.getElementById('ttPickupResort'),
+    pickupToggle: document.getElementById('ttPickupToggle'),
+    pickupSub: document.getElementById('ttPickupSub'),
+    pickupNight: document.getElementById('ttPickupNight'),
+    pickupRow: document.getElementById('ttPickupRow'),
+    pickupPrice: document.getElementById('ttPickupPrice'),
+    dropoffResort: document.getElementById('ttDropoffResort'),
+    dropoffToggle: document.getElementById('ttDropoffToggle'),
+    dropoffSub: document.getElementById('ttDropoffSub'),
+    dropoffNight: document.getElementById('ttDropoffNight'),
+    dropoffRow: document.getElementById('ttDropoffRow'),
+    dropoffPrice: document.getElementById('ttDropoffPrice'),
+    transferTotal: document.getElementById('ttTransferTotal'),
+    form: document.getElementById('transferForm'),
+    confirm: document.getElementById('ttConfirm'),
+    confirmDetail: document.getElementById('ttConfirmDetail')
+  };
+
+  function getVehicle() { return document.querySelector('input[name="ttVehicle"]:checked').value; }
+  function getDuration() { return document.querySelector('input[name="ttDuration"]:checked').value; }
+
+  document.querySelectorAll('.hpc-transfer__quickpick').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var ta = document.getElementById('ttRoute');
+      ta.value = ta.value ? ta.value + '、' + btn.dataset.fill : btn.dataset.fill;
+      ta.focus();
+    });
+  });
+
+  function toggleBody(toggleEl, bodyEl) {
+    bodyEl.classList.toggle('is-open', toggleEl.checked);
+  }
+
+  function legPrice(resortSelect, vehicle, nightChecked) {
+    var group = resortSelect.selectedOptions[0].dataset.group;
+    if (group === 'quote') return { quote: true };
+    var price = TRANSFER[group][vehicle] + (nightChecked ? NIGHT_SURCHARGE : 0);
+    return { quote: false, price: price };
+  }
+
+  function recalcTransfer() {
+    if (!els.transferToggle.checked) return;
+    var vehicle = getVehicle();
+    var total = 0;
+    var hasQuoteOnly = false;
+
+    els.pickupSub.style.display = els.pickupToggle.checked ? '' : 'none';
+    els.pickupRow.style.display = els.pickupToggle.checked ? '' : 'none';
+    if (els.pickupToggle.checked) {
+      var p = legPrice(els.pickupResort, vehicle, els.pickupNight.checked);
+      if (p.quote) { els.pickupPrice.textContent = '需人工報價'; hasQuoteOnly = true; }
+      else { els.pickupPrice.textContent = yen(p.price); total += p.price; }
+    }
+
+    els.dropoffSub.style.display = els.dropoffToggle.checked ? '' : 'none';
+    els.dropoffRow.style.display = els.dropoffToggle.checked ? '' : 'none';
+    if (els.dropoffToggle.checked) {
+      var d = legPrice(els.dropoffResort, vehicle, els.dropoffNight.checked);
+      if (d.quote) { els.dropoffPrice.textContent = '需人工報價'; hasQuoteOnly = true; }
+      else { els.dropoffPrice.textContent = yen(d.price); total += d.price; }
+    }
+
+    if (!els.pickupToggle.checked && !els.dropoffToggle.checked) {
+      els.transferTotal.textContent = '請至少選擇一趟';
+    } else if (hasQuoteOnly) {
+      els.transferTotal.textContent = (total > 0 ? yen(total) + '＋' : '') + '需人工報價（旭川／富良野）';
+    } else {
+      els.transferTotal.textContent = yen(total);
+    }
+  }
+
+  els.transferToggle.addEventListener('change', function () { toggleBody(els.transferToggle, els.transferBody); });
+  els.charterToggle.addEventListener('change', function () { toggleBody(els.charterToggle, els.charterBody); });
+  els.form.addEventListener('change', recalcTransfer);
+  els.form.addEventListener('input', recalcTransfer);
+
+  // TODO: 接到你實際的後台 / Notion，現在先印出資料 + 顯示確認畫面
+  function submitBooking(payload) {
+    console.log('[transfer booking]', payload);
+    // fetch('/api/transfer-booking', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+  }
+
+  els.form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var wantsTransfer = els.transferToggle.checked;
+    var wantsCharter = els.charterToggle.checked;
+
+    var payload = {
+      transfer: wantsTransfer ? {
+        vehicle: getVehicle(),
+        pickup: els.pickupToggle.checked ? { resort: els.pickupResort.value, date: document.getElementById('ttPickupDate').value, night: els.pickupNight.checked, price: els.pickupPrice.textContent } : null,
+        dropoff: els.dropoffToggle.checked ? { resort: els.dropoffResort.value, date: document.getElementById('ttDropoffDate').value, night: els.dropoffNight.checked, price: els.dropoffPrice.textContent } : null,
+        total: els.transferTotal.textContent
+      } : null,
+      charter: wantsCharter ? {
+        route: document.getElementById('ttRoute').value,
+        duration: getDuration(),
+        date: document.getElementById('ttCharterDate').value
+      } : null,
+      name: document.getElementById('ttName').value,
+      contact: document.getElementById('ttContact').value,
+      flight: document.getElementById('ttFlight').value,
+      note: document.getElementById('ttNote').value
+    };
+    submitBooking(payload);
+
+    var lines = [];
+    if (wantsTransfer) lines.push('機場接送試算 ' + payload.transfer.total);
+    if (wantsCharter) lines.push('觀光包車路線已收到，將另行報價');
+
+    els.form.style.display = 'none';
+    els.confirmDetail.textContent = payload.name + '，' + lines.join('；');
+    els.confirm.classList.add('is-active');
+  });
+
+  recalcTransfer();
+})();
+</script>
+</body>
+</html>

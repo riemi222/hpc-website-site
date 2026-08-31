@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>雪具倉儲・專業打蠟保養 — Hokkaido Powder Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     storage.html — kit 03「雪具倉儲・專業打蠟保養」單一服務頁
+     只含倉儲會員 + 加購保養，真實三階定價，全部即時試算。
+     不含追雪包車（那是B套餐combo-b.html的混合內容，屬於另一頁）
+     ============================================================ */
+  .hpc-storage {
+    --snow: #F0EEE8; --ice: #C8D8E4; --deep: #0B1117; --charcoal: #141C24; --slate: #1E2A36;
+    --accent: #5B9EC9; --accent-bright: #7DBDE8; --rose: #D98BA0; --warm: #D4A96A; --warm-soft: #E0BD87;
+    --muted: #8A99A8; --line: rgba(138,153,168,0.18);
+    background: var(--deep); color: var(--snow);
+    font-family: 'DM Sans','Noto Sans TC', sans-serif; font-weight:300;
+    min-height: 100vh;
+  }
+  .hpc-storage *, .hpc-storage *::before, .hpc-storage *::after { box-sizing: border-box; }
+  .hpc-storage .cjk{ font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage a{ color: var(--accent-bright); }
+
+  .hpc-storage__wrap{ max-width: 640px; margin:0 auto; padding: 0 20px 80px; }
+  .hpc-storage__back{ display:inline-block; padding:20px 0 0; font-size:13px; color:var(--muted); text-decoration:none; }
+  .hpc-storage__back:hover{ color:var(--accent-bright); }
+
+  .hpc-storage__hero{ text-align:center; padding:32px 0 8px; }
+  .hpc-storage__badge{ width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg, var(--accent-bright), var(--accent)); color:var(--deep); font-family:'Bebas Neue', sans-serif; font-size:20px; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; }
+  .hpc-storage__eyebrow{ font-family:'Bebas Neue', sans-serif; font-size:13px; letter-spacing:.16em; color:var(--accent-bright); display:block; margin-bottom:8px; }
+  .hpc-storage__h1{ font-family:'Noto Sans TC', sans-serif; font-size:26px; font-weight:900; margin:0 0 8px; line-height:1.3; }
+  .hpc-storage__tagline{ font-size:13px; color:var(--accent-bright); letter-spacing:.02em; margin:0 0 14px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage__intro{ font-size:14px; color:var(--muted); line-height:1.7; max-width:480px; margin:0 auto; font-family:'Noto Sans TC', sans-serif; }
+
+  .hpc-storage__section{ padding:36px 0 0; }
+  .hpc-storage__section-title{ font-size:12px; font-family:'Bebas Neue', sans-serif; letter-spacing:.12em; color:var(--muted); margin:0 0 14px; }
+
+  .hpc-storage__cards{ display:flex; flex-direction:column; gap:10px; }
+  .hpc-storage__card{ background:var(--charcoal); border:1px solid var(--line); border-radius:14px; padding:16px 18px; }
+  .hpc-storage__card h3{ font-family:'Noto Sans TC', sans-serif; font-size:15px; margin:0 0 6px; }
+  .hpc-storage__card p{ font-family:'Noto Sans TC', sans-serif; font-size:13px; color:var(--muted); line-height:1.65; margin:0; }
+
+  .hpc-storage__panel{ background:var(--charcoal); border:1px solid var(--line); border-radius:16px; padding:20px; margin-top:14px; }
+  .hpc-storage__panel h3{ font-family:'Noto Sans TC', sans-serif; font-size:16px; margin:0 0 4px; }
+
+  /* 雪具寄存流程 */
+  .hpc-storage__process{ display:flex; flex-direction:column; }
+  .hpc-storage__process-step{ display:flex; align-items:flex-start; gap:14px; padding:12px 0; position:relative; }
+  .hpc-storage__process-step:not(:last-child)::after{ content:''; position:absolute; left:19px; top:50px; bottom:-12px; width:1px; background:var(--line); }
+  .hpc-storage__process-num{ width:40px; height:40px; border-radius:50%; background:var(--slate); border:1px solid var(--accent-bright); color:var(--accent-bright); font-family:'Bebas Neue', sans-serif; font-size:15px; display:flex; align-items:center; justify-content:center; flex-shrink:0; z-index:1; }
+  .hpc-storage__process-text strong{ display:block; font-family:'Noto Sans TC', sans-serif; font-size:14px; color:var(--snow); margin-bottom:2px; }
+  .hpc-storage__process-text span{ font-family:'Noto Sans TC', sans-serif; font-size:12.5px; color:var(--muted); }
+
+  /* 雪具倉儲詳細費用表 */
+  .hpc-storage__fee-table{ width:100%; border-collapse:collapse; font-family:'Noto Sans TC', sans-serif; font-size:12.5px; }
+  .hpc-storage__fee-table th{ text-align:left; color:var(--accent-bright); font-weight:700; padding:9px 6px; border-bottom:1px solid var(--line); font-size:11.5px; }
+  .hpc-storage__fee-table td{ padding:9px 6px; border-bottom:1px solid var(--line); color:var(--ice); vertical-align:top; }
+  .hpc-storage__fee-table td:first-child{ color:var(--muted); width:22px; }
+  .hpc-storage__fee-table td:last-child{ text-align:right; white-space:nowrap; color:var(--snow); font-weight:500; }
+  .hpc-storage__fee-table tr:last-child td{ border-bottom:none; }
+  .hpc-storage__fee-note{ font-family:'Noto Sans TC', sans-serif; font-size:11.5px; color:var(--muted); margin-top:12px; }
+  .hpc-storage__fee-list{ font-family:'Noto Sans TC', sans-serif; font-size:11.5px; color:var(--muted); line-height:1.8; margin:8px 0 0 1.1rem; }
+
+  .hpc-storage__field{ margin-bottom:16px; }
+  .hpc-storage__field:last-child{ margin-bottom:0; }
+  .hpc-storage__label{ display:block; font-size:13px; font-weight:700; margin-bottom:7px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage__hint{ display:block; font-size:11.5px; color:var(--muted); margin-top:5px; line-height:1.6; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage__input{ width:100%; background:var(--slate); border:1px solid var(--line); border-radius:10px; padding:11px 12px; color:var(--snow); font-size:14px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage__input:focus{ outline:2px solid var(--accent-bright); outline-offset:1px; }
+
+  .hpc-storage__radio-group{ display:flex; flex-direction:column; gap:8px; }
+  .hpc-storage__radio{ display:flex; align-items:flex-start; gap:10px; background:var(--slate); border:1px solid var(--line); border-radius:10px; padding:11px 12px; cursor:pointer; font-size:13px; }
+  .hpc-storage__radio input{ margin-top:3px; accent-color:var(--accent-bright); }
+  .hpc-storage__radio-text strong{ display:block; font-size:13.5px; margin-bottom:2px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage__radio-text span{ color:var(--muted); font-size:12px; font-family:'Noto Sans TC', sans-serif; }
+
+  .hpc-storage__checkbox{ display:flex; align-items:flex-start; gap:9px; font-size:13px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage__checkbox input{ accent-color:var(--accent-bright); width:16px; height:16px; margin-top:2px; flex-shrink:0; }
+
+  .hpc-storage__summary{ background:var(--slate); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin-top:18px; }
+  .hpc-storage__summary-row{ display:flex; justify-content:space-between; font-size:13px; color:var(--muted); padding:5px 0; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage__summary-row span:last-child{ color:var(--snow); }
+  .hpc-storage__summary-total{ display:flex; justify-content:space-between; align-items:baseline; border-top:1px solid var(--line); margin-top:8px; padding-top:12px; }
+  .hpc-storage__summary-total span:first-child{ font-size:13px; color:var(--muted); font-family:'Noto Sans TC', sans-serif; }
+  .hpc-storage__summary-total span:last-child{ font-size:22px; font-weight:900; color:var(--accent-bright); font-family:'Bebas Neue', sans-serif; }
+  .hpc-storage__disclaimer{ font-size:11px; color:var(--muted); line-height:1.6; margin-top:10px; font-family:'Noto Sans TC', sans-serif; }
+
+  .hpc-storage__submit{ all:unset; cursor:pointer; display:block; width:100%; text-align:center; background:var(--accent); color:var(--deep); font-weight:500; font-size:15px; padding:15px; border-radius:12px; margin-top:20px; font-family:'DM Sans', sans-serif; }
+  .hpc-storage__submit:hover{ background:var(--accent-bright); }
+  .hpc-storage__submit:focus-visible{ outline:2px solid var(--accent-bright); outline-offset:2px; }
+
+  .hpc-storage__confirm{ display:none; text-align:center; padding:40px 20px; }
+  .hpc-storage__confirm.is-active{ display:block; }
+  .hpc-storage__confirm h2{ font-family:'Noto Sans TC', sans-serif; font-size:20px; margin:0 0 10px; }
+  .hpc-storage__confirm p{ font-family:'Noto Sans TC', sans-serif; font-size:14px; color:var(--muted); line-height:1.7; margin-bottom:6px; }
+
+  @media (min-width:560px){ .hpc-storage__cards{ flex-direction:row; } .hpc-storage__card{ flex:1; } }
+</style>
+</head>
+<body>
+<div class="hpc-storage">
+  <div class="hpc-storage__wrap">
+
+    <a class="hpc-storage__back" href="index.html">← 返回首頁</a>
+
+    <div class="hpc-storage__hero">
+      <div class="hpc-storage__badge">03</div>
+      <span class="hpc-storage__eyebrow">SEASON PASS</span>
+      <h1 class="hpc-storage__h1 cjk">雪具倉儲<br>專業打蠟保養</h1>
+      <p class="hpc-storage__tagline cjk">溫控除濕全年倉儲 ・ 專業保養打蠟</p>
+      <p class="hpc-storage__intro cjk">板子狀態一直維持最佳，回來不用再操心。</p>
+    </div>
+
+    <div class="hpc-storage__section">
+      <p class="hpc-storage__section-title">這頁提供什麼</p>
+      <div class="hpc-storage__cards">
+        <div class="hpc-storage__card">
+          <h3 class="cjk">雪具倉儲會員</h3>
+          <p class="cjk">溫控除濕全年倉儲，三個層級，PLUS 以上含開封板保養打蠟。</p>
+        </div>
+        <div class="hpc-storage__card">
+          <h3 class="cjk">加購專業保養</h3>
+          <p class="cjk">入庫／出庫保養各含除舊蠟、板底清潔、鋼邊處理。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 雪具寄存流程 -->
+    <div class="hpc-storage__section">
+      <p class="hpc-storage__section-title">雪具寄存流程</p>
+      <div class="hpc-storage__panel">
+        <div class="hpc-storage__process">
+          <div class="hpc-storage__process-step">
+            <div class="hpc-storage__process-num">01</div>
+            <div class="hpc-storage__process-text"><strong class="cjk">申請</strong><span class="cjk">線上填寫寄存表單</span></div>
+          </div>
+          <div class="hpc-storage__process-step">
+            <div class="hpc-storage__process-num">02</div>
+            <div class="hpc-storage__process-text"><strong class="cjk">入庫</strong><span class="cjk">雪具全年除濕倉儲</span></div>
+          </div>
+          <div class="hpc-storage__process-step">
+            <div class="hpc-storage__process-num">03</div>
+            <div class="hpc-storage__process-text"><strong class="cjk">出庫</strong><span class="cjk">取件前7天預約出庫</span></div>
+          </div>
+          <div class="hpc-storage__process-step">
+            <div class="hpc-storage__process-num">04</div>
+            <div class="hpc-storage__process-text"><strong class="cjk">取件</strong><span class="cjk">收件後檢查裝備</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 雪具倉儲詳細費用 -->
+    <div class="hpc-storage__section">
+      <p class="hpc-storage__section-title">雪具倉儲詳細費用</p>
+      <div class="hpc-storage__panel">
+        <table class="hpc-storage__fee-table cjk">
+          <thead>
+            <tr><th>項目</th><th>內容</th><th>費用（JPY）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>①</td><td>基本會員費（只收一次）</td><td>¥10,000</td></tr>
+            <tr><td rowspan="4">②</td><td>存倉費／年・雪板袋（30kg以下）－ BASIC</td><td>¥16,000</td></tr>
+            <tr><td>存倉費／年・雪板袋（30kg以下）－ PLUS</td><td>¥25,000</td></tr>
+            <tr><td>存倉費／年・雪板袋（30kg以下）－ VIP</td><td>¥36,000</td></tr>
+            <tr><td>手提裝備袋／雪鞋背包</td><td>¥8,000</td></tr>
+            <tr><td>－</td><td>超過30kg之物品</td><td>費用另計</td></tr>
+            <tr><td rowspan="2">③</td><td>出入庫手續費（單次）</td><td>¥1,500</td></tr>
+            <tr><td>出入庫手續費（來回）</td><td>¥3,000</td></tr>
+            <tr><td rowspan="2">④</td><td>寄送費用（日本境內）新潟縣以北</td><td>¥6,600</td></tr>
+            <tr><td>新潟縣以南、超過30kg</td><td>費用另計</td></tr>
+            <tr><td rowspan="2">⑤</td><td>加購：入庫保養（鋼邊防銹＋封板蠟）</td><td>¥6,500</td></tr>
+            <tr><td>加購：出庫保養（修鋼邊＋開板打蠟）</td><td>¥6,500</td></tr>
+          </tbody>
+        </table>
+        <p class="hpc-storage__fee-note cjk">＊保養皆含除板底舊蠟、板底清潔</p>
+        <ul class="hpc-storage__fee-list cjk">
+          <li>上述費用皆以「件」為計價單位</li>
+          <li>首次加入會員寄存裝備時，需支付費用①＋②＋③（單次）</li>
+          <li>如寄放兩年以上要出倉及寄送時，需支付費用②＋③（來回）＋④</li>
+          <li>如單次寄放要出倉及寄送時，需支付費用③（單次）＋④</li>
+        </ul>
+      </div>
+    </div>
+
+    <form id="storageForm">
+      <div class="hpc-storage__section">
+        <p class="hpc-storage__section-title">試算 / 預約</p>
+
+        <div class="hpc-storage__panel">
+          <h3 class="cjk">雪具倉儲會員</h3>
+          <div class="hpc-storage__field" style="margin-top:14px;">
+            <label class="hpc-storage__checkbox">
+              <input type="checkbox" id="stFirstTime" checked>
+              第一次加入會員（基本會員費 ¥10,000，只收一次）
+            </label>
+          </div>
+
+          <div class="hpc-storage__field">
+            <label class="hpc-storage__label">會員方案（存倉費／年，含雪板袋30kg以下）</label>
+            <div class="hpc-storage__radio-group">
+              <label class="hpc-storage__radio">
+                <input type="radio" name="stTier" value="basic" checked>
+                <span class="hpc-storage__radio-text"><strong>BASIC ¥16,000／年</strong><span>溫控除濕倉儲，安心寄放雪板與雪具</span></span>
+              </label>
+              <label class="hpc-storage__radio">
+                <input type="radio" name="stTier" value="plus">
+                <span class="hpc-storage__radio-text"><strong>PLUS ¥25,000／年</strong><span>包含封板、開板保養與專業打蠟</span></span>
+              </label>
+              <label class="hpc-storage__radio">
+                <input type="radio" name="stTier" value="vip">
+                <span class="hpc-storage__radio-text"><strong>VIP ¥36,000／年</strong><span>享有 PLUS 全部服務，再加雪具袋無限次免費寄送</span></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="hpc-storage__field">
+            <label class="hpc-storage__label">出入庫手續費</label>
+            <div class="hpc-storage__radio-group">
+              <label class="hpc-storage__radio">
+                <input type="radio" name="stHandling" value="single">
+                <span class="hpc-storage__radio-text"><strong>單次 ¥1,500</strong></span>
+              </label>
+              <label class="hpc-storage__radio">
+                <input type="radio" name="stHandling" value="round" checked>
+                <span class="hpc-storage__radio-text"><strong>來回 ¥3,000</strong><span>當季會再次出入庫，建議選這個</span></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="hpc-storage__field">
+            <label class="hpc-storage__checkbox">
+              <input type="checkbox" id="stMaintIn">
+              加購：入庫保養（鋼邊防銹＋封板蠟）¥6,500
+            </label>
+            <span class="hpc-storage__hint">PLUS／VIP 已含開封板保養打蠟，這項通常給 BASIC 會員或想額外加做的人</span>
+          </div>
+          <div class="hpc-storage__field">
+            <label class="hpc-storage__checkbox">
+              <input type="checkbox" id="stMaintOut">
+              加購：出庫保養（修鋼邊＋開板打蠟）¥6,500
+            </label>
+          </div>
+
+          <div class="hpc-storage__summary">
+            <div class="hpc-storage__summary-row" id="stFeeRow" style="display:none;"><span>基本會員費（首次）</span><span>¥10,000</span></div>
+            <div class="hpc-storage__summary-row"><span>存倉費／年</span><span id="stTierPrice">¥16,000</span></div>
+            <div class="hpc-storage__summary-row"><span>出入庫手續費</span><span id="stHandlingPrice">¥3,000</span></div>
+            <div class="hpc-storage__summary-row" id="stMaintInRow" style="display:none;"><span>入庫保養</span><span>¥6,500</span></div>
+            <div class="hpc-storage__summary-row" id="stMaintOutRow" style="display:none;"><span>出庫保養</span><span>¥6,500</span></div>
+            <div class="hpc-storage__summary-total"><span>試算總價</span><span id="stStorageTotal">—</span></div>
+            <p class="hpc-storage__disclaimer">超過30kg、新潟縣以南寄送費用另計。為系統試算參考價，實際報價以正式確認為準。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hpc-storage__section">
+        <p class="hpc-storage__section-title">聯絡資訊</p>
+        <div class="hpc-storage__panel">
+          <div class="hpc-storage__field">
+            <label class="hpc-storage__label" for="stName">姓名</label>
+            <input class="hpc-storage__input" type="text" id="stName" required>
+          </div>
+          <div class="hpc-storage__field">
+            <label class="hpc-storage__label" for="stContact">聯絡方式（Email 或 LINE ID）</label>
+            <input class="hpc-storage__input" type="text" id="stContact" required>
+          </div>
+          <div class="hpc-storage__field">
+            <label class="hpc-storage__label" for="stNote">備註</label>
+            <input class="hpc-storage__input" type="text" id="stNote" placeholder="其他需求（選填）">
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="hpc-storage__submit">送出預約</button>
+    </form>
+
+    <div class="hpc-storage__confirm" id="stConfirm">
+      <h2 class="cjk">已收到你的預約需求</h2>
+      <p class="cjk" id="stConfirmDetail"></p>
+      <p class="cjk">我們會盡快跟你確認實際報價與細節。</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var TIER = { basic: 16000, plus: 25000, vip: 36000 };
+  var HANDLING = { single: 1500, round: 3000 };
+  var MEMBER_FEE = 10000;
+  var MAINT_FEE = 6500;
+  function yen(n) { return '¥' + n.toLocaleString('ja-JP'); }
+
+  var els = {
+    firstTime: document.getElementById('stFirstTime'),
+    feeRow: document.getElementById('stFeeRow'),
+    tierPrice: document.getElementById('stTierPrice'),
+    handlingPrice: document.getElementById('stHandlingPrice'),
+    maintIn: document.getElementById('stMaintIn'),
+    maintInRow: document.getElementById('stMaintInRow'),
+    maintOut: document.getElementById('stMaintOut'),
+    maintOutRow: document.getElementById('stMaintOutRow'),
+    total: document.getElementById('stStorageTotal'),
+    form: document.getElementById('storageForm'),
+    confirm: document.getElementById('stConfirm'),
+    confirmDetail: document.getElementById('stConfirmDetail')
+  };
+
+  function getTier() { return document.querySelector('input[name="stTier"]:checked').value; }
+  function getHandling() { return document.querySelector('input[name="stHandling"]:checked').value; }
+
+  function recalc() {
+    var total = 0;
+    els.feeRow.style.display = els.firstTime.checked ? '' : 'none';
+    if (els.firstTime.checked) total += MEMBER_FEE;
+
+    var tier = getTier();
+    els.tierPrice.textContent = yen(TIER[tier]);
+    total += TIER[tier];
+
+    var handling = getHandling();
+    els.handlingPrice.textContent = yen(HANDLING[handling]);
+    total += HANDLING[handling];
+
+    els.maintInRow.style.display = els.maintIn.checked ? '' : 'none';
+    if (els.maintIn.checked) total += MAINT_FEE;
+    els.maintOutRow.style.display = els.maintOut.checked ? '' : 'none';
+    if (els.maintOut.checked) total += MAINT_FEE;
+
+    els.total.textContent = yen(total);
+  }
+
+  els.form.addEventListener('change', recalc);
+  els.form.addEventListener('input', recalc);
+
+  // TODO: 接到你實際的後台 / Notion
+  function submitBooking(payload) {
+    console.log('[storage-product booking]', payload);
+    // fetch('/api/storage-booking', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+  }
+
+  els.form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var payload = {
+      firstTime: els.firstTime.checked, tier: getTier(), handling: getHandling(),
+      maintIn: els.maintIn.checked, maintOut: els.maintOut.checked, total: els.total.textContent,
+      name: document.getElementById('stName').value,
+      contact: document.getElementById('stContact').value,
+      note: document.getElementById('stNote').value
+    };
+    submitBooking(payload);
+
+    els.form.style.display = 'none';
+    els.confirmDetail.textContent = payload.name + '，倉儲試算 ' + payload.total;
+    els.confirm.classList.add('is-active');
+  });
+
+  recalc();
+})();
+</script>
+</body>
+</html>

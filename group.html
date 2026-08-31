@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>好友家庭彈性團 — Hokkaido Powder Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     group.html — D套餐「好友家庭彈性團」專屬頁
+     人數、程度落差、分組方式都因人而異，不做試算器，
+     純內容說明 + 需求表單，送出後人工規劃方案並回信報價
+     ============================================================ */
+  .hpc-group {
+    --snow: #F0EEE8; --ice: #C8D8E4; --deep: #0B1117; --charcoal: #141C24; --slate: #1E2A36;
+    --accent: #5B9EC9; --accent-bright: #7DBDE8; --rose: #D98BA0; --warm: #D4A96A; --warm-soft: #E0BD87;
+    --muted: #8A99A8; --line: rgba(138,153,168,0.18);
+    background: var(--deep); color: var(--snow);
+    font-family: 'DM Sans','Noto Sans TC', sans-serif; font-weight:300;
+    min-height: 100vh;
+  }
+  .hpc-group *, .hpc-group *::before, .hpc-group *::after { box-sizing: border-box; }
+  .hpc-group .cjk{ font-family:'Noto Sans TC', sans-serif; }
+  .hpc-group a{ color: var(--accent-bright); }
+
+  .hpc-group__wrap{ max-width: 640px; margin:0 auto; padding: 0 20px 80px; }
+  .hpc-group__back{ display:inline-block; padding:20px 0 0; font-size:13px; color:var(--muted); text-decoration:none; }
+  .hpc-group__back:hover{ color:var(--accent-bright); }
+
+  .hpc-group__hero{ text-align:center; padding:32px 0 8px; }
+  .hpc-group__badge{ width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg, var(--accent-bright), var(--rose)); color:var(--deep); font-family:'Bebas Neue', sans-serif; font-size:20px; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; }
+  .hpc-group__eyebrow{ font-family:'Bebas Neue', sans-serif; font-size:13px; letter-spacing:.16em; color:var(--accent-bright); display:block; margin-bottom:8px; }
+  .hpc-group__h1{ font-family:'Noto Sans TC', sans-serif; font-size:26px; font-weight:900; margin:0 0 8px; line-height:1.3; }
+  .hpc-group__tagline{ font-size:13px; color:var(--accent-bright); letter-spacing:.02em; margin:0 0 14px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-group__intro{ font-size:14px; color:var(--muted); line-height:1.7; max-width:480px; margin:0 auto; font-family:'Noto Sans TC', sans-serif; }
+
+  .hpc-group__section{ padding:36px 0 0; }
+  .hpc-group__section-title{ font-size:12px; font-family:'Bebas Neue', sans-serif; letter-spacing:.12em; color:var(--muted); margin:0 0 14px; }
+
+  .hpc-group__cards{ display:flex; flex-direction:column; gap:10px; }
+  .hpc-group__card{ background:var(--charcoal); border:1px solid var(--line); border-radius:14px; padding:16px 18px; }
+  .hpc-group__card h3{ font-family:'Noto Sans TC', sans-serif; font-size:15px; margin:0 0 6px; }
+  .hpc-group__card p{ font-family:'Noto Sans TC', sans-serif; font-size:13px; color:var(--muted); line-height:1.65; margin:0; }
+
+  .hpc-group__panel{ background:var(--charcoal); border:1px solid var(--line); border-radius:16px; padding:20px; margin-top:14px; }
+  .hpc-group__field{ margin-bottom:16px; }
+  .hpc-group__field:last-child{ margin-bottom:0; }
+  .hpc-group__label{ display:block; font-size:13px; font-weight:700; margin-bottom:7px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-group__hint{ display:block; font-size:11.5px; color:var(--muted); margin-top:5px; line-height:1.6; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-group__input, .hpc-group__textarea{ width:100%; background:var(--slate); border:1px solid var(--line); border-radius:10px; padding:11px 12px; color:var(--snow); font-size:14px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-group__textarea{ resize:vertical; min-height:90px; }
+  .hpc-group__input:focus, .hpc-group__textarea:focus{ outline:2px solid var(--accent-bright); outline-offset:1px; }
+  .hpc-group__row{ display:flex; gap:10px; }
+  .hpc-group__row > *{ flex:1; }
+
+  .hpc-group__checkbox-group{ display:flex; flex-direction:column; gap:8px; }
+  .hpc-group__checkbox{ display:flex; align-items:flex-start; gap:10px; background:var(--slate); border:1px solid var(--line); border-radius:10px; padding:11px 12px; cursor:pointer; font-size:13px; font-family:'Noto Sans TC', sans-serif; }
+  .hpc-group__checkbox input{ accent-color:var(--accent-bright); width:16px; height:16px; margin-top:2px; flex-shrink:0; }
+
+  .hpc-group__quote-note{ background:rgba(125,189,232,0.12); border:1px solid var(--accent-bright); border-radius:10px; padding:14px 16px; font-size:13px; color:var(--accent-bright); line-height:1.75; margin-top:20px; font-family:'Noto Sans TC', sans-serif; }
+
+  .hpc-group__submit{ all:unset; cursor:pointer; display:block; width:100%; text-align:center; background:var(--accent); color:var(--deep); font-weight:500; font-size:15px; padding:15px; border-radius:12px; margin-top:20px; font-family:'DM Sans', sans-serif; }
+  .hpc-group__submit:hover{ background:var(--accent-bright); }
+  .hpc-group__submit:focus-visible{ outline:2px solid var(--accent-bright); outline-offset:2px; }
+
+  .hpc-group__confirm{ display:none; text-align:center; padding:40px 20px; }
+  .hpc-group__confirm.is-active{ display:block; }
+  .hpc-group__confirm h2{ font-family:'Noto Sans TC', sans-serif; font-size:20px; margin:0 0 10px; }
+  .hpc-group__confirm p{ font-family:'Noto Sans TC', sans-serif; font-size:14px; color:var(--muted); line-height:1.7; margin-bottom:6px; }
+
+  @media (min-width:560px){ .hpc-group__cards{ flex-direction:row; } .hpc-group__card{ flex:1; } }
+</style>
+</head>
+<body>
+<div class="hpc-group">
+  <div class="hpc-group__wrap">
+
+    <a class="hpc-group__back" href="index.html">← 返回首頁</a>
+
+    <div class="hpc-group__hero">
+      <div class="hpc-group__badge">D</div>
+      <span class="hpc-group__eyebrow">FLEXIBLE GROUP</span>
+      <h1 class="hpc-group__h1 cjk">好友家庭彈性團</h1>
+      <p class="hpc-group__tagline cjk">專屬包車 ・ 客製化分組課程</p>
+      <p class="hpc-group__intro cjk">人多、程度不一也沒關係，各玩各的再一起集合。</p>
+    </div>
+
+    <div class="hpc-group__section">
+      <p class="hpc-group__section-title">這頁提供什麼</p>
+      <div class="hpc-group__cards">
+        <div class="hpc-group__card">
+          <h3 class="cjk">專屬包車</h3>
+          <p class="cjk">依人數與行程客製安排，全程專車接送不用配合其他人。</p>
+        </div>
+        <div class="hpc-group__card">
+          <h3 class="cjk">客製化分組課程</h3>
+          <p class="cjk">依每個人的程度分開上課，教練配置彈性調整，新手老手一起出遊也不卡關。</p>
+        </div>
+      </div>
+    </div>
+
+    <form id="groupForm">
+      <div class="hpc-group__section">
+        <p class="hpc-group__section-title">告訴我們你們的狀況</p>
+        <div class="hpc-group__panel">
+          <div class="hpc-group__field">
+            <label class="hpc-group__label" for="grSize">同行人數</label>
+            <input class="hpc-group__input" type="number" id="grSize" min="2" max="30" placeholder="例：6">
+          </div>
+
+          <div class="hpc-group__field">
+            <label class="hpc-group__label" for="grLevels">程度分佈</label>
+            <textarea class="hpc-group__textarea" id="grLevels" placeholder="例：2位新手（沒滑過）、2位中階、2位資深老手"></textarea>
+            <span class="hpc-group__hint">寫下每個人大概的程度，我們才能規劃怎麼分組上課</span>
+          </div>
+
+          <div class="hpc-group__field">
+            <label class="hpc-group__label">想要的服務</label>
+            <div class="hpc-group__checkbox-group">
+              <label class="hpc-group__checkbox">
+                <input type="checkbox" id="grWantCharter" checked>
+                專屬包車接送
+              </label>
+              <label class="hpc-group__checkbox">
+                <input type="checkbox" id="grWantCourse" checked>
+                分組課程
+              </label>
+            </div>
+          </div>
+
+          <div class="hpc-group__field">
+            <label class="hpc-group__row">
+              <div>
+                <label class="hpc-group__label" for="grStart">預計開始日期</label>
+                <input class="hpc-group__input" type="date" id="grStart" min="2026-12-01" max="2027-04-30">
+              </div>
+              <div>
+                <label class="hpc-group__label" for="grEnd">預計結束日期</label>
+                <input class="hpc-group__input" type="date" id="grEnd" min="2026-12-01" max="2027-04-30">
+              </div>
+            </label>
+          </div>
+
+          <div class="hpc-group__field">
+            <label class="hpc-group__label" for="grNote">其他需求</label>
+            <textarea class="hpc-group__textarea" id="grNote" placeholder="例：想住在同一間飯店、需要兒童教練、有人不會滑雪只想逛街等（選填）"></textarea>
+          </div>
+        </div>
+
+        <div class="hpc-group__quote-note">人數、程度落差、分組方式每一團都不一樣，我們會依照你填的狀況規劃方案，於 1～2 個工作天內回信報價，這裡不會自動算出金額。</div>
+      </div>
+
+      <div class="hpc-group__section">
+        <p class="hpc-group__section-title">聯絡資訊</p>
+        <div class="hpc-group__panel">
+          <div class="hpc-group__field">
+            <label class="hpc-group__label" for="grName">姓名</label>
+            <input class="hpc-group__input" type="text" id="grName" required>
+          </div>
+          <div class="hpc-group__field">
+            <label class="hpc-group__label" for="grContact">聯絡方式（Email 或 LINE ID）</label>
+            <input class="hpc-group__input" type="text" id="grContact" required>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="hpc-group__submit">送出需求</button>
+    </form>
+
+    <div class="hpc-group__confirm" id="grConfirm">
+      <h2 class="cjk">已收到你的團體需求</h2>
+      <p class="cjk" id="grConfirmDetail"></p>
+      <p class="cjk">我們會依人數與程度規劃方案，盡快回信報價。</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var form = document.getElementById('groupForm');
+  var confirm = document.getElementById('grConfirm');
+  var confirmDetail = document.getElementById('grConfirmDetail');
+
+  // TODO: 接到你實際的後台 / Notion
+  function submitRequest(payload) {
+    console.log('[group request]', payload);
+    // fetch('/api/group-request', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var payload = {
+      size: document.getElementById('grSize').value,
+      levels: document.getElementById('grLevels').value,
+      wantCharter: document.getElementById('grWantCharter').checked,
+      wantCourse: document.getElementById('grWantCourse').checked,
+      start: document.getElementById('grStart').value,
+      end: document.getElementById('grEnd').value,
+      note: document.getElementById('grNote').value,
+      name: document.getElementById('grName').value,
+      contact: document.getElementById('grContact').value
+    };
+    submitRequest(payload);
+
+    form.style.display = 'none';
+    confirmDetail.textContent = payload.name + '，' + (payload.size || '?') + ' 人團，' + payload.start + ' → ' + payload.end;
+    confirm.classList.add('is-active');
+  });
+})();
+</script>
+</body>
+</html>
