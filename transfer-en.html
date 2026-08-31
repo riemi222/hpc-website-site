@@ -1,18 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>新千歲機場接送・北海道觀光包車 — Hokkaido Powder Club</title>
+<title>New Chitose Airport Transfer・Hokkaido Sightseeing Charter — Hokkaido Powder Club</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
-  /* ============================================================
-     transfer.html — kit 01 專屬頁
-     新千歲機場接送：真實定價表，自動試算
-     北海道觀光包車：無固定定價，客人填路線後由 Emi 人工回信報價
-     兩個服務用 checkbox 各自開關，可以只選一個，也可以兩個都要
-     配色沿用網站真實token，跟 index.html / package-a.html 同一套
-     ============================================================ */
   .hpc-transfer {
     --snow: #F0EEE8; --ice: #C8D8E4; --deep: #0B1117; --charcoal: #141C24; --slate: #1E2A36;
     --accent: #5B9EC9; --accent-bright: #7DBDE8; --rose: #D98BA0; --warm: #D4A96A; --warm-soft: #E0BD87;
@@ -22,7 +15,6 @@
     min-height: 100vh;
   }
   .hpc-transfer *, .hpc-transfer *::before, .hpc-transfer *::after { box-sizing: border-box; }
-  .hpc-transfer .cjk{ font-family:'Noto Sans TC', sans-serif; }
   .hpc-transfer a{ color: var(--accent-bright); }
 
   .hpc-transfer__wrap{ max-width: 640px; margin:0 auto; padding: 0 20px 80px; }
@@ -107,43 +99,43 @@
   <div class="hpc-transfer__wrap">
 
     <div style="display:flex; align-items:center; justify-content:space-between; padding-top:20px;">
-      <a href="index.html" style="font-family:'Bebas Neue', sans-serif; font-size:.95rem; letter-spacing:.05em; color:var(--snow); text-decoration:none;">HOKKAIDO POWDER <span style="color:var(--accent-bright);">CLUB</span></a>
-      <a href="transfer-en.html" style="color:var(--muted); font-size:.72rem; letter-spacing:.05em; text-decoration:none;">EN</a>
+      <a href="en.html" style="font-family:'Bebas Neue', sans-serif; font-size:.95rem; letter-spacing:.05em; color:var(--snow); text-decoration:none;">HOKKAIDO POWDER <span style="color:var(--accent-bright);">CLUB</span></a>
+      <a href="transfer.html" style="color:var(--muted); font-size:.72rem; letter-spacing:.05em; text-decoration:none;">ZH</a>
     </div>
-    <a class="hpc-transfer__back" href="index.html">← 返回首頁</a>
+    <a class="hpc-transfer__back" href="en.html">← Back to Home</a>
 
     <div class="hpc-transfer__hero">
       <div class="hpc-transfer__badge">01</div>
       <span class="hpc-transfer__eyebrow">FIRST ARRIVAL</span>
-      <h1 class="hpc-transfer__h1 cjk">新千歲機場接送<br>北海道觀光包車</h1>
-      <p class="hpc-transfer__tagline cjk">再也不用拖著行李轉車</p>
-      <p class="hpc-transfer__intro cjk">機場接送即時試算，馬上知道價格；觀光包車依你的路線人工報價，兩個都可以只選一個或一起訂。</p>
+      <h1 class="hpc-transfer__h1">New Chitose Airport Transfer<br>Hokkaido Sightseeing Charter</h1>
+      <p class="hpc-transfer__tagline">No more dragging luggage through transit</p>
+      <p class="hpc-transfer__intro">Instant estimate for the airport transfer — know the price right away. The sightseeing charter is quoted by hand based on your route. Book either one alone, or both together.</p>
     </div>
 
     <div class="hpc-transfer__section">
-      <p class="hpc-transfer__section-title">這頁提供什麼</p>
+      <p class="hpc-transfer__section-title">What's on this page</p>
       <div class="hpc-transfer__cards">
         <div class="hpc-transfer__card">
-          <h3 class="cjk">新千歲機場接送</h3>
-          <p class="cjk">機場 ↔ 雪場／指定飯店，專車直達，依路線固定報價。</p>
-          <span class="price-tag">¥55,000 起／趟</span>
+          <h3>New Chitose Airport Transfer</h3>
+          <p>Airport ↔ ski resort / designated hotel, direct door-to-door, fixed pricing by route.</p>
+          <span class="price-tag">¥55,000 from／trip</span>
         </div>
         <div class="hpc-transfer__card">
-          <h3 class="cjk">北海道觀光包車</h3>
-          <p class="cjk">行程與停留時間彈性安排，依你的路線人工報價。不限同時預訂住宿或課程／導滑的客人，可以單純包車觀光。</p>
-          <span class="price-tag">¥50,000 起／來回</span>
+          <h3>Hokkaido Sightseeing Charter</h3>
+          <p>Flexible itinerary and duration, quoted based on your route. Open to everyone — a standalone charter booking is fine, no lodging or course required.</p>
+          <span class="price-tag">¥50,000 from／round trip</span>
         </div>
       </div>
     </div>
 
     <form id="transferForm">
       <div class="hpc-transfer__section">
-        <p class="hpc-transfer__section-title">試算 / 預約</p>
+        <p class="hpc-transfer__section-title">Estimate / Book</p>
 
-        <!-- 機場接送：即時試算 -->
+        <!-- Airport transfer: live estimate -->
         <div class="hpc-transfer__panel">
           <label class="hpc-transfer__panel-toggle">
-            <h3 class="cjk">新千歲機場接送</h3>
+            <h3>New Chitose Airport Transfer</h3>
             <span class="hpc-transfer__switch">
               <input type="checkbox" id="ttTransferToggle" checked>
               <span class="hpc-transfer__switch-track"><span class="hpc-transfer__switch-thumb"></span></span>
@@ -152,15 +144,15 @@
 
           <div class="hpc-transfer__panel-body is-open" id="ttTransferBody">
             <div class="hpc-transfer__field">
-              <label class="hpc-transfer__label">車型</label>
+              <label class="hpc-transfer__label">Vehicle</label>
               <div class="hpc-transfer__radio-group">
                 <label class="hpc-transfer__radio">
                   <input type="radio" name="ttVehicle" value="small" checked>
-                  <span class="hpc-transfer__radio-text"><strong>小型車</strong><span>Alphard 等級</span></span>
+                  <span class="hpc-transfer__radio-text"><strong>Small vehicle</strong><span>Alphard class</span></span>
                 </label>
                 <label class="hpc-transfer__radio">
                   <input type="radio" name="ttVehicle" value="large">
-                  <span class="hpc-transfer__radio-text"><strong>大型車</strong><span>Hiace 等級，行李空間較大</span></span>
+                  <span class="hpc-transfer__radio-text"><strong>Large vehicle</strong><span>Hiace class, more luggage space</span></span>
                 </label>
               </div>
             </div>
@@ -168,27 +160,27 @@
             <div class="hpc-transfer__field">
               <label class="hpc-transfer__checkbox">
                 <input type="checkbox" id="ttPickupToggle" checked>
-                接機：新千歲機場 → 目的地
+                Pickup: New Chitose Airport → destination
               </label>
               <div id="ttPickupSub" style="margin-top:10px; padding-left:26px;">
-                <label class="hpc-transfer__label" for="ttPickupResort">接機目的地</label>
+                <label class="hpc-transfer__label" for="ttPickupResort">Pickup destination</label>
                 <select class="hpc-transfer__select" id="ttPickupResort">
-                  <optgroup label="TOMAMU・二世谷・留壽都・Kiroro">
+                  <optgroup label="TOMAMU・Niseko・Rusutsu・Kiroro">
                     <option value="TOMAMU" data-group="1">TOMAMU</option>
-                    <option value="二世谷 Niseko" data-group="1">二世谷 Niseko</option>
-                    <option value="留壽都 Rusutsu" data-group="1">留壽都 Rusutsu</option>
+                    <option value="Niseko" data-group="1">Niseko</option>
+                    <option value="Rusutsu" data-group="1">Rusutsu</option>
                     <option value="Kiroro" data-group="1">Kiroro</option>
                   </optgroup>
-                  <optgroup label="手稲・札幌国際">
-                    <option value="手稲滑雪場" data-group="2">手稲滑雪場</option>
-                    <option value="札幌国際滑雪場" data-group="2">札幌国際滑雪場</option>
+                  <optgroup label="Teine・Sapporo Kokusai">
+                    <option value="Teine Ski Resort" data-group="2">Teine Ski Resort</option>
+                    <option value="Sapporo Kokusai Ski Resort" data-group="2">Sapporo Kokusai Ski Resort</option>
                   </optgroup>
-                  <optgroup label="小樽">
-                    <option value="小樽" data-group="3">小樽</option>
+                  <optgroup label="Otaru">
+                    <option value="Otaru" data-group="3">Otaru</option>
                   </optgroup>
-                  <optgroup label="富良野・旭川">
-                    <option value="富良野" data-group="4">富良野</option>
-                    <option value="旭川" data-group="5">旭川</option>
+                  <optgroup label="Furano・Asahikawa">
+                    <option value="Furano" data-group="4">Furano</option>
+                    <option value="Asahikawa" data-group="5">Asahikawa</option>
                   </optgroup>
                 </select>
                 <div class="hpc-transfer__row" style="margin-top:10px;">
@@ -196,7 +188,7 @@
                 </div>
                 <label class="hpc-transfer__checkbox" style="margin-top:8px;">
                   <input type="checkbox" id="ttPickupNight">
-                  此趟為 22:00～05:00 時段（+¥20,000）
+                  This leg falls between 22:00–05:00 (+¥20,000)
                 </label>
               </div>
             </div>
@@ -204,27 +196,27 @@
             <div class="hpc-transfer__field">
               <label class="hpc-transfer__checkbox">
                 <input type="checkbox" id="ttDropoffToggle">
-                送機：目的地 → 新千歲機場
+                Drop-off: destination → New Chitose Airport
               </label>
               <div id="ttDropoffSub" style="display:none; margin-top:10px; padding-left:26px;">
-                <label class="hpc-transfer__label" for="ttDropoffResort">送機出發地</label>
+                <label class="hpc-transfer__label" for="ttDropoffResort">Drop-off origin</label>
                 <select class="hpc-transfer__select" id="ttDropoffResort">
-                  <optgroup label="TOMAMU・二世谷・留壽都・Kiroro">
+                  <optgroup label="TOMAMU・Niseko・Rusutsu・Kiroro">
                     <option value="TOMAMU" data-group="1">TOMAMU</option>
-                    <option value="二世谷 Niseko" data-group="1">二世谷 Niseko</option>
-                    <option value="留壽都 Rusutsu" data-group="1">留壽都 Rusutsu</option>
+                    <option value="Niseko" data-group="1">Niseko</option>
+                    <option value="Rusutsu" data-group="1">Rusutsu</option>
                     <option value="Kiroro" data-group="1">Kiroro</option>
                   </optgroup>
-                  <optgroup label="手稲・札幌国際">
-                    <option value="手稲滑雪場" data-group="2">手稲滑雪場</option>
-                    <option value="札幌国際滑雪場" data-group="2">札幌国際滑雪場</option>
+                  <optgroup label="Teine・Sapporo Kokusai">
+                    <option value="Teine Ski Resort" data-group="2">Teine Ski Resort</option>
+                    <option value="Sapporo Kokusai Ski Resort" data-group="2">Sapporo Kokusai Ski Resort</option>
                   </optgroup>
-                  <optgroup label="小樽">
-                    <option value="小樽" data-group="3">小樽</option>
+                  <optgroup label="Otaru">
+                    <option value="Otaru" data-group="3">Otaru</option>
                   </optgroup>
-                  <optgroup label="富良野・旭川">
-                    <option value="富良野" data-group="4">富良野</option>
-                    <option value="旭川" data-group="5">旭川</option>
+                  <optgroup label="Furano・Asahikawa">
+                    <option value="Furano" data-group="4">Furano</option>
+                    <option value="Asahikawa" data-group="5">Asahikawa</option>
                   </optgroup>
                 </select>
                 <div class="hpc-transfer__row">
@@ -232,24 +224,24 @@
                 </div>
                 <label class="hpc-transfer__checkbox" style="margin-top:8px;">
                   <input type="checkbox" id="ttDropoffNight">
-                  此趟為 22:00～05:00 時段（+¥20,000）
+                  This leg falls between 22:00–05:00 (+¥20,000)
                 </label>
               </div>
             </div>
 
             <div class="hpc-transfer__summary">
-              <div class="hpc-transfer__summary-row" id="ttPickupRow"><span>接機（新千歲機場 → 目的地）</span><span id="ttPickupPrice">—</span></div>
-              <div class="hpc-transfer__summary-row" id="ttDropoffRow" style="display:none;"><span>送機（目的地 → 新千歲機場）</span><span id="ttDropoffPrice">—</span></div>
-              <div class="hpc-transfer__summary-total"><span>試算總價</span><span id="ttTransferTotal">—</span></div>
-              <p class="hpc-transfer__disclaimer">單趟報價，接機／送機可各自單獨預約或一起訂。為系統試算參考價，實際報價以正式確認為準。</p>
+              <div class="hpc-transfer__summary-row" id="ttPickupRow"><span>Pickup (Airport → destination)</span><span id="ttPickupPrice">—</span></div>
+              <div class="hpc-transfer__summary-row" id="ttDropoffRow" style="display:none;"><span>Drop-off (destination → Airport)</span><span id="ttDropoffPrice">—</span></div>
+              <div class="hpc-transfer__summary-total"><span>Estimated total</span><span id="ttTransferTotal">—</span></div>
+              <p class="hpc-transfer__disclaimer">Priced per one-way leg — pickup and drop-off can be booked separately or together. This is a system estimate for reference; final pricing is confirmed upon booking.</p>
             </div>
           </div>
         </div>
 
-        <!-- 北海道觀光包車：人工報價 -->
+        <!-- Hokkaido sightseeing charter: quoted by hand -->
         <div class="hpc-transfer__panel">
           <label class="hpc-transfer__panel-toggle">
-            <h3 class="cjk">北海道觀光包車</h3>
+            <h3>Hokkaido Sightseeing Charter</h3>
             <span class="hpc-transfer__switch">
               <input type="checkbox" id="ttCharterToggle">
               <span class="hpc-transfer__switch-track"><span class="hpc-transfer__switch-thumb"></span></span>
@@ -258,69 +250,69 @@
 
           <div class="hpc-transfer__panel-body" id="ttCharterBody">
             <div class="hpc-transfer__field">
-              <label class="hpc-transfer__label" for="ttRoute">想去的路線／景點</label>
+              <label class="hpc-transfer__label" for="ttRoute">Route / places you'd like to visit</label>
               <div style="display:flex; gap:8px; margin-bottom:8px;">
-                <button type="button" class="hpc-transfer__quickpick" data-fill="旭川市區觀光">旭川</button>
-                <button type="button" class="hpc-transfer__quickpick" data-fill="富良野薰衣草田／花海觀光">富良野</button>
+                <button type="button" class="hpc-transfer__quickpick" data-fill="Asahikawa city sightseeing">Asahikawa</button>
+                <button type="button" class="hpc-transfer__quickpick" data-fill="Furano lavender fields / flower viewing">Furano</button>
               </div>
-              <textarea class="hpc-transfer__textarea" id="ttRoute" placeholder="例：旭川出發 → 富良野薰衣草田 → 美瑛青池 → 當日返回旭川"></textarea>
-              <span class="hpc-transfer__hint">寫下起訖點與想去的地方，我們會依路線人工報價；也可以點上面的快速選填</span>
+              <textarea class="hpc-transfer__textarea" id="ttRoute" placeholder="e.g., Depart Asahikawa → Furano lavender fields → Biei Blue Pond → return to Asahikawa same day"></textarea>
+              <span class="hpc-transfer__hint">Write your start/end points and places you'd like to visit — we'll quote based on the route by hand. You can also use the quick-fill buttons above.</span>
             </div>
             <div class="hpc-transfer__field">
-              <label class="hpc-transfer__label">預計時長</label>
+              <label class="hpc-transfer__label">Estimated duration</label>
               <div class="hpc-transfer__radio-group">
                 <label class="hpc-transfer__radio">
                   <input type="radio" name="ttDuration" value="half" checked>
-                  <span class="hpc-transfer__radio-text"><strong>半天</strong></span>
+                  <span class="hpc-transfer__radio-text"><strong>Half day</strong></span>
                 </label>
                 <label class="hpc-transfer__radio">
                   <input type="radio" name="ttDuration" value="full">
-                  <span class="hpc-transfer__radio-text"><strong>全天</strong></span>
+                  <span class="hpc-transfer__radio-text"><strong>Full day</strong></span>
                 </label>
                 <label class="hpc-transfer__radio">
                   <input type="radio" name="ttDuration" value="flex">
-                  <span class="hpc-transfer__radio-text"><strong>彈性／還沒確定</strong></span>
+                  <span class="hpc-transfer__radio-text"><strong>Flexible / not decided yet</strong></span>
                 </label>
               </div>
             </div>
             <div class="hpc-transfer__field">
-              <label class="hpc-transfer__label" for="ttCharterDate">預計日期</label>
+              <label class="hpc-transfer__label" for="ttCharterDate">Preferred date</label>
               <input class="hpc-transfer__input" type="date" id="ttCharterDate" min="2026-12-01" max="2027-04-30">
             </div>
-            <div class="hpc-transfer__quote-note">起價 ¥50,000／來回，我們會依照你填的路線於 1 個工作天內回信報價，這裡不會自動算出金額。</div>
+            <div class="hpc-transfer__quote-note">Starting from ¥50,000 round trip — we'll quote based on the route you provide within 1 business day. This won't calculate a total automatically.</div>
           </div>
         </div>
       </div>
 
       <div class="hpc-transfer__section">
-        <p class="hpc-transfer__section-title">聯絡資訊</p>
+        <p class="hpc-transfer__section-title">Contact Info</p>
         <div class="hpc-transfer__panel">
           <div class="hpc-transfer__field">
-            <label class="hpc-transfer__label" for="ttName">姓名</label>
+            <label class="hpc-transfer__label" for="ttName">Name</label>
             <input class="hpc-transfer__input" type="text" id="ttName" required>
           </div>
           <div class="hpc-transfer__field">
-            <label class="hpc-transfer__label" for="ttContact">聯絡方式（Email 或 LINE ID）</label>
+            <label class="hpc-transfer__label" for="ttContact">Contact (Email or LINE ID)</label>
             <input class="hpc-transfer__input" type="text" id="ttContact" required>
           </div>
           <div class="hpc-transfer__field">
-            <label class="hpc-transfer__label" for="ttFlight">抵達航班／時間（機場接送適用）</label>
-            <input class="hpc-transfer__input" type="text" id="ttFlight" placeholder="例：CI130 / 1/10 14:20 抵達">
+            <label class="hpc-transfer__label" for="ttFlight">Arrival flight / time (for airport transfer)</label>
+            <input class="hpc-transfer__input" type="text" id="ttFlight" placeholder="e.g., CI130 / arriving 1/10 14:20">
           </div>
           <div class="hpc-transfer__field">
-            <label class="hpc-transfer__label" for="ttNote">備註</label>
-            <input class="hpc-transfer__input" type="text" id="ttNote" placeholder="其他需求（選填）">
+            <label class="hpc-transfer__label" for="ttNote">Notes</label>
+            <input class="hpc-transfer__input" type="text" id="ttNote" placeholder="Anything else we should know (optional)">
           </div>
         </div>
       </div>
 
-      <button type="submit" class="hpc-transfer__submit">送出預約</button>
+      <button type="submit" class="hpc-transfer__submit">Submit Booking</button>
     </form>
 
     <div class="hpc-transfer__confirm" id="ttConfirm">
-      <h2 class="cjk">已收到你的預約需求</h2>
-      <p class="cjk" id="ttConfirmDetail"></p>
-      <p class="cjk">我們會盡快跟你確認實際報價與細節。</p>
+      <h2>We've received your booking request</h2>
+      <p id="ttConfirmDetail"></p>
+      <p>We'll confirm the actual pricing and details with you soon.</p>
     </div>
 
   </div>
@@ -361,7 +353,7 @@
   document.querySelectorAll('.hpc-transfer__quickpick').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var ta = document.getElementById('ttRoute');
-      ta.value = ta.value ? ta.value + '、' + btn.dataset.fill : btn.dataset.fill;
+      ta.value = ta.value ? ta.value + ', ' + btn.dataset.fill : btn.dataset.fill;
       ta.focus();
     });
   });
@@ -387,7 +379,7 @@
     els.pickupRow.style.display = els.pickupToggle.checked ? '' : 'none';
     if (els.pickupToggle.checked) {
       var p = legPrice(els.pickupResort, vehicle, els.pickupNight.checked);
-      if (p.quote) { els.pickupPrice.textContent = '需人工報價'; hasQuoteOnly = true; }
+      if (p.quote) { els.pickupPrice.textContent = 'Quote needed'; hasQuoteOnly = true; }
       else { els.pickupPrice.textContent = yen(p.price); total += p.price; }
     }
 
@@ -395,14 +387,14 @@
     els.dropoffRow.style.display = els.dropoffToggle.checked ? '' : 'none';
     if (els.dropoffToggle.checked) {
       var d = legPrice(els.dropoffResort, vehicle, els.dropoffNight.checked);
-      if (d.quote) { els.dropoffPrice.textContent = '需人工報價'; hasQuoteOnly = true; }
+      if (d.quote) { els.dropoffPrice.textContent = 'Quote needed'; hasQuoteOnly = true; }
       else { els.dropoffPrice.textContent = yen(d.price); total += d.price; }
     }
 
     if (!els.pickupToggle.checked && !els.dropoffToggle.checked) {
-      els.transferTotal.textContent = '請至少選擇一趟';
+      els.transferTotal.textContent = 'Please select at least one leg';
     } else if (hasQuoteOnly) {
-      els.transferTotal.textContent = (total > 0 ? yen(total) + '＋' : '') + '需人工報價（旭川／富良野）';
+      els.transferTotal.textContent = (total > 0 ? yen(total) + ' + ' : '') + 'quote needed';
     } else {
       els.transferTotal.textContent = yen(total);
     }
@@ -413,9 +405,8 @@
   els.form.addEventListener('change', recalcTransfer);
   els.form.addEventListener('input', recalcTransfer);
 
-  // TODO: 接到你實際的後台 / Notion，現在先印出資料 + 顯示確認畫面
   function submitBooking(payload) {
-    var data = { access_key: 'a2a66d84-31b8-4e10-ad64-29181cca53d1', subject: '新預約 - 機場接送・觀光包車', from_name: 'Hokkaido Powder Club 網站' };
+    var data = { access_key: 'a2a66d84-31b8-4e10-ad64-29181cca53d1', subject: '[EN Guest] New Booking - Airport Transfer・Sightseeing Charter', from_name: 'Hokkaido Powder Club Website' };
     Object.keys(payload).forEach(function (k) {
       var v = payload[k];
       data[k] = (v !== null && typeof v === 'object') ? JSON.stringify(v) : v;
@@ -424,7 +415,7 @@
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
-    }).catch(function (err) { console.error('送出失敗', err); });
+    }).catch(function (err) { console.error('Submission failed', err); });
   }
 
   els.form.addEventListener('submit', function (e) {
@@ -452,11 +443,11 @@
     submitBooking(payload);
 
     var lines = [];
-    if (wantsTransfer) lines.push('機場接送試算 ' + payload.transfer.total);
-    if (wantsCharter) lines.push('觀光包車路線已收到，將另行報價');
+    if (wantsTransfer) lines.push('Transfer estimate ' + payload.transfer.total);
+    if (wantsCharter) lines.push('Charter route received, we will quote separately');
 
     els.form.style.display = 'none';
-    els.confirmDetail.textContent = payload.name + '，' + lines.join('；');
+    els.confirmDetail.textContent = payload.name + ', ' + lines.join('; ');
     els.confirm.classList.add('is-active');
   });
 

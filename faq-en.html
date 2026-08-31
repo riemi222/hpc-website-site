@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Hokkaido Powder Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  .hpc-faq {
+    --snow: #F0EEE8; --ice: #C8D8E4; --deep: #0B1117; --charcoal: #141C24; --slate: #1E2A36;
+    --accent: #5B9EC9; --accent-bright: #7DBDE8; --rose: #D98BA0; --warm: #D4A96A; --warm-soft: #E0BD87;
+    --muted: #8A99A8; --line: rgba(138,153,168,0.18);
+    background: var(--deep); color: var(--snow);
+    font-family: 'DM Sans','Noto Sans TC', sans-serif; font-weight:300;
+    min-height: 100vh;
+  }
+  .hpc-faq *, .hpc-faq *::before, .hpc-faq *::after { box-sizing: border-box; }
+  .hpc-faq a{ color: var(--accent-bright); }
+
+  .hpc-faq__wrap{ max-width: 640px; margin:0 auto; padding: 0 20px 80px; }
+  .hpc-faq__back{ display:inline-block; padding:20px 0 0; font-size:13px; color:var(--muted); text-decoration:none; }
+  .hpc-faq__back:hover{ color:var(--accent-bright); }
+
+  .hpc-faq__hero{ text-align:center; padding:32px 0 8px; }
+  .hpc-faq__eyebrow{ font-family:'Bebas Neue', sans-serif; font-size:13px; letter-spacing:.16em; color:var(--accent-bright); display:block; margin-bottom:8px; }
+  .hpc-faq__h1{ font-family:'Noto Sans TC', sans-serif; font-size:26px; font-weight:900; margin:0 0 8px; line-height:1.3; }
+  .hpc-faq__intro{ font-size:14px; color:var(--muted); line-height:1.7; max-width:480px; margin:0 auto; font-family:'Noto Sans TC', sans-serif; }
+
+  .hpc-faq__section{ padding:36px 0 0; }
+  .hpc-faq__section-title{ font-size:12px; font-family:'Bebas Neue', sans-serif; letter-spacing:.12em; color:var(--muted); margin:0 0 14px; }
+
+  .hpc-faq__list{ display:flex; flex-direction:column; gap:10px; }
+  .hpc-faq__item{ background:var(--charcoal); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+  .hpc-faq__q{
+    all:unset; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:12px;
+    width:100%; padding:16px 18px; font-family:'Noto Sans TC', sans-serif; font-size:14.5px; font-weight:700; color:var(--snow);
+    box-sizing:border-box;
+  }
+  .hpc-faq__q-mark{ font-family:'Bebas Neue', sans-serif; color:var(--accent-bright); flex-shrink:0; transition:transform .2s ease; }
+  .hpc-faq__item.is-open .hpc-faq__q-mark{ transform:rotate(45deg); }
+  .hpc-faq__a{ max-height:0; overflow:hidden; transition:max-height .25s ease; }
+  .hpc-faq__item.is-open .hpc-faq__a{ max-height:400px; }
+  .hpc-faq__a-inner{ padding:0 18px 16px; font-family:'Noto Sans TC', sans-serif; font-size:13.5px; color:var(--muted); line-height:1.8; }
+  .hpc-faq__a-inner ul{ margin:6px 0 0 1.1rem; padding:0; }
+  .hpc-faq__a-inner li{ margin-bottom:4px; }
+
+  .hpc-faq__contact{ background:rgba(125,189,232,0.12); border:1px solid var(--accent-bright); border-radius:10px; padding:14px 16px; font-size:13px; color:var(--accent-bright); line-height:1.75; margin-top:20px; font-family:'Noto Sans TC', sans-serif; text-align:center; }
+
+  @media (prefers-reduced-motion: reduce){ .hpc-faq__q-mark, .hpc-faq__a{ transition:none; } }
+</style>
+</head>
+<body>
+<div class="hpc-faq">
+  <div class="hpc-faq__wrap">
+
+    <div style="display:flex; align-items:center; justify-content:space-between; padding-top:20px;">
+      <a href="en.html" style="font-family:'Bebas Neue', sans-serif; font-size:.95rem; letter-spacing:.05em; color:var(--snow); text-decoration:none;">HOKKAIDO POWDER <span style="color:var(--accent-bright);">CLUB</span></a>
+      <a href="faq.html" style="color:var(--muted); font-size:.72rem; letter-spacing:.05em; text-decoration:none;">ZH</a>
+    </div>
+    <a class="hpc-faq__back" href="en.html">← Back to Home</a>
+
+    <div class="hpc-faq__hero">
+      <span class="hpc-faq__eyebrow">FAQ</span>
+      <h1 class="hpc-faq__h1">Frequently Asked Questions</h1>
+      <p class="hpc-faq__intro">Tap a question to expand the answer — can't find what you need? Feel free to contact us directly.</p>
+    </div>
+
+    <div class="hpc-faq__section">
+      <p class="hpc-faq__section-title">General</p>
+      <div class="hpc-faq__list" id="faqGroup0"></div>
+    </div>
+
+    <div class="hpc-faq__section">
+      <p class="hpc-faq__section-title">Booking &amp; Packages</p>
+      <div class="hpc-faq__list" id="faqGroup1"></div>
+    </div>
+
+    <div class="hpc-faq__section">
+      <p class="hpc-faq__section-title">Lessons &amp; Training Camps</p>
+      <div class="hpc-faq__list" id="faqGroup2"></div>
+    </div>
+
+    <div class="hpc-faq__section">
+      <p class="hpc-faq__section-title">Lodging &amp; Gear Storage</p>
+      <div class="hpc-faq__list" id="faqGroup3"></div>
+    </div>
+
+    <div class="hpc-faq__section">
+      <p class="hpc-faq__section-title">Safety &amp; Cancellation Policy</p>
+      <div class="hpc-faq__list" id="faqGroup4"></div>
+      <div class="hpc-faq__contact">Can't find your answer? Reach us directly through the contact form at the bottom of any package page and we'll reply as soon as we can.</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var GROUPS = {
+    faqGroup0: [
+      {
+        q: 'Can I join with zero skiing experience?',
+        a: "Yes. Our coaches adjust the teaching pace to your actual level, starting from putting on gear and riding the lift — no prior experience needed."
+      },
+      {
+        q: 'Do the coaches speak Chinese?',
+        a: 'Yes. The founder and most partner coaches can teach in Chinese; if a specific coach\'s language doesn\'t match your needs, we also offer an accompanying translator coach option (see the "Lessons" booking form for details).'
+      },
+      {
+        q: 'Will the trip be cancelled for bad weather or poor snow conditions?',
+        a: 'We decide whether to adjust or postpone based on on-site conditions and a safety assessment — see "Safety &amp; Cancellation Policy" below for details. Safety always comes before keeping to the original schedule.'
+      },
+      {
+        q: 'Do I need to bring my own ski gear?',
+        a: 'No. We can arrange gear rental for you; if you have your own gear, you can also use our <a href="storage-en.html">gear storage &amp; maintenance</a> service so you don\'t have to carry your board back and forth every trip.'
+      },
+      {
+        q: 'Can kids join the lessons?',
+        a: "Yes, we have extensive experience teaching families and children — we adjust our approach to the child's age and physical ability. Just let us know the child's age in the notes field of the booking form."
+      },
+      {
+        q: 'What payment methods are available?',
+        a: "We accept online credit card payment (securely encrypted via Stripe). For some offers that need availability confirmed first (like a room hold or a waitlisted lesson), we'll check with you first and send a payment link once confirmed."
+      }
+    ],
+    faqGroup1: [
+      {
+        q: 'What\'s the difference between the four "kits" on the homepage and the packages matched by the "30-second quiz"?',
+        a: 'The four kits (airport transfer, Asahikawa powder trip, gear storage &amp; maintenance, ski lessons) are pages for a single service on its own. The A/B/C/D packages matched by the quiz combine multiple services based on your situation. You can book directly from either side — just pick the level of detail you need.'
+      },
+      {
+        q: 'Are there any restrictions on the Hokkaido sightseeing charter／powder-chasing charter?',
+        a: 'This service is only available to guests who have also booked lodging, or added a course／guide — it\'s not open as a standalone booking (storage-only or transfer-only doesn\'t qualify). You can add a qualifying service directly on the relevant page.'
+      }
+    ],
+    faqGroup2: [
+      {
+        q: 'Does the lesson price include a lift ticket or gear rental?',
+        a: 'No. The lesson price covers instruction only — lift tickets and personal gear (board, boots, etc.) need to be arranged or rented separately.'
+      },
+      {
+        q: 'How is low season／high season pricing split for lessons?',
+        a: 'Low season: 2026/12/01–12/22, 2027/01/04–02/02, 2027/02/16–02/25, 2027/03/03–04/01, 2027/04/07 through resort closing.<br>High season: 2026/12/23–01/03, 2027/02/03–02/15, 2027/02/26–03/02, 2027/04/02–04/06. The system auto-detects the season from the lesson date you enter.'
+      },
+      {
+        q: 'Can the dates for the Former Team Japan Olympic Camp be guaranteed?',
+        a: "No. This camp is subject to the coach's actual availability — we'll do our best to arrange it, but can't guarantee your selected dates. The confirmed dates will be discussed with you by a team member via email."
+      }
+    ],
+    faqGroup3: [
+      {
+        q: 'What room types are available?',
+        a: 'Budget Japanese-Style Room: one person per room, ¥10,000／person／night.<br>Capsule Room: base 2 people ¥66,000／night, +¥8,800／night for each additional person from the 3rd on, up to 5 people.'
+      },
+      {
+        q: 'How many tiers does the gear storage membership have?',
+        a: 'BASIC: climate-controlled, dehumidified storage — your board and gear kept safe.<br>PLUS: includes board sealing/opening service and professional waxing.<br>VIP: everything in PLUS, plus unlimited free gear-bag shipping. First-time members also pay a one-time basic membership fee.'
+      }
+    ],
+    faqGroup4: [
+      {
+        q: 'Is there insurance coverage during the trip?',
+        a: "All trips include accident insurance coverage up to a maximum of ¥200,000,000; the actual terms and scope of any claim are subject to the insurer's official policy conditions."
+      },
+      {
+        q: "What's the cancellation policy?",
+        a: 'Applies regardless of reason:<ul><li>Cancelled 31+ days before the trip: 50% of amount paid refunded</li><li>Cancelled 8–30 days before the trip: 30% of amount paid refunded</li><li>Cancelled within 7 days of the trip: non-refundable</li><li>No-show: non-refundable</li></ul>The refunded amount is net of the Stripe processing fee.'
+      },
+      {
+        q: 'Will the trip be cancelled for poor snow conditions?',
+        a: 'We reserve the right to adjust, postpone, or cancel a day\'s itinerary or lesson based on on-site snow conditions, visibility, avalanche risk assessment, and other factors, with participant safety as our top priority.'
+      }
+    ]
+  };
+
+  Object.keys(GROUPS).forEach(function (groupId) {
+    var container = document.getElementById(groupId);
+    GROUPS[groupId].forEach(function (item, idx) {
+      var wrap = document.createElement('div');
+      wrap.className = 'hpc-faq__item';
+
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'hpc-faq__q';
+      btn.innerHTML = '<span>' + item.q + '</span><span class="hpc-faq__q-mark">+</span>';
+
+      var aWrap = document.createElement('div');
+      aWrap.className = 'hpc-faq__a';
+      var aInner = document.createElement('div');
+      aInner.className = 'hpc-faq__a-inner';
+      aInner.innerHTML = item.a;
+      aWrap.appendChild(aInner);
+
+      btn.addEventListener('click', function () {
+        wrap.classList.toggle('is-open');
+      });
+
+      wrap.appendChild(btn);
+      wrap.appendChild(aWrap);
+      container.appendChild(wrap);
+    });
+  });
+})();
+</script>
+</body>
+</html>

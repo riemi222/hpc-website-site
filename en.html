@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hokkaido Powder Club | 北海道粉雪俱樂部</title>
+<title>Hokkaido Powder Club | Hokkaido Powder Club</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
   /* ============================================================
-     index.html — 重做版
-     結構：nav → 四款kit(僅teaser，深入內容/試算/預約移到各自
-     專屬頁) → 30秒情境問答quiz → 顧客見證 → 縮小版footer-zone
-     (信任徽章+關於我們+政策) → footer
-
-     沿用原站設計語彙(:root token / 字體)，跟Snowi姊妹站同一套系統。
-     以下CTA連到還沒建的頁面，先佔位，之後要逐一補上：
-       transfer.html / ski-trip.html / storage.html / training.html / faq.html
+     en.html — English homepage (translation of index.html)
+     Same structure, same design tokens, same quiz logic — only the
+     visible text is translated. CTAs point to the -en.html version
+     of each subpage (transfer-en.html / ski-trip-en.html /
+     storage-en.html / training-en.html / package-a-en.html /
+     combo-b-en.html / combo-c-en.html / group-en.html / faq-en.html
+     / blog-en.html). Keep this file's content in sync with
+     index.html whenever the Chinese site changes.
      ============================================================ */
   :root {
     --snow: #F0EEE8;
@@ -36,7 +36,6 @@
     font-family: 'DM Sans','Noto Sans TC', sans-serif; font-weight:300;
     overflow-x:hidden;
   }
-  .cjk{ font-family:'Noto Sans TC', sans-serif; }
   section{ position:relative; }
   .section-label{ font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--accent); margin-bottom:1rem; }
   .section-title{
@@ -66,15 +65,12 @@
   }
   @media (max-width:760px){ .nav-links a:not(.nav-cta):not(.nav-line){ display:none; } }
 
-  /* KITS (also carries the page's opening statement — no separate hero) */
+  /* KITS */
   .kits-section{ padding:5rem 6vw 6rem; }
   .kits-section .section-title{ max-width:820px; }
   .kits-brand{ font-family:'Bebas Neue', sans-serif; font-size:1.6rem; letter-spacing:0.06em; color:var(--snow); margin-bottom:.8rem; }
   .kits-brand span{ color:var(--accent-bright); }
 
-  /* HERO COVER — 佔位雪山剪影，換成真實照片時把 hero-cover 加上
-     background-image: url('你的照片路徑'); background-size:cover; background-position:center;
-     就會蓋在剪影上面（也可以把 svg 那行整個刪掉） */
   .hero-cover{
     position: relative;
     min-height: 52vh;
@@ -105,9 +101,6 @@
   .kit-list{ list-style:none; font-family:'Noto Sans TC', sans-serif; font-size:.82rem; color:var(--ice); flex-grow:1; margin-bottom:1.4rem; }
   .kit-list li{ padding:.35rem 0 .35rem 1rem; position:relative; line-height:1.5; }
   .kit-list li::before{ content:'—'; position:absolute; left:0; color:var(--muted); }
-  .waitlist-badge{ display:inline-block; font-size:.62rem; letter-spacing:.03em; color:var(--warm); border:1px solid var(--warm); border-radius:2px; padding:1px 6px; margin-left:.4rem; vertical-align:middle; }
-  .kit-list-link{ color:var(--accent-bright); text-decoration:underline; text-underline-offset:2px; }
-  .kit-list-link:hover{ color:var(--snow); }
   .kit-price-row{ border-top:1px solid var(--line); padding-top:1rem; margin-bottom:1rem; }
   .kit-price{ font-family:'Bebas Neue', sans-serif; font-size:1.7rem; color:var(--snow); }
   .kit-price small{ font-family:'Noto Sans TC', sans-serif; font-size:.7rem; font-weight:300; color:var(--muted); margin-left:4px; }
@@ -175,12 +168,11 @@
   .quote-who{ font-family:'DM Sans', sans-serif; font-size:.75rem; color:var(--muted); letter-spacing:.03em; }
   .stars{ color: var(--warm); font-size:.85rem; margin-bottom:.6rem; }
 
-  /* FOOTER-ZONE (縮小版：trust + about + policy 合併一區) */
+  /* FOOTER-ZONE */
   .footer-zone{ padding:5rem 6vw 4rem; background:var(--charcoal); }
   .footer-zone-block{ max-width:900px; margin:0 auto 3.5rem; }
   .footer-zone-block:last-child{ margin-bottom:0; }
   .footer-zone-label{ font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--accent); margin-bottom:1rem; }
-  .footer-zone-heading{ font-family:'Noto Sans TC', sans-serif; font-weight:700; font-size:1.3rem; color:var(--snow); margin-bottom:1.3rem; }
 
   .trust-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1.5px; background:var(--line); border:1px solid var(--line); }
   @media (max-width:900px){ .trust-grid{ grid-template-columns:repeat(2,1fr); } }
@@ -203,23 +195,21 @@
 <body>
 
 <nav>
-  <a href="index.html" class="brand" style="text-decoration:none;">HOKKAIDO POWDER <span>CLUB</span></a>
+  <a href="en.html" class="brand" style="text-decoration:none;">HOKKAIDO POWDER <span>CLUB</span></a>
   <div class="nav-links">
-    <a href="blog.html" class="cjk">部落格</a>
-    <a href="faq.html" class="cjk">FAQ</a>
-    <a href="en.html">EN</a>
-    <a class="nav-line" href="https://line.me/R/ti/p/@snowi" target="_blank" rel="noopener" aria-label="加LINE好友" style="display:flex;align-items:center;">
+    <a href="blog-en.html">Blog</a>
+    <a href="faq-en.html">FAQ</a>
+    <a href="index.html">中文</a>
+    <a class="nav-line" href="https://line.me/R/ti/p/@snowi" target="_blank" rel="noopener" aria-label="Add us on LINE" style="display:flex;align-items:center;">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 2C6.48 2 2 5.69 2 10.24c0 4.08 3.54 7.5 8.32 8.15.32.07.76.21.87.49.1.25.06.65.03.9l-.14.86c-.04.25-.2.99.86.54 1.06-.45 5.73-3.37 7.82-5.77C21.24 13.63 22 12.03 22 10.24 22 5.69 17.52 2 12 2z" fill="#06C755"/>
         <path d="M18.36 11.4h-1.34v1.9c0 .1-.08.18-.18.18h-.3c-.06 0-.11-.02-.15-.07l-1.44-1.95v1.85c0 .1-.08.19-.18.19h-.3c-.1 0-.18-.08-.18-.19V9.32c0-.1.08-.18.18-.18h.3c.06 0 .11.03.14.07l1.44 1.95V9.32c0-.1.08-.18.18-.18h.3c.1 0 .18.08.18.18v2.08zm-4.34 0c0 .1-.08.19-.18.19h-.3c-.1 0-.18-.08-.18-.19V9.32c0-.1.08-.18.18-.18h.3c.1 0 .18.08.18.18v2.08zm-1.11.02c0 .1-.08.18-.18.18H10.6c-.1 0-.18-.08-.18-.18v-.3c0-.1.08-.18.18-.18h1.75V9.32c0-.1.08-.18.18-.18h.3c.1 0 .18.08.18.18v2.1zm-2.35 0c0 .1-.08.18-.18.18H8.03c-.1 0-.18-.08-.18-.18V9.32c0-.1.08-.18.18-.18h.3c.1 0 .18.08.18.18v1.72h1.05c.1 0 .18.08.18.18v.2z" fill="#fff"/>
       </svg>
     </a>
-    <a class="nav-cta" href="#kits">立即預約</a>
+    <a class="nav-cta" href="#kits">Book Now</a>
   </div>
 </nav>
 
-<!-- 封面照片區：目前用手繪雪山剪影佔位，等實景照片傳來後把 hero-cover 的
-     background-image 換成 url('你的照片路徑') 即可，其他不用動 -->
 <section class="hero-cover">
   <svg class="hero-cover__mountains" viewBox="0 0 1200 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
     <polygon points="0,260 0,140 180,60 340,150 520,40 700,160 900,70 1080,170 1200,110 1200,260" fill="#16232F"/>
@@ -230,12 +220,11 @@
   </svg>
   <div class="hero-cover__content">
     <div class="kits-brand">HOKKAIDO POWDER <span>CLUB</span></div>
-    <p class="hero-cover__services cjk">新千歲機場接送<br>滑雪包車自由行<br>合法滑雪課程<br>裝備倉儲保養</p>
-    <h1 class="section-title cjk">你只要踏進北海道，其他我們包了</h1>
+    <p class="hero-cover__services">Airport Transfer<br>Ski Trip Charter<br>Licensed Ski Lessons<br>Gear Storage &amp; Tune-Up</p>
+    <h1 class="section-title">Just land in Hokkaido.<br>We'll handle the rest.</h1>
   </div>
 </section>
 
-<!-- 四款kit（僅teaser，深入內容/試算/預約在各自專屬頁） -->
 <section class="kits-section" id="kits">
   <div class="section-label">THE OFFERS</div>
 
@@ -243,66 +232,65 @@
     <div class="kit-card">
       <div class="kit-num">01</div>
       <div class="kit-tag">First Arrival</div>
-      <div class="kit-name cjk">新千歲機場接送<br>北海道觀光包車</div>
-      <div class="kit-outcome cjk">再也不用拖著行李轉車。</div>
+      <div class="kit-name">Airport Transfer<br>Hokkaido Sightseeing Charter</div>
+      <div class="kit-outcome">No more dragging luggage through transit.</div>
       <ul class="kit-list">
-        <li>新千歲機場 ↔ 滑雪度假村／指定飯店，專車直達</li>
-        <li>北海道觀光包車，行程與停留時間彈性安排</li>
-        <li>依人數與行李量安排車型，滑雪裝備也能安心載送</li>
+        <li>New Chitose Airport ↔ ski resort / designated hotel, direct door-to-door</li>
+        <li>Hokkaido sightseeing charter, flexible itinerary and duration</li>
+        <li>Vehicle sized to your group and luggage — your ski gear travels safely too</li>
       </ul>
-      <div class="kit-price-row"><span class="kit-price">¥50,000<small>起／趟</small></span></div>
-      <a class="kit-cta" href="transfer.html">查看方案詳情 →</a>
+      <div class="kit-price-row"><span class="kit-price">¥50,000<small>from／trip</small></span></div>
+      <a class="kit-cta" href="transfer-en.html">View Details →</a>
     </div>
 
     <div class="kit-card featured">
       <div class="kit-num">02</div>
       <div class="kit-tag">Signature Trip</div>
-      <div class="kit-name cjk">旭川追雪自由行<br>住宿交通一次搞定</div>
-      <div class="kit-outcome cjk">不用煩惱住宿交通，每天帶你去雪質最好的雪場。</div>
+      <div class="kit-name">Asahikawa Powder Trip<br>Lodging + Transport, All In One</div>
+      <div class="kit-outcome">No lodging or transport to plan — we take you to the best snow every day.</div>
       <ul class="kit-list">
-        <li>依每日雪況彈性選擇旭川周邊雪場，真正追著好雪滑</li>
-        <li>自有高級與平價住宿可選，搭配每日雪場來回接送</li>
-        <li>可加購導滑或滑雪課程，高手追粉雪、初學者也能安心參加</li>
+        <li>Flexible daily resort picks around Asahikawa based on conditions — actually chase the powder</li>
+        <li>Choice of our own upscale or budget lodging, with daily round-trip resort transfers</li>
+        <li>Add a guide or ski lessons — great for powder-chasing experts and cautious beginners alike</li>
       </ul>
-      <div class="kit-price-row"><span class="kit-price">¥10,000<small>起／晚</small></span></div>
-      <a class="kit-cta" href="ski-trip.html">查看方案詳情 →</a>
+      <div class="kit-price-row"><span class="kit-price">¥10,000<small>from／night</small></span></div>
+      <a class="kit-cta" href="ski-trip-en.html">View Details →</a>
     </div>
 
     <div class="kit-card">
       <div class="kit-num">03</div>
       <div class="kit-tag">Season Pass</div>
-      <div class="kit-name cjk">雪具倉儲<br>專業打蠟保養</div>
-      <div class="kit-outcome cjk">再也不用扛著雪具到處跑。</div>
+      <div class="kit-name">Gear Storage<br>Professional Wax &amp; Tune</div>
+      <div class="kit-outcome">Never lug your gear around again.</div>
       <ul class="kit-list">
-        <li>BASIC：溫控除濕倉儲，安心寄放雪板與雪具</li>
-        <li>PLUS：包含封板、開板保養與專業打蠟</li>
-        <li>VIP：享有 PLUS 全部服務，再加送機場接送抵用券與課程訓練營抵用券</li>
+        <li>BASIC: climate-controlled, dehumidified storage — your board and gear kept safe</li>
+        <li>PLUS: includes board sealing/opening service and professional waxing</li>
+        <li>VIP: everything in PLUS, plus an airport transfer voucher and a course/camp voucher</li>
       </ul>
-      <div class="kit-price-row"><span class="kit-price">¥16,000<small>起／年</small></span></div>
-      <a class="kit-cta" href="storage.html">查看方案詳情 →</a>
+      <div class="kit-price-row"><span class="kit-price">¥16,000<small>from／year</small></span></div>
+      <a class="kit-cta" href="storage-en.html">View Details →</a>
     </div>
 
     <div class="kit-card">
       <div class="kit-num">04</div>
       <div class="kit-tag">Skill Up</div>
-      <div class="kit-name cjk">滑雪課程<br>進階技術訓練營</div>
-      <div class="kit-outcome cjk">從兒童到高階滑行者，每個階段都能找到適合的進步方式。</div>
+      <div class="kit-name">Ski &amp; Snowboard Lessons<br>Advanced Training Camp</div>
+      <div class="kit-outcome">From kids to advanced riders, there's a path forward for every level.</div>
       <ul class="kit-list">
-        <li>兒童與初中階：持有國際及兒童滑雪指導員證照的教練授課</li>
-        <li>高階滑行者：由前日本奧運代表選手親自帶領技術強化訓練</li>
-        <li>高階訓練營配有隨行中文翻譯教練，專業指導也能完整理解</li>
+        <li>Kids, beginners &amp; intermediates: taught by internationally certified &amp; children's ski instructors</li>
+        <li>Advanced riders: hands-on technical coaching from a former Team Japan Olympic athlete</li>
+        <li>Advanced camps come with an accompanying Chinese-speaking translator coach for full clarity</li>
       </ul>
-      <div class="kit-price-row"><span class="kit-price">¥55,000<small>起／組</small></span></div>
-      <a class="kit-cta" href="training.html">查看方案詳情 →</a>
+      <div class="kit-price-row"><span class="kit-price">¥55,000<small>from／group</small></span></div>
+      <a class="kit-cta" href="training-en.html">View Details →</a>
     </div>
   </div>
 </section>
 
-<!-- 30秒情境問答 -->
 <section class="quiz-section" id="quiz">
-  <div class="section-label">30秒情境問答</div>
-  <h2 class="section-title cjk">不知道選哪個？回答四題幫你配對</h2>
-  <p class="section-desc cjk">不用自己爬文比較，讓我們幫你配對最適合的組合方案。</p>
+  <div class="section-label">30-SECOND MATCH</div>
+  <h2 class="section-title">Not sure which one? Answer 4 questions and we'll match you</h2>
+  <p class="section-desc">Skip the research — let us match you to the combo that fits.</p>
 
   <div class="quiz-card">
     <div class="quiz-progress-row">
@@ -313,7 +301,7 @@
     <div id="quizQuestionView">
       <p class="quiz-question" id="quizQuestionText"></p>
       <div class="quiz-options" id="quizOptions" role="group"></div>
-      <button type="button" class="quiz-back" id="quizBack" hidden>← 上一題</button>
+      <button type="button" class="quiz-back" id="quizBack" hidden>← Previous</button>
     </div>
 
     <div class="quiz-result" id="quizResultView">
@@ -323,61 +311,59 @@
       <p class="quiz-pkg-tagline" id="quizPkgTagline"></p>
       <p class="quiz-pkg-solves" id="quizPkgSolves"></p>
       <button type="button" class="quiz-cta" id="quizCta"></button>
-      <button type="button" class="quiz-restart" id="quizRestart">重新測一次</button>
+      <button type="button" class="quiz-restart" id="quizRestart">Take it again</button>
     </div>
   </div>
 </section>
 
-<!-- 顧客見證 -->
 <section class="proof">
   <div class="section-label">SOCIAL PROOF</div>
-  <h2 class="section-title cjk">使用者回饋與心得</h2>
+  <h2 class="section-title">What our guests say</h2>
   <div class="stat-bar">
-    <div class="stat"><div class="num">9+</div><div class="label cjk">年在地經營經驗</div></div>
-    <div class="stat"><div class="num">7</div><div class="label cjk">旭川周邊配套雪場</div></div>
-    <div class="stat"><div class="num">¥2億</div><div class="label cjk">最高保額保障</div></div>
+    <div class="stat"><div class="num">9+</div><div class="label">years of local experience</div></div>
+    <div class="stat"><div class="num">7</div><div class="label">partner resorts around Asahikawa</div></div>
+    <div class="stat"><div class="num">¥200M</div><div class="label">maximum insurance coverage</div></div>
   </div>
-  <p class="resort-list-line cjk">神居・旭岳・黑岳・聖誕禮物公園・比布・富良野・星野TOMAMU</p>
+  <p class="resort-list-line">Kamui ・ Asahidake ・ Kurodake ・ Christmas Present Park ・ Pippu ・ Furano ・ Hoshino TOMAMU</p>
   <div class="quote-scroll">
     <div class="quote-card">
       <div class="stars">★★★★★</div>
-      <p class="cjk">「大推這個住宿加接送方案！第一次來北海道滑雪，不敢自己在雪地開車，每個住宿都好貴交通還要另外找⋯這次直接用他們的服務，住宿跟每天到雪場的來回接送都包好，真的省心很多，還可以加價購教練課。」</p>
-      <div class="quote-who cjk">— 林怡君</div>
+      <p>"Highly recommend the lodging + transfer package! First time skiing in Hokkaido and I didn't dare drive myself in the snow — every hotel was pricey and I still had to sort out transport separately. This time we just used their service, lodging and daily round-trip resort transfers all handled, way less stress, and you can even add a coaching session."</p>
+      <div class="quote-who">— Yi-Chun Lin</div>
     </div>
     <div class="quote-card">
       <div class="stars">★★★★★</div>
-      <p class="cjk">「以前每次安排北海道滑雪最煩的是從機場到雪場飯店這段，拖著大行李帶著小孩真的快瘋掉，還被計程車以星野太遠拒絕過。他們家都是日本當地正當公司，司機讓我安靜休息，有些還會用英文介紹風景。推薦給帶小孩或行李多的人！」</p>
-      <div class="quote-who cjk">— Jessica Kao</div>
+      <p>"The part I always dreaded about planning a Hokkaido ski trip was getting from the airport to the resort hotel — dragging huge luggage with kids in tow was maddening, and a taxi once refused us because Hoshino was 'too far.' Their drivers are all properly licensed local companies, let me rest quietly, and some even pointed out the scenery in English. Recommended if you're traveling with kids or a lot of luggage!"</p>
+      <div class="quote-who">— Jessica Kao</div>
     </div>
     <div class="quote-card">
       <div class="stars">★★★★★</div>
-      <p class="cjk">「我很少上完課會這麼有感！這次上了日本教練的課，教得很細很戳中我的缺點，重點是翻譯教練也很細心又很有耐心，專有用詞都能講到讓我一聽就懂。一定會再來參加！」</p>
-      <div class="quote-who cjk">— 妙妙</div>
+      <p>"I rarely feel this much progress after one lesson! Took a class with a Japanese coach this time — really detailed, called out exactly what I was doing wrong, and the translator coach was patient and precise, so every technical term landed and made sense. Definitely coming back!"</p>
+      <div class="quote-who">— Miao Miao</div>
     </div>
     <div class="quote-card">
       <div class="stars">★★★★★</div>
-      <p class="cjk">「滑了這麼久，以前的我都低估雪板寄放跟保養的重要性，直到有一次回台灣發現板底又乾又刮還毛毛的，去外面保養超貴！我這次直接買了他們 VIP 會員，除了寄放＋保養，還有抵用券跟每年小禮物！」</p>
-      <div class="quote-who cjk">— Emily</div>
+      <p>"After years of skiing, I used to underestimate how much board storage and maintenance mattered — until I got home once and found the base dry, scratched, and fuzzy. Outside tune-ups are so expensive! This time I just got their VIP membership — storage, maintenance, plus vouchers and a little gift every year."</p>
+      <div class="quote-who">— Emily</div>
     </div>
     <div class="quote-card">
       <div class="stars">★★★★★</div>
-      <p class="cjk">「我覺得安排滑雪旅行最累的不是玩，是每天到底要怎麼從住宿到雪場。這次直接訂他們包住宿加來回接送的方案，還能加教練選項，我跟老婆去滑、小孩交給教練，超棒的！明年也麻煩了，下次想住最新的太空艙！」</p>
-      <div class="quote-who cjk">— 查理</div>
+      <p>"The most tiring part of a ski trip isn't the skiing, it's figuring out how to get from lodging to the resort every single day. This time we just booked their lodging + round-trip transfer package and added a coaching option — my wife and I skied while the kids were with a coach, amazing! Already planning next year, want to try the newest capsule room next time!"</p>
+      <div class="quote-who">— Charlie</div>
     </div>
     <div class="quote-card">
       <div class="stars">★★★★★</div>
-      <p class="cjk">「這個雪板寄放跟保養服務我一定要給五顆星！以前每次來北海道最煩的就是雪板到底要怎麼處理，搬來搬去真的很累！HPC 的寄放＋打蠟保養服務真的輕鬆太多，明年回來又已經幫我開好板了，當 VIP 還有很多優惠抵用券，推推！」</p>
-      <div class="quote-who cjk">— 醜醜</div>
+      <p>"Five stars for the gear storage and maintenance service! Dealing with what to do with my board every trip to Hokkaido used to be exhausting — hauling it back and forth. HPC's storage + wax service made it so much easier, my board was already tuned and ready when I came back this year. VIP members also get a lot of discount vouchers, highly recommend!"</p>
+      <div class="quote-who">— Chou Chou</div>
     </div>
   </div>
 </section>
 
-<!-- 縮小版footer-zone：信任徽章 + 關於我們 + 政策 -->
 <section class="footer-zone">
   <div class="footer-zone-block about-zone">
     <div class="footer-zone-label">ABOUT US</div>
-    <p class="cjk">Hokkaido Powder Club 由 Emi 創立，常駐旭川，致力經營旭川與北海道各大滑雪場。以十年滑雪學校經營經驗為底，為大家帶來最好的冬季體驗。服務包含住宿交通、雪板倉儲保養、滑雪行程與專業訓練營。</p>
-    <p class="cjk">我們的核心理念很簡單：來滑雪不該還要煩惱語言、交通、裝備這些瑣事。從你踏出機場的那一刻起，到滑完粉雪回家。每一段都有人幫你打理好，才叫做滑雪度假。</p>
+    <p>Hokkaido Powder Club was founded by Emi, based year-round in Asahikawa, dedicated to Asahikawa and Hokkaido's major ski resorts. Built on a decade of ski school experience, we bring you the best winter experience — lodging &amp; transport, board storage &amp; maintenance, ski trips, and professional training camps.</p>
+    <p>Our core belief is simple: skiing shouldn't come with the hassle of language, transport, and gear logistics. From the moment you step off the plane to the moment you head home after the powder, every step should be taken care of — that's what a real ski getaway looks like.</p>
   </div>
 
   <div class="footer-zone-block">
@@ -385,23 +371,23 @@
     <div class="trust-grid">
       <div class="trust-card">
         <div class="trust-icon">🛡️</div>
-        <h4 class="cjk">最高2億日圓保險</h4>
-        <p class="cjk">行程期間意外保障，安心滑雪無後顧之憂</p>
+        <h4>Up to ¥200M Insurance</h4>
+        <p>Accident coverage throughout your trip, ski with peace of mind</p>
       </div>
       <div class="trust-card">
         <div class="trust-icon">📋</div>
-        <h4 class="cjk">透明取消政策</h4>
-        <p class="cjk">31天前取消退50%，明確條款不藏細節</p>
+        <h4>Transparent Cancellation Policy</h4>
+        <p>50% refund 31 days out, clear terms with no hidden fine print</p>
       </div>
       <div class="trust-card">
         <div class="trust-icon">🎓</div>
-        <h4 class="cjk">官方認證資格</h4>
-        <p class="cjk">前奧運日本代表與國際證照高階教練親自上課</p>
+        <h4>Officially Certified Coaches</h4>
+        <p>Taught in person by a former Olympic Team Japan athlete and internationally certified senior coaches</p>
       </div>
       <div class="trust-card">
         <div class="trust-icon">🔒</div>
-        <h4 class="cjk">安全加密付款</h4>
-        <p class="cjk">SSL加密傳輸，個資與付款資訊受保護</p>
+        <h4>Secure, Encrypted Payment</h4>
+        <p>SSL-encrypted transmission, your personal and payment data protected</p>
       </div>
     </div>
   </div>
@@ -409,67 +395,67 @@
   <div class="footer-zone-block policy-zone">
     <div class="footer-zone-label">POLICIES</div>
 
-    <h3 class="cjk">取消政策（不管任何因素都適用）</h3>
-    <ul class="cjk">
-      <li>行程開始31天前取消：退還已付款項之50%</li>
-      <li>行程開始8–30天內取消：退還已付款項之30%</li>
-      <li>行程開始7天內取消：恕不退費</li>
-      <li>No-show：恕不退費</li>
+    <h3>Cancellation Policy (applies regardless of reason)</h3>
+    <ul>
+      <li>Cancelled 31+ days before the trip: 50% of amount paid refunded</li>
+      <li>Cancelled 8–30 days before the trip: 30% of amount paid refunded</li>
+      <li>Cancelled within 7 days of the trip: non-refundable</li>
+      <li>No-show: non-refundable</li>
     </ul>
-    <p class="cjk">退還金額加上Stripe 手續費為退還總金額，請悉知。</p>
+    <p>Please note: the refunded amount is net of the Stripe processing fee.</p>
 
-    <h3 class="cjk">雪況與安全聲明</h3>
-    <p class="cjk">滑雪與滑雪板運動具有一定程度之風險，可能因雪況、天候、地形或個人體能狀況導致意外發生。我們會依現場實際雪況、能見度、雪崩風險評估等因素，保留調整、延後或取消當日行程與課程的權利，以維護參與者安全為最優先考量。所有行程皆含最高2億日圓之意外保險，惟保險理賠條件與範圍以保險公司實際條款為準。參與者應如實告知自身健康狀況、既往傷病史及滑雪經驗程度，並自行評估是否適合參與特定難度之行程或課程。未成年參與者須由監護人陪同或授權同意方可報名。</p>
+    <h3>Snow Conditions &amp; Safety Statement</h3>
+    <p>Skiing and snowboarding carry an inherent degree of risk, and accidents may occur due to snow conditions, weather, terrain, or personal physical condition. We reserve the right to adjust, postpone, or cancel a day's itinerary or lesson based on on-site snow conditions, visibility, avalanche risk assessment, and other safety factors, with participant safety as our top priority. All trips include accident insurance coverage up to a maximum of ¥200,000,000; the actual terms and scope of any claim are subject to the insurer's official policy conditions. Participants must accurately disclose their own health condition, prior injuries, and skiing/riding experience, and are responsible for assessing whether a given itinerary or lesson difficulty is appropriate for them. Minor participants must be accompanied by, or have the authorized consent of, a legal guardian to register.</p>
 
-    <h3 class="cjk">免責聲明</h3>
-    <p class="cjk">本網站所載之行程內容、價格、雪場資訊與時程僅供參考，實際服務內容以正式確認之預約單為準。Hokkaido Powder Club 對因不可抗力、第三方服務提供者（如住宿、交通業者）之疏失、或參與者個人因素所導致之損失、傷害或延誤，不負連帶賠償責任，惟本公司將盡力協助處理相關事宜。</p>
+    <h3>Disclaimer</h3>
+    <p>The itinerary content, prices, resort information, and schedules on this website are for reference only; the actual scope of service is governed by the officially confirmed booking. Hokkaido Powder Club is not jointly liable for loss, injury, or delay arising from force majeure, the negligence of third-party service providers (such as lodging or transport operators), or a participant's own actions, though the company will make every effort to assist in resolving such matters.</p>
   </div>
 </section>
 
-<footer class="cjk">Hokkaido Powder Club｜旭川・北海道｜姊妹服務 <a href="https://www.snowisnow.com" target="_blank">Snowi 滑雪學校</a></footer>
+<footer>Hokkaido Powder Club｜Asahikawa, Hokkaido｜Sister brand <a href="https://www.snowisnow.com" target="_blank">Snowi Ski School</a></footer>
 
 <script>
 (function () {
   var QUESTIONS = [
     {
-      id: 'exp', text: '你的滑雪／單板經驗大概是？', decisive: false,
+      id: 'exp', text: 'About how much skiing/riding experience do you have?', decisive: false,
       options: [
-        { value: 'beginner', label: '完全新手，沒滑過或只滑過1-2次', personalize: '剛入門' },
-        { value: 'intermediate', label: '滑過幾次，能自己滑纜車道', personalize: '已經上手' },
-        { value: 'advanced', label: '資深玩家，樹林野雪都能上', personalize: '資深老手' }
+        { value: 'beginner', label: "Complete beginner, never been or only 1–2 times", personalize: 'Just starting out' },
+        { value: 'intermediate', label: "Been a few times, can ride the lifts on my own", personalize: 'Getting the hang of it' },
+        { value: 'advanced', label: "Seasoned rider, comfortable in trees and off-piste", personalize: 'Seasoned veteran' }
       ]
     },
     {
-      id: 'group', text: '這趟主要是誰要一起去？', decisive: false,
+      id: 'group', text: "Who's mainly coming on this trip?", decisive: false,
       options: [
-        { value: 'solo', label: '我自己一個人', personalize: '獨行' },
-        { value: 'pair', label: '兩人同行（情侶／夫妻／朋友）', personalize: '兩人同行' },
-        { value: 'multi', label: '三人以上，朋友或家庭，程度可能不太一樣', personalize: '揪了一團' }
+        { value: 'solo', label: 'Just me', personalize: 'Solo' },
+        { value: 'pair', label: 'Two of us (couple / spouse / friend)', personalize: 'Traveling as a pair' },
+        { value: 'multi', label: 'Three or more, friends or family, levels may vary', personalize: 'Bringing a crew' }
       ]
     },
     {
-      id: 'gear', text: '你有自己的雪板／裝備嗎？', decisive: false,
+      id: 'gear', text: 'Do you have your own board / gear?', decisive: false,
       options: [
-        { value: 'own', label: '有，滑季會來好幾趟，想找地方存放保養', personalize: '帶著自己的板' },
-        { value: 'rent', label: '沒有，需要現場租借', personalize: '打算現場租裝備' }
+        { value: 'own', label: "Yes, I come a few times a season and want somewhere to store & maintain it", personalize: 'Bringing my own board' },
+        { value: 'rent', label: "No, I'll need to rent on-site", personalize: 'Planning to rent gear' }
       ]
     },
     {
-      id: 'pain', text: '這趟最想解決的一件事是？', decisive: true,
+      id: 'pain', text: 'What is the one thing you most want taken care of on this trip?', decisive: true,
       options: [
-        { value: 'all_inclusive', label: '什麼都不懂，只想有人幫我把交通、住宿、課程都安排好', package: 'A' },
-        { value: 'freeride', label: '想追新鮮粉雪、自由行動，只是懶得管接送跟裝備保養', package: 'B' },
-        { value: 'breakthrough', label: '卡在同一個技巧瓶頸很久了，想被教練有系統地調整', package: 'C' },
-        { value: 'group_flex', label: '人數比較多、大家程度不太一樣，想要彈性又能分開上課', package: 'D' }
+        { value: 'all_inclusive', label: "I'm new to this — I just want someone to arrange transport, lodging, and lessons", package: 'A' },
+        { value: 'freeride', label: "I want to chase fresh powder freely, I just don't want to deal with transfers and gear upkeep", package: 'B' },
+        { value: 'breakthrough', label: "I've been stuck at the same skill plateau for a while, I want a coach to systematically fix it", package: 'C' },
+        { value: 'group_flex', label: "We're a bigger group with mixed levels, I want flexibility with separate lessons", package: 'D' }
       ]
     }
   ];
 
   var PACKAGES = {
-    A: { name: '新手無腦放空行', tagline: '門對門包車 ・ 基礎課程 ・ 住宿代訂', solves: '什麼都不用自己安排，落地到上雪場，我們都接手。', cta: '一鍵幫我全部搞定 →', anchor: 'package-a.html' },
-    B: { name: '硬核玩家輕裝行', tagline: '雪板倉儲 ・ 專業打蠟保養 ・ 追雪包車', solves: '裝備幫你顧好，你只管追今天哪裡在下雪。', cta: '輕裝出發，追我的雪 →', anchor: 'combo-b.html' },
-    C: { name: '突破瓶頸進階營', tagline: '高階單板訓練 ・ 專業保養調校 ・ 點對點包車', solves: '卡關太久了，讓教練用系統化訓練把你帶過去。', cta: '報名突破瓶頸訓練營 →', anchor: 'combo-c.html' },
-    D: { name: '好友家庭彈性團', tagline: '專屬包車 ・ 客製化分組課程', solves: '人多、程度不一也沒關係，各玩各的再一起集合。', cta: '客製我們的彈性行程 →', anchor: 'group.html' }
+    A: { name: 'Effortless First-Timer', tagline: 'Door-to-Door Transfer ・ Basic Course ・ Lodging Booking', solves: "You don't have to plan a thing — once you land, we take it from there.", cta: 'Handle It All For Me →', anchor: 'package-a-en.html' },
+    B: { name: 'Hardcore Rider, Light Pack', tagline: 'Gear Storage ・ Pro Wax & Tune ・ Powder-Chasing Charter', solves: "We take care of your gear — you just chase wherever it's snowing today.", cta: 'Go Light, Chase the Snow →', anchor: 'combo-b-en.html' },
+    C: { name: 'Breakthrough Training Camp', tagline: 'Advanced Training ・ Pro Tune-Up ・ Point-to-Point Transfer', solves: 'Stuck too long — let a coach take you through structured training.', cta: 'Join the Breakthrough Camp →', anchor: 'combo-c-en.html' },
+    D: { name: 'Flexible Friends & Family Group', tagline: 'Private Charter ・ Custom Group Lessons', solves: 'Big group, mixed levels? No problem — split up and regroup.', cta: 'Customize Our Flexible Trip →', anchor: 'group-en.html' }
   };
 
   var state = { index: 0, answers: {} };
@@ -523,7 +509,7 @@
     els.resultView.classList.add('is-active');
     els.badge.textContent = packageId;
     var recapParts = [a.exp, a.group, a.gear].filter(Boolean).map(function (x) { return x.personalize; });
-    els.recap.textContent = recapParts.length ? '根據你的選擇：' + recapParts.join('・') : '';
+    els.recap.textContent = recapParts.length ? 'Based on your answers: ' + recapParts.join(' ・ ') : '';
     els.pkgName.textContent = pkg.name;
     els.pkgTagline.textContent = pkg.tagline;
     els.pkgSolves.textContent = pkg.solves;

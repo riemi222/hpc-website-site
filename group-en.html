@@ -1,16 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>好友家庭彈性團 — Hokkaido Powder Club</title>
+<title>Flexible Friends &amp; Family Group — Hokkaido Powder Club</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
-  /* ============================================================
-     group.html — D套餐「好友家庭彈性團」專屬頁
-     人數、程度落差、分組方式都因人而異，不做試算器，
-     純內容說明 + 需求表單，送出後人工規劃方案並回信報價
-     ============================================================ */
   .hpc-group {
     --snow: #F0EEE8; --ice: #C8D8E4; --deep: #0B1117; --charcoal: #141C24; --slate: #1E2A36;
     --accent: #5B9EC9; --accent-bright: #7DBDE8; --rose: #D98BA0; --warm: #D4A96A; --warm-soft: #E0BD87;
@@ -20,7 +15,6 @@
     min-height: 100vh;
   }
   .hpc-group *, .hpc-group *::before, .hpc-group *::after { box-sizing: border-box; }
-  .hpc-group .cjk{ font-family:'Noto Sans TC', sans-serif; }
   .hpc-group a{ color: var(--accent-bright); }
 
   .hpc-group__wrap{ max-width: 640px; margin:0 auto; padding: 0 20px 80px; }
@@ -76,58 +70,58 @@
   <div class="hpc-group__wrap">
 
     <div style="display:flex; align-items:center; justify-content:space-between; padding-top:20px;">
-      <a href="index.html" style="font-family:'Bebas Neue', sans-serif; font-size:.95rem; letter-spacing:.05em; color:var(--snow); text-decoration:none;">HOKKAIDO POWDER <span style="color:var(--accent-bright);">CLUB</span></a>
-      <a href="group-en.html" style="color:var(--muted); font-size:.72rem; letter-spacing:.05em; text-decoration:none;">EN</a>
+      <a href="en.html" style="font-family:'Bebas Neue', sans-serif; font-size:.95rem; letter-spacing:.05em; color:var(--snow); text-decoration:none;">HOKKAIDO POWDER <span style="color:var(--accent-bright);">CLUB</span></a>
+      <a href="group.html" style="color:var(--muted); font-size:.72rem; letter-spacing:.05em; text-decoration:none;">ZH</a>
     </div>
-    <a class="hpc-group__back" href="index.html">← 返回首頁</a>
+    <a class="hpc-group__back" href="en.html">← Back to Home</a>
 
     <div class="hpc-group__hero">
       <div class="hpc-group__badge">D</div>
       <span class="hpc-group__eyebrow">FLEXIBLE GROUP</span>
-      <h1 class="hpc-group__h1 cjk">好友家庭彈性團</h1>
-      <p class="hpc-group__tagline cjk">專屬包車 ・ 客製化分組課程</p>
-      <p class="hpc-group__intro cjk">人多、程度不一也沒關係，各玩各的再一起集合。</p>
+      <h1 class="hpc-group__h1">Flexible Friends &amp; Family Group</h1>
+      <p class="hpc-group__tagline">Private Charter ・ Custom Group Lessons</p>
+      <p class="hpc-group__intro">Big group, mixed levels? No problem — split up and regroup.</p>
     </div>
 
     <div class="hpc-group__section">
-      <p class="hpc-group__section-title">這頁提供什麼</p>
+      <p class="hpc-group__section-title">What's on this page</p>
       <div class="hpc-group__cards">
         <div class="hpc-group__card">
-          <h3 class="cjk">專屬包車</h3>
-          <p class="cjk">依人數與行程客製安排，全程專車接送不用配合其他人。</p>
+          <h3>Private Charter</h3>
+          <p>Custom-arranged by group size and itinerary — a dedicated vehicle the whole way, no waiting on other groups.</p>
         </div>
         <div class="hpc-group__card">
-          <h3 class="cjk">客製化分組課程</h3>
-          <p class="cjk">依每個人的程度分開上課，教練配置彈性調整，新手老手一起出遊也不卡關。</p>
+          <h3>Custom Group Lessons</h3>
+          <p>Lessons split by each person's level, coach assignments adjusted flexibly — beginners and veterans can travel together without anyone stuck waiting.</p>
         </div>
       </div>
     </div>
 
     <form id="groupForm">
       <div class="hpc-group__section">
-        <p class="hpc-group__section-title">告訴我們你們的狀況</p>
+        <p class="hpc-group__section-title">Tell us about your group</p>
         <div class="hpc-group__panel">
           <div class="hpc-group__field">
-            <label class="hpc-group__label" for="grSize">同行人數</label>
-            <input class="hpc-group__input" type="number" id="grSize" min="2" max="30" placeholder="例：6">
+            <label class="hpc-group__label" for="grSize">Group size</label>
+            <input class="hpc-group__input" type="number" id="grSize" min="2" max="30" placeholder="e.g., 6">
           </div>
 
           <div class="hpc-group__field">
-            <label class="hpc-group__label" for="grLevels">程度分佈</label>
-            <textarea class="hpc-group__textarea" id="grLevels" placeholder="例：2位新手（沒滑過）、2位中階、2位資深老手"></textarea>
-            <span class="hpc-group__hint">寫下每個人大概的程度，我們才能規劃怎麼分組上課</span>
+            <label class="hpc-group__label" for="grLevels">Skill level breakdown</label>
+            <textarea class="hpc-group__textarea" id="grLevels" placeholder="e.g., 2 complete beginners, 2 intermediate, 2 seasoned veterans"></textarea>
+            <span class="hpc-group__hint">Give us a rough sense of each person's level, so we can plan how to split the lessons</span>
           </div>
 
           <div class="hpc-group__field">
-            <label class="hpc-group__label">想要的服務</label>
+            <label class="hpc-group__label">Services you'd like</label>
             <div class="hpc-group__checkbox-group">
               <label class="hpc-group__checkbox">
                 <input type="checkbox" id="grWantCharter" checked>
-                專屬包車接送
+                Private charter transfer
               </label>
               <label class="hpc-group__checkbox">
                 <input type="checkbox" id="grWantCourse" checked>
-                分組課程
+                Split-group lessons
               </label>
             </div>
           </div>
@@ -135,46 +129,46 @@
           <div class="hpc-group__field">
             <label class="hpc-group__row">
               <div>
-                <label class="hpc-group__label" for="grStart">預計開始日期</label>
+                <label class="hpc-group__label" for="grStart">Preferred start date</label>
                 <input class="hpc-group__input" type="date" id="grStart" min="2026-12-01" max="2027-04-30">
               </div>
               <div>
-                <label class="hpc-group__label" for="grEnd">預計結束日期</label>
+                <label class="hpc-group__label" for="grEnd">Preferred end date</label>
                 <input class="hpc-group__input" type="date" id="grEnd" min="2026-12-01" max="2027-04-30">
               </div>
             </label>
           </div>
 
           <div class="hpc-group__field">
-            <label class="hpc-group__label" for="grNote">其他需求</label>
-            <textarea class="hpc-group__textarea" id="grNote" placeholder="例：想住在同一間飯店、需要兒童教練、有人不會滑雪只想逛街等（選填）"></textarea>
+            <label class="hpc-group__label" for="grNote">Other requests</label>
+            <textarea class="hpc-group__textarea" id="grNote" placeholder="e.g., want everyone in the same hotel, need a kids' coach, someone doesn't ski and just wants to shop, etc. (optional)"></textarea>
           </div>
         </div>
 
-        <div class="hpc-group__quote-note">人數、程度落差、分組方式每一團都不一樣，我們會依照你填的狀況規劃方案，於 1～2 個工作天內回信報價，這裡不會自動算出金額。</div>
+        <div class="hpc-group__quote-note">Every group is different in size, skill spread, and how it splits up, so we'll plan a proposal based on what you fill in here and reply with a quote within 1–2 business days — this won't calculate a total automatically.</div>
       </div>
 
       <div class="hpc-group__section">
-        <p class="hpc-group__section-title">聯絡資訊</p>
+        <p class="hpc-group__section-title">Contact Info</p>
         <div class="hpc-group__panel">
           <div class="hpc-group__field">
-            <label class="hpc-group__label" for="grName">姓名</label>
+            <label class="hpc-group__label" for="grName">Name</label>
             <input class="hpc-group__input" type="text" id="grName" required>
           </div>
           <div class="hpc-group__field">
-            <label class="hpc-group__label" for="grContact">聯絡方式（Email 或 LINE ID）</label>
+            <label class="hpc-group__label" for="grContact">Contact (Email or LINE ID)</label>
             <input class="hpc-group__input" type="text" id="grContact" required>
           </div>
         </div>
       </div>
 
-      <button type="submit" class="hpc-group__submit">送出需求</button>
+      <button type="submit" class="hpc-group__submit">Submit Request</button>
     </form>
 
     <div class="hpc-group__confirm" id="grConfirm">
-      <h2 class="cjk">已收到你的團體需求</h2>
-      <p class="cjk" id="grConfirmDetail"></p>
-      <p class="cjk">我們會依人數與程度規劃方案，盡快回信報價。</p>
+      <h2>We've received your group request</h2>
+      <p id="grConfirmDetail"></p>
+      <p>We'll plan a proposal based on your group size and levels and reply with a quote soon.</p>
     </div>
 
   </div>
@@ -186,9 +180,8 @@
   var confirm = document.getElementById('grConfirm');
   var confirmDetail = document.getElementById('grConfirmDetail');
 
-  // TODO: 接到你實際的後台 / Notion
   function submitRequest(payload) {
-    var data = { access_key: 'a2a66d84-31b8-4e10-ad64-29181cca53d1', subject: '新需求 - D 好友家庭彈性團', from_name: 'Hokkaido Powder Club 網站' };
+    var data = { access_key: 'a2a66d84-31b8-4e10-ad64-29181cca53d1', subject: '[EN Guest] New Request - D Flexible Friends & Family Group', from_name: 'Hokkaido Powder Club Website' };
     Object.keys(payload).forEach(function (k) {
       var v = payload[k];
       data[k] = (v !== null && typeof v === 'object') ? JSON.stringify(v) : v;
@@ -197,7 +190,7 @@
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
-    }).catch(function (err) { console.error('送出失敗', err); });
+    }).catch(function (err) { console.error('Submission failed', err); });
   }
 
   form.addEventListener('submit', function (e) {
@@ -216,7 +209,7 @@
     submitRequest(payload);
 
     form.style.display = 'none';
-    confirmDetail.textContent = payload.name + '，' + (payload.size || '?') + ' 人團，' + payload.start + ' → ' + payload.end;
+    confirmDetail.textContent = payload.name + ', group of ' + (payload.size || '?') + ', ' + payload.start + ' → ' + payload.end;
     confirm.classList.add('is-active');
   });
 })();

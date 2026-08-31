@@ -1,17 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>新手無腦放空行 — Hokkaido Powder Club</title>
+<title>Effortless First-Timer — Hokkaido Powder Club</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
-  /* ============================================================
-     package-a.html — A套餐「新手無腦放空行」專屬頁
-     內容重新對應：包車包住(住宿+每日雪場接送，借用ski-trip.html邏輯)
-     ・滑雪課程(必選，真實課程報價表) ・機場接送(必選，借用transfer.html
-     的接機/送機單程邏輯，含旭川/富良野)
-     ============================================================ */
   .hpc-pkg-a {
     --snow: #F0EEE8; --ice: #C8D8E4; --deep: #0B1117; --charcoal: #141C24; --slate: #1E2A36;
     --accent: #5B9EC9; --accent-bright: #7DBDE8; --rose: #D98BA0; --warm: #D4A96A; --warm-soft: #E0BD87;
@@ -21,7 +15,6 @@
     min-height: 100vh;
   }
   .hpc-pkg-a *, .hpc-pkg-a *::before, .hpc-pkg-a *::after { box-sizing: border-box; }
-  .hpc-pkg-a .cjk{ font-family:'Noto Sans TC', sans-serif; }
   .hpc-pkg-a a{ color: var(--accent-bright); }
 
   .hpc-pkg-a__wrap{ max-width: 640px; margin:0 auto; padding: 0 20px 80px; }
@@ -94,132 +87,129 @@
   <div class="hpc-pkg-a__wrap">
 
     <div style="display:flex; align-items:center; justify-content:space-between; padding-top:20px;">
-      <a href="index.html" style="font-family:'Bebas Neue', sans-serif; font-size:.95rem; letter-spacing:.05em; color:var(--snow); text-decoration:none;">HOKKAIDO POWDER <span style="color:var(--accent-bright);">CLUB</span></a>
-      <a href="package-a-en.html" style="color:var(--muted); font-size:.72rem; letter-spacing:.05em; text-decoration:none;">EN</a>
+      <a href="en.html" style="font-family:'Bebas Neue', sans-serif; font-size:.95rem; letter-spacing:.05em; color:var(--snow); text-decoration:none;">HOKKAIDO POWDER <span style="color:var(--accent-bright);">CLUB</span></a>
+      <a href="package-a.html" style="color:var(--muted); font-size:.72rem; letter-spacing:.05em; text-decoration:none;">ZH</a>
     </div>
-    <a class="hpc-pkg-a__back" href="index.html">← 返回首頁</a>
+    <a class="hpc-pkg-a__back" href="en.html">← Back to Home</a>
 
     <div class="hpc-pkg-a__hero">
       <div class="hpc-pkg-a__badge">A</div>
       <span class="hpc-pkg-a__eyebrow">COMBO PACKAGE A</span>
-      <h1 class="hpc-pkg-a__h1 cjk">新手無腦放空行</h1>
-      <p class="hpc-pkg-a__tagline cjk">包車包住 ・ 滑雪課程 ・ 機場接送</p>
-      <p class="hpc-pkg-a__intro cjk">什麼都不用自己安排，落地到上雪場，我們都接手。</p>
+      <h1 class="hpc-pkg-a__h1">Effortless First-Timer</h1>
+      <p class="hpc-pkg-a__tagline">Charter + Lodging ・ Ski Lessons ・ Airport Transfer</p>
+      <p class="hpc-pkg-a__intro">You don't have to plan a thing — once you land, we take it from there.</p>
     </div>
 
     <div class="hpc-pkg-a__section">
-      <p class="hpc-pkg-a__section-title">這頁提供什麼</p>
+      <p class="hpc-pkg-a__section-title">What's on this page</p>
       <div class="hpc-pkg-a__cards">
         <div class="hpc-pkg-a__card">
-          <h3 class="cjk">包車包住</h3>
-          <p class="cjk">自有高級與平價住宿可選，依當日雪況彈性安排周邊雪場接送。</p>
+          <h3>Charter + Lodging</h3>
+          <p>Choice of our own upscale or budget lodging, with flexible daily transfers to nearby resorts based on conditions.</p>
         </div>
         <div class="hpc-pkg-a__card">
-          <h3 class="cjk">滑雪課程</h3>
-          <p class="cjk">教練會依學生程度判斷旭川區域適合的雪場。</p>
+          <h3>Ski Lessons</h3>
+          <p>Your coach will pick the right Asahikawa-area resort based on your skill level.</p>
         </div>
         <div class="hpc-pkg-a__card">
-          <h3 class="cjk">機場接送</h3>
-          <p class="cjk">新千歲機場 ↔ 雪場／指定飯店，專車直達，接機送機可分開訂。</p>
+          <h3>Airport Transfer</h3>
+          <p>New Chitose Airport ↔ resort／designated hotel, direct door-to-door — pickup and drop-off can be booked separately.</p>
         </div>
       </div>
     </div>
 
     <form id="pkgAForm">
       <div class="hpc-pkg-a__section">
-        <p class="hpc-pkg-a__section-title">試算 / 預約</p>
+        <p class="hpc-pkg-a__section-title">Estimate / Book</p>
 
-        <!-- 包車包住：住宿 + 每日雪場接送 -->
         <div class="hpc-pkg-a__panel">
-          <h3 class="cjk">包車包住</h3>
+          <h3>Charter + Lodging</h3>
           <div class="hpc-pkg-a__field" style="margin-top:14px;">
-            <label class="hpc-pkg-a__label">房型</label>
+            <label class="hpc-pkg-a__label">Room Type</label>
             <div class="hpc-pkg-a__radio-group">
               <label class="hpc-pkg-a__radio">
                 <input type="radio" name="paRoom" value="japanese" checked>
-                <span class="hpc-pkg-a__radio-text"><strong>日式平價房</strong><span>一人一間，¥10,000／人／晚</span></span>
+                <span class="hpc-pkg-a__radio-text"><strong>Budget Japanese-Style Room</strong><span>One person per room, ¥10,000／person／night</span></span>
               </label>
               <label class="hpc-pkg-a__radio">
                 <input type="radio" name="paRoom" value="capsule">
-                <span class="hpc-pkg-a__radio-text"><strong>太空艙房</strong><span>基礎2人¥66,000／晚，第3人起+¥8,800／晚，最多5人</span></span>
+                <span class="hpc-pkg-a__radio-text"><strong>Capsule Room</strong><span>Base 2 people ¥66,000／night, +¥8,800／night from the 3rd person on, up to 5 people</span></span>
               </label>
             </div>
           </div>
           <div class="hpc-pkg-a__field">
             <div class="hpc-pkg-a__row">
               <div>
-                <label class="hpc-pkg-a__label" for="paCheckin">入住日期</label>
+                <label class="hpc-pkg-a__label" for="paCheckin">Check-in date</label>
                 <input class="hpc-pkg-a__input" type="date" id="paCheckin" min="2026-12-01" max="2027-04-30" value="2027-01-10">
               </div>
               <div>
-                <label class="hpc-pkg-a__label" for="paCheckout">退房日期</label>
+                <label class="hpc-pkg-a__label" for="paCheckout">Check-out date</label>
                 <input class="hpc-pkg-a__input" type="date" id="paCheckout" min="2026-12-02" max="2027-05-01" value="2027-01-13">
               </div>
             </div>
           </div>
           <div class="hpc-pkg-a__field">
-            <label class="hpc-pkg-a__label" for="paPeople">人數</label>
+            <label class="hpc-pkg-a__label" for="paPeople">Number of people</label>
             <select class="hpc-pkg-a__select" id="paPeople">
-              <option value="1">1 人</option>
-              <option value="2" selected>2 人</option>
-              <option value="3">3 人</option>
-              <option value="4">4 人</option>
-              <option value="5">5 人</option>
+              <option value="1">1 person</option>
+              <option value="2" selected>2 people</option>
+              <option value="3">3 people</option>
+              <option value="4">4 people</option>
+              <option value="5">5 people</option>
             </select>
-            <span class="hpc-pkg-a__hint">太空艙最多5人；日式平價每人一間，人數不限</span>
+            <span class="hpc-pkg-a__hint">Capsule rooms max 5 people; Japanese-style is one person per room, no group limit</span>
           </div>
           <div class="hpc-pkg-a__field">
-            <label class="hpc-pkg-a__label" for="paResorts">每日雪場接送需求</label>
-            <textarea class="hpc-pkg-a__textarea" id="paResorts" placeholder="例：神居、旭岳、黑岳，依當天雪況安排"></textarea>
-            <span class="hpc-pkg-a__hint">寫下想去的雪場，交通費已自動算入下方試算（每人每天 ¥10,000）</span>
+            <label class="hpc-pkg-a__label" for="paResorts">Daily resort transfer preferences</label>
+            <textarea class="hpc-pkg-a__textarea" id="paResorts" placeholder="e.g., Kamui, Asahidake, Kurodake — arranged based on daily conditions"></textarea>
+            <span class="hpc-pkg-a__hint">Write down the resorts you'd like to visit — the transport cost is already included in the estimate below (¥10,000／person／day)</span>
           </div>
           <div class="hpc-pkg-a__summary">
-            <div class="hpc-pkg-a__summary-row"><span>住宿費（<span id="paNightsCount">—</span> 晚）</span><span id="paRoomPrice">—</span></div>
-            <div class="hpc-pkg-a__summary-row"><span>每日雪場接送（人數 × <span id="paDaysCount">—</span> 天 × ¥10,000）</span><span id="paDailyTransferPrice">—</span></div>
+            <div class="hpc-pkg-a__summary-row"><span>Lodging cost (<span id="paNightsCount">—</span> nights)</span><span id="paRoomPrice">—</span></div>
+            <div class="hpc-pkg-a__summary-row"><span>Daily resort transfer (people × <span id="paDaysCount">—</span> days × ¥10,000)</span><span id="paDailyTransferPrice">—</span></div>
           </div>
         </div>
 
-        <!-- 滑雪課程（必選） -->
         <div class="hpc-pkg-a__panel">
-          <h3 class="cjk">滑雪課程</h3>
+          <h3>Ski Lessons</h3>
           <div class="hpc-pkg-a__field" style="margin-top:14px;">
-            <label class="hpc-pkg-a__label" for="paCoursePeople">上課人數（教練:學員）</label>
+            <label class="hpc-pkg-a__label" for="paCoursePeople">Lesson size (coach:student)</label>
             <select class="hpc-pkg-a__select" id="paCoursePeople">
-              <option value="1">1 人（1對1）</option>
-              <option value="2" selected>2 人（1對2）</option>
-              <option value="3">3 人（1對3）</option>
-              <option value="4">4 人（1對4）</option>
+              <option value="1">1 person (1:1)</option>
+              <option value="2" selected>2 people (1:2)</option>
+              <option value="3">3 people (1:3)</option>
+              <option value="4">4 people (1:4)</option>
             </select>
-            <span class="hpc-pkg-a__hint">上限 1對4；5人以上請備註或聯繫客服</span>
+            <span class="hpc-pkg-a__hint">Max 1:4; for 5+ people please note it below or contact us</span>
           </div>
           <div class="hpc-pkg-a__field">
-            <label class="hpc-pkg-a__label" for="paCourseHours">課程時數</label>
+            <label class="hpc-pkg-a__label" for="paCourseHours">Lesson duration</label>
             <select class="hpc-pkg-a__select" id="paCourseHours">
-              <option value="3">3 小時</option>
-              <option value="4">4 小時</option>
-              <option value="6">6 小時（初階／進階通用）</option>
+              <option value="3">3 hours</option>
+              <option value="4">4 hours</option>
+              <option value="6">6 hours (beginner／advanced, same rate)</option>
             </select>
-            <span class="hpc-pkg-a__hint">季節：<span class="hpc-pkg-a__season-tag" id="paSeasonTag">平季</span>（依入住日期自動判斷）</span>
+            <span class="hpc-pkg-a__hint">Season: <span class="hpc-pkg-a__season-tag" id="paSeasonTag">Low season</span> (auto-detected from check-in date)</span>
           </div>
           <div class="hpc-pkg-a__summary">
-            <div class="hpc-pkg-a__summary-row"><span>課程費（1對<span id="paCourseDetail">2</span>）</span><span id="paCoursePrice">—</span></div>
+            <div class="hpc-pkg-a__summary-row"><span>Lesson cost (1:<span id="paCourseDetail">2</span>)</span><span id="paCoursePrice">—</span></div>
           </div>
         </div>
 
-        <!-- 機場接送（必選） -->
         <div class="hpc-pkg-a__panel">
-          <h3 class="cjk">機場接送</h3>
+          <h3>Airport Transfer</h3>
 
           <div class="hpc-pkg-a__field" style="margin-top:14px;">
-            <label class="hpc-pkg-a__label">車型</label>
+            <label class="hpc-pkg-a__label">Vehicle</label>
             <div class="hpc-pkg-a__radio-group">
               <label class="hpc-pkg-a__radio">
                 <input type="radio" name="paVehicle" value="small" checked>
-                <span class="hpc-pkg-a__radio-text"><strong>小型車</strong><span>Alphard 等級</span></span>
+                <span class="hpc-pkg-a__radio-text"><strong>Small vehicle</strong><span>Alphard class</span></span>
               </label>
               <label class="hpc-pkg-a__radio">
                 <input type="radio" name="paVehicle" value="large">
-                <span class="hpc-pkg-a__radio-text"><strong>大型車</strong><span>Hiace 等級，行李空間較大</span></span>
+                <span class="hpc-pkg-a__radio-text"><strong>Large vehicle</strong><span>Hiace class, more luggage space</span></span>
               </label>
             </div>
           </div>
@@ -227,26 +217,26 @@
           <div class="hpc-pkg-a__field">
             <label class="hpc-pkg-a__checkbox">
               <input type="checkbox" id="paPickupToggle" checked>
-              接機：新千歲機場 → 目的地
+              Pickup: New Chitose Airport → destination
             </label>
             <div id="paPickupSub" style="margin-top:10px; padding-left:26px;">
               <select class="hpc-pkg-a__select" id="paPickupResort">
-                <optgroup label="TOMAMU・二世谷・留壽都・Kiroro">
+                <optgroup label="TOMAMU・Niseko・Rusutsu・Kiroro">
                   <option value="TOMAMU" data-group="1">TOMAMU</option>
-                  <option value="二世谷 Niseko" data-group="1">二世谷 Niseko</option>
-                  <option value="留壽都 Rusutsu" data-group="1">留壽都 Rusutsu</option>
+                  <option value="Niseko" data-group="1">Niseko</option>
+                  <option value="Rusutsu" data-group="1">Rusutsu</option>
                   <option value="Kiroro" data-group="1">Kiroro</option>
                 </optgroup>
-                <optgroup label="手稲・札幌国際">
-                  <option value="手稲滑雪場" data-group="2">手稲滑雪場</option>
-                  <option value="札幌国際滑雪場" data-group="2">札幌国際滑雪場</option>
+                <optgroup label="Teine・Sapporo Kokusai">
+                  <option value="Teine Ski Resort" data-group="2">Teine Ski Resort</option>
+                  <option value="Sapporo Kokusai Ski Resort" data-group="2">Sapporo Kokusai Ski Resort</option>
                 </optgroup>
-                <optgroup label="小樽">
-                  <option value="小樽" data-group="3">小樽</option>
+                <optgroup label="Otaru">
+                  <option value="Otaru" data-group="3">Otaru</option>
                 </optgroup>
-                <optgroup label="富良野・旭川">
-                  <option value="富良野" data-group="4">富良野</option>
-                  <option value="旭川" data-group="5">旭川</option>
+                <optgroup label="Furano・Asahikawa">
+                  <option value="Furano" data-group="4">Furano</option>
+                  <option value="Asahikawa" data-group="5">Asahikawa</option>
                 </optgroup>
               </select>
               <div class="hpc-pkg-a__row" style="margin-top:10px;">
@@ -254,7 +244,7 @@
               </div>
               <label class="hpc-pkg-a__checkbox" style="margin-top:8px;">
                 <input type="checkbox" id="paPickupNight">
-                此趟為 22:00～05:00 時段（+¥20,000）
+                This leg falls between 22:00–05:00 (+¥20,000)
               </label>
             </div>
           </div>
@@ -262,26 +252,26 @@
           <div class="hpc-pkg-a__field">
             <label class="hpc-pkg-a__checkbox">
               <input type="checkbox" id="paDropoffToggle">
-              送機：目的地 → 新千歲機場
+              Drop-off: destination → New Chitose Airport
             </label>
             <div id="paDropoffSub" style="display:none; margin-top:10px; padding-left:26px;">
               <select class="hpc-pkg-a__select" id="paDropoffResort">
-                <optgroup label="TOMAMU・二世谷・留壽都・Kiroro">
+                <optgroup label="TOMAMU・Niseko・Rusutsu・Kiroro">
                   <option value="TOMAMU" data-group="1">TOMAMU</option>
-                  <option value="二世谷 Niseko" data-group="1">二世谷 Niseko</option>
-                  <option value="留壽都 Rusutsu" data-group="1">留壽都 Rusutsu</option>
+                  <option value="Niseko" data-group="1">Niseko</option>
+                  <option value="Rusutsu" data-group="1">Rusutsu</option>
                   <option value="Kiroro" data-group="1">Kiroro</option>
                 </optgroup>
-                <optgroup label="手稲・札幌国際">
-                  <option value="手稲滑雪場" data-group="2">手稲滑雪場</option>
-                  <option value="札幌国際滑雪場" data-group="2">札幌国際滑雪場</option>
+                <optgroup label="Teine・Sapporo Kokusai">
+                  <option value="Teine Ski Resort" data-group="2">Teine Ski Resort</option>
+                  <option value="Sapporo Kokusai Ski Resort" data-group="2">Sapporo Kokusai Ski Resort</option>
                 </optgroup>
-                <optgroup label="小樽">
-                  <option value="小樽" data-group="3">小樽</option>
+                <optgroup label="Otaru">
+                  <option value="Otaru" data-group="3">Otaru</option>
                 </optgroup>
-                <optgroup label="富良野・旭川">
-                  <option value="富良野" data-group="4">富良野</option>
-                  <option value="旭川" data-group="5">旭川</option>
+                <optgroup label="Furano・Asahikawa">
+                  <option value="Furano" data-group="4">Furano</option>
+                  <option value="Asahikawa" data-group="5">Asahikawa</option>
                 </optgroup>
               </select>
               <div class="hpc-pkg-a__row" style="margin-top:10px;">
@@ -289,57 +279,56 @@
               </div>
               <label class="hpc-pkg-a__checkbox" style="margin-top:8px;">
                 <input type="checkbox" id="paDropoffNight">
-                此趟為 22:00～05:00 時段（+¥20,000）
+                This leg falls between 22:00–05:00 (+¥20,000)
               </label>
             </div>
           </div>
 
           <div class="hpc-pkg-a__summary">
-            <div class="hpc-pkg-a__summary-row" id="paPickupRow"><span>接機</span><span id="paPickupPrice">—</span></div>
-            <div class="hpc-pkg-a__summary-row" id="paDropoffRow" style="display:none;"><span>送機</span><span id="paDropoffPrice">—</span></div>
+            <div class="hpc-pkg-a__summary-row" id="paPickupRow"><span>Pickup</span><span id="paPickupPrice">—</span></div>
+            <div class="hpc-pkg-a__summary-row" id="paDropoffRow" style="display:none;"><span>Drop-off</span><span id="paDropoffPrice">—</span></div>
           </div>
         </div>
 
         <div class="hpc-pkg-a__summary">
-          <div class="hpc-pkg-a__summary-row"><span>住宿費</span><span id="paSumRoom">—</span></div>
-          <div class="hpc-pkg-a__summary-row"><span>每日雪場接送</span><span id="paSumDaily">—</span></div>
-          <div class="hpc-pkg-a__summary-row"><span>課程費</span><span id="paSumCourse">—</span></div>
-          <div class="hpc-pkg-a__summary-row"><span>接送費</span><span id="paSumTransfer">—</span></div>
-          <div class="hpc-pkg-a__summary-total"><span>試算總價</span><span id="paTotalPrice">—</span></div>
-          <p class="hpc-pkg-a__disclaimer">不含每日雪場接送費用（人工報價，見上方）。不含雪票及個人裝備租借費用。為系統試算參考價，實際報價以正式確認為準。</p>
+          <div class="hpc-pkg-a__summary-row"><span>Lodging cost</span><span id="paSumRoom">—</span></div>
+          <div class="hpc-pkg-a__summary-row"><span>Daily resort transfer</span><span id="paSumDaily">—</span></div>
+          <div class="hpc-pkg-a__summary-row"><span>Lesson cost</span><span id="paSumCourse">—</span></div>
+          <div class="hpc-pkg-a__summary-row"><span>Airport transfer</span><span id="paSumTransfer">—</span></div>
+          <div class="hpc-pkg-a__summary-total"><span>Estimated total</span><span id="paTotalPrice">—</span></div>
+          <p class="hpc-pkg-a__disclaimer">Does not include lift tickets or personal gear rental. This is a system estimate for reference; final pricing is confirmed upon booking.</p>
         </div>
       </div>
 
-      <!-- 預約資訊 -->
       <div class="hpc-pkg-a__section">
-        <p class="hpc-pkg-a__section-title">預約資訊</p>
+        <p class="hpc-pkg-a__section-title">Booking Info</p>
         <div class="hpc-pkg-a__panel">
           <div class="hpc-pkg-a__field">
-            <label class="hpc-pkg-a__label" for="paName">姓名</label>
+            <label class="hpc-pkg-a__label" for="paName">Name</label>
             <input class="hpc-pkg-a__input" type="text" id="paName" required>
           </div>
           <div class="hpc-pkg-a__field">
-            <label class="hpc-pkg-a__label" for="paContact">聯絡方式（Email 或 LINE ID）</label>
+            <label class="hpc-pkg-a__label" for="paContact">Contact (Email or LINE ID)</label>
             <input class="hpc-pkg-a__input" type="text" id="paContact" required>
           </div>
           <div class="hpc-pkg-a__field">
-            <label class="hpc-pkg-a__label" for="paFlight">抵達航班／接送時間</label>
-            <input class="hpc-pkg-a__input" type="text" id="paFlight" placeholder="例：CI130 / 1/10 14:20 抵達">
+            <label class="hpc-pkg-a__label" for="paFlight">Arrival flight / transfer time</label>
+            <input class="hpc-pkg-a__input" type="text" id="paFlight" placeholder="e.g., CI130 / arriving 1/10 14:20">
           </div>
           <div class="hpc-pkg-a__field">
-            <label class="hpc-pkg-a__label" for="paNote">備註</label>
-            <input class="hpc-pkg-a__input" type="text" id="paNote" placeholder="其他需求（選填）">
+            <label class="hpc-pkg-a__label" for="paNote">Notes</label>
+            <input class="hpc-pkg-a__input" type="text" id="paNote" placeholder="Anything else we should know (optional)">
           </div>
         </div>
       </div>
 
-      <button type="submit" class="hpc-pkg-a__submit">送出預約</button>
+      <button type="submit" class="hpc-pkg-a__submit">Submit Booking</button>
     </form>
 
     <div class="hpc-pkg-a__confirm" id="paConfirm">
-      <h2 class="cjk">已收到你的預約需求</h2>
-      <p class="cjk" id="paConfirmDetail"></p>
-      <p class="cjk">我們會盡快跟你確認實際報價與細節。</p>
+      <h2>We've received your booking request</h2>
+      <p id="paConfirmDetail"></p>
+      <p>We'll confirm the actual pricing and details with you soon.</p>
     </div>
 
   </div>
@@ -423,28 +412,25 @@
   function recalc() {
     var total = 0;
 
-    // 住宿
     els.checkout.min = els.checkin.value;
     var nights = nightsBetween(els.checkin.value, els.checkout.value);
     var people = parseInt(els.people.value, 10);
     var room = getRoomType();
     var roomCost = nights > 0 ? roomPrice(room, people, nights) : 0;
     els.nightsCount.textContent = nights || '—';
-    els.roomPrice.textContent = nights > 0 ? yen(roomCost) : '請選擇日期';
+    els.roomPrice.textContent = nights > 0 ? yen(roomCost) : 'Select dates';
     els.sumRoom.textContent = nights > 0 ? yen(roomCost) : '—';
     total += roomCost;
 
-    // 每日雪場接送（人數 × 天數 × ¥10,000；天數＝住宿晚數）
     var days = nights;
     var dailyTransferCost = days > 0 ? people * days * DAILY_TRANSFER_RATE : 0;
     els.daysCount.textContent = days || '—';
-    els.dailyTransferPrice.textContent = days > 0 ? yen(dailyTransferCost) : '請選擇日期';
+    els.dailyTransferPrice.textContent = days > 0 ? yen(dailyTransferCost) : 'Select dates';
     els.sumDaily.textContent = days > 0 ? yen(dailyTransferCost) : '—';
     total += dailyTransferCost;
 
-    // 課程（依入住日期判斷季節，人數為課程自己的選項）
     var peak = isPeak(els.checkin.value);
-    els.seasonTag.textContent = peak ? '旺季' : '平季';
+    els.seasonTag.textContent = peak ? 'High season' : 'Low season';
     els.seasonTag.classList.toggle('is-peak', peak);
     var coursePeople = parseInt(els.coursePeople.value, 10);
     els.courseDetail.textContent = coursePeople;
@@ -453,7 +439,6 @@
     els.sumCourse.textContent = yen(course);
     total += course;
 
-    // 機場接送
     var vehicle = getVehicle();
     var transferTotal = 0;
 
@@ -473,7 +458,7 @@
       transferTotal += d;
     }
 
-    els.sumTransfer.textContent = (els.pickupToggle.checked || els.dropoffToggle.checked) ? yen(transferTotal) : '請至少選擇一趟';
+    els.sumTransfer.textContent = (els.pickupToggle.checked || els.dropoffToggle.checked) ? yen(transferTotal) : 'Please select at least one leg';
     total += transferTotal;
 
     els.total.textContent = yen(total);
@@ -483,7 +468,7 @@
   els.form.addEventListener('input', recalc);
 
   function submitBooking(payload) {
-    var data = { access_key: 'a2a66d84-31b8-4e10-ad64-29181cca53d1', subject: '新預約 - A 新手無腦放空行', from_name: 'Hokkaido Powder Club 網站' };
+    var data = { access_key: 'a2a66d84-31b8-4e10-ad64-29181cca53d1', subject: '[EN Guest] New Booking - A Effortless First-Timer', from_name: 'Hokkaido Powder Club Website' };
     Object.keys(payload).forEach(function (k) {
       var v = payload[k];
       data[k] = (v !== null && typeof v === 'object') ? JSON.stringify(v) : v;
@@ -492,7 +477,7 @@
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
-    }).catch(function (err) { console.error('送出失敗', err); });
+    }).catch(function (err) { console.error('Submission failed', err); });
   }
 
   els.form.addEventListener('submit', function (e) {
@@ -514,7 +499,7 @@
     submitBooking(payload);
 
     els.form.style.display = 'none';
-    els.confirmDetail.textContent = payload.name + '，' + payload.checkin + ' → ' + payload.checkout + '，試算總價 ' + payload.total;
+    els.confirmDetail.textContent = payload.name + ', ' + payload.checkin + ' → ' + payload.checkout + ', estimated total ' + payload.total;
     els.confirm.classList.add('is-active');
   });
 
