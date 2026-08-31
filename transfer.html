@@ -411,8 +411,16 @@
 
   // TODO: 接到你實際的後台 / Notion，現在先印出資料 + 顯示確認畫面
   function submitBooking(payload) {
-    console.log('[transfer booking]', payload);
-    // fetch('/api/transfer-booking', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+    var data = { access_key: 'a2a66d84-31b8-4e10-ad64-29181cca53d1', subject: '新預約 - 機場接送・觀光包車', from_name: 'Hokkaido Powder Club 網站' };
+    Object.keys(payload).forEach(function (k) {
+      var v = payload[k];
+      data[k] = (v !== null && typeof v === 'object') ? JSON.stringify(v) : v;
+    });
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).catch(function (err) { console.error('送出失敗', err); });
   }
 
   els.form.addEventListener('submit', function (e) {

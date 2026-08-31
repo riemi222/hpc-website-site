@@ -532,8 +532,16 @@
   els.form.addEventListener('input', recalc);
 
   function submitBooking(payload) {
-    console.log('[combo-c booking]', payload);
-    // fetch('/api/training-booking', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+    var data = { access_key: 'a2a66d84-31b8-4e10-ad64-29181cca53d1', subject: '新預約 - C 突破瓶頸進階營', from_name: 'Hokkaido Powder Club 網站' };
+    Object.keys(payload).forEach(function (k) {
+      var v = payload[k];
+      data[k] = (v !== null && typeof v === 'object') ? JSON.stringify(v) : v;
+    });
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).catch(function (err) { console.error('送出失敗', err); });
   }
 
   els.form.addEventListener('submit', function (e) {
