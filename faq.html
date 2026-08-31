@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>常見問題 — Hokkaido Powder Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     faq.html — 常見問題獨立頁
+     內容全部來自本專案已確認的真實資訊（政策、課程/住宿規則、
+     保險等），沒有原始FAQ文字前先不編造沒verify過的內容。
+     拿到真實FAQ問答後可整份替換 QA 陣列。
+     ============================================================ */
+  .hpc-faq {
+    --snow: #F0EEE8; --ice: #C8D8E4; --deep: #0B1117; --charcoal: #141C24; --slate: #1E2A36;
+    --accent: #5B9EC9; --accent-bright: #7DBDE8; --rose: #D98BA0; --warm: #D4A96A; --warm-soft: #E0BD87;
+    --muted: #8A99A8; --line: rgba(138,153,168,0.18);
+    background: var(--deep); color: var(--snow);
+    font-family: 'DM Sans','Noto Sans TC', sans-serif; font-weight:300;
+    min-height: 100vh;
+  }
+  .hpc-faq *, .hpc-faq *::before, .hpc-faq *::after { box-sizing: border-box; }
+  .hpc-faq .cjk{ font-family:'Noto Sans TC', sans-serif; }
+  .hpc-faq a{ color: var(--accent-bright); }
+
+  .hpc-faq__wrap{ max-width: 640px; margin:0 auto; padding: 0 20px 80px; }
+  .hpc-faq__back{ display:inline-block; padding:20px 0 0; font-size:13px; color:var(--muted); text-decoration:none; }
+  .hpc-faq__back:hover{ color:var(--accent-bright); }
+
+  .hpc-faq__hero{ text-align:center; padding:32px 0 8px; }
+  .hpc-faq__eyebrow{ font-family:'Bebas Neue', sans-serif; font-size:13px; letter-spacing:.16em; color:var(--accent-bright); display:block; margin-bottom:8px; }
+  .hpc-faq__h1{ font-family:'Noto Sans TC', sans-serif; font-size:26px; font-weight:900; margin:0 0 8px; line-height:1.3; }
+  .hpc-faq__intro{ font-size:14px; color:var(--muted); line-height:1.7; max-width:480px; margin:0 auto; font-family:'Noto Sans TC', sans-serif; }
+
+  .hpc-faq__section{ padding:36px 0 0; }
+  .hpc-faq__section-title{ font-size:12px; font-family:'Bebas Neue', sans-serif; letter-spacing:.12em; color:var(--muted); margin:0 0 14px; }
+
+  .hpc-faq__list{ display:flex; flex-direction:column; gap:10px; }
+  .hpc-faq__item{ background:var(--charcoal); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+  .hpc-faq__q{
+    all:unset; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:12px;
+    width:100%; padding:16px 18px; font-family:'Noto Sans TC', sans-serif; font-size:14.5px; font-weight:700; color:var(--snow);
+    box-sizing:border-box;
+  }
+  .hpc-faq__q-mark{ font-family:'Bebas Neue', sans-serif; color:var(--accent-bright); flex-shrink:0; transition:transform .2s ease; }
+  .hpc-faq__item.is-open .hpc-faq__q-mark{ transform:rotate(45deg); }
+  .hpc-faq__a{ max-height:0; overflow:hidden; transition:max-height .25s ease; }
+  .hpc-faq__item.is-open .hpc-faq__a{ max-height:400px; }
+  .hpc-faq__a-inner{ padding:0 18px 16px; font-family:'Noto Sans TC', sans-serif; font-size:13.5px; color:var(--muted); line-height:1.8; }
+  .hpc-faq__a-inner ul{ margin:6px 0 0 1.1rem; padding:0; }
+  .hpc-faq__a-inner li{ margin-bottom:4px; }
+
+  .hpc-faq__contact{ background:rgba(125,189,232,0.12); border:1px solid var(--accent-bright); border-radius:10px; padding:14px 16px; font-size:13px; color:var(--accent-bright); line-height:1.75; margin-top:20px; font-family:'Noto Sans TC', sans-serif; text-align:center; }
+
+  @media (prefers-reduced-motion: reduce){ .hpc-faq__q-mark, .hpc-faq__a{ transition:none; } }
+</style>
+</head>
+<body>
+<div class="hpc-faq">
+  <div class="hpc-faq__wrap">
+
+    <a class="hpc-faq__back" href="index.html">← 返回首頁</a>
+
+    <div class="hpc-faq__hero">
+      <span class="hpc-faq__eyebrow">FAQ</span>
+      <h1 class="hpc-faq__h1 cjk">常見問題</h1>
+      <p class="hpc-faq__intro cjk">點擊問題展開答案，找不到你要的答案歡迎直接聯繫我們。</p>
+    </div>
+
+    <div class="hpc-faq__section">
+      <p class="hpc-faq__section-title">一般問題</p>
+      <div class="hpc-faq__list" id="faqGroup0"></div>
+    </div>
+
+    <div class="hpc-faq__section">
+      <p class="hpc-faq__section-title">預約與方案</p>
+      <div class="hpc-faq__list" id="faqGroup1"></div>
+    </div>
+
+    <div class="hpc-faq__section">
+      <p class="hpc-faq__section-title">課程與訓練營</p>
+      <div class="hpc-faq__list" id="faqGroup2"></div>
+    </div>
+
+    <div class="hpc-faq__section">
+      <p class="hpc-faq__section-title">住宿與雪具倉儲</p>
+      <div class="hpc-faq__list" id="faqGroup3"></div>
+    </div>
+
+    <div class="hpc-faq__section">
+      <p class="hpc-faq__section-title">安全與取消政策</p>
+      <div class="hpc-faq__list" id="faqGroup4"></div>
+      <div class="hpc-faq__contact">找不到答案？直接透過各方案頁面底部的聯絡資訊表單告訴我們，我們會盡快回覆。</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var GROUPS = {
+    faqGroup0: [
+      {
+        q: '完全沒有滑雪經驗可以參加嗎？',
+        a: '可以。我們的教練會依照你的實際程度調整教學節奏，從裝備穿脫、纜車搭乘開始教起，不需要任何基礎。'
+      },
+      {
+        q: '教練會說中文嗎？',
+        a: '會。創辦人與大部分合作教練皆能以中文授課；若指定教練的語言與你需求不符，我們也提供隨行翻譯教練選項（詳見「教練課程」的預約表單）。'
+      },
+      {
+        q: '雪況不好或天候不佳，行程會取消嗎？',
+        a: '我們會依現場雪況與安全評估決定是否調整或延後行程，詳細規則請見下方「安全與取消政策」。安全永遠優先於行程照常進行。'
+      },
+      {
+        q: '需要自己準備滑雪裝備嗎？',
+        a: '不需要。裝備租借可透過我們代為安排；若你有自己的裝備，也可以使用 <a href="storage.html">裝備倉儲保養</a> 的倉儲服務，不用每次往返都帶著板子。'
+      },
+      {
+        q: '小孩可以參加課程嗎？',
+        a: '可以，我們有豐富的親子與兒童教學經驗，會依孩子的年齡與體能調整教法，詳情可在預約表單備註欄告訴我們孩子的年齡。'
+      },
+      {
+        q: '付款方式有哪些？',
+        a: '支援線上信用卡付款（Stripe安全加密），部分Offer（如需先確認房況或候補課程）採先詢問、後付款的方式，確認後我們會提供付款連結。'
+      }
+    ],
+    faqGroup1: [
+      {
+        q: '首頁的「四款kit」跟「30秒情境問答」配對出來的方案有什麼不同？',
+        a: '四款kit（機場接送、旭川追雪自由行、雪具倉儲保養、滑雪課程）是單一服務本身的內容頁；情境問答配對出的A/B/C/D是依你的情況混合搭配多項服務的組合方案。兩邊都可以直接預約，選你需要的深度即可。'
+      },
+      {
+        q: '北海道觀光包車／追雪包車有什麼限制嗎？',
+        a: '這項服務僅提供給同時預訂住宿，或加購課程／導滑的客人，不開放單獨預訂（純寄倉或純接送不含資格）。相關頁面上都可以直接加選符合資格的服務。'
+      }
+    ],
+    faqGroup2: [
+      {
+        q: '課程費用有包含雪票或裝備租借嗎？',
+        a: '不包含。課程報價僅為教學費用，雪票及個人裝備（雪板、雪鞋等）需另外準備或租借。'
+      },
+      {
+        q: '課程怎麼分平季／旺季報價？',
+        a: '平季：2026/12/01–12/22、2027/01/04–02/02、2027/02/16–02/25、2027/03/03–04/01、2027/04/07 至雪場關閉。<br>旺季：2026/12/23–01/03、2027/02/03–02/15、2027/02/26–03/02、2027/04/02–04/06。系統會依你填的上課日期自動判斷。'
+      },
+      {
+        q: '前日本奧運代表選手訓練營的日期可以保證嗎？',
+        a: '不行。這項訓練營需視教練實際檔期而定，我們會盡量安排，但無法保證所選日期一定可行，確切日期會由專人透過 Email 與你討論確認。'
+      }
+    ],
+    faqGroup3: [
+      {
+        q: '住宿房型有哪些選擇？',
+        a: '日式平價房：一人一間，¥10,000／人／晚。<br>太空艙房：基礎2人 ¥66,000／晚，第3人起每多1人 +¥8,800／晚，最多5人。'
+      },
+      {
+        q: '雪具倉儲會員分幾個等級？',
+        a: 'BASIC：溫控除濕倉儲，安心寄放雪板與雪具。<br>PLUS：包含封板、開板保養與專業打蠟。<br>VIP：享有 PLUS 全部服務，再加雪具袋無限次免費寄送。首次加入需另付一次性基本會員費。'
+      }
+    ],
+    faqGroup4: [
+      {
+        q: '行程期間有保險保障嗎？',
+        a: '所有行程皆含最高2億日圓之意外保險，保險理賠條件與範圍以保險公司實際條款為準。'
+      },
+      {
+        q: '取消政策是什麼？',
+        a: '不管任何因素都適用：<ul><li>行程開始31天前取消：退還已付款項之50%</li><li>行程開始8–30天內取消：退還已付款項之30%</li><li>行程開始7天內取消：恕不退費</li><li>No-show：恕不退費</li></ul>退還金額需再扣除 Stripe 手續費，實際退還總金額以此為準。'
+      },
+      {
+        q: '雪況不好會取消行程嗎？',
+        a: '我們會依現場實際雪況、能見度、雪崩風險評估等因素，保留調整、延後或取消當日行程與課程的權利，以維護參與者安全為最優先考量。'
+      }
+    ]
+  };
+
+  Object.keys(GROUPS).forEach(function (groupId) {
+    var container = document.getElementById(groupId);
+    GROUPS[groupId].forEach(function (item, idx) {
+      var wrap = document.createElement('div');
+      wrap.className = 'hpc-faq__item';
+
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'hpc-faq__q cjk';
+      btn.innerHTML = '<span>' + item.q + '</span><span class="hpc-faq__q-mark">+</span>';
+
+      var aWrap = document.createElement('div');
+      aWrap.className = 'hpc-faq__a';
+      var aInner = document.createElement('div');
+      aInner.className = 'hpc-faq__a-inner cjk';
+      aInner.innerHTML = item.a;
+      aWrap.appendChild(aInner);
+
+      btn.addEventListener('click', function () {
+        wrap.classList.toggle('is-open');
+      });
+
+      wrap.appendChild(btn);
+      wrap.appendChild(aWrap);
+      container.appendChild(wrap);
+    });
+  });
+})();
+</script>
+</body>
+</html>
