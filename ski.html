@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北海道中文滑雪教練課程｜旭川・星野 TOMAMU｜Hokkaido Powder Club</title>
+<meta name="description" content="Emi 帶領的中文教練團隊，團體、家庭分組教學，滑雪小白一天學會 S turn。旭川・星野 TOMAMU 上課，可加購機場接送與住宿。">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     ski.html — 廣告測試用著陸頁
+     A 版：?v=a（課程訊息）  B 版：?v=b（一條龍訊息）
+     兩版只有 hero 標題區不同，其他內容與表單完全相同。
+     沒帶參數時顯示 B 版，追蹤標記為 direct。
+     ============================================================ */
+  :root{
+    --snow:#F0EEE8; --ice:#C8D8E4; --deep:#0B1117; --charcoal:#141C24;
+    --slate:#1E2A36; --accent:#5B9EC9; --accent-bright:#7DBDE8;
+    --warm:#D4A96A; --muted:#8A99A8; --line:rgba(138,153,168,0.18);
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+  body{
+    background:var(--deep); color:var(--snow);
+    font-family:'Noto Sans TC','DM Sans',sans-serif; font-weight:300; line-height:1.8;
+    overflow-x:hidden;
+  }
+  a{ color:inherit; }
+  :focus-visible{ outline:2px solid var(--accent-bright); outline-offset:3px; }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 6vw; }
+  h2{ font-weight:900; font-size:clamp(1.6rem,3.2vw,2.4rem); line-height:1.35; margin-bottom:.8rem; }
+  .lead{ color:var(--muted); max-width:36em; font-size:.98rem; }
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:100; display:flex; align-items:center; justify-content:space-between;
+    padding:1rem 6vw; background:rgba(11,17,23,.88); backdrop-filter:blur(14px); border-bottom:1px solid var(--line);
+  }
+  .brand{ font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.05em; text-decoration:none; }
+  .brand span{ color:var(--accent-bright); }
+  .nav-right{ display:flex; align-items:center; gap:1rem; }
+  .nav-line{ font-size:.8rem; color:var(--ice); text-decoration:none; }
+  .btn{
+    display:inline-block; font-family:'Noto Sans TC',sans-serif; font-weight:500; text-decoration:none;
+    color:var(--deep); background:var(--accent); border:0; cursor:pointer;
+    clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+    transition:background .2s;
+  }
+  .btn:hover{ background:var(--accent-bright); }
+  .nav-cta{ padding:.55rem 1.1rem; font-size:.82rem; white-space:nowrap; }
+  .nav-line{ white-space:nowrap; }
+  @media (max-width:480px){ nav{ padding:.8rem 4vw; } .brand{ font-size:.9rem; } .nav-right{ gap:.7rem; } .nav-line{ font-size:.75rem; } .nav-cta{ padding:.5rem .8rem; font-size:.75rem; } }
+
+  /* HERO */
+  .hero{
+    position:relative; min-height:78vh; display:flex; align-items:flex-end; overflow:hidden;
+    background:linear-gradient(160deg,#1a2f42 0%,#10202e 55%,var(--deep) 100%);
+    padding:5rem 0 4.5rem;
+  }
+  .hero svg{ position:absolute; left:0; right:0; bottom:0; width:100%; height:34%; opacity:.9; }
+  .hero .wrap{ position:relative; z-index:2; width:100%; }
+  .variant{ display:none; }
+  body[data-v="A"] .variant-a, body[data-v="B"] .variant-b{ display:block; }
+  .hero h1{
+    font-weight:900; font-size:clamp(2.4rem,7vw,5rem); line-height:1.15; letter-spacing:-.01em; max-width:11em;
+    margin-bottom:1.2rem;
+  }
+  .hero-sub{ font-size:clamp(1rem,1.8vw,1.2rem); color:var(--ice); max-width:30em; margin-bottom:2.2rem; }
+  .hero-foot{ display:flex; flex-wrap:wrap; align-items:center; gap:1.6rem 2.4rem; }
+  .price-from{ display:flex; align-items:baseline; gap:.6rem; }
+  .price-from small{ font-size:.85rem; color:var(--muted); }
+  .price-from strong{ font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:3rem; line-height:1; color:var(--warm); letter-spacing:.02em; }
+  .hero-cta{ padding:1rem 2rem; font-size:1rem; }
+  .hero-note{ margin-top:1.6rem; font-size:.8rem; color:var(--muted); }
+
+  /* PROOF */
+  .proof{ padding:5rem 0 4rem; border-bottom:1px solid var(--line); }
+  .proof-list{ display:grid; grid-template-columns:repeat(3,1fr); gap:2.5rem; margin-top:2.5rem; list-style:none; }
+  .proof-list li{ border-top:2px solid var(--accent); padding-top:1.1rem; }
+  .proof-list b{ display:block; font-weight:700; font-size:1.15rem; margin-bottom:.4rem; }
+  .proof-list span{ color:var(--muted); font-size:.92rem; }
+  @media (max-width:760px){ .proof-list{ grid-template-columns:1fr; gap:1.8rem; } }
+
+  /* PRICE */
+  .price{ padding:5rem 0; }
+  .season-toggle{ display:inline-flex; margin:1.8rem 0 1rem; border:1px solid var(--line); }
+  .season-toggle button{
+    font:inherit; font-size:.9rem; background:none; color:var(--muted); border:0; padding:.6rem 1.4rem; cursor:pointer;
+  }
+  .season-toggle button[aria-pressed="true"]{ background:var(--slate); color:var(--snow); font-weight:500; }
+  .season-dates{ font-size:.85rem; color:var(--muted); margin-bottom:1.4rem; max-width:44em; }
+  .table-scroll{ overflow-x:auto; border:1px solid var(--line); }
+  table{ width:100%; min-width:520px; border-collapse:collapse; font-size:.95rem; }
+  th,td{ padding:1rem 1.1rem; text-align:right; border-bottom:1px solid var(--line); }
+  th:first-child,td:first-child{ text-align:left; }
+  thead th{ font-weight:500; color:var(--ice); font-size:.85rem; background:var(--charcoal); }
+  tbody tr:last-child td{ border-bottom:0; }
+  td .total{ display:block; font-family:'DM Sans',sans-serif; font-weight:400; }
+  td .per{ display:block; font-size:.8rem; color:var(--warm); }
+  td:first-child{ color:var(--ice); }
+  .price-notes{ margin-top:1.2rem; font-size:.85rem; color:var(--muted); list-style:none; }
+  .price-notes li{ padding-left:1em; text-indent:-1em; }
+  .price-notes li::before{ content:"・"; }
+
+  /* REVIEWS */
+  .reviews{ padding:5rem 0; background:var(--charcoal); }
+  .review-group + .review-group{ margin-top:3.5rem; }
+  .review-group h3{ font-weight:700; font-size:1.1rem; margin-bottom:1.2rem; color:var(--ice); }
+  .review-row{
+    display:grid; grid-auto-flow:column; grid-auto-columns:minmax(280px,340px); gap:1rem;
+    overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:1rem;
+  }
+  .review{
+    scroll-snap-align:start; background:var(--slate); padding:1.6rem 1.5rem; border-left:3px solid var(--accent);
+    display:flex; flex-direction:column; justify-content:space-between; gap:1.2rem;
+  }
+  .review p{ font-size:.95rem; }
+  .review footer{ font-size:.8rem; color:var(--muted); }
+  .scroll-hint{ font-size:.8rem; color:var(--muted); margin-top:.4rem; }
+
+  /* FORM */
+  .enquire{ padding:5rem 0 6rem; }
+  form{ margin-top:2.2rem; display:grid; grid-template-columns:1fr 1fr; gap:1.4rem 1.6rem; max-width:760px; }
+  .full{ grid-column:1 / -1; }
+  @media (max-width:640px){ form{ grid-template-columns:1fr; } }
+  label, legend{ display:block; font-size:.88rem; color:var(--ice); margin-bottom:.45rem; }
+  .req{ color:var(--warm); }
+  input[type=text], input[type=number], input[type=date], select, textarea{
+    width:100%; font:inherit; font-size:1rem; color:var(--snow); background:var(--charcoal);
+    border:1px solid var(--line); padding:.75rem .9rem; border-radius:0;
+  }
+  input:focus, select:focus, textarea:focus{ border-color:var(--accent); outline:none; }
+  textarea{ min-height:110px; resize:vertical; }
+  fieldset{ border:0; }
+  .checks{ display:grid; grid-template-columns:1fr 1fr; gap:.7rem; }
+  @media (max-width:640px){ .checks{ grid-template-columns:1fr; } }
+  .check{
+    display:flex; gap:.7rem; align-items:flex-start; padding:.9rem 1rem; background:var(--charcoal);
+    border:1px solid var(--line); cursor:pointer; font-size:.95rem; color:var(--snow); margin:0;
+  }
+  .check input{ margin-top:.35rem; accent-color:var(--accent); width:1rem; height:1rem; flex:none; }
+  .check small{ display:block; color:var(--muted); font-size:.8rem; }
+  .check:has(input:checked){ border-color:var(--accent); background:var(--slate); }
+  .submit-row{ display:flex; flex-wrap:wrap; align-items:center; gap:1rem 1.6rem; }
+  .submit-row .btn{ padding:1rem 2.2rem; font-size:1rem; }
+  .submit-row p{ font-size:.82rem; color:var(--muted); }
+  .form-error{ color:#E8A0A0; font-size:.88rem; display:none; }
+  .form-error.is-on{ display:block; }
+  .confirm{ display:none; max-width:640px; margin-top:2.2rem; padding:2rem; background:var(--slate); border-left:3px solid var(--warm); }
+  .confirm.is-on{ display:block; }
+  .confirm h3{ font-weight:700; font-size:1.3rem; margin-bottom:.6rem; }
+  .confirm p{ color:var(--ice); }
+  .confirm a{ color:var(--accent-bright); }
+
+  footer.site{ border-top:1px solid var(--line); padding:2.5rem 0 3rem; font-size:.82rem; color:var(--muted); }
+  footer.site a{ color:var(--ice); }
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1035447772859173');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1035447772859173&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<script>
+  // 先決定版本，避免畫面閃爍
+  (function(){
+    var v = (new URLSearchParams(location.search).get('v') || '').toLowerCase();
+    window.HPC_VARIANT = v === 'a' ? 'A' : (v === 'b' ? 'B' : 'direct');
+    document.documentElement.setAttribute('data-variant', window.HPC_VARIANT);
+  })();
+</script>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="index.html">HOKKAIDO POWDER <span>CLUB</span></a>
+  <div class="nav-right">
+    <a class="nav-line" href="https://line.me/R/ti/p/@snowi" target="_blank" rel="noopener">LINE 詢問</a>
+    <a class="btn nav-cta" href="#enquire">取得報價</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <svg viewBox="0 0 1200 260" preserveAspectRatio="none" aria-hidden="true">
+    <polygon points="0,260 0,140 180,60 340,150 520,40 700,160 900,70 1080,170 1200,110 1200,260" fill="#16232F"/>
+    <polygon points="0,260 0,180 220,110 400,190 600,90 820,200 1000,120 1200,190 1200,260" fill="#1E2E3D"/>
+    <polygon points="160,72 180,60 200,80 180,68" fill="#F0EEE8" opacity="0.65"/>
+    <polygon points="500,52 520,40 540,60 520,48" fill="#F0EEE8" opacity="0.65"/>
+    <polygon points="880,82 900,70 920,90 900,78" fill="#F0EEE8" opacity="0.65"/>
+  </svg>
+  <div class="wrap">
+    <div class="variant variant-a">
+      <h1>滑雪小白，<br>一天學會 S turn</h1>
+      <p class="hero-sub">Emi 與 William 帶領的中文教練團隊，團體、家庭分組教學。6 歲、7 歲的小朋友都跟得上，大人小孩一起學。</p>
+    </div>
+    <div class="variant variant-b">
+      <h1>你負責揪人，<br>其他交給我們</h1>
+      <p class="hero-sub">機場接送、住宿、中文教練課程，一次安排好。不用自己在雪地開車，也不用找好幾家公司。</p>
+    </div>
+    <div class="hero-foot">
+      <div class="price-from"><small>課程每人</small><strong>¥21,250</strong><small>起</small></div>
+      <a class="btn hero-cta" href="#enquire">填寫需求，取得報價</a>
+    </div>
+    <p class="hero-note">上課地點：旭川、星野 TOMAMU。課程由星野 TOMAMU 官方註冊滑雪學校 Snowi 提供。</p>
+  </div>
+</header>
+
+<section class="proof">
+  <div class="wrap">
+    <h2>客人最常跟我們說的三件事</h2>
+    <ul class="proof-list">
+      <li><b>一天學會 S turn</b><span>從沒滑過的初學者，一天內從落葉飄練到 S turn，是評價裡最常出現的一句話。</span></li>
+      <li><b>小孩跟得上</b><span>4 歲、6 歲、7 歲的小朋友都上過課。教練會依年齡和程度分組，爸媽也能放心去滑。</span></li>
+      <li><b>全程中文</b><span>從穿裝備、搭纜車到每個動作都用中文講解，哪裡做不好會直接指出來。</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="price" id="price">
+  <div class="wrap">
+    <h2>課程價格</h2>
+    <p class="lead">依「一位教練帶幾位學員」和上課時數計價，人越多，每人分攤越少。旭川和星野 TOMAMU 價格相同。</p>
+
+    <div class="season-toggle" role="group" aria-label="選擇季節">
+      <button type="button" data-season="off" aria-pressed="true">平季</button>
+      <button type="button" data-season="peak" aria-pressed="false">旺季</button>
+    </div>
+    <p class="season-dates" id="seasonDates"></p>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th scope="col">教練：學員</th><th scope="col">3 小時</th><th scope="col">4 小時</th><th scope="col">6 小時</th></tr>
+        </thead>
+        <tbody id="priceBody"></tbody>
+      </table>
+    </div>
+    <ul class="price-notes">
+      <li>價格為整組課程費用，括號內為平均每人金額，實際以整組報價收費。</li>
+      <li>不含雪票及裝備。上課時數為實際上課時間，已扣除休息時間。</li>
+      <li>6 小時課程初階、進階通用，進階課程包含公園 Park、粉雪樹林嚮導。</li>
+      <li>5 人以上的團體，請在表單的備註欄註明，我們會依人數安排分組並提供報價。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="wrap">
+    <h2>上過課的客人怎麼說</h2>
+
+    <div class="review-group">
+      <h3>課程</h3>
+      <div class="review-row">
+        <blockquote class="review"><p>「教練對孩子極度有耐心，比我這當媽的還有耐心。6 歲女兒跟著教練很快就上手，教練不只讓我們覺得好玩，還顧著我們這些菜鳥的安全。」</p><footer>蔡小姐，帶 4 歲、6 歲女兒</footer></blockquote>
+        <blockquote class="review"><p>「兩天的教學非常愉快，講解得非常清楚。我們七歲的小孩跟著大人一起學，也可以完全跟上進度。」</p><footer>陳○熹，帶 7 歲小孩</footer></blockquote>
+        <blockquote class="review"><p>「從沒學過滑雪、只會 heel side 的我，一日學會 toe side、C turn，最後連 S turn 都成功，真是太神奇了。」</p><footer>C. Chen</footer></blockquote>
+        <blockquote class="review"><p>「讓我們滑雪小白一天學會 S turn，還挑戰了中級山路線。下次來北海道滑雪一定要再找你！」</p><footer>Y. Li</footer></blockquote>
+        <blockquote class="review"><p>「第一次學滑雪，從基本的裝備穿脫到搭纜車、滑行都講解得非常清楚，讓初學的我在短時間內就學會 S turn。」</p><footer>W. Liao</footer></blockquote>
+        <blockquote class="review"><p>「上了許多次的教練課，這次收穫最多，因為教練非常有耐心，值得推薦。」</p><footer>I. Kao</footer></blockquote>
+      </div>
+      <p class="scroll-hint">左右滑動看更多</p>
+    </div>
+
+    <div class="review-group">
+      <h3>接送、住宿、寄放</h3>
+      <div class="review-row">
+        <blockquote class="review"><p>「以前每次安排北海道滑雪最煩的是從機場到雪場飯店這段，拖著大行李帶著小孩真的快瘋掉，還被計程車以星野太遠拒絕過。司機讓我安靜休息，推薦給帶小孩或行李多的人！」</p><footer>Jessica Kao</footer></blockquote>
+        <blockquote class="review"><p>「安排滑雪旅行最累的不是玩，是每天到底要怎麼從住宿到雪場。這次直接訂他們包住宿加來回接送的方案，還能加教練，我跟老婆去滑、小孩交給教練，超棒的！」</p><footer>查理</footer></blockquote>
+        <blockquote class="review"><p>「第一次來北海道滑雪，不敢自己在雪地開車，每個住宿都好貴、交通還要另外找。這次住宿跟每天到雪場的來回接送都包好，真的省心很多，還可以加價購教練課。」</p><footer>林怡君</footer></blockquote>
+        <blockquote class="review"><p>「以前每次來北海道最煩的就是雪板到底要怎麼處理，搬來搬去真的很累！寄放加打蠟保養輕鬆太多，明年回來又已經幫我開好板了。」</p><footer>醜醜</footer></blockquote>
+        <blockquote class="review"><p>「以前都低估雪板寄放跟保養的重要性，直到有一次回台灣發現板底又乾又刮還毛毛的。我這次直接買了 VIP 會員，除了寄放加保養，還有抵用券跟每年小禮物！」</p><footer>Emily</footer></blockquote>
+        <blockquote class="review"><p>「上了日本教練的課，教得很細、很戳中我的缺點，翻譯教練也很細心又有耐心，專有用詞都能講到讓我一聽就懂。一定會再來參加！」</p><footer>妙妙</footer></blockquote>
+      </div>
+      <p class="scroll-hint">左右滑動看更多</p>
+    </div>
+  </div>
+</section>
+
+<section class="enquire" id="enquire">
+  <div class="wrap">
+    <h2>告訴我們你們的計畫</h2>
+    <p class="lead">填完後我們會在 24 小時內用你留的方式聯絡，提供完整報價。還沒確定日期也可以先填，之後再調整。</p>
+
+    <form id="enquireForm" novalidate>
+      <div>
+        <label for="fName">聯絡人姓名 <span class="req">*</span></label>
+        <input type="text" id="fName" name="name" autocomplete="name" required>
+      </div>
+      <div>
+        <label for="fContact">LINE ID、WhatsApp 或 Email <span class="req">*</span></label>
+        <input type="text" id="fContact" name="contact" required>
+      </div>
+      <div>
+        <label for="fAdults">大人人數 <span class="req">*</span></label>
+        <input type="number" id="fAdults" name="adults" min="1" max="40" value="2" inputmode="numeric" required>
+      </div>
+      <div>
+        <label for="fKids">小孩人數</label>
+        <input type="number" id="fKids" name="kids" min="0" max="40" value="0" inputmode="numeric">
+      </div>
+      <div class="full" id="kidsAgesWrap" hidden>
+        <label for="fKidsAges">小孩年齡</label>
+        <input type="text" id="fKidsAges" name="kids_ages" placeholder="例如：5 歲、8 歲">
+      </div>
+      <div>
+        <label for="fFrom">預計抵達日期</label>
+        <input type="date" id="fFrom" name="date_from">
+      </div>
+      <div>
+        <label for="fTo">預計離開日期</label>
+        <input type="date" id="fTo" name="date_to">
+      </div>
+      <div>
+        <label for="fPlace">想在哪裡上課</label>
+        <select id="fPlace" name="place">
+          <option value="未定">還沒決定</option>
+          <option value="旭川">旭川</option>
+          <option value="星野 TOMAMU">星野 TOMAMU</option>
+        </select>
+      </div>
+      <div>
+        <label for="fLevel">大家的程度</label>
+        <select id="fLevel" name="level">
+          <option value="全部初學">全部都沒滑過</option>
+          <option value="有初學有經驗">有人滑過、有人沒滑過</option>
+          <option value="都有經驗">都有滑過，想進步</option>
+        </select>
+      </div>
+
+      <fieldset class="full">
+        <legend>除了課程，還需要我們安排什麼？（可複選）</legend>
+        <div class="checks">
+          <label class="check"><input type="checkbox" name="addon" value="機場接送"><span>機場接送<small>新千歲機場直達雪場或飯店</small></span></label>
+          <label class="check"><input type="checkbox" name="addon" value="住宿"><span>住宿<small>雪場附近住宿代訂</small></span></label>
+          <label class="check"><input type="checkbox" name="addon" value="觀光追雪包車"><span>觀光、追雪包車<small>美瑛、富良野或其他雪場</small></span></label>
+          <label class="check"><input type="checkbox" name="addon" value="雪具寄放"><span>雪具寄放保養<small>雪板留在北海道，明年直接滑</small></span></label>
+        </div>
+      </fieldset>
+
+      <div class="full">
+        <label for="fNote">其他想讓我們知道的事</label>
+        <textarea id="fNote" name="note" placeholder="5 人以上的團體請在這裡註明。也可以寫：有人會怕高、想在某天去美瑛、預算範圍……"></textarea>
+      </div>
+
+      <div class="full submit-row">
+        <button type="submit" class="btn">送出，取得報價</button>
+        <p>送出不代表預約，確認報價後才需要付款。</p>
+      </div>
+      <p class="form-error full" id="formError" role="alert"></p>
+    </form>
+
+    <div class="confirm" id="confirm" tabindex="-1">
+      <h3>已收到你的需求</h3>
+      <p id="confirmText"></p>
+      <p style="margin-top:.8rem;">想更快收到回覆，也可以直接 <a href="https://line.me/R/ti/p/@snowi" target="_blank" rel="noopener">加 LINE 詢問</a>。</p>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <p>Hokkaido Powder Club｜課程由星野 TOMAMU 官方註冊滑雪學校 Snowi 提供｜<a href="faq.html">常見問題與取消政策</a>｜<a href="index.html">回首頁</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var VARIANT = window.HPC_VARIANT || 'direct';
+  document.body.setAttribute('data-v', VARIANT === 'A' ? 'A' : 'B');
+  if (window.fbq) fbq('trackCustom', 'LandingView', { variant: VARIANT });
+
+  /* ---------- 價格表 ---------- */
+  var PRICES = {
+    off: {
+      dates: '平季：2026/12/01–12/22、2027/01/04–02/02、02/16–02/25、03/03–04/01、04/07 至雪場關閉',
+      rows: [[55000,70000,98000],[65000,80000,108000],[75000,90000,118000],[85000,100000,128000]]
+    },
+    peak: {
+      dates: '旺季：2026/12/23–2027/01/03、2027/02/03–02/15、02/26–03/02、04/02–04/06',
+      rows: [[65000,90000,118000],[75000,100000,128000],[85000,110000,138000],[95000,120000,148000]]
+    }
+  };
+  function yen(n){ return '¥' + n.toLocaleString('ja-JP'); }
+  function renderPrices(season){
+    var d = PRICES[season], html = '';
+    d.rows.forEach(function(row, i){
+      var people = i + 1;
+      html += '<tr><td>1：' + people + '</td>' + row.map(function(total){
+        var per = people > 1 ? '<span class="per">每人 ' + yen(Math.round(total / people)) + '</span>' : '';
+        return '<td><span class="total">' + yen(total) + '</span>' + per + '</td>';
+      }).join('') + '</tr>';
+    });
+    document.getElementById('priceBody').innerHTML = html;
+    document.getElementById('seasonDates').textContent = d.dates;
+    document.querySelectorAll('.season-toggle button').forEach(function(b){
+      b.setAttribute('aria-pressed', b.dataset.season === season ? 'true' : 'false');
+    });
+  }
+  document.querySelectorAll('.season-toggle button').forEach(function(b){
+    b.addEventListener('click', function(){ renderPrices(b.dataset.season); });
+  });
+  renderPrices('off');
+
+  /* ---------- 表單 ---------- */
+  var form = document.getElementById('enquireForm');
+  var kids = document.getElementById('fKids');
+  var kidsWrap = document.getElementById('kidsAgesWrap');
+  kids.addEventListener('input', function(){ kidsWrap.hidden = !(parseInt(kids.value, 10) > 0); });
+
+  function utm(){
+    var p = new URLSearchParams(location.search), out = [];
+    ['utm_source','utm_medium','utm_campaign','utm_content','fbclid'].forEach(function(k){ if (p.get(k)) out.push(k + '=' + p.get(k)); });
+    return out.join('&');
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var err = document.getElementById('formError');
+    var name = document.getElementById('fName').value.trim();
+    var contact = document.getElementById('fContact').value.trim();
+    var adults = parseInt(document.getElementById('fAdults').value, 10) || 0;
+    if (!name || !contact || adults < 1){
+      err.textContent = '請填寫聯絡人姓名、聯絡方式，以及至少 1 位大人。';
+      err.classList.add('is-on');
+      (!name ? document.getElementById('fName') : !contact ? document.getElementById('fContact') : document.getElementById('fAdults')).focus();
+      return;
+    }
+    err.classList.remove('is-on');
+
+    var addons = Array.prototype.map.call(form.querySelectorAll('input[name=addon]:checked'), function(c){ return c.value; });
+    var kidsN = parseInt(kids.value, 10) || 0;
+    var data = {
+      access_key: 'a2a66d84-31b8-4e10-ad64-29181cca53d1',
+      subject: ((adults + kidsN) >= 5 ? '【5人以上】' : '') + '新詢問 - 滑雪課程著陸頁（' + VARIANT + ' 版）' + (addons.length ? '＋' + addons.join('、') : '・只要課程'),
+      from_name: 'Hokkaido Powder Club 網站',
+      版本: VARIANT,
+      姓名: name,
+      聯絡方式: contact,
+      大人: adults,
+      小孩: kidsN,
+      小孩年齡: document.getElementById('fKidsAges').value,
+      抵達: document.getElementById('fFrom').value,
+      離開: document.getElementById('fTo').value,
+      地點: document.getElementById('fPlace').value,
+      程度: document.getElementById('fLevel').value,
+      加購: addons.length ? addons.join('、') : '無（只要課程）',
+      備註: document.getElementById('fNote').value,
+      廣告來源: utm()
+    };
+
+    if (window.fbq) fbq('track', 'Lead', {
+      content_name: 'ski-landing',
+      variant: VARIANT,
+      addons: addons.length ? addons.join(',') : 'none',
+      addon_count: addons.length,
+      group_size: adults + kidsN,
+      has_kids: kidsN > 0 ? 'yes' : 'no'
+    });
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).catch(function(e2){ console.error('送出失敗', e2); });
+
+    form.style.display = 'none';
+    document.getElementById('confirmText').textContent =
+      name + '，我們收到 ' + (adults + kidsN) + ' 位的課程需求' +
+      (addons.length ? '，以及' + addons.join('、') : '') + '。24 小時內會透過「' + contact + '」聯絡你。';
+    var c = document.getElementById('confirm');
+    c.classList.add('is-on');
+    c.focus();
+  });
+})();
+</script>
+</body>
+</html>
