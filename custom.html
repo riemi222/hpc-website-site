@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>自由搭配 | Hokkaido Powder Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     custom.html — 自由搭配（暫時頁）
+     第 7 步會換成完整的選配工具。?lang=en 顯示英文。
+     ============================================================ */
+  :root{
+    --snow:#F0EEE8; --ice:#C8D8E4; --deep:#0B1117; --accent-bright:#7DBDE8;
+    --line:rgba(138,153,168,0.18);
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{ background:#f4f6f9; color:#0d2846; font-family:'DM Sans','Noto Sans TC',sans-serif; min-height:100vh; display:flex; flex-direction:column; }
+  nav{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1.1rem 6vw; background:var(--deep); border-bottom:1px solid var(--line); }
+  .brand{ font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.05em; color:var(--snow); text-decoration:none; white-space:nowrap; }
+  .brand span{ color:var(--accent-bright); }
+  .nav-links{ display:flex; gap:1.1rem; }
+  .nav-links a{ color:var(--ice); font-size:.8rem; letter-spacing:.05em; text-decoration:none; white-space:nowrap; }
+  main{ flex:1; width:100%; max-width:760px; margin:0 auto; padding:3.5rem 16px 4rem; }
+  h1{ font-family:'Noto Sans TC',sans-serif; font-weight:900; font-size:clamp(1.5rem,4vw,2.2rem); line-height:1.35; }
+  .sub{ margin-top:.7rem; color:#4a5a6e; line-height:1.75; }
+  .list{ display:grid; grid-template-columns:1fr 1fr; gap:.8rem; margin-top:2rem; }
+  .list a{ display:block; background:#fff; border:1px solid #dde3ea; border-radius:14px; padding:1.1rem 1rem; color:#0d2846; text-decoration:none; }
+  .list a:hover{ border-color:#1f6fc8; }
+  .list b{ display:block; font-size:1rem; margin-bottom:.25rem; }
+  .list span{ font-size:.85rem; color:#4a5a6e; }
+  .back{ display:inline-block; margin-top:2rem; color:#1f6fc8; font-weight:700; text-decoration:none; }
+  @media (max-width:760px){ nav{ padding:.95rem 4vw; } .brand{ font-size:.92rem; } .nav-links{ gap:.9rem; } .nav-links a{ font-size:.76rem; } }
+</style>
+<script src="js/site-config.js" defer></script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1035447772859173');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1035447772859173&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="brand" id="navHome">HOKKAIDO POWDER <span>CLUB</span></a>
+  <div class="nav-links">
+    <a href="blog.html" id="navBlog">部落格</a>
+    <a href="faq.html" id="navFaq">FAQ</a>
+    <a href="en.html" id="navLang">EN</a>
+  </div>
+</nav>
+
+<main>
+  <h1 id="title">自由搭配選配工具即將推出</h1>
+  <p class="sub" id="sub">在那之前，可以先看各項服務的介紹與價格：</p>
+  <div class="list">
+    <a href="transfer.html" data-en-href="transfer-en.html"><b data-en="Airport transfer">機場接送</b><span data-en-html="From <span data-cfg='from.transfer'>¥80,000</span> one way">單程 <span data-cfg="from.transfer">¥80,000</span> 起</span></a>
+    <a href="ski-trip.html" data-en-href="ski-trip-en.html"><b data-en="Lodging">住宿</b><span data-en-html="From <span data-cfg='from.lodging'>¥11,000</span> per person per night">每晚 <span data-cfg="from.lodging">¥11,000</span> 起／人</span></a>
+    <a href="storage.html" data-en-href="storage-en.html"><b data-en="Gear storage">倉儲</b><span data-en-html="From <span data-cfg='from.storage'>¥16,000</span> a year">一年 <span data-cfg="from.storage">¥16,000</span> 起</span></a>
+    <a href="training.html" data-en-href="training-en.html"><b data-en="Ski lessons">滑雪課程</b><span data-en-html="From <span data-cfg='from.lesson'>¥98,000</span> for a 6-hour day">一天 6 小時 <span data-cfg="from.lesson">¥98,000</span> 起</span></a>
+  </div>
+  <a class="back" href="index.html" id="back">← 回首頁</a>
+</main>
+
+<script>
+// ?lang=en → 換成英文（要在 site-config.js 填價格之前跑完，所以不用 defer）
+(function () {
+  if (new URLSearchParams(location.search).get('lang') !== 'en') return;
+  document.documentElement.lang = 'en';
+  document.title = 'Build your own trip | Hokkaido Powder Club';
+  var set = function (id, text, href) { var el = document.getElementById(id); if (text) el.textContent = text; if (href) el.href = href; };
+  set('navHome', null, 'en.html');
+  set('navBlog', 'Blog', 'blog-en.html');
+  set('navFaq', null, 'faq-en.html');
+  set('navLang', '中文', 'custom.html');
+  set('title', 'Our trip builder is coming soon');
+  set('sub', 'In the meantime, see each service and its prices:');
+  set('back', '← Back to home', 'en.html');
+  document.querySelectorAll('[data-en-href]').forEach(function (a) { a.href = a.getAttribute('data-en-href'); });
+  document.querySelectorAll('[data-en]').forEach(function (el) { el.textContent = el.getAttribute('data-en'); });
+  document.querySelectorAll('[data-en-html]').forEach(function (el) { el.innerHTML = el.getAttribute('data-en-html'); });
+})();
+</script>
+</body>
+</html>

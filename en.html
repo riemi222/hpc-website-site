@@ -7,14 +7,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
   /* ============================================================
-     en.html — English homepage (translation of index.html)
-     Same structure, same design tokens, same quiz logic — only the
-     visible text is translated. CTAs point to the -en.html version
-     of each subpage (transfer-en.html / ski-trip-en.html /
-     storage-en.html / training-en.html / package-a-en.html /
-     combo-b-en.html / combo-c-en.html / group-en.html / faq-en.html
-     / blog-en.html). Keep this file's content in sync with
-     index.html whenever the Chinese site changes.
+     en.html — English homepage (step 1 redesign)
+     Same layout as index.html: nav (Blog | FAQ | 中文) → headline + three-way
+     chooser → reviews → trust (about, policies) → footer.
+     Prices and deadline come from js/site-config.js.
      ============================================================ */
   :root {
     --snow: #F0EEE8;
@@ -44,136 +40,77 @@
   }
   .section-desc{ font-family:'Noto Sans TC', sans-serif; color:var(--muted); max-width:560px; font-size:0.98rem; line-height:1.85; }
 
-  /* NAV */
-  nav{
-    position:sticky; top:0; left:0; right:0; z-index:100;
-    display:flex; align-items:center; justify-content:space-between;
-    padding: 1.2rem 6vw;
-    background: rgba(11,17,23,0.85);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--line);
-  }
-  .brand{ font-family:'Bebas Neue', sans-serif; font-size:1.1rem; letter-spacing:0.05em; color:var(--snow); }
-  .brand span{ color: var(--accent-bright); }
-  .nav-right{ display:flex; align-items:center; gap:.8rem; position:relative; }
-  .nav-links{ display:flex; gap:0.9rem; align-items:center; }
-  .nav-links a{ color:var(--ice); font-size:.78rem; letter-spacing:.05em; text-decoration:none; opacity:.85; transition:opacity .2s; }
-  .nav-links a:hover{ opacity:1; }
-  .nav-cta{
-    font-family:'DM Sans', sans-serif; font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase;
-    color: var(--deep); background: var(--accent); padding:0.6rem 1.3rem; text-decoration:none;
-    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
-  }
-  .nav-hamburger{
-    display:none; background:none; border:1px solid var(--line); border-radius:8px;
-    width:34px; height:34px; align-items:center; justify-content:center;
-    color:var(--snow); font-size:18px; line-height:1; cursor:pointer; padding:0;
-  }
-  @media (max-width:760px){
-    nav{ padding: 1rem 4vw; }
-    .brand{ font-size:.9rem; }
-    .nav-hamburger{ display:flex; }
-    .nav-cta{ padding:.5rem .9rem; font-size:.66rem; }
-    .nav-links{
-      position:absolute; top:calc(100% + 10px); right:0;
-      flex-direction:column; align-items:stretch; gap:0;
-      background:var(--charcoal); border:1px solid var(--line); border-radius:12px;
-      min-width:170px; padding:6px; display:none;
-      box-shadow:0 10px 30px rgba(0,0,0,0.4);
-    }
-    .nav-links.is-open{ display:flex; }
-    .nav-links a{ padding:11px 12px; opacity:1; border-radius:8px; }
-    .nav-links a:hover{ background:rgba(125,189,232,0.1); }
-    .nav-links a.nav-line{ padding-left:12px; }
+  /* ===== 第一屏：標題 + 三選一 ===== */
+  .choose{ background:#f4f6f9; color:#0d2846; padding:3.2rem 6vw 4.2rem; font-family:'Noto Sans TC', sans-serif; }
+  .choose__head{ max-width:1180px; margin:0 auto 2rem; }
+  .choose__title{ font-weight:900; font-size:clamp(1.75rem, 3.6vw, 2.7rem); line-height:1.3; color:#0d2846; }
+  .choose__sub{ margin-top:.7rem; font-size:1rem; line-height:1.75; color:#4a5a6e; max-width:640px; }
+  .choose__grid{ max-width:1180px; margin:0 auto; display:grid; grid-template-columns:45fr 55fr; gap:1.5rem; align-items:stretch; }
+  .choose__right{ display:flex; flex-direction:column; gap:1rem; grid-column:2; grid-row:1; }
+  .choose__left{ grid-column:1; grid-row:1; display:flex; }
+  @media (max-width:899px){
+    .choose{ padding:2rem 16px 3rem; }
+    .choose__head{ margin-bottom:1.3rem; }
+    .choose__sub{ font-size:.92rem; }
+    .choose__grid{ grid-template-columns:1fr; gap:1rem; }
+    .choose__right, .choose__left{ grid-column:auto; grid-row:auto; }
   }
 
-  /* KITS */
-  .kits-section{ padding:5rem 6vw 6rem; }
-  .kits-section .section-title{ max-width:820px; }
-  .kits-brand{ font-family:'Bebas Neue', sans-serif; font-size:1.6rem; letter-spacing:0.06em; color:var(--snow); margin-bottom:.8rem; }
-  .kits-brand span{ color:var(--accent-bright); }
+  /* 全包卡 */
+  .camp{ position:relative; background:#0d2846; color:#fff; border-radius:20px; padding:2.2rem 2.2rem 2rem; box-shadow:0 18px 40px rgba(13,40,70,.28); }
+  .camp__tag{ position:absolute; top:1.2rem; right:1.2rem; background:#e8662c; color:#fff; font-size:.78rem; font-weight:700; padding:.32rem .8rem; border-radius:999px; letter-spacing:.04em; }
+  .camp__kicker{ font-size:.88rem; color:#b9c8dc; letter-spacing:.04em; padding-right:10rem; }
+  .camp__title{ font-weight:900; font-size:clamp(1.55rem, 2.6vw, 2.05rem); line-height:1.35; margin:.45rem 0 1.1rem; }
+  .camp__title .nw{ white-space:nowrap; }
+  .camp__price{ display:flex; flex-wrap:wrap; align-items:baseline; gap:.2rem .7rem; }
+  .camp__amount{ font-family:'DM Sans', sans-serif; font-weight:500; font-size:clamp(2.5rem, 5vw, 3.3rem); line-height:1; color:#ffd166; letter-spacing:-.01em; }
+  .camp__per{ font-size:1rem; color:#ffd166; font-weight:700; }
+  .camp__early{ font-size:.85rem; color:#dbe4ef; }
+  .camp__value{ margin-top:.45rem; font-size:.9rem; color:#8fa3bd; text-decoration:line-through; }
+  .camp__list{ list-style:none; margin:1.4rem 0 1.3rem; display:grid; gap:.55rem; }
+  .camp__list li{ position:relative; padding-left:1.7rem; font-size:.97rem; line-height:1.55; }
+  .camp__list li::before{ content:''; position:absolute; left:0; top:.2em; width:1.1rem; height:1.1rem; border-radius:50%; background:rgba(255,209,102,.16) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.4l2.6 2.5L12 5.5' fill='none' stroke='%23ffd166' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/80% no-repeat; }
+  .camp__badge{ display:inline-block; border:1.5px solid #ffd166; color:#ffd166; border-radius:10px; padding:.5rem .9rem; font-size:.92rem; font-weight:700; line-height:1.4; }
+  .camp__btn{ display:block; margin-top:1.4rem; background:#e8662c; color:#fff; text-align:center; text-decoration:none; font-weight:700; font-size:1.05rem; padding:1.05rem 1rem; border-radius:12px; transition:background .2s, transform .2s; }
+  .camp__btn:hover{ background:#d4561f; transform:translateY(-1px); }
+  .camp__btn:focus-visible, .lite a:focus-visible, .free__btn:focus-visible{ outline:3px solid #2f7fd8; outline-offset:3px; }
+  @media (max-width:899px){
+    .camp{ padding:1.6rem 1.25rem 1.4rem; }
+    .camp__tag{ top:1rem; right:1rem; }
+    .camp__list li{ font-size:.92rem; }
+  }
 
-  .hero-cover{
-    position: relative;
-    min-height: 52vh;
-    display: flex;
-    align-items: flex-end;
-    padding: 0 6vw 3rem;
-    overflow: hidden;
-    background: linear-gradient(160deg, #1a2f42 0%, #10202e 55%, var(--deep) 100%);
-  }
-  .hero-cover__mountains{
-    position: absolute; left:0; right:0; bottom:0; width:100%; height:55%;
-    display:block;
-  }
-  .hero-cover__content{ position:relative; z-index:2; max-width:820px; }
-  .hero-cover__services{ font-size:.85rem; color:var(--ice); line-height:1.9; letter-spacing:.03em; margin-bottom:1.2rem; }
-  @media (max-width:700px){ .hero-cover{ min-height:42vh; } }
-  .kit-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1.5px; background:var(--line); border:1px solid var(--line); margin-top:3rem; }
-  @media (max-width:1000px){ .kit-grid{ grid-template-columns:repeat(2,1fr);} }
-  @media (max-width:600px){ .kit-grid{ grid-template-columns:1fr;} }
-  .kit-card{ background:var(--charcoal); padding:2.2rem 1.8rem; display:flex; flex-direction:column; transition:background .25s; }
-  .kit-card:hover{ background:var(--slate); }
-  .kit-card.featured{ background:linear-gradient(160deg, var(--slate), #1a2a38); }
-  .kit-num{ font-family:'Bebas Neue', sans-serif; font-size:2.2rem; color:rgba(200,216,228,0.18); line-height:1; margin-bottom:.7rem; }
-  .kit-tag{ font-size:.65rem; letter-spacing:.15em; text-transform:uppercase; color:var(--warm); margin-bottom:.8rem; }
-  .kit-card.featured .kit-tag{ color:var(--accent-bright); }
-  .kit-name{ font-family:'Noto Sans TC', sans-serif; font-weight:700; font-size:1.2rem; color:var(--snow); margin-bottom:.4rem; }
-  .kit-outcome{ font-family:'Noto Sans TC', sans-serif; font-size:.82rem; color:var(--rose); margin-bottom:1.2rem; line-height:1.6; }
-  .kit-list{ list-style:none; font-family:'Noto Sans TC', sans-serif; font-size:.82rem; color:var(--ice); flex-grow:1; margin-bottom:1.4rem; }
-  .kit-list li{ padding:.35rem 0 .35rem 1rem; position:relative; line-height:1.5; }
-  .kit-list li::before{ content:'—'; position:absolute; left:0; color:var(--muted); }
-  .kit-price-row{ border-top:1px solid var(--line); padding-top:1rem; margin-bottom:1rem; }
-  .kit-price{ font-family:'Bebas Neue', sans-serif; font-size:1.7rem; color:var(--snow); }
-  .kit-price small{ font-family:'Noto Sans TC', sans-serif; font-size:.7rem; font-weight:300; color:var(--muted); margin-left:4px; }
-  .kit-cta{ display:block; text-align:center; font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; color:var(--deep); background:var(--accent); font-weight:500; padding:.75rem; text-decoration:none; transition:.2s; }
-  .kit-cta:hover{ background:var(--accent-bright); }
+  /* 精簡版小卡 */
+  .lite{ background:#fff; border:1px solid #dde3ea; border-radius:16px; padding:1.1rem 1.3rem; color:#0d2846; }
+  .lite__kicker{ font-size:.8rem; color:#7a8798; }
+  .lite__title{ font-weight:700; font-size:1.05rem; margin:.15rem 0 .35rem; }
+  .lite__text{ font-size:.88rem; line-height:1.65; color:#33445a; }
+  .lite__note{ font-size:.78rem; color:#7a8798; margin-top:.2rem; }
+  .lite__link{ display:inline-block; margin-top:.5rem; font-size:.9rem; font-weight:700; color:#1f6fc8; text-decoration:none; }
+  .lite__link:hover{ text-decoration:underline; }
 
-  /* QUIZ */
-  .quiz-section{ padding:6rem 6vw 7rem; background:var(--charcoal); }
-  .quiz-card{
-    max-width:480px; margin:3rem auto 0; background:var(--slate); border:1px solid var(--line);
-    border-radius:4px; padding:2rem 1.8rem;
+  /* 自由搭配卡 */
+  .free{ flex:1; display:flex; flex-direction:column; background:#fff; border:1px solid #dde3ea; border-radius:20px; padding:1.9rem 1.8rem; color:#0d2846; }
+
+  .free__tag{ display:inline-block; background:#e5f0fb; color:#1f6fc8; font-size:.78rem; font-weight:700; padding:.3rem .75rem; border-radius:999px; }
+  .free__title{ font-weight:900; font-size:1.6rem; margin:.7rem 0 .4rem; }
+  .free__text{ font-size:.93rem; line-height:1.75; color:#4a5a6e; }
+  .minis{ flex:1; display:grid; grid-template-columns:1fr 1fr; gap:.75rem; margin:1.3rem 0 1.4rem; }
+  .mini{ justify-content:center; }
+  .mini{ display:flex; flex-direction:column; gap:.2rem; background:#f7f9fc; border:1px solid #e3e8ef; border-radius:14px; padding:1rem .95rem; color:#0d2846; min-width:0; }
+  .mini svg{ width:28px; height:28px; color:#1f6fc8; margin-bottom:.35rem; }
+  .mini__name{ font-weight:700; font-size:.95rem; }
+  .mini__price{ font-size:.8rem; color:#4a5a6e; line-height:1.5; }
+  .mini__price b{ color:#0d2846; font-weight:700; }
+  .free__btn{ display:block; text-align:center; border:2px solid #1f6fc8; color:#1f6fc8; font-weight:700; font-size:1rem; padding:.9rem 1rem; border-radius:12px; text-decoration:none; transition:background .2s, color .2s; }
+  .free__btn:hover{ background:#1f6fc8; color:#fff; }
+  @media (max-width:899px){
+    .free{ padding:1.5rem 1.2rem; }
+    .free__title{ font-size:1.4rem; }
+    .mini{ padding:.85rem .75rem; }
+    .mini__name{ font-size:.9rem; }
+    .mini__price{ font-size:.76rem; }
   }
-  .quiz-progress-row{ display:flex; align-items:center; justify-content:space-between; margin-bottom:1.4rem; }
-  .quiz-step-label{ font-family:'Bebas Neue', sans-serif; font-size:.85rem; letter-spacing:.08em; color:var(--muted); }
-  .quiz-progress-track{ flex:1; height:3px; background:var(--line); margin-left:1rem; overflow:hidden; }
-  .quiz-progress-fill{ height:100%; width:0%; background:var(--accent-bright); transition:width .35s ease, background .35s ease; }
-  .quiz-progress-fill.is-done{ background:var(--warm); }
-  .quiz-question{ font-family:'Noto Sans TC', sans-serif; font-size:1.05rem; font-weight:700; color:var(--snow); line-height:1.5; margin-bottom:1.2rem; }
-  .quiz-options{ display:flex; flex-direction:column; gap:.6rem; }
-  .quiz-option{
-    all:unset; cursor:pointer; display:block; background:var(--charcoal); border:1px solid var(--line);
-    padding:.9rem 1rem; font-family:'Noto Sans TC', sans-serif; font-size:.88rem; line-height:1.5; color:var(--ice);
-    transition:border-color .2s, background .2s;
-  }
-  .quiz-option:hover{ border-color:var(--accent-bright); }
-  .quiz-option:focus-visible{ outline:2px solid var(--accent-bright); outline-offset:2px; }
-  .quiz-option.is-selected{ border-color:var(--warm); background:rgba(212,169,106,0.12); }
-  .quiz-back{ all:unset; cursor:pointer; display:inline-block; margin-top:1rem; font-size:.75rem; color:var(--muted); }
-  .quiz-back:hover{ color:var(--accent-bright); }
-  .quiz-back[hidden]{ display:none; }
-  .quiz-result{ display:none; }
-  .quiz-result.is-active{ display:block; }
-  .quiz-badge{
-    width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg, var(--warm), #b9884c);
-    display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue', sans-serif;
-    font-size:1.3rem; color:var(--deep); margin:0 auto 1rem;
-  }
-  .quiz-recap{ text-align:center; font-size:.75rem; color:var(--muted); margin-bottom:.3rem; font-family:'Noto Sans TC', sans-serif; }
-  .quiz-pkg-name{ text-align:center; font-family:'Noto Sans TC', sans-serif; font-weight:900; font-size:1.35rem; color:var(--snow); margin-bottom:.5rem; }
-  .quiz-pkg-tagline{ text-align:center; font-size:.85rem; color:var(--accent-bright); margin-bottom:1.2rem; font-family:'Noto Sans TC', sans-serif; }
-  .quiz-pkg-solves{ background:var(--charcoal); border:1px solid var(--line); padding:1rem 1.1rem; font-family:'Noto Sans TC', sans-serif; font-size:.88rem; color:var(--ice); line-height:1.7; margin-bottom:1.4rem; }
-  .quiz-cta{
-    all:unset; cursor:pointer; display:block; text-align:center; width:100%; background:var(--accent);
-    color:var(--deep); font-weight:500; font-size:.92rem; padding:1rem; font-family:'DM Sans',sans-serif;
-    letter-spacing:.03em; transition:background .2s;
-  }
-  .quiz-cta:hover{ background:var(--accent-bright); }
-  .quiz-cta:focus-visible{ outline:2px solid var(--accent-bright); outline-offset:2px; }
-  .quiz-restart{ all:unset; cursor:pointer; display:block; text-align:center; width:100%; margin-top:.8rem; font-size:.72rem; color:var(--muted); font-family:'Noto Sans TC', sans-serif; }
-  .quiz-restart:hover{ color:var(--accent-bright); }
-  @media (prefers-reduced-motion: reduce){ .quiz-progress-fill, .quiz-option, .quiz-cta, .quiz-restart{ transition:none; } }
 
   /* PROOF */
   .proof{ padding:6rem 6vw; }
@@ -213,6 +150,8 @@
   footer{ text-align:center; padding:2.5rem; font-size:.75rem; color:var(--muted); font-family:'DM Sans', sans-serif; letter-spacing:.05em; border-top:1px solid var(--line); }
   footer a{ color:var(--accent-bright); }
 </style>
+<link rel="stylesheet" href="css/site-shell.css">
+<script src="js/site-config.js" defer></script>
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -233,148 +172,88 @@ src="https://www.facebook.com/tr?id=1035447772859173&ev=PageView&noscript=1"
 </head>
 <body>
 
-<nav>
-  <a href="en.html" class="brand" style="text-decoration:none;">HOKKAIDO POWDER <span>CLUB</span></a>
-  <div class="nav-right">
-    <div class="nav-links" id="navLinks">
-      <a href="blog-en.html">Blog</a>
-      <a href="faq-en.html">FAQ</a>
-      <a href="index.html" class="nav-lang">中文</a>
-      <a class="nav-line" href="https://line.me/R/ti/p/@snowi" target="_blank" rel="noopener" aria-label="Add us on LINE" style="display:flex;align-items:center;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2C6.48 2 2 5.69 2 10.24c0 4.08 3.54 7.5 8.32 8.15.32.07.76.21.87.49.1.25.06.65.03.9l-.14.86c-.04.25-.2.99.86.54 1.06-.45 5.73-3.37 7.82-5.77C21.24 13.63 22 12.03 22 10.24 22 5.69 17.52 2 12 2z" fill="#06C755"/>
-          <path d="M18.36 11.4h-1.34v1.9c0 .1-.08.18-.18.18h-.3c-.06 0-.11-.02-.15-.07l-1.44-1.95v1.85c0 .1-.08.19-.18.19h-.3c-.1 0-.18-.08-.18-.19V9.32c0-.1.08-.18.18-.18h.3c.06 0 .11.03.14.07l1.44 1.95V9.32c0-.1.08-.18.18-.18h.3c.1 0 .18.08.18.18v2.08zm-4.34 0c0 .1-.08.19-.18.19h-.3c-.1 0-.18-.08-.18-.19V9.32c0-.1.08-.18.18-.18h.3c.1 0 .18.08.18.18v2.08zm-1.11.02c0 .1-.08.18-.18.18H10.6c-.1 0-.18-.08-.18-.18v-.3c0-.1.08-.18.18-.18h1.75V9.32c0-.1.08-.18.18-.18h.3c.1 0 .18.08.18.18v2.1zm-2.35 0c0 .1-.08.18-.18.18H8.03c-.1 0-.18-.08-.18-.18V9.32c0-.1.08-.18.18-.18h.3c.1 0 .18.08.18.18v1.72h1.05c.1 0 .18.08.18.18v.2z" fill="#fff"/>
-        </svg>
-      </a>
-    </div>
-    <button type="button" class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">☰</button>
-    <a class="nav-cta" href="#kits">Book Now</a>
+<nav class="site-nav">
+  <a href="en.html" class="site-nav__brand">HOKKAIDO POWDER <span>CLUB</span></a>
+  <div class="site-nav__links">
+    <a href="blog-en.html">Blog</a>
+    <a href="faq-en.html">FAQ</a>
+    <a href="index.html" class="cjk">中文</a>
   </div>
 </nav>
-<script>
-(function () {
-  var btn = document.getElementById('navHamburger');
-  var menu = document.getElementById('navLinks');
-  if (!btn || !menu) return;
-  btn.addEventListener('click', function (e) {
-    e.stopPropagation();
-    var isOpen = menu.classList.toggle('is-open');
-    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-  document.addEventListener('click', function (e) {
-    if (!menu.contains(e.target) && !btn.contains(e.target)) {
-      menu.classList.remove('is-open');
-      btn.setAttribute('aria-expanded', 'false');
-    }
-  });
-})();
-</script>
 
-<section class="hero-cover">
-  <svg class="hero-cover__mountains" viewBox="0 0 1200 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="0,260 0,140 180,60 340,150 520,40 700,160 900,70 1080,170 1200,110 1200,260" fill="#16232F"/>
-    <polygon points="0,260 0,180 220,110 400,190 600,90 820,200 1000,120 1200,190 1200,260" fill="#1E2E3D"/>
-    <polygon points="160,72 180,60 200,80 180,68" fill="#F0EEE8" opacity="0.65"/>
-    <polygon points="500,52 520,40 540,60 520,48" fill="#F0EEE8" opacity="0.65"/>
-    <polygon points="880,82 900,70 920,90 900,78" fill="#F0EEE8" opacity="0.65"/>
-  </svg>
-  <div class="hero-cover__content">
-    <div class="kits-brand">HOKKAIDO POWDER <span>CLUB</span></div>
-    <p class="hero-cover__services">Airport Transfer<br>Ski Trip Charter<br>Licensed Ski Lessons<br>Gear Storage &amp; Tune-Up</p>
-    <h1 class="section-title">Just fly to Hokkaido.<br>We'll handle the rest.</h1>
+<!-- 第一屏：標題 + 三選一（價格從 js/site-config.js 讀） -->
+<section class="choose" id="choose" aria-label="Choose: guaranteed camp, lite version or build your own">
+  <div class="choose__head">
+    <h1 class="choose__title">How do you want to ski Hokkaido?</h1>
+    <p class="choose__sub">First time on snow? Go all-inclusive — it's the easiest. Experienced and like planning your own trip? Build it yourself.</p>
   </div>
-</section>
 
-<section class="kits-section" id="kits">
-  <div class="section-label">THE OFFERS</div>
+  <div class="choose__grid">
+    <!-- 右欄（手機排第一）：全包卡 + 精簡版小卡 -->
+    <div class="choose__right">
+      <article class="camp">
+        <span class="camp__tag">Best for beginners</span>
+        <div class="camp__kicker">Asahikawa · 5 days 4 nights · all-inclusive</div>
+        <h2 class="camp__title">Zero-to-Turns <span class="nw">Guaranteed Camp</span></h2>
+        <div class="camp__price">
+          <span><span class="camp__amount" data-cfg="camp.earlyBird">¥268,000</span><span class="camp__per"> per person</span></span>
+          <span class="camp__early">Early bird · ends <span data-cfg="camp.earlyBirdDeadline" data-cfg-format="date-en">Nov 20</span></span>
+        </div>
+        <div class="camp__value">Total value <span data-cfg="camp.totalValue">¥475,400</span></div>
+        <ul class="camp__list">
+          <li>New Chitose Airport ⇄ Asahikawa private return transfers</li>
+          <li>4 nights' lodging</li>
+          <li>3 lesson days (max 1:3)</li>
+          <li>Lift pass + full gear and ski wear rental</li>
+          <li>Daily slope shuttle</li>
+        </ul>
+        <div class="camp__badge">Can't link turns? Retake free next season</div>
+        <a class="camp__btn" href="camp.html?lang=en">See dates &amp; seats left →</a>
+      </article>
 
-  <div class="kit-grid">
-    <div class="kit-card">
-      <div class="kit-num">01</div>
-      <div class="kit-tag">First Arrival</div>
-      <div class="kit-name">Airport Transfer<br>Hokkaido Sightseeing Charter</div>
-      <div class="kit-outcome">No more dragging luggage through transit.</div>
-      <ul class="kit-list">
-        <li>New Chitose Airport ↔ ski resort / designated hotel, direct door-to-door</li>
-        <li>Hokkaido sightseeing charter, flexible itinerary and duration</li>
-        <li>Vehicle sized to your group and luggage — your ski gear travels safely too</li>
-      </ul>
-      <div class="kit-price-row"><span class="kit-price">¥50,000<small>from／trip</small></span></div>
-      <a class="kit-cta" href="transfer-en.html">View Details →</a>
+      <aside class="lite">
+        <div class="lite__kicker">Sorting your own transport?</div>
+        <h3 class="lite__title">Lite version · 5 days 4 nights</h3>
+        <p class="lite__text">Lessons + lodging + lift pass + gear and ski wear + slope shuttle · <span data-cfg="lite.price">¥248,000</span> per person</p>
+        <p class="lite__note">Airport transfers and bonuses not included</p>
+        <a class="lite__link" href="camp-lite.html?lang=en">See the lite version →</a>
+      </aside>
     </div>
 
-    <div class="kit-card featured">
-      <div class="kit-num">02</div>
-      <div class="kit-tag">Signature Trip</div>
-      <div class="kit-name">Asahikawa Powder Trip<br>Lodging + Transport, All In One</div>
-      <div class="kit-outcome">No lodging or transport to plan — we take you to the best snow every day.</div>
-      <ul class="kit-list">
-        <li>Flexible daily resort picks around Asahikawa based on conditions — actually chase the powder</li>
-        <li>Choice of our own upscale or budget lodging, with daily round-trip resort transfers</li>
-        <li>Add a guide or ski lessons — great for powder-chasing experts and cautious beginners alike</li>
-      </ul>
-      <div class="kit-price-row"><span class="kit-price">¥10,000<small>from／night</small></span></div>
-      <a class="kit-cta" href="ski-trip-en.html">View Details →</a>
-    </div>
-
-    <div class="kit-card">
-      <div class="kit-num">03</div>
-      <div class="kit-tag">Season Pass</div>
-      <div class="kit-name">Gear Storage<br>Professional Wax &amp; Tune</div>
-      <div class="kit-outcome">Never lug your gear around again.</div>
-      <ul class="kit-list">
-        <li>BASIC: climate-controlled, dehumidified storage — your board and gear kept safe</li>
-        <li>PLUS: includes board sealing/opening service and professional waxing</li>
-        <li>VIP: everything in PLUS, plus an airport transfer voucher and a course/camp voucher</li>
-      </ul>
-      <div class="kit-price-row"><span class="kit-price">¥16,000<small>from／year</small></span></div>
-      <a class="kit-cta" href="storage-en.html">View Details →</a>
-    </div>
-
-    <div class="kit-card">
-      <div class="kit-num">04</div>
-      <div class="kit-tag">Skill Up</div>
-      <div class="kit-name">Ski &amp; Snowboard Lessons<br>Advanced Training Camp</div>
-      <div class="kit-outcome">From kids to advanced riders, there's a path forward for every level.</div>
-      <ul class="kit-list">
-        <li>Kids, beginners &amp; intermediates: taught by internationally certified &amp; children's ski instructors</li>
-        <li>Advanced riders: hands-on technical coaching from a former Team Japan Olympic athlete</li>
-        <li>Advanced camps come with an accompanying Chinese-speaking translator coach for full clarity</li>
-      </ul>
-      <div class="kit-price-row"><span class="kit-price">¥55,000<small>from／group</small></span></div>
-      <a class="kit-cta" href="training-en.html">View Details →</a>
+    <!-- 左欄（手機排最後）：自由搭配 -->
+    <div class="choose__left">
+      <article class="free">
+        <span class="free__tag">Experienced · plan it yourself</span>
+        <h2 class="free__title">Build your own trip</h2>
+        <p class="free__text">Airport transfers, slope shuttles, sightseeing charters, lodging, lessons and gear storage — pick only what you need.</p>
+        <div class="minis">
+          <div class="mini">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l2-5.5A2 2 0 0 1 6.9 6h10.2a2 2 0 0 1 1.9 1.5L21 13"/><rect x="2.5" y="13" width="19" height="5" rx="1.5"/><path d="M5.5 18v2M18.5 18v2"/><circle cx="7" cy="15.5" r=".6" fill="currentColor"/><circle cx="17" cy="15.5" r=".6" fill="currentColor"/></svg>
+            <span class="mini__name">Airport transfer</span>
+            <span class="mini__price">From <b data-cfg="from.transfer">¥80,000</b> one way</span>
+          </div>
+          <div class="mini">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19V6M3 15h18v4M21 15v-3a3 3 0 0 0-3-3h-7v6"/><circle cx="7" cy="11.5" r="2"/></svg>
+            <span class="mini__name">Lodging</span>
+            <span class="mini__price">From <b data-cfg="from.lodging">¥11,000</b> per person per night</span>
+          </div>
+          <div class="mini">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-5 9 5v11H3z"/><path d="M7 20v-7h10v7M7 16.5h10"/></svg>
+            <span class="mini__name">Gear storage</span>
+            <span class="mini__price">From <b data-cfg="from.storage">¥16,000</b> a year</span>
+          </div>
+          <div class="mini">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="14" cy="4.5" r="1.8"/><path d="M8 10l4-2 3 3-2.5 3 3 3.5M12 8l-1 4.5"/><path d="M3 18.5l18-4"/></svg>
+            <span class="mini__name">Ski lessons</span>
+            <span class="mini__price">From <b data-cfg="from.lesson">¥98,000</b> for a 6-hour day</span>
+          </div>
+        </div>
+        <a class="free__btn" href="custom.html?lang=en">Start building →</a>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="quiz-section" id="quiz">
-  <div class="section-label">30-SECOND MATCH</div>
-  <h2 class="section-title">Not sure which one? Answer 4 questions and we'll match you</h2>
-  <p class="section-desc">Skip the research — let us match you to the combo that fits.</p>
-
-  <div class="quiz-card">
-    <div class="quiz-progress-row">
-      <span class="quiz-step-label" id="quizStepLabel" aria-live="polite">Q1 / 4</span>
-      <div class="quiz-progress-track"><div class="quiz-progress-fill" id="quizProgress"></div></div>
-    </div>
-
-    <div id="quizQuestionView">
-      <p class="quiz-question" id="quizQuestionText"></p>
-      <div class="quiz-options" id="quizOptions" role="group"></div>
-      <button type="button" class="quiz-back" id="quizBack" hidden>← Previous</button>
-    </div>
-
-    <div class="quiz-result" id="quizResultView">
-      <div class="quiz-badge" id="quizBadge"></div>
-      <p class="quiz-recap" id="quizRecap"></p>
-      <p class="quiz-pkg-name" id="quizPkgName"></p>
-      <p class="quiz-pkg-tagline" id="quizPkgTagline"></p>
-      <p class="quiz-pkg-solves" id="quizPkgSolves"></p>
-      <button type="button" class="quiz-cta" id="quizCta"></button>
-      <button type="button" class="quiz-restart" id="quizRestart">Take it again</button>
-    </div>
-  </div>
-</section>
 
 <section class="proof">
   <div class="section-label">SOCIAL PROOF</div>
@@ -472,124 +351,8 @@ src="https://www.facebook.com/tr?id=1035447772859173&ev=PageView&noscript=1"
   </div>
 </section>
 
-<footer>Hokkaido Powder Club｜Asahikawa, Hokkaido｜Sister brand <a href="https://www.snowisnow.com" target="_blank">Snowi Ski School</a></footer>
+<footer class="site-footer">Hokkaido Powder Club｜Asahikawa, Hokkaido｜Sister brand <a href="https://www.snowisnow.com" target="_blank">Snowi Ski School</a></footer>
 
-<script>
-(function () {
-  var QUESTIONS = [
-    {
-      id: 'exp', text: 'About how much skiing/riding experience do you have?', decisive: false,
-      options: [
-        { value: 'beginner', label: "Complete beginner, never been or only 1–2 times", personalize: 'Just starting out' },
-        { value: 'intermediate', label: "Been a few times, can ride the lifts on my own", personalize: 'Getting the hang of it' },
-        { value: 'advanced', label: "Seasoned rider, comfortable in trees and off-piste", personalize: 'Seasoned veteran' }
-      ]
-    },
-    {
-      id: 'group', text: "Who's mainly coming on this trip?", decisive: false,
-      options: [
-        { value: 'solo', label: 'Just me', personalize: 'Solo' },
-        { value: 'pair', label: 'Two of us (couple / spouse / friend)', personalize: 'Traveling as a pair' },
-        { value: 'multi', label: 'Three or more, friends or family, levels may vary', personalize: 'Bringing a crew' }
-      ]
-    },
-    {
-      id: 'gear', text: 'Do you have your own board / gear?', decisive: false,
-      options: [
-        { value: 'own', label: "Yes, I come a few times a season and want somewhere to store & maintain it", personalize: 'Bringing my own board' },
-        { value: 'rent', label: "No, I'll need to rent on-site", personalize: 'Planning to rent gear' }
-      ]
-    },
-    {
-      id: 'pain', text: 'What is the one thing you most want taken care of on this trip?', decisive: true,
-      options: [
-        { value: 'all_inclusive', label: "I'm new to this — I just want someone to arrange transport, lodging, and lessons", package: 'A' },
-        { value: 'freeride', label: "I want to chase fresh powder freely, I just don't want to deal with transfers and gear upkeep", package: 'B' },
-        { value: 'breakthrough', label: "I've been stuck at the same skill plateau for a while, I want a coach to systematically fix it", package: 'C' },
-        { value: 'group_flex', label: "We're a bigger group with mixed levels, I want flexibility with separate lessons", package: 'D' }
-      ]
-    }
-  ];
-
-  var PACKAGES = {
-    A: { name: 'Effortless First-Timer', tagline: 'Door-to-Door Transfer ・ Basic Course ・ Lodging Booking', solves: "You don't have to plan a thing — once you land, we take it from there.", cta: 'Handle It All For Me →', anchor: 'package-a-en.html' },
-    B: { name: 'Hardcore Rider, Light Pack', tagline: 'Gear Storage ・ Pro Wax & Tune ・ Powder-Chasing Charter', solves: "We take care of your gear — you just chase wherever it's snowing today.", cta: 'Go Light, Chase the Snow →', anchor: 'combo-b-en.html' },
-    C: { name: 'Breakthrough Training Camp', tagline: 'Advanced Training ・ Pro Tune-Up ・ Point-to-Point Transfer', solves: 'Stuck too long — let a coach take you through structured training.', cta: 'Join the Breakthrough Camp →', anchor: 'combo-c-en.html' },
-    D: { name: 'Flexible Friends & Family Group', tagline: 'Private Charter ・ Custom Group Lessons', solves: 'Big group, mixed levels? No problem — split up and regroup.', cta: 'Customize Our Flexible Trip →', anchor: 'group-en.html' }
-  };
-
-  var state = { index: 0, answers: {} };
-  var els = {
-    stepLabel: document.getElementById('quizStepLabel'),
-    progress: document.getElementById('quizProgress'),
-    questionText: document.getElementById('quizQuestionText'),
-    options: document.getElementById('quizOptions'),
-    back: document.getElementById('quizBack'),
-    questionView: document.getElementById('quizQuestionView'),
-    resultView: document.getElementById('quizResultView'),
-    badge: document.getElementById('quizBadge'),
-    recap: document.getElementById('quizRecap'),
-    pkgName: document.getElementById('quizPkgName'),
-    pkgTagline: document.getElementById('quizPkgTagline'),
-    pkgSolves: document.getElementById('quizPkgSolves'),
-    cta: document.getElementById('quizCta'),
-    restart: document.getElementById('quizRestart')
-  };
-
-  function renderQuestion() {
-    var q = QUESTIONS[state.index];
-    els.stepLabel.textContent = 'Q' + (state.index + 1) + ' / ' + QUESTIONS.length;
-    els.progress.style.width = Math.round((state.index / QUESTIONS.length) * 100) + '%';
-    els.progress.classList.remove('is-done');
-    els.questionText.textContent = q.text;
-    els.back.hidden = state.index === 0;
-    els.options.innerHTML = '';
-    q.options.forEach(function (opt) {
-      var btn = document.createElement('button');
-      btn.type = 'button'; btn.className = 'quiz-option'; btn.textContent = opt.label;
-      if (state.answers[q.id] && state.answers[q.id].value === opt.value) btn.classList.add('is-selected');
-      btn.addEventListener('click', function () { selectOption(q, opt); });
-      els.options.appendChild(btn);
-    });
-  }
-
-  function selectOption(question, option) {
-    state.answers[question.id] = option;
-    if (question.decisive) { showResult(option.package); return; }
-    renderQuestion();
-    setTimeout(function () { state.index += 1; renderQuestion(); }, 220);
-  }
-
-  function showResult(packageId) {
-    var pkg = PACKAGES[packageId];
-    var a = state.answers;
-    els.progress.style.width = '100%';
-    els.progress.classList.add('is-done');
-    els.questionView.style.display = 'none';
-    els.resultView.classList.add('is-active');
-    els.badge.textContent = packageId;
-    var recapParts = [a.exp, a.group, a.gear].filter(Boolean).map(function (x) { return x.personalize; });
-    els.recap.textContent = recapParts.length ? 'Based on your answers: ' + recapParts.join(' ・ ') : '';
-    els.pkgName.textContent = pkg.name;
-    els.pkgTagline.textContent = pkg.tagline;
-    els.pkgSolves.textContent = pkg.solves;
-    els.cta.textContent = pkg.cta;
-    els.cta.onclick = function () { window.location.href = pkg.anchor; };
-  }
-
-  function goBack() { if (state.index === 0) return; state.index -= 1; renderQuestion(); }
-  function restart() {
-    state = { index: 0, answers: {} };
-    els.resultView.classList.remove('is-active');
-    els.questionView.style.display = '';
-    renderQuestion();
-  }
-
-  els.back.addEventListener('click', goBack);
-  els.restart.addEventListener('click', restart);
-  renderQuestion();
-})();
-</script>
 
 </body>
 </html>

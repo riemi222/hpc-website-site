@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>旭川5天保證班｜Hokkaido Powder Club</title>
+<meta name="description" content="旭川5天4夜全包滑雪：機場接送、住宿、3天課程、雪票、雪具、雪場專車。完全新手 Day 4 學會連續轉彎，做不到下一季免費重上。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site-shell.css">
+
+<!-- Meta Pixel（與全站相同 ID） -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1035447772859173');fbq('track','PageView');
+</script>
+
+<!-- 保證班設定（價格、班次、後端網址）在 js/site-config.js 的 window.CAMP -->
+<script src="js/site-config.js"></script>
+
+<style>
+:root{
+  --ink:#16222e; --ink-2:#4a5a69; --muted:#7a8996; --line:#e3e9ee;
+  --snow:#f6f9fb; --paper:#ffffff; --blue:#1d5fa8; --blue-d:#123f73;
+  --orange:#e8662c; --orange-d:#c9531d; --gold:#f2b544; --ok:#2f8f5b;
+  --r:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Noto Sans TC',-apple-system,'PingFang TC',sans-serif;color:var(--ink);background:var(--paper);line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--blue)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+body.lang-en .zh, body:not(.lang-en) .en{display:none!important}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+.brand{font-weight:900;letter-spacing:.06em;font-size:14px;color:var(--blue-d);text-decoration:none}
+.brand b{color:var(--blue)}
+.nav-r{display:flex;gap:10px;align-items:center}
+.lang{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--orange);color:#fff;border:0;border-radius:999px;padding:14px 26px;font:inherit;font-weight:700;font-size:16px;text-decoration:none;cursor:pointer;transition:background .15s,transform .15s}
+.btn:hover{background:var(--orange-d);transform:translateY(-1px)}
+.btn.sm{padding:9px 16px;font-size:14px}
+.btn.ghost{background:transparent;color:var(--blue-d);border:1.5px solid var(--blue-d)}
+.btn.ghost:hover{background:var(--blue-d);color:#fff}
+
+/* hero */
+.hero{position:relative;color:#fff;background:#0f2c4d}
+.hero-img{position:absolute;inset:0;background:url('img/lesson-hero.jpg') center 52%/cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,30,55,.35) 0%,rgba(10,30,55,.82) 70%,rgba(10,30,55,.95) 100%)}
+.hero .wrap{position:relative;z-index:1;padding:90px 20px 56px}
+@media (min-width:900px){
+  .hero-img{left:auto;width:44%;background-position:center 45%}
+  .hero::after{background:linear-gradient(90deg,#0f2c4d 0%,#0f2c4d 56%,rgba(15,44,77,.6) 63%,rgba(15,44,77,0) 76%)}
+}
+.eyebrow{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:4px 14px;font-size:13px;letter-spacing:.05em}
+.hero h1{font-size:clamp(30px,6vw,52px);line-height:1.2;font-weight:900;margin:16px 0 12px;letter-spacing:.01em}
+.hero .sub{font-size:clamp(16px,2.4vw,20px);max-width:640px;opacity:.95;margin:0 0 26px}
+.price-card{background:#fff;color:var(--ink);border-radius:var(--r);padding:22px 24px;max-width:520px;box-shadow:0 18px 50px rgba(0,0,0,.28)}
+.price-card .tag{display:inline-block;background:#fff1e9;color:var(--orange-d);font-weight:700;font-size:13px;border-radius:6px;padding:2px 10px}
+.price-card .big{font-size:clamp(34px,6vw,46px);font-weight:900;line-height:1.1;margin:8px 0 2px;color:var(--ink)}
+.price-card .big small{font-size:16px;font-weight:500;color:var(--ink-2)}
+.price-card .was{color:var(--muted);font-size:14px}
+.price-card .was s{margin-right:6px}
+.price-card .incl{font-size:14px;color:var(--ink-2);margin:12px 0 16px;line-height:1.6}
+.price-card .btn{width:100%}
+.price-card .note{font-size:12.5px;color:var(--muted);margin-top:10px;text-align:center}
+
+/* sections */
+section{padding:72px 0}
+section.alt{background:var(--snow)}
+.kicker{color:var(--blue);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+h2{font-size:clamp(24px,4vw,34px);line-height:1.3;margin:8px 0 18px;font-weight:900}
+.lead{font-size:18px;color:var(--ink-2);max-width:720px}
+.pain{display:grid;gap:12px;margin:24px 0;max-width:720px}
+.pain div{background:#fff;border:1px solid var(--line);border-left:4px solid #c9d4dd;border-radius:10px;padding:12px 16px;color:var(--ink-2)}
+.punch{font-weight:700;font-size:19px;margin-top:20px}
+
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.card .n{font-size:30px;font-weight:900;color:var(--blue)}
+.card h3{margin:6px 0 6px;font-size:18px}
+.card p{margin:0;color:var(--ink-2);font-size:15px}
+
+/* schedule */
+.sched{width:100%;border-collapse:separate;border-spacing:0;margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.sched th,.sched td{padding:14px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:15px}
+.sched th{background:#eef4fa;color:var(--blue-d);font-size:13px;letter-spacing:.06em}
+.sched tr:last-child td{border-bottom:0}
+.sched td:first-child{font-weight:900;color:var(--blue);white-space:nowrap}
+.sched .goal td{background:#fff8ec}
+.sched .goal td:first-child{color:var(--orange-d)}
+.pill{display:inline-block;background:#fff1e9;color:var(--orange-d);font-size:12px;font-weight:700;border-radius:6px;padding:1px 8px;margin-left:6px}
+.time{color:var(--muted);font-size:14px;margin-top:10px}
+
+/* included */
+.inc-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start;margin-top:24px}
+.inc{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.inc li{display:flex;gap:12px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.inc li::before{content:"✓";flex:0 0 26px;height:26px;border-radius:50%;background:#e7f4ec;color:var(--ok);font-weight:900;display:grid;place-items:center;font-size:14px;margin-top:2px}
+.inc li b{display:block}
+.inc li span{color:var(--ink-2);font-size:14px}
+.exc{margin-top:14px;color:var(--muted);font-size:14px}
+.photos{display:grid;gap:10px}
+.photos img{border-radius:12px;width:100%;aspect-ratio:16/8;object-fit:cover}
+.photos img.whole{aspect-ratio:auto;height:auto}
+.photos img.people{object-position:center 66%}
+.photos .cap{font-size:12.5px;color:var(--muted);margin:-4px 0 4px}
+
+/* bonus */
+.bonus{width:100%;border-collapse:collapse;margin-top:18px;background:#fff;border-radius:var(--r);overflow:hidden;border:1px solid var(--line)}
+.bonus td{padding:13px 16px;border-bottom:1px solid var(--line);font-size:15px;vertical-align:top}
+.bonus tr:last-child td{border-bottom:0}
+.bonus td:last-child{color:var(--ink-2);font-size:14px}
+.value td.v{text-align:right;font-weight:700;color:var(--ink);white-space:nowrap}
+.value tr.tot td{background:#eef4fa;font-weight:900;font-size:17px}
+.bonus .first{color:var(--orange-d);font-size:12px;font-weight:700}
+
+/* guarantee */
+.guar{background:linear-gradient(135deg,#123f73,#1d5fa8);color:#fff;border-radius:22px;padding:36px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.seal{width:120px;height:120px;border-radius:50%;border:3px dashed var(--gold);display:grid;place-items:center;text-align:center;font-weight:900;color:var(--gold);line-height:1.2;font-size:15px}
+.guar h2{color:#fff;margin-top:0}
+.guar p{margin:0 0 10px;opacity:.95}
+.guar .cond{font-size:14px;opacity:.8}
+
+/* dates */
+.dates{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-top:22px}
+.date{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.date b{font-size:16px}
+.date .left{font-size:13px;font-weight:700;border-radius:999px;padding:3px 10px;background:#e7f4ec;color:var(--ok);white-space:nowrap}
+.date.low .left{background:#fff1e9;color:var(--orange-d)}
+.date .dp{font-size:13px;font-weight:700;color:var(--orange-d);margin-top:2px}
+.date .dp.peak,.date .dp.regular{color:var(--ink-2)}
+.date.full{opacity:.55}
+.date.full .left{background:#eceff2;color:var(--muted)}
+.tiers{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:18px;font-size:15px}
+.tier{border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:#fff}
+.tier.on{border-color:var(--orange);background:#fff7f2;font-weight:700}
+.arrow{color:var(--muted)}
+
+/* form */
+.form-box{background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:0 10px 30px rgba(18,63,115,.07);max-width:720px;margin:24px auto 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}
+label .req{color:var(--orange-d)}
+input,select,textarea{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1.5px solid #cfd9e2;border-radius:10px;background:#fff;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(29,95,168,.12)}
+.field{margin-bottom:16px}
+.hint{font-size:12.5px;color:var(--muted);margin-top:4px}
+.seg{display:flex;gap:8px}
+.seg label{flex:1;margin:0;font-weight:500}
+.seg input{display:none}
+.seg>label>span{display:block;text-align:center;border:1.5px solid #cfd9e2;border-radius:10px;padding:11px;cursor:pointer}
+.seg input:checked+span{border-color:var(--blue);background:#eef4fa;color:var(--blue-d);font-weight:700}
+.form-box .btn{width:100%;margin-top:6px;font-size:17px;padding:16px}
+.err{color:#c0392b;font-size:14px;margin-top:10px;display:none}
+.hp{position:absolute;left:-9999px}
+.person{border:1px solid var(--line);border-radius:14px;padding:14px 16px 4px;margin-bottom:14px;background:#fbfdff}
+.person h4{margin:0 0 10px;font-size:15px;color:var(--blue-d);display:flex;justify-content:space-between;align-items:center}
+.person h4 small{font-weight:700;font-size:12px;border-radius:999px;padding:2px 10px}
+.person h4 small.g{background:#e7f4ec;color:var(--ok)}
+.person h4 small.n{background:#fff1e9;color:var(--orange-d)}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pgrid .field{margin-bottom:10px}
+.pgrid label{font-size:12.5px;margin-bottom:4px}
+.pgrid select{padding:9px 10px;font-size:15px}
+.over{background:#fff7f2;border:1px solid #f6c9b0;border-radius:12px;padding:14px 16px;margin-bottom:14px;font-size:15px}
+.over-btns{display:flex;gap:10px;margin-top:10px}
+.over .btn.line{background:#06C755}.over .btn.wa{background:#25D366}
+.noguar{background:#fff8ec;border:1px solid #f3dca6;border-radius:12px;padding:10px 14px;font-size:14px;color:var(--ink-2);margin-bottom:12px}
+@media (max-width:560px){.pgrid{grid-template-columns:1fr 1fr}}
+.sumline{background:var(--snow);border-radius:10px;padding:10px 14px;font-size:14px;color:var(--ink-2);margin:4px 0 14px}
+
+/* faq */
+.faq{max-width:760px;margin-top:20px}
+details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:4px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700;padding:12px 0;list-style:none;position:relative;padding-right:28px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:0;top:9px;font-size:22px;color:var(--blue)}
+details[open] summary::after{content:"–"}
+details p{margin:0 0 14px;color:var(--ink-2)}
+.policy{font-size:14px;color:var(--ink-2)}
+.policy table{border-collapse:collapse;margin-top:8px}
+.policy td{border:1px solid var(--line);padding:6px 12px}
+
+.final{text-align:center}
+.final h2{margin-bottom:10px}
+footer{background:#0f2c4d;color:#c6d4e2;font-size:13px;padding:28px 0;text-align:center}
+footer a{color:#fff}
+
+.sticky-cta{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;display:none}
+.sticky-cta .btn{width:100%;box-shadow:0 10px 26px rgba(0,0,0,.25)}
+
+@media (max-width:820px){
+  .three{grid-template-columns:1fr}
+  .inc-grid{grid-template-columns:1fr}
+  .guar{grid-template-columns:1fr;text-align:left;padding:28px}
+  .seal{width:96px;height:96px;font-size:13px}
+  .grid2{grid-template-columns:1fr}
+  section{padding:56px 0}
+  .hero .wrap{padding:70px 20px 40px}
+  .sticky-cta{display:block}
+  footer{padding-bottom:90px}
+  .nav .btn.sm{display:none}
+}
+@media (max-width:560px){
+  .sched th:nth-child(3),.sched td:nth-child(3){display:none}
+  .sched .sb{display:block!important;color:var(--ink-2);font-size:13.5px;margin-top:4px}
+}
+.sched .sb{display:none}
+</style>
+<style>
+/* 整合：手機版底部固定按鈕不要蓋到共用頁尾 */
+@media (max-width:820px){ .site-footer{ padding-bottom:90px; } }
+</style>
+</head>
+<body>
+
+<!-- 共用導覽列（樣式在 css/site-shell.css） -->
+<nav class="site-nav">
+  <a class="site-nav__brand zh" href="index.html">HOKKAIDO POWDER <span>CLUB</span></a>
+  <a class="site-nav__brand en" href="en.html">HOKKAIDO POWDER <span>CLUB</span></a>
+  <div class="site-nav__right">
+    <div class="site-nav__links">
+      <a class="zh" href="blog.html">部落格</a><a class="en" href="blog-en.html">Blog</a>
+      <a class="zh" href="faq.html">FAQ</a><a class="en" href="faq-en.html">FAQ</a>
+      <a class="zh" href="camp.html?lang=en" data-lang-to="en">EN</a><a class="en" href="camp.html?lang=zh" data-lang-to="zh">中文</a>
+    </div>
+    <a class="site-nav__cta" href="#book"><span class="zh">選日期報名</span><span class="en">Pick dates</span></a>
+  </div>
+</nav>
+<script>
+// 語言切換：保留網址上的其他參數，只換 lang
+document.querySelectorAll('[data-lang-to]').forEach(function (a) {
+  var u = new URL(location.href); u.searchParams.set('lang', a.getAttribute('data-lang-to')); u.hash = '';
+  a.href = (u.pathname.split('/').pop() || 'camp.html') + u.search;
+});
+</script>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-img" role="img" aria-label="教練在雪場帶學員練習"></div>
+  <div class="wrap">
+    <span class="eyebrow"><span class="zh">旭川・5天4夜・全包</span><span class="en">Asahikawa · 5 days 4 nights · all-inclusive</span></span>
+    <h1><span class="zh">旭川5天・零基礎到<br>連續轉彎 保證班</span><span class="en">Asahikawa 5-Day<br>Zero-to-Turns Camp</span></h1>
+    <p class="sub"><span class="zh">5天後，你能自己從初級道頂端，一路轉彎滑到底。做不到，下一季免費回來重上。</span><span class="en">In 5 days you'll ride a green run top to bottom on your own, linking turns. If you can't, you come back next season and retake the lessons free.</span></p>
+
+    <div class="price-card">
+      <span class="tag" data-label></span>
+      <div class="big">¥<span data-price></span> <small><span class="zh">／人・全包</span><span class="en">per person · all-in</span></small></div>
+      <div class="was"><span class="zh">總價值 </span><span class="en">Total value </span><s>¥<span data-value></span></s>・<span class="zh">正價 </span><span class="en">regular </span><s>¥<span data-regular></span></s>・<span class="zh">截止 </span><span class="en">ends </span><span data-deadline></span></div>
+      <div class="incl"><span class="zh">機場接送＋4晚住宿＋3天課程＋雪票＋雪具＋雪場專車，人到就好。</span><span class="en">Airport transfers + 4 nights + 3 lesson days + lift pass + gear + daily shuttle. Just show up.</span></div>
+      <a class="btn" href="#book"><span class="zh">查看開班日期與剩餘名額</span><span class="en">See dates &amp; seats left</span></a>
+      <div class="note"><span class="zh">每班最多 3 人・2 人成團</span><span class="en">Max 3 per camp · runs with 2</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- PAIN -->
+<section>
+  <div class="wrap">
+    <div class="kicker"><span class="zh">為什麼</span><span class="en">The problem</span></div>
+    <h2><span class="zh">第一次滑雪，為什麼大部分人都帶著瘀青回家？</span><span class="en">Why most first-timers go home sore, not skiing</span></h2>
+    <div class="pain">
+      <div><span class="zh">飛到北海道，花了半天租雪具、買雪票、找公車，還沒滑就累了。</span><span class="en">You land in Hokkaido and lose half a day sorting rentals, lift passes and buses.</span></div>
+      <div><span class="zh">報了十幾人的大班課，教練顧不到你，一整天都在跌倒。</span><span class="en">You join a group lesson of 12. The instructor barely sees you. You spend the day on your backside.</span></div>
+      <div><span class="zh">滑完 3 天還不會轉彎，每次都用蹲的「溶」下山。</span><span class="en">Three days later you still can't turn. You snowplough down every run.</span></div>
+      <div><span class="zh">回國後只剩累和擦傷，從此不想再碰滑雪。</span><span class="en">You fly home tired and bruised, and never try again.</span></div>
+    </div>
+    <p class="punch"><span class="zh">問題不是你沒運動神經，是沒有人把「學會」這件事安排好。</span><span class="en">It's not that you're unathletic. Nobody set you up to actually learn.</span></p>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="alt">
+  <div class="wrap">
+    <div class="kicker"><span class="zh">結果</span><span class="en">The outcome</span></div>
+    <h2><span class="zh">不是「上過滑雪課」，是「我會滑雪了」</span><span class="en">Not "I took a lesson". "I can ski."</span></h2>
+    <p class="lead"><span class="zh">這個班只賣一個結果：Day 4 結束時，你能自己在初級道連續轉彎（單板是連續換刃）滑到底。不用教練牽著，不用蹲著溶，影片會證明。</span><span class="en">This camp sells one result: by the end of Day 4 you ride a green run on your own, linking turns (snowboard: linking edge changes). No instructor holding you. Your video proves it.</span></p>
+    <div class="three">
+      <div class="card"><div class="n">1:3</div><h3><span class="zh">師生比最多 1:3</span><span class="en">Max 3 per instructor</span></h3><p><span class="zh">整天教練的眼睛都在你身上，不是大班課裡的第 12 個人。</span><span class="en">All day, eyes on you — not number 12 in a crowd.</span></p></div>
+      <div class="card"><div class="n">Day 4</div><h3><span class="zh">每天一個明確目標</span><span class="en">A clear goal every day</span></h3><p><span class="zh">你知道今天要學會什麼，也看得到自己做到了。</span><span class="en">You know what you'll learn today, and you see yourself do it.</span></p></div>
+      <div class="card"><div class="n">✓</div><h3><span class="zh">做不到有保證</span><span class="en">Guaranteed</span></h3><p><span class="zh">做不到，下一季免費重上。我們敢這樣說，因為這套方法我們教過很多次。</span><span class="en">Miss the goal and retake the lessons free next season.</span></p></div>
+    </div>
+    <!-- ★ 學員實證：有 Day1 vs Day4 影片和真實評價後，放在這裡 -->
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section>
+  <div class="wrap">
+    <div class="kicker"><span class="zh">5天行程</span><span class="en">Your 5 days</span></div>
+    <h2><span class="zh">每天你會學會什麼</span><span class="en">What you'll learn each day</span></h2>
+    <table class="sched">
+      <thead><tr><th>DAY</th><th><span class="zh">雙板</span><span class="en">Ski</span></th><th><span class="zh">單板</span><span class="en">Snowboard</span></th></tr></thead>
+      <tbody>
+        <tr><td>Day 1</td><td colspan="2"><span class="zh">新千歲機場接機→旭川、入住、試穿雪具、課前預習</span><span class="en">New Chitose pick-up → Asahikawa, check in, gear fitting, pre-lesson briefing</span></td></tr>
+        <tr><td>Day 2</td><td><span class="zh">會煞車、會直滑</span><span class="en">Stopping, straight gliding</span><span class="sb"><span class="zh">單板：會煞車、後刃落葉飄、打直板</span><span class="en">Snowboard: stopping, heel-side falling leaf, straight gliding</span></span></td><td><span class="zh">會煞車、後刃落葉飄、打直板</span><span class="en">Stopping, heel-side falling leaf, straight gliding</span></td></tr>
+        <tr><td>Day 3</td><td><span class="zh">上下纜車、單邊轉彎</span><span class="en">Lift on/off, single turns</span><span class="sb"><span class="zh">單板：單腳上下纜車、站著穿板、前刃落葉飄</span><span class="en">Snowboard: one-foot lift on/off, strapping in standing, toe-side falling leaf</span></span></td><td><span class="zh">單腳上下纜車、站著穿板、前刃落葉飄</span><span class="en">One-foot lift on/off, strapping in standing, toe-side falling leaf</span></td></tr>
+        <tr class="goal"><td>Day 4</td><td><span class="zh">連續轉彎</span><span class="en">Linked turns</span><span class="pill"><span class="zh">保證驗收</span><span class="en">Guarantee check</span></span><span class="sb"><span class="zh">單板：連續換刃</span><span class="en">Snowboard: linked edge changes</span></span></td><td><span class="zh">連續換刃</span><span class="en">Linked edge changes</span><span class="pill"><span class="zh">保證驗收</span><span class="en">Guarantee check</span></span></td></tr>
+        <tr><td>Day 5</td><td colspan="2"><span class="zh">退房、送往新千歲機場</span><span class="en">Check out, drop-off at New Chitose Airport</span></td></tr>
+      </tbody>
+    </table>
+    <p class="time"><span class="zh">課程時間：10:00–12:30、13:30–16:00（每天 5 小時）｜上課雪場：聖誕禮物公園 Santa Present Park／神居 Kamui</span><span class="en">Lessons 10:00–12:30 and 13:30–16:00 (5 hours a day) at Santa Present Park / Kamui ski area.</span></p>
+  </div>
+</section>
+
+<!-- INCLUDED -->
+<section class="alt">
+  <div class="wrap">
+    <div class="kicker"><span class="zh">方案內容</span><span class="en">What's included</span></div>
+    <h2><span class="zh">你只要人到就好</span><span class="en">Just show up</span></h2>
+    <div class="inc-grid">
+      <div>
+        <ul class="inc">
+          <li><div><b><span class="zh">新千歲機場 ⇄ 旭川 來回專車接送</span><span class="en">New Chitose Airport ⇄ Asahikawa private return transfers</span></b><span class="zh">下飛機直接上車，不用自己搭 JR 轉車拖行李</span><span class="en">Straight from arrivals, no trains or luggage hauling</span></div></li>
+          <li><div><b><span class="zh">4 晚住宿・日式公寓單人房</span><span class="en">4 nights · private single room</span></b><span class="zh">共用浴室、廚房、客廳，隔壁就是日式公共澡堂</span><span class="en">Japanese apartment with shared bath, kitchen and lounge; public bathhouse next door</span></div></li>
+          <li><div><b><span class="zh">3 天課程・每天 5 小時</span><span class="en">3 lesson days · 5 hours a day</span></b><span class="zh">師生比最多 1:3</span><span class="en">Max 1:3 ratio</span></div></li>
+          <li><div><b><span class="zh">3 天雪票</span><span class="en">3-day lift pass</span></b></div></li>
+          <li><div><b><span class="zh">3 天全套雪具租借</span><span class="en">3-day full gear rental</span></b><span class="zh">雪板、雪靴、安全帽、雪鏡、手套、雪衣、雪褲</span><span class="en">Skis or board, boots, helmet, goggles, gloves, jacket and pants</span></div></li>
+          <li><div><b><span class="zh">每天住處 ⇄ 雪場專車</span><span class="en">Daily shuttle to and from the slopes</span></b></div></li>
+        </ul>
+        <p class="exc"><span class="zh">不含：早午晚餐、機票、旅平險（需涵蓋滑雪）。住處有廚房，附近也有很多旭川在地餐廳。</span><span class="en">Not included: meals, flights, travel insurance (must cover skiing/snowboarding). The apartment has a kitchen and local restaurants are close by.</span></p>
+      </div>
+      <div class="photos">
+        <img src="img/transfer.jpg" alt="接送車" class="whole"><div class="cap"><span class="zh">新千歲機場直達旭川住處</span><span class="en">New Chitose Airport to your door</span></div>
+        <img src="img/room.jpg" alt="日式公寓"><div class="cap"><span class="zh">日式公寓住宿</span><span class="en">Your Japanese apartment</span></div>
+        <img src="img/small-group.jpg" alt="1:3 小班課程" class="people"><div class="cap"><span class="zh">1:3 小班課程</span><span class="en">Small-group lessons</span></div>
+      </div>
+    </div>
+
+    <h2 style="margin-top:48px;font-size:24px"><span class="zh">加碼贈品・只有這個班才有</span><span class="en">Bonuses · only with this camp</span></h2>
+    <table class="bonus">
+      <tr><td><span class="zh">新手禮包：滑雪用毛帽＋滑雪機能襪，帶回家</span><span class="en">Starter pack: ski beanie + technical ski socks, yours to keep</span><div class="first"><span class="zh">第一批報名限定</span><span class="en">First release only</span></div></td><td><span class="zh">不用為了一趟旅行專程買裝備</span><span class="en">No buying gear for one trip</span></td></tr>
+      <tr><td><span class="zh">行前線上課：在家先練的 3 支暖身影片</span><span class="en">Pre-trip: 3 warm-up videos</span></td><td><span class="zh">怕跟不上、怕受傷</span><span class="en">Fear of falling behind or getting hurt</span></td></tr>
+      <tr><td><span class="zh">教練拍攝＋剪好的結業影片</span><span class="en">Instructor-filmed, edited camp video</span></td><td><span class="zh">留下你第一次滑下山的樣子，直接發 IG</span><span class="en">Your first run, ready for Instagram</span></td></tr>
+      <tr><td><span class="zh">結業技術報告＋下一步建議</span><span class="en">Skills report + next steps</span></td><td><span class="zh">回國後知道怎麼繼續練</span><span class="en">Know how to keep improving</span></td></tr>
+      <tr><td><span class="zh">隔壁公共澡堂 4 晚泡湯券</span><span class="en">4-night public bathhouse pass</span></td><td><span class="zh">滑完腿痠直接泡，體驗日本在地文化</span><span class="en">Soak sore legs the Japanese way</span></td></tr>
+      <tr><td><span class="zh">HPC 雪板倉儲首年 9 折、太空艙／站前套房 95 折</span><span class="en">10% off HPC board storage; 5% off capsule / station-front suite</span></td><td><span class="zh">下次來更方便</span><span class="en">For your next trip</span></td></tr>
+    </table>
+  </div>
+</section>
+
+
+<!-- PRICE / VALUE -->
+<section>
+  <div class="wrap">
+    <div class="kicker"><span class="zh">價格</span><span class="en">Price</span></div>
+    <h2><span class="zh">單買要 ¥475,400，這個班一次搞定</span><span class="en">¥475,400 if bought separately. One price here.</span></h2>
+    <table class="bonus value">
+      <tr><td><span class="zh">3 天課程（師生比 1:3）</span><span class="en">3 lesson days (max 1:3)</span></td><td class="v">¥125,000</td></tr>
+      <tr><td><span class="zh">4 晚住宿（日式公寓單人房）</span><span class="en">4 nights, private room</span></td><td class="v">¥44,000</td></tr>
+      <tr><td><span class="zh">3 天雪票</span><span class="en">3-day lift pass</span></td><td class="v">¥15,900</td></tr>
+      <tr><td><span class="zh">3 天全套雪具租借</span><span class="en">3-day full gear rental</span></td><td class="v">¥28,500</td></tr>
+      <tr><td><span class="zh">3 天雪場專車</span><span class="en">3-day slope shuttle</span></td><td class="v">¥30,000</td></tr>
+      <tr><td><span class="zh">新千歲機場 ⇄ 旭川 來回專車接送（單獨預訂價）</span><span class="en">New Chitose Airport ⇄ Asahikawa private return transfer (single-booking price)</span></td><td class="v">¥160,000</td></tr>
+      <tr><td><span class="zh">贈品（新手禮包、結業影片、暖身課、技術報告、泡湯券）</span><span class="en">Bonuses (starter pack, video, warm-up course, skills report, bathhouse pass)</span></td><td class="v">¥72,000</td></tr>
+      <tr class="tot"><td><span class="zh">總價值</span><span class="en">Total value</span></td><td class="v"><s>¥475,400</s></td></tr>
+    </table>
+    <div class="tiers" style="margin-top:18px" id="tiers2"></div>
+    <p style="margin-top:18px"><a class="btn" href="#book"><span class="zh">查看開班日期與剩餘名額</span><span class="en">See dates &amp; seats left</span></a></p>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section>
+  <div class="wrap">
+    <div class="guar">
+      <div class="seal"><span class="zh">連續轉彎<br>保證</span><span class="en">LINKED<br>TURNS<br>GUARANTEE</span></div>
+      <div>
+        <h2><span class="zh">做不到，下一季免費重上</span><span class="en">Can't link turns? Retake free next season.</span></h2>
+        <p><span class="zh">Day 4 結束時，如果你還沒辦法自己連續轉彎（單板：連續換刃）滑完初級道，下一季免費回來重上 3 天課，你只需要付住宿和交通。風險我們來承擔。</span><span class="en">If by the end of Day 4 you can't ride a green run on your own linking turns (snowboard: linking edge changes), come back next season and retake 3 days of lessons free. You only pay lodging and transport. We carry the risk.</span></p>
+        <p class="cond"><span class="zh">條件：10 歲以上、全程出席、遵守教練指示、行前看完 3 支暖身影片。<a href="camp-terms.html" style="color:#ffd166">完整條款</a></span><span class="en">Conditions: age 10+, attend every session, follow your instructor, watch the 3 warm-up videos. <a href="camp-terms.html?lang=en" style="color:#ffd166">Full terms</a></span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DATES + FORM -->
+<section class="alt" id="book">
+  <div class="wrap">
+    <div class="kicker"><span class="zh">名額有限</span><span class="en">Limited seats</span></div>
+    <h2><span class="zh">選一個日期，剩下的交給我們</span><span class="en">Pick a date. We handle the rest.</span></h2>
+    <p class="lead"><span class="zh">每班只收 3 人，因為超過 3 人，我們就做不到保證。第一批額滿就調到下一批價格。</span><span class="en">Each camp takes only 3 people — beyond 3 we can't guarantee the result. When the first release sells out, the price goes up.</span></p>
+    <div class="tiers" id="tiers"></div>
+    <div class="dates" id="dates"></div>
+    <p class="time"><span class="zh">聖誕、跨年、農曆新年等旺季班次不適用早鳥價。其他日期將在下一批開放。</span><span class="en">Early-bird pricing doesn't apply to peak-season camps (Christmas, New Year, Lunar New Year). More dates open in the next release.</span></p>
+
+    <form class="form-box" id="leadForm" novalidate>
+      <h3 style="margin:0 0 4px;font-size:21px"><span class="zh">填表，幾分鐘內收到完整報價</span><span class="en">Get your full quote in minutes</span></h3>
+      <p style="margin:0 0 18px;color:var(--muted);font-size:14px"><span class="zh">報價會自動寄到你的 Email，不需要等人工回覆。</span><span class="en">Your quote is emailed automatically — no waiting.</span></p>
+
+      <div class="grid2">
+        <div class="field">
+          <label for="name"><span class="zh">姓名</span><span class="en">Name</span> <span class="req">*</span></label>
+          <input id="name" name="name" required autocomplete="name" placeholder="例：Lisa Chen / e.g. Lisa Chen">
+        </div>
+        <div class="field">
+          <label for="email">Email <span class="req">*</span></label>
+          <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="date"><span class="zh">開班日期</span><span class="en">Camp dates</span> <span class="req">*</span></label>
+        <select id="date" name="date" required></select>
+      </div>
+
+      <div class="grid2">
+        <div class="field">
+          <label for="adults"><span class="zh">大人幾位（18 歲以上）</span><span class="en">Adults (18+)</span> <span class="req">*</span></label>
+          <select id="adults" name="adults"><option>1</option><option selected>2</option><option>3</option><option value="4">4+</option></select>
+        </div>
+        <div class="field">
+          <label for="children"><span class="zh">小孩幾位（10–17 歲）</span><span class="en">Children (10–17)</span></label>
+          <select id="children" name="children"><option selected>0</option><option>1</option><option>2</option><option value="3">3+</option></select>
+        </div>
+      </div>
+      <p class="hint" style="margin:-8px 0 14px"><span class="zh">每班最多 3 人，僅限 10 歲以上。</span><span class="en">Max 3 per camp, ages 10 and up.</span></p>
+
+      <div id="overBox" class="over" style="display:none">
+        <b><span class="zh">4 人以上請加 LINE，我們幫你安排同日期兩班</span><span class="en">4 or more? Message us and we'll set up two camps on the same dates</span></b>
+        <div class="over-btns">
+          <a class="btn sm line" data-line-msg href="#">LINE</a>
+          <a class="btn sm wa" data-wa-msg href="#">WhatsApp</a>
+        </div>
+      </div>
+
+      <div id="people"></div>
+      <div id="noGuarNote" class="noguar" style="display:none"></div>
+
+      <div class="sumline" id="sumline"></div>
+      <input class="hp" name="website" tabindex="-1" autocomplete="off">
+      <button class="btn" type="submit" id="submitBtn"><span class="zh">寄給我完整報價</span><span class="en">Email me the full quote</span></button>
+      <div class="err" id="err"></div>
+      <p style="text-align:center;font-size:12.5px;color:var(--muted);margin:12px 0 0"><span class="zh">送出後不會自動扣款。看完報價再決定。</span><span class="en">No payment now. Decide after you see the quote.</span></p>
+    </form>
+  </div>
+</section>
+
+
+<!-- ADD-ONS -->
+<section>
+  <div class="wrap">
+    <div class="kicker"><span class="zh">加購</span><span class="en">Add-ons</span></div>
+    <h2 style="font-size:24px"><span class="zh">想要更多？可以加購</span><span class="en">Want more? Add-ons</span></h2>
+    <div class="three">
+      <div class="card"><h3><span class="zh">多加一天課</span><span class="en">An extra lesson day</span></h3></div>
+      <div class="card"><h3><span class="zh">升級 1:1 私人課</span><span class="en">Upgrade to 1:1 private</span></h3></div>
+      <div class="card"><h3><span class="zh">富良野／美瑛觀光包車</span><span class="en">Furano / Biei sightseeing charter</span></h3></div>
+    </div>
+    <p class="time"><span class="zh">自己安排交通？也有 5 天 4 夜精簡版（不含機場接送與保證），每人 ¥248,000，<a href="camp-lite.html">看精簡版 →</a></span><span class="en">Arranging your own transport? There's a 5-day lite version (no airport transfers or guarantee) at ¥248,000 per person. <a href="camp-lite.html?lang=en">See the lite version →</a></span></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <div class="kicker">FAQ</div>
+    <h2><span class="zh">常見問題</span><span class="en">Questions</span></h2>
+    <div class="faq">
+      <details><summary><span class="zh">完全沒滑過可以報嗎？</span><span class="en">I've never skied. Can I join?</span></summary><p><span class="zh">可以，這個班就是為完全新手設計的。</span><span class="en">Yes. This camp is built for complete beginners.</span></p></details>
+      <details><summary><span class="zh">只有我一個人可以報嗎？</span><span class="en">Can I sign up alone?</span></summary><p><span class="zh">可以，我們會把你和其他同程度的學員編成一班。開班前 30 天仍未達 2 人時，可以改期或全額退費。</span><span class="en">Yes. We'll group you with other beginners at your level. If your camp still has fewer than 2 people 30 days before it starts, you can move dates or get a full refund.</span></p></details>
+      <details><summary><span class="zh">不足 3 人會開班嗎？</span><span class="en">Does the camp run with fewer than 3?</span></summary><p><span class="zh">會。只要 2 人報名就保證開班，不改期、不取消，課程內容和保證條款完全一樣。</span><span class="en">Yes. With 2 people the camp is guaranteed to run — no date changes, no cancellations, same lessons and same guarantee.</span></p></details>
+      <details><summary><span class="zh">小孩可以參加嗎？</span><span class="en">Can children join?</span></summary><p><span class="zh">這個班僅限 10 歲以上（含）參加。</span><span class="en">This camp is for ages 10 and up.</span></p></details>
+      <details><summary><span class="zh">可以自己帶雪具嗎？</span><span class="en">Can I bring my own gear?</span></summary><p><span class="zh">可以，但價格不變。</span><span class="en">Yes, but the price stays the same.</span></p></details>
+      <details><summary><span class="zh">下雪太大、雪場停駛怎麼辦？</span><span class="en">What if a storm closes the resort?</span></summary><p><span class="zh">我們會改到旭川周邊其他雪場上課。</span><span class="en">We move your lesson to another ski area around Asahikawa.</span></p></details>
+      <details><summary><span class="zh">怎麼付款？</span><span class="en">How do I pay?</span></summary><p><span class="zh">報價信裡有訂金付款連結（每人 ¥<span data-deposit></span>，信用卡），付了就保留名額。尾款於出發前 30 天付清。</span><span class="en">Your quote email has a deposit link (¥<span data-deposit></span> per person, card). Paying holds your seats. The balance is due 30 days before arrival.</span></p></details>
+      <details><summary><span class="zh">取消政策</span><span class="en">Cancellation policy</span></summary>
+        <div class="policy"><p><span class="zh">不論任何原因，依取消日計算退款：</span><span class="en">Whatever the reason, refunds depend on when you cancel:</span></p>
+        <table>
+          <tr><td><span class="zh">出發前 31 天以上</span><span class="en">31+ days before</span></td><td><span class="zh">退款 50%</span><span class="en">50% refund</span></td></tr>
+          <tr><td><span class="zh">出發前 8–30 天</span><span class="en">8–30 days before</span></td><td><span class="zh">退款 30%</span><span class="en">30% refund</span></td></tr>
+          <tr><td><span class="zh">出發前 7 天內／未到</span><span class="en">Within 7 days / no-show</span></td><td><span class="zh">不退款</span><span class="en">No refund</span></td></tr>
+        </table>
+        <p style="margin-top:10px"><span class="zh">退款金額會扣除 Stripe 手續費。強烈建議購買涵蓋滑雪的旅平險。</span><span class="en">Refunds are less Stripe fees. We strongly recommend travel insurance that covers skiing.</span></p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="alt final">
+  <div class="wrap">
+    <h2><span class="zh">5 天後，你可以是「會滑雪的人」</span><span class="en">In 5 days, you can be someone who skis.</span></h2>
+    <p class="lead" style="margin:0 auto 22px"><span class="zh">選一個日期，剩下的交給我們。</span><span class="en">Pick a date. We handle the rest.</span></p>
+    <a class="btn" href="#book"><span class="zh">立即選日期報名</span><span class="en">Pick your dates</span></a>
+  </div>
+</section>
+
+<!-- 共用頁尾 -->
+<footer class="site-footer"><span class="zh">Hokkaido Powder Club｜旭川・北海道｜姊妹服務 <a href="https://www.snowisnow.com" target="_blank" rel="noopener">Snowi 滑雪學校</a></span><span class="en">Hokkaido Powder Club｜Asahikawa, Hokkaido｜Sister brand <a href="https://www.snowisnow.com" target="_blank" rel="noopener">Snowi Ski School</a></span></footer>
+
+<div class="sticky-cta"><a class="btn" href="#book"><span class="zh">¥<span data-price></span> 起・選日期報名</span><span class="en">From ¥<span data-price></span> · Pick dates</span></a></div>
+
+<script>
+(function(){
+  const C = window.CAMP;
+  const yen = n => Number(n).toLocaleString('en-US');
+  // 早鳥截止後自動切換成第二批
+  const pastEarly = Date.now() > new Date(C.price.earlyDeadlineISO || '2026-11-20T23:59:59+09:00').getTime();
+  const tierOf = d => (d.tier === 'early' && pastEarly) ? 'second' : (C.tiers[d.tier] ? d.tier : 'regular');
+  if (pastEarly) {
+    C.price.current = C.tiers.second.price; C.price.labelZh = '第二批'; C.price.labelEn = 'Second release';
+    C.price.deadline = C.price.secondDeadline; C.price.next = C.price.regular;
+  }
+  const params = new URLSearchParams(location.search);
+  let lang = params.get('lang') || ((navigator.language||'').toLowerCase().startsWith('zh') ? 'zh' : 'en');
+
+  function applyLang(){
+    document.body.classList.toggle('lang-en', lang === 'en');
+    document.documentElement.lang = lang === 'en' ? 'en' : 'zh-Hant';
+    const lb = document.getElementById('langBtn'); if (lb) lb.textContent = lang === 'en' ? '中文' : 'EN';
+    document.querySelectorAll('[data-label]').forEach(e => e.textContent = lang === 'en' ? C.price.labelEn : C.price.labelZh);
+    renderDates(); renderTiers(); renderPeople(); setOverLinks();
+  }
+  const lbtn = document.getElementById('langBtn'); if (lbtn) lbtn.onclick = () => { lang = lang === 'en' ? 'zh' : 'en'; applyLang(); };
+
+  document.querySelectorAll('[data-price]').forEach(e => e.textContent = yen(C.price.current));
+  document.querySelectorAll('[data-regular]').forEach(e => e.textContent = yen(C.price.regular));
+  document.querySelectorAll('[data-value]').forEach(e => e.textContent = yen(C.price.totalValue));
+  if (C.lineUrl) document.querySelectorAll('[data-line]').forEach(a => a.href = C.lineUrl);
+  if (C.whatsappUrl) document.querySelectorAll('[data-wa]').forEach(a => a.href = C.whatsappUrl);
+  document.querySelectorAll('[data-deadline]').forEach(e => e.textContent = C.price.deadline);
+  document.querySelectorAll('[data-deposit]').forEach(e => e.textContent = yen(C.deposit));
+
+  const fmt = (s) => { const d = new Date(s + 'T00:00:00'); return `${d.getMonth()+1}/${d.getDate()}`; };
+  const label = (d) => `${d.start.slice(0,4)} ${fmt(d.start)}–${fmt(d.end)}`;
+
+  function renderDates(){
+    const box = document.getElementById('dates'), sel = document.getElementById('date');
+    box.innerHTML = ''; const cur = sel.value; sel.innerHTML = '';
+    const ph = document.createElement('option'); ph.value=''; ph.textContent = lang==='en' ? 'Choose a camp' : '請選擇班次'; sel.appendChild(ph);
+    [...C.dates].sort((a,b)=>((a.tier==='peak')-(b.tier==='peak')) || a.start.localeCompare(b.start)).forEach(d => {
+      const full = d.seats <= 0;
+      const tk = tierOf(d), t = C.tiers[tk];
+      const el = document.createElement('div');
+      el.className = 'date' + (full ? ' full' : d.seats === 1 ? ' low' : '');
+      const left = full ? (lang==='en' ? 'Sold out' : '額滿') : (lang==='en' ? `${d.seats}/3 left` : `剩 ${d.seats}/3`);
+      el.innerHTML = `<div><b>${label(d)}</b><div class="dp ${tk}">${lang==='en'?t.en:t.zh} ¥${yen(t.price)}</div></div><span class="left">${left}</span>`;
+      if (!full) { el.style.cursor='pointer'; el.onclick = () => { sel.value = label(d); document.getElementById('email').focus(); }; }
+      box.appendChild(el);
+      const o = document.createElement('option'); o.value = label(d); o.dataset.price = t.price; o.dataset.tier = tk; o.textContent = label(d) + `　¥${yen(t.price)}` + (full ? (lang==='en'?' (sold out)':'（額滿）') : `　${left}`); o.disabled = full; sel.appendChild(o);
+    });
+    const other = document.createElement('option'); other.value = '其他日期／Other'; other.textContent = lang==='en' ? 'Other dates (next release)' : '其他日期（下一批開放時通知我）'; sel.appendChild(other);
+    if (cur) sel.value = cur;
+  }
+  function renderTiers(){
+    const p = C.price, t = document.getElementById('tiers');
+    const html = pastEarly ? (lang==='en'
+      ? `<span class="tier on">Second release ¥${yen(p.current)} · ends ${p.deadline}</span><span class="arrow">→</span><span class="tier">Then ¥${yen(p.regular)}</span>`
+      : `<span class="tier on">第二批 ¥${yen(p.current)}・${p.deadline} 截止</span><span class="arrow">→</span><span class="tier">之後 ¥${yen(p.regular)}</span>`) : lang==='en'
+      ? `<span class="tier on">${p.labelEn} ¥${yen(p.current)} · ends ${p.deadline}</span><span class="arrow">→</span><span class="tier">Next ¥${yen(p.next)}</span><span class="arrow">→</span><span class="tier">Then ¥${yen(p.regular)}</span>`
+      : `<span class="tier on">${p.labelZh} ¥${yen(p.current)}・${p.deadline} 截止</span><span class="arrow">→</span><span class="tier">第二批 ¥${yen(p.next)}</span><span class="arrow">→</span><span class="tier">之後 ¥${yen(p.regular)}</span>`;
+    t.innerHTML = html; const t2 = document.getElementById('tiers2'); if (t2) t2.innerHTML = html;
+  }
+
+  const f = document.getElementById('leadForm');
+  const kids = document.getElementById('children');
+  const range = (a,b,st=1) => { const r=[]; for(let v=a; v<=b+1e-9; v+=st) r.push(+v.toFixed(1)); return r; };
+  const OPTS = {
+    ageA: range(18,80), ageC: range(10,17), height: range(130,200,5), weight: range(30,120,5),
+    shoe: range(20,31,0.5), size: ['XS','S','M','L','XL','XXL']
+  };
+  const DEF = {};
+  const LV = [['完全沒滑過','Never skied/ridden'],['滑過1-2次','Tried 1–2 times'],['會一點','Can do a little']];
+  let saved = [];
+
+  function sel(name, list, val, fmt){
+    const ph = `<option value="">${lang==='en'?'Select':'請選擇'}</option>`;
+    return `<select data-k="${name}">${ph}${list.map(v=>`<option value="${v}"${String(v)===String(val)?' selected':''}>${fmt?fmt(v):v}</option>`).join('')}</select>`;
+  }
+  function personHTML(type, no, d){
+    const zh = lang!=='en';
+    const title = type==='child' ? (zh?`小孩 ${no}`:`Child ${no}`) : (zh?`大人 ${no}`:`Adult ${no}`);
+    const L = (z,e) => `<label>${zh?z:e}</label>`;
+    return `<div class="person" data-type="${type}"><h4>${title}<small class="g"></small></h4><div class="pgrid">
+      <div class="field">${L('年齡','Age')}${sel('age', type==='child'?OPTS.ageC:OPTS.ageA, d.age ?? '', v=>zh?v+' 歲':v)}</div>
+      <div class="field">${L('身高','Height')}${sel('height', OPTS.height, d.height ?? '', v=>v+' cm')}</div>
+      <div class="field">${L('體重','Weight')}${sel('weight', OPTS.weight, d.weight ?? '', v=>v+' kg')}</div>
+      <div class="field">${L('鞋子尺寸','Shoe size')}${sel('shoe', OPTS.shoe, d.shoe ?? '', v=>v.toFixed(1)+' cm')}</div>
+      <div class="field">${L('衣服尺寸','Clothing size')}${sel('size', OPTS.size, d.size ?? '')}</div>
+      <div class="field">${L('雙板／單板','Ski / snowboard')}${sel('discipline', ['雙板','單板'], d.discipline ?? '', v=>zh?v:(v==='單板'?'Snowboard':'Ski'))}</div>
+      <div class="field" style="grid-column:1/-1">${L('滑雪程度','Experience')}${sel('level', LV.map(x=>x[0]), d.level ?? '', v=>zh?v.replace('1-2','1–2 '):LV.find(x=>x[0]===v)[1])}</div>
+    </div></div>`;
+  }
+  function readPeople(){
+    return [...document.querySelectorAll('#people .person')].map(el => {
+      const o = { type: el.dataset.type };
+      el.querySelectorAll('select').forEach(s => o[s.dataset.k] = s.value);
+      return o;
+    });
+  }
+  function renderPeople(){
+    if (document.querySelector('#people .person')) saved = readPeople();
+    const a = +f.adults.value, c = +kids.value, over = a + c > 3;
+    document.getElementById('overBox').style.display = over ? '' : 'none';
+    document.getElementById('submitBtn').style.display = over ? 'none' : '';
+    const box = document.getElementById('people');
+    if (over) { box.innerHTML=''; updateSum(); return; }
+    let html='', ai=0, ci=0;
+    const sa = saved.filter(p=>p.type==='adult'), sc = saved.filter(p=>p.type==='child');
+    for (let i=0;i<a;i++) html += personHTML('adult', i+1, sa[i]||{});
+    for (let i=0;i<c;i++) html += personHTML('child', i+1, sc[i]||{});
+    box.innerHTML = html;
+    box.querySelectorAll('select').forEach(s => s.onchange = updateSum);
+    updateSum();
+  }
+  function updateSum(){
+    const people = document.querySelector('#people .person') ? readPeople() : [];
+    const n = people.length;
+    const opt = document.getElementById('date').selectedOptions[0];
+    const other = opt && opt.value === '其他日期／Other';
+    const unit = (opt && opt.dataset.price) ? +opt.dataset.price : C.price.current;
+    // 保證標籤
+    let ng = [];
+    document.querySelectorAll('#people .person').forEach((el,i) => {
+      const lv = el.querySelector('[data-k="level"]').value, tag = el.querySelector('h4 small');
+      if (!lv) { tag.className=''; tag.textContent=''; return; }
+      const g = lv === '完全沒滑過';
+      tag.className = g ? 'g' : 'n';
+      tag.textContent = g ? (lang==='en'?'✓ Guarantee':'✓ 適用保證') : (lang==='en'?'No guarantee':'不適用保證');
+      if (!g) ng.push(el.querySelector('h4').firstChild.textContent.trim());
+    });
+    const note = document.getElementById('noGuarNote');
+    note.style.display = ng.length ? '' : 'none';
+    note.innerHTML = lang==='en'
+      ? `${ng.join(', ')} already ${ng.length>1?'have':'has'} some experience, so the guarantee doesn't apply. Lessons, lodging, transfers, bonuses and price stay exactly the same.`
+      : `${ng.join('、')} 不是完全新手，所以不適用連續轉彎保證；課程、住宿、接送、贈品和價格都完全一樣。`;
+    const sum = document.getElementById('sumline');
+    if (!n) { sum.style.display='none'; return; }
+    sum.style.display='';
+    sum.innerHTML = other
+      ? (lang==='en' ? `${n} guest${n>1?'s':''} · We'll email you when the next release opens.` : `${n} 位・下一批開放時會 Email 通知你`)
+      : (lang==='en' ? `${n} guest${n>1?'s':''} × ¥${yen(unit)} = <b>¥${yen(n*unit)}</b>` : `${n} 位 × ¥${yen(unit)} ＝ <b>¥${yen(n*unit)}</b>`);
+  }
+  f.adults.onchange = renderPeople; kids.onchange = renderPeople; document.getElementById('date').onchange = updateSum;
+
+  // 4 人以上的 LINE / WhatsApp 按鈕（自動帶入訊息）
+  function setOverLinks(){
+    const d = document.getElementById('date').value;
+    const msg = lang==='en' ? `Hi! We're a group of 4+ and want the 5-day camp${d?' ('+d+')':''}.` : `你好，我們 4 人以上，想報名5天保證班${d?'（'+d+'）':''}`;
+    const lineId = (C.lineUrl||'').split('/').pop();
+    const wa = (C.whatsappUrl||'').split('/').pop();
+    document.querySelectorAll('[data-line-msg]').forEach(a => a.href = `https://line.me/R/oaMessage/${encodeURIComponent(lineId)}/?${encodeURIComponent(msg)}`);
+    document.querySelectorAll('[data-wa-msg]').forEach(a => a.href = `https://wa.me/${wa}?text=${encodeURIComponent(msg)}`);
+  }
+  document.getElementById('date').addEventListener('change', setOverLinks);
+
+  f.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const err = document.getElementById('err'); err.style.display = 'none';
+    const show = (z,en) => { err.textContent = lang==='en'?en:z; err.style.display='block'; };
+    const opt = document.getElementById('date').selectedOptions[0];
+    const data = {
+      name: document.getElementById('name').value.trim(), email: f.email.value.trim(), date: f.date.value,
+      tier: opt && opt.dataset.tier || '', people: readPeople(),
+      website: f.website.value, lang, page: location.href
+    };
+    if (!data.name) return show('請填寫姓名。','Please enter your name.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return show('請輸入正確的 Email。','Please enter a valid email.');
+    if (!data.date) return show('請選擇開班日期。','Please choose your camp dates.');
+    if (!data.people.length || data.people.length > 3) return show('每班最多 3 人。','Max 3 per camp.');
+    const missing = document.querySelector('#people select:invalid, #people select option[value=""]:checked');
+    if (missing) { missing.closest('select') && missing.closest('select').focus(); return show('請把每個人的年齡、身高、體重、鞋子、衣服尺寸、雙板／單板、程度都選好。','Please fill in every field for each person.'); }
+    const btn = document.getElementById('submitBtn'); btn.disabled = true; btn.style.opacity = .6;
+
+    let ok = false;
+    try {
+      const r = await fetch(C.backend, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data) });
+      ok = r.ok;
+    } catch(_) {}
+    if (!ok) { // 備援：用 Web3Forms 寄給 Emi，至少名單不會掉
+      try {
+        const flat = Object.assign({}, data, { people: data.people.map((p,i)=>`${i+1}. ${p.type} ${p.age}歲 ${p.height}cm ${p.weight}kg 鞋${p.shoe} ${p.size} ${p.discipline} ${p.level}`).join(' / ') });
+        await fetch('https://api.web3forms.com/submit', { method:'POST', headers:{'Content-Type':'application/json',Accept:'application/json'},
+          body: JSON.stringify(Object.assign({ access_key: C.web3formsKey, subject: `【保證班・後端失敗備援】${data.date}｜${data.name}｜${data.email}`, from_name: 'HPC 保證班' }, flat)) });
+        ok = true;
+      } catch(_) {}
+    }
+    if (ok) {
+      try { fbq('track','Lead'); } catch(_) {}
+      const wait = data.date === '其他日期／Other' ? '&wait=1' : '';
+      location.href = 'camp-thanks.html?lang=' + lang + '&date=' + encodeURIComponent(data.date) + wait;
+    } else {
+      btn.disabled = false; btn.style.opacity = 1;
+      show('送出失敗，請再試一次，或直接加 LINE 詢問。','Something went wrong. Please try again, or message us on WhatsApp.');
+    }
+  });
+
+  applyLang();
+})();
+</script>
+</body>
+</html>
