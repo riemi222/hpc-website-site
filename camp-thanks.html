@@ -99,7 +99,8 @@ document.querySelectorAll('[data-lang-to]').forEach(function (a) {
   const date = p.get('date') || '';
   document.body.classList.toggle('lang-en', lang === 'en');
   document.documentElement.lang = lang === 'en' ? 'en' : 'zh-Hant';
-  const msg = lang === 'en'
+  const lite = p.get('plan') === 'lite';
+  const msg = lite ? (lang === 'en' ? `Hi! I'd like to ask about the 5-day lite camp${date ? ' (' + date + ')' : ''}.` : `你好，我想詢問旭川5天精簡版${date ? '（' + date + '）' : ''}`) : lang === 'en'
     ? `Hi! I'd like to ask about the all-inclusive 5-day ski camp${date ? ' (' + date + ')' : ''}.`
     : `你好，我想詢問全包滑雪行程${date ? '（' + date + '）' : ''}`;
   const C = window.CONTACT;

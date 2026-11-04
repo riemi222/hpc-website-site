@@ -2,8 +2,10 @@
    site-config.js — 全站共用設定
    要改價格、截止日、班次、聯絡方式，只改這個檔案。
 
-   1) window.CAMP：保證班設定（從 camp.html 原封不動搬過來）
-      camp.html 直接讀 window.CAMP；首頁全包卡的價格、截止日、總價值也從這裡來。
+   1) window.CAMP：保證班／精簡版設定（從 camp.html 原封不動搬過來）
+      camp.html 和 camp-lite.html 直接讀 window.CAMP（精簡版在自己的頁面裡把 plan 換成 'lite'）。
+      開班日期不放這裡：由後端 /api/classes 提供。
+      首頁全包卡的價格、截止日、總價值和精簡版價格也從這裡來。
    2) window.SITE_CONFIG：首頁和其他頁面用的值
       頁面上寫 data-cfg="路徑" 的元素會自動填入：
         data-cfg="camp.earlyBird"                → ¥268,000
@@ -15,6 +17,7 @@
    ★ 這裡是你唯一需要改的地方 ★
    ================================================================ */
 window.CAMP = {
+  plan: 'camp',                 // 這一頁的方案：camp＝保證班、lite＝精簡版
   // 後端網址：Railway 部署完成後，把網址換成你的（結尾要有 /api/camp-lead）
   backend: 'https://hpc-camp-backend-production.up.railway.app/api/camp-lead',
   // 後端掛掉時的備援：仍會用 Web3Forms 寄到你的信箱
@@ -22,10 +25,11 @@ window.CAMP = {
 
   price: {
     current: 268000,            // 目前顯示的價格
-    labelZh: '早鳥第一批', labelEn: 'Early bird · first release',
+    labelZh: '早鳥第一梯', labelEn: 'Early bird · first release',
     deadline: '2026/11/20',     // 這一批截止日
     earlyDeadlineISO: '2026-11-20T23:59:59+09:00', // 過了這個時間（日本時間），早鳥自動變第二批
-    secondDeadline: '2026/12/15',  // 第二批截止日
+    secondDeadline: '2026/12/10',  // 第二梯截止日
+    secondDeadlineISO: '2026-12-10T23:59:59+09:00', // 過了這個時間，自動變正價
     next: 283000,               // 下一批價格
     regular: 298000,            // 正價
     totalValue: 475400          // 總價值（方案 403,400＋贈品 72,000）
@@ -37,30 +41,16 @@ window.CAMP = {
   // 每個價格等級的金額
   tiers: {
     early:   { price: 268000, zh: '早鳥', en: 'Early bird' },
-    second:  { price: 283000, zh: '第二批', en: 'Second release' },
+    second:  { price: 283000, zh: '第二梯', en: 'Second release' },
     regular: { price: 298000, zh: '正價', en: 'Regular' },
-    peak:    { price: 298000, zh: '旺季', en: 'Peak season' }
+    peak:    { price: 298000, zh: '旺季', en: 'Peak season' },
+    // 精簡版（camp-lite.html）用：平日 248,000／旺季 278,000，沒有早鳥
+    liteRegular: { price: 248000, zh: '精簡版', en: 'Lite' },
+    litePeak:    { price: 278000, zh: '精簡版・旺季', en: 'Lite · peak season' }
   },
 
-  // 目前開放的班次（每個日期一次只開一班，最多 3 人）
-  // seats = 這一班剩幾個名額；額滿填 0。額滿後要再開同日期的下一班，就把 seats 改回 3、tier 改成當下的批次。
-  // ── 第一批 早鳥（11/20 截止或 18 個名額賣完）──
-  dates: [
-    { start: '2026-12-18', end: '2026-12-22', seats: 3, tier: 'early' },
-    { start: '2027-01-07', end: '2027-01-11', seats: 3, tier: 'early' },
-    { start: '2027-01-17', end: '2027-01-21', seats: 3, tier: 'early' },
-    { start: '2027-02-17', end: '2027-02-21', seats: 3, tier: 'early' },
-    { start: '2027-03-01', end: '2027-03-05', seats: 3, tier: 'early' },
-    { start: '2027-03-13', end: '2027-03-17', seats: 3, tier: 'early' },
-  // ── 旺季（聖誕、跨年、農曆新年、2月底連假）：一開始就以正價開放，不給早鳥 ──
-    { start: '2026-12-22', end: '2026-12-26', seats: 3, tier: 'peak' },
-    { start: '2026-12-26', end: '2026-12-30', seats: 3, tier: 'peak' },
-    { start: '2026-12-30', end: '2027-01-03', seats: 3, tier: 'peak' },
-    { start: '2027-02-05', end: '2027-02-09', seats: 3, tier: 'peak' },
-    { start: '2027-02-09', end: '2027-02-13', seats: 3, tier: 'peak' },
-    { start: '2027-02-13', end: '2027-02-17', seats: 3, tier: 'peak' },
-    { start: '2027-02-25', end: '2027-03-01', seats: 3, tier: 'peak' }
-  ]
+  // 開班日期、梯次、剩餘名額都由後端自動決定（後端 repo 的 schedule.js），這裡不用改。
+  // 平日班永遠顯示 6 個日期、旺季 7 個；滿班自動換下一班，梯次截止自動換日期和價格。
 };
 
 (function () {
@@ -77,7 +67,7 @@ window.CAMP = {
     },
     // 精簡版
     lite: {
-      price: 248000
+      price: CAMP.tiers.liteRegular.price        // 精簡版平日價
     },
     // 自由搭配起價
     from: {

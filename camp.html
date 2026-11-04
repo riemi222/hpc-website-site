@@ -15,7 +15,7 @@
 fbq('init','1035447772859173');fbq('track','PageView');
 </script>
 
-<!-- 保證班設定（價格、班次、後端網址）在 js/site-config.js 的 window.CAMP -->
+<!-- 保證班設定（價格、梯次、後端網址）在 js/site-config.js 的 window.CAMP；開班日期由後端提供 -->
 <script src="js/site-config.js"></script>
 
 <style>
@@ -78,6 +78,18 @@ h2{font-size:clamp(24px,4vw,34px);line-height:1.3;margin:8px 0 18px;font-weight:
 .pain div{background:#fff;border:1px solid var(--line);border-left:4px solid #c9d4dd;border-radius:10px;padding:12px 16px;color:var(--ink-2)}
 .punch{font-weight:700;font-size:19px;margin-top:20px}
 
+.proof{margin-top:34px}
+.proof h3{font-size:20px;margin:0 0 14px}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ba figure{margin:0;background:#0d2846;border-radius:var(--r);overflow:hidden}
+.ba video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#0d2846}
+.ba figcaption{color:#fff;font-weight:700;font-size:14px;padding:10px 14px}
+.ba figcaption small{display:block;font-weight:400;opacity:.75;font-size:12.5px}
+.review{background:#fff;border:1px solid var(--line);border-left:4px solid var(--orange);border-radius:var(--r);padding:20px 22px;margin-top:14px}
+.review p{margin:0 0 10px;font-size:15.5px;line-height:1.8}
+.review .who{font-size:13px;color:var(--muted)}
+.review .stars{color:var(--gold);letter-spacing:2px;margin-bottom:6px}
+@media(max-width:720px){.ba{grid-template-columns:1fr}}
 .three{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px}
 .card .n{font-size:30px;font-weight:900;color:var(--blue)}
@@ -105,8 +117,6 @@ h2{font-size:clamp(24px,4vw,34px);line-height:1.3;margin:8px 0 18px;font-weight:
 .exc{margin-top:14px;color:var(--muted);font-size:14px}
 .photos{display:grid;gap:10px}
 .photos img{border-radius:12px;width:100%;aspect-ratio:16/8;object-fit:cover}
-.photos img.whole{aspect-ratio:auto;height:auto}
-.photos img.people{object-position:center 66%}
 .photos .cap{font-size:12.5px;color:var(--muted);margin:-4px 0 4px}
 
 /* bonus */
@@ -284,7 +294,23 @@ document.querySelectorAll('[data-lang-to]').forEach(function (a) {
       <div class="card"><div class="n">Day 4</div><h3><span class="zh">每天一個明確目標</span><span class="en">A clear goal every day</span></h3><p><span class="zh">你知道今天要學會什麼，也看得到自己做到了。</span><span class="en">You know what you'll learn today, and you see yourself do it.</span></p></div>
       <div class="card"><div class="n">✓</div><h3><span class="zh">做不到有保證</span><span class="en">Guaranteed</span></h3><p><span class="zh">做不到，下一季免費重上。我們敢這樣說，因為這套方法我們教過很多次。</span><span class="en">Miss the goal and retake the lessons free next season.</span></p></div>
     </div>
-    <!-- ★ 學員實證：有 Day1 vs Day4 影片和真實評價後，放在這裡 -->
+    <div class="proof">
+      <h3><span class="zh">同一位學員：before → after</span><span class="en">Same student: before → after</span></h3>
+      <div class="ba">
+        <figure>
+          <video src="video/before.mp4" poster="video/before.jpg" autoplay muted loop playsinline preload="metadata"></video>
+          <figcaption>Before<small><span class="zh">上課前</span><span class="en">Before lessons</span></small></figcaption>
+        </figure>
+        <figure>
+          <video src="video/after.mp4" poster="video/after.jpg" autoplay muted loop playsinline preload="metadata"></video>
+          <figcaption>After<small><span class="zh">3 天課程後</span><span class="en">After 3 lesson days</span></small></figcaption>
+        </figure>
+      </div>
+      <div class="review">
+        <p><span class="zh">「教練上課很用心，很有經驗，都只需要看一小部分滑行就可以指出我的問題在哪裡，並立刻可以提出精準的練習來修正滑行的錯誤。我覺得這三天的課程是我滑雪生涯中最開心充實也進步最多的一次！真的十分感謝，讓我真的體驗到滑雪的樂趣與進步的成就感。我決定以後每一季都要來！」</span><span class="en">"My instructor was so dedicated and experienced — after watching just a few seconds of my riding, he could pinpoint exactly what was wrong and immediately give me precise drills to fix it. These three days were the happiest, fullest and most improved I've ever been on snow! Thank you so much for letting me truly feel the fun of skiing and the joy of progress. I've decided to come back every season!"</span></p>
+        <div class="who"><span class="zh">— D.T，台灣・單板</span><span class="en">— D.T, Taiwan · snowboard (translated from Chinese)</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -325,15 +351,15 @@ document.querySelectorAll('[data-lang-to]').forEach(function (a) {
         <p class="exc"><span class="zh">不含：早午晚餐、機票、旅平險（需涵蓋滑雪）。住處有廚房，附近也有很多旭川在地餐廳。</span><span class="en">Not included: meals, flights, travel insurance (must cover skiing/snowboarding). The apartment has a kitchen and local restaurants are close by.</span></p>
       </div>
       <div class="photos">
-        <img src="img/transfer.jpg" alt="接送車" class="whole"><div class="cap"><span class="zh">新千歲機場直達旭川住處</span><span class="en">New Chitose Airport to your door</span></div>
+        <img src="img/transfer-van.jpg" alt="新千歲機場接送車"><div class="cap"><span class="zh">新千歲機場直達旭川住處</span><span class="en">New Chitose Airport to your door</span></div>
         <img src="img/room.jpg" alt="日式公寓"><div class="cap"><span class="zh">日式公寓住宿</span><span class="en">Your Japanese apartment</span></div>
-        <img src="img/small-group.jpg" alt="1:3 小班課程" class="people"><div class="cap"><span class="zh">1:3 小班課程</span><span class="en">Small-group lessons</span></div>
+        <img src="img/lesson-group.jpg" alt="1:3 小班課程"><div class="cap"><span class="zh">1:3 小班課程</span><span class="en">Small-group lessons</span></div>
       </div>
     </div>
 
     <h2 style="margin-top:48px;font-size:24px"><span class="zh">加碼贈品・只有這個班才有</span><span class="en">Bonuses · only with this camp</span></h2>
     <table class="bonus">
-      <tr><td><span class="zh">新手禮包：滑雪用毛帽＋滑雪機能襪，帶回家</span><span class="en">Starter pack: ski beanie + technical ski socks, yours to keep</span><div class="first"><span class="zh">第一批報名限定</span><span class="en">First release only</span></div></td><td><span class="zh">不用為了一趟旅行專程買裝備</span><span class="en">No buying gear for one trip</span></td></tr>
+      <tr><td><span class="zh">新手禮包：滑雪用毛帽＋滑雪機能襪，帶回家</span><span class="en">Starter pack: ski beanie + technical ski socks, yours to keep</span><div class="first"><span class="zh">第一梯報名限定</span><span class="en">First release only</span></div></td><td><span class="zh">不用為了一趟旅行專程買裝備</span><span class="en">No buying gear for one trip</span></td></tr>
       <tr><td><span class="zh">行前線上課：在家先練的 3 支暖身影片</span><span class="en">Pre-trip: 3 warm-up videos</span></td><td><span class="zh">怕跟不上、怕受傷</span><span class="en">Fear of falling behind or getting hurt</span></td></tr>
       <tr><td><span class="zh">教練拍攝＋剪好的結業影片</span><span class="en">Instructor-filmed, edited camp video</span></td><td><span class="zh">留下你第一次滑下山的樣子，直接發 IG</span><span class="en">Your first run, ready for Instagram</span></td></tr>
       <tr><td><span class="zh">結業技術報告＋下一步建議</span><span class="en">Skills report + next steps</span></td><td><span class="zh">回國後知道怎麼繼續練</span><span class="en">Know how to keep improving</span></td></tr>
@@ -383,7 +409,7 @@ document.querySelectorAll('[data-lang-to]').forEach(function (a) {
   <div class="wrap">
     <div class="kicker"><span class="zh">名額有限</span><span class="en">Limited seats</span></div>
     <h2><span class="zh">選一個日期，剩下的交給我們</span><span class="en">Pick a date. We handle the rest.</span></h2>
-    <p class="lead"><span class="zh">每班只收 3 人，因為超過 3 人，我們就做不到保證。第一批額滿就調到下一批價格。</span><span class="en">Each camp takes only 3 people — beyond 3 we can't guarantee the result. When the first release sells out, the price goes up.</span></p>
+    <p class="lead"><span class="zh">每班只收 3 人，因為超過 3 人，我們就做不到保證。第一梯額滿就調到下一梯價格。</span><span class="en">Each camp takes only 3 people — beyond 3 we can't guarantee the result. When the first release sells out, the price goes up.</span></p>
     <div class="tiers" id="tiers"></div>
     <div class="dates" id="dates"></div>
     <p class="time"><span class="zh">聖誕、跨年、農曆新年等旺季班次不適用早鳥價。其他日期將在下一批開放。</span><span class="en">Early-bird pricing doesn't apply to peak-season camps (Christmas, New Year, Lunar New Year). More dates open in the next release.</span></p>
@@ -467,7 +493,7 @@ document.querySelectorAll('[data-lang-to]').forEach(function (a) {
       <details><summary><span class="zh">小孩可以參加嗎？</span><span class="en">Can children join?</span></summary><p><span class="zh">這個班僅限 10 歲以上（含）參加。</span><span class="en">This camp is for ages 10 and up.</span></p></details>
       <details><summary><span class="zh">可以自己帶雪具嗎？</span><span class="en">Can I bring my own gear?</span></summary><p><span class="zh">可以，但價格不變。</span><span class="en">Yes, but the price stays the same.</span></p></details>
       <details><summary><span class="zh">下雪太大、雪場停駛怎麼辦？</span><span class="en">What if a storm closes the resort?</span></summary><p><span class="zh">我們會改到旭川周邊其他雪場上課。</span><span class="en">We move your lesson to another ski area around Asahikawa.</span></p></details>
-      <details><summary><span class="zh">怎麼付款？</span><span class="en">How do I pay?</span></summary><p><span class="zh">報價信裡有訂金付款連結（每人 ¥<span data-deposit></span>，信用卡），付了就保留名額。尾款於出發前 30 天付清。</span><span class="en">Your quote email has a deposit link (¥<span data-deposit></span> per person, card). Paying holds your seats. The balance is due 30 days before arrival.</span></p></details>
+      <details><summary><span class="zh">怎麼付款？</span><span class="en">How do I pay?</span></summary><p><span class="zh">報價信裡有訂金付款連結（每人 ¥<span data-deposit></span>，信用卡），付了就保留名額。尾款於出發前 10 天付清（出發前 10 天內報名需一次付清）。</span><span class="en">Your quote email has a deposit link (¥<span data-deposit></span> per person, card). Paying holds your seats. The balance is due 10 days before arrival (book within 10 days and you pay in full).</span></p></details>
       <details><summary><span class="zh">取消政策</span><span class="en">Cancellation policy</span></summary>
         <div class="policy"><p><span class="zh">不論任何原因，依取消日計算退款：</span><span class="en">Whatever the reason, refunds depend on when you cancel:</span></p>
         <table>
@@ -500,10 +526,16 @@ document.querySelectorAll('[data-lang-to]').forEach(function (a) {
   const yen = n => Number(n).toLocaleString('en-US');
   // 早鳥截止後自動切換成第二批
   const pastEarly = Date.now() > new Date(C.price.earlyDeadlineISO || '2026-11-20T23:59:59+09:00').getTime();
-  const tierOf = d => (d.tier === 'early' && pastEarly) ? 'second' : (C.tiers[d.tier] ? d.tier : 'regular');
-  if (pastEarly) {
-    C.price.current = C.tiers.second.price; C.price.labelZh = '第二批'; C.price.labelEn = 'Second release';
+  const isLite = C.plan === 'lite';
+  const tierOf = d => isLite ? (d.tier === 'peak' ? 'litePeak' : 'liteRegular') : (d.tier === 'early' && pastEarly) ? 'second' : (C.tiers[d.tier] ? d.tier : 'regular');
+  const pastSecond = Date.now() > new Date(C.price.secondDeadlineISO || '2026-12-10T23:59:59+09:00').getTime();
+  if (pastEarly && !isLite) {
+    C.price.current = C.tiers.second.price; C.price.labelZh = '第二梯'; C.price.labelEn = 'Second release';
     C.price.deadline = C.price.secondDeadline; C.price.next = C.price.regular;
+  }
+  if (pastSecond && !isLite) {
+    C.price.current = C.tiers.regular.price; C.price.labelZh = '旭川5天全包'; C.price.labelEn = '5 days all-in';
+    C.price.deadline = ''; C.price.next = C.price.regular;
   }
   const params = new URLSearchParams(location.search);
   let lang = params.get('lang') || ((navigator.language||'').toLowerCase().startsWith('zh') ? 'zh' : 'en');
@@ -522,37 +554,58 @@ document.querySelectorAll('[data-lang-to]').forEach(function (a) {
   document.querySelectorAll('[data-value]').forEach(e => e.textContent = yen(C.price.totalValue));
   if (C.lineUrl) document.querySelectorAll('[data-line]').forEach(a => a.href = C.lineUrl);
   if (C.whatsappUrl) document.querySelectorAll('[data-wa]').forEach(a => a.href = C.whatsappUrl);
-  document.querySelectorAll('[data-deadline]').forEach(e => e.textContent = C.price.deadline);
+  document.querySelectorAll('[data-deadline]').forEach(e => { e.textContent = C.price.deadline; if (!C.price.deadline && !isLite && e.closest('.was')) { const w = e.closest('.was'); w.innerHTML = w.innerHTML.split('・')[0]; } });
   document.querySelectorAll('[data-deposit]').forEach(e => e.textContent = yen(C.deposit));
 
-  const fmt = (s) => { const d = new Date(s + 'T00:00:00'); return `${d.getMonth()+1}/${d.getDate()}`; };
-  const label = (d) => `${d.start.slice(0,4)} ${fmt(d.start)}–${fmt(d.end)}`;
-
+  // 班次由後端提供：window.__classes = [{id,label,start,end,kind,left,status,tier,price}]
+  const chatMsg = (d) => lang==='en' ? `Hi! I'd like to ask about the ${isLite?'5-day lite camp':'5-day camp'} (${d}).` : `你好，我想詢問${isLite?'旭川5天精簡版':'旭川5天保證班'}（${d}）`;
+  const chatHref = (d) => {
+    const lineId = (C.lineUrl||'').split('/').pop(), wa = (C.whatsappUrl||'').split('/').pop();
+    return lang==='en' ? `https://wa.me/${wa}?text=${encodeURIComponent(chatMsg(d))}` : `https://line.me/R/oaMessage/${encodeURIComponent(lineId)}/?${encodeURIComponent(chatMsg(d))}`;
+  };
   function renderDates(){
     const box = document.getElementById('dates'), sel = document.getElementById('date');
     box.innerHTML = ''; const cur = sel.value; sel.innerHTML = '';
     const ph = document.createElement('option'); ph.value=''; ph.textContent = lang==='en' ? 'Choose a camp' : '請選擇班次'; sel.appendChild(ph);
-    [...C.dates].sort((a,b)=>((a.tier==='peak')-(b.tier==='peak')) || a.start.localeCompare(b.start)).forEach(d => {
-      const full = d.seats <= 0;
-      const tk = tierOf(d), t = C.tiers[tk];
+    const list = window.__classes;
+    if (!list) {
+      box.innerHTML = window.__classesFailed
+        ? `<p class="time">${lang==='en' ? 'Dates could not load. Please refresh, or <a href="'+chatHref('')+'">message us</a>.' : '日期載入失敗，請重新整理，或<a href="'+chatHref('')+'">傳訊息給我們</a>。'}</p>`
+        : `<p class="time">${lang==='en' ? 'Loading dates…' : '日期載入中…'}</p>`;
+    }
+    const sorted = [...(list||[])].sort((a,b)=> isLite ? ((a.kind==='peak')-(b.kind==='peak')) || a.start.localeCompare(b.start) : a.start.localeCompare(b.start));
+    sorted.forEach(d => {
+      const t = C.tiers[d.tier] || { zh: '', en: '' };
+      const full = d.status === 'full' || d.left <= 0, ask = d.status === 'inquire';
+      const lft = d.left;
       const el = document.createElement('div');
-      el.className = 'date' + (full ? ' full' : d.seats === 1 ? ' low' : '');
-      const left = full ? (lang==='en' ? 'Sold out' : '額滿') : (lang==='en' ? `${d.seats}/3 left` : `剩 ${d.seats}/3`);
-      el.innerHTML = `<div><b>${label(d)}</b><div class="dp ${tk}">${lang==='en'?t.en:t.zh} ¥${yen(t.price)}</div></div><span class="left">${left}</span>`;
-      if (!full) { el.style.cursor='pointer'; el.onclick = () => { sel.value = label(d); document.getElementById('email').focus(); }; }
+      el.className = 'date' + (full ? ' full' : ask ? ' low' : lft === 1 ? ' low' : '');
+      const left = full ? (lang==='en' ? 'Sold out' : '額滿')
+        : ask ? `<a href="${chatHref(d.label)}" target="_blank" rel="noopener">${lang==='en' ? 'Message us' : '請詢問我們'}</a>`
+        : (lang==='en' ? `${lft}/3 left` : `剩 ${lft}/3`);
+      el.innerHTML = `<div><b>${d.label}</b><div class="dp ${d.tier}">${lang==='en'?t.en:t.zh} ¥${yen(d.price)}</div></div><span class="left">${left}</span>`;
+      if (!full && !ask) { el.style.cursor='pointer'; el.onclick = () => { sel.value = d.label; updateSum(); setOverLinks(); document.getElementById('email').focus(); }; }
       box.appendChild(el);
-      const o = document.createElement('option'); o.value = label(d); o.dataset.price = t.price; o.dataset.tier = tk; o.textContent = label(d) + `　¥${yen(t.price)}` + (full ? (lang==='en'?' (sold out)':'（額滿）') : `　${left}`); o.disabled = full; sel.appendChild(o);
+      const o = document.createElement('option'); o.value = d.label; o.dataset.id = d.id; o.dataset.price = d.price; o.dataset.tier = d.tier; o.dataset.left = lft;
+      o.textContent = d.label + `　¥${yen(d.price)}` + (full ? (lang==='en'?' (sold out)':'（額滿）') : ask ? (lang==='en'?' (message us)':'（請用 LINE 詢問）') : `　${lang==='en' ? lft+'/3 left' : '剩 '+lft+'/3'}`);
+      o.disabled = full || ask; sel.appendChild(o);
     });
     const other = document.createElement('option'); other.value = '其他日期／Other'; other.textContent = lang==='en' ? 'Other dates (next release)' : '其他日期（下一批開放時通知我）'; sel.appendChild(other);
-    if (cur) sel.value = cur;
+    if (cur && [...sel.options].some(o => o.value === cur && !o.disabled)) sel.value = cur;
+    // 早鳥賣完時，「起」價跟著最低價走
+    if (list && !isLite) {
+      const reg = list.filter(d => d.kind === 'regular' && d.status === 'open' && d.left > 0).map(d => d.price);
+      if (reg.length) document.querySelectorAll('span[data-price]').forEach(e => e.textContent = yen(Math.min(...reg)));
+    }
   }
   function renderTiers(){
     const p = C.price, t = document.getElementById('tiers');
-    const html = pastEarly ? (lang==='en'
+    const html = pastSecond ? (lang==='en' ? `<span class="tier on">¥${yen(p.regular)} per person</span>` : `<span class="tier on">每人 ¥${yen(p.regular)}</span>`) : pastEarly ? (lang==='en'
       ? `<span class="tier on">Second release ¥${yen(p.current)} · ends ${p.deadline}</span><span class="arrow">→</span><span class="tier">Then ¥${yen(p.regular)}</span>`
-      : `<span class="tier on">第二批 ¥${yen(p.current)}・${p.deadline} 截止</span><span class="arrow">→</span><span class="tier">之後 ¥${yen(p.regular)}</span>`) : lang==='en'
+      : `<span class="tier on">第二梯 ¥${yen(p.current)}・${p.deadline} 截止</span><span class="arrow">→</span><span class="tier">之後 ¥${yen(p.regular)}</span>`) : lang==='en'
       ? `<span class="tier on">${p.labelEn} ¥${yen(p.current)} · ends ${p.deadline}</span><span class="arrow">→</span><span class="tier">Next ¥${yen(p.next)}</span><span class="arrow">→</span><span class="tier">Then ¥${yen(p.regular)}</span>`
-      : `<span class="tier on">${p.labelZh} ¥${yen(p.current)}・${p.deadline} 截止</span><span class="arrow">→</span><span class="tier">第二批 ¥${yen(p.next)}</span><span class="arrow">→</span><span class="tier">之後 ¥${yen(p.regular)}</span>`;
+      : `<span class="tier on">${p.labelZh} ¥${yen(p.current)}・${p.deadline} 截止</span><span class="arrow">→</span><span class="tier">第二梯 ¥${yen(p.next)}</span><span class="arrow">→</span><span class="tier">之後 ¥${yen(p.regular)}</span>`;
+    if (isLite) { t.innerHTML=''; t.style.display='none'; return; }
     t.innerHTML = html; const t2 = document.getElementById('tiers2'); if (t2) t2.innerHTML = html;
   }
 
@@ -655,8 +708,8 @@ document.querySelectorAll('[data-lang-to]').forEach(function (a) {
     const opt = document.getElementById('date').selectedOptions[0];
     const data = {
       name: document.getElementById('name').value.trim(), email: f.email.value.trim(), date: f.date.value,
-      tier: opt && opt.dataset.tier || '', people: readPeople(),
-      website: f.website.value, lang, page: location.href
+      tier: opt && opt.dataset.tier || '', classId: opt && opt.dataset.id || '', people: readPeople(),
+      website: f.website.value, lang, page: location.href, plan: C.plan || 'camp'
     };
     if (!data.name) return show('請填寫姓名。','Please enter your name.');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return show('請輸入正確的 Email。','Please enter a valid email.');
@@ -664,24 +717,32 @@ document.querySelectorAll('[data-lang-to]').forEach(function (a) {
     if (!data.people.length || data.people.length > 3) return show('每班最多 3 人。','Max 3 per camp.');
     const missing = document.querySelector('#people select:invalid, #people select option[value=""]:checked');
     if (missing) { missing.closest('select') && missing.closest('select').focus(); return show('請把每個人的年齡、身高、體重、鞋子、衣服尺寸、雙板／單板、程度都選好。','Please fill in every field for each person.'); }
+    if (opt && opt.dataset.left !== undefined && +opt.dataset.left < data.people.length) return show(`這一班只剩 ${opt.dataset.left} 個名額，請減少人數或選其他日期。`, `Only ${opt.dataset.left} seat(s) left on these dates. Please choose fewer people or other dates.`);
     const btn = document.getElementById('submitBtn'); btn.disabled = true; btn.style.opacity = .6;
 
     let ok = false;
     try {
       const r = await fetch(C.backend, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data) });
       ok = r.ok;
+      if (r.status === 409) { // 這一班剛被訂走
+        const j = await r.json().catch(() => ({}));
+        seatsAt = 0; await loadSeats();
+        btn.disabled = false; btn.style.opacity = 1;
+        if (j.error === 'inquire') return show('這一班快開課了，請直接用 LINE 詢問我們。', 'This camp starts very soon. Please message us directly.');
+        return show(`抱歉，這一班剛剛被訂走，只剩 ${j.left || 0} 個名額。請選其他日期。`, `Sorry, these dates just filled up (${j.left || 0} seat(s) left). Please choose other dates.`);
+      }
     } catch(_) {}
     if (!ok) { // 備援：用 Web3Forms 寄給 Emi，至少名單不會掉
       try {
         const flat = Object.assign({}, data, { people: data.people.map((p,i)=>`${i+1}. ${p.type} ${p.age}歲 ${p.height}cm ${p.weight}kg 鞋${p.shoe} ${p.size} ${p.discipline} ${p.level}`).join(' / ') });
         await fetch('https://api.web3forms.com/submit', { method:'POST', headers:{'Content-Type':'application/json',Accept:'application/json'},
-          body: JSON.stringify(Object.assign({ access_key: C.web3formsKey, subject: `【保證班・後端失敗備援】${data.date}｜${data.name}｜${data.email}`, from_name: 'HPC 保證班' }, flat)) });
+          body: JSON.stringify(Object.assign({ access_key: C.web3formsKey, subject: `【${isLite?'精簡版':'保證班'}・後端失敗備援】${data.date}｜${data.name}｜${data.email}`, from_name: 'HPC 保證班' }, flat)) });
         ok = true;
       } catch(_) {}
     }
     if (ok) {
       try { fbq('track','Lead'); } catch(_) {}
-      const wait = data.date === '其他日期／Other' ? '&wait=1' : '';
+      const wait = (data.date === '其他日期／Other' ? '&wait=1' : '') + (isLite ? '&plan=lite' : '');
       location.href = 'camp-thanks.html?lang=' + lang + '&date=' + encodeURIComponent(data.date) + wait;
     } else {
       btn.disabled = false; btn.style.opacity = 1;
@@ -689,7 +750,24 @@ document.querySelectorAll('[data-lang-to]').forEach(function (a) {
     }
   });
 
+  // 班次和剩餘名額：向後端查詢（梯次、滿班換日期都由後端決定）
+  const seatsUrl = (C.backend || '').replace(/\/api\/camp-lead$/, '/api/classes?plan=' + (isLite ? 'lite' : 'camp'));
+  let seatsAt = 0;
+  async function loadSeats(retry){
+    if (!seatsUrl || Date.now() - seatsAt < 15000) return;
+    seatsAt = Date.now();
+    try {
+      const r = await fetch(seatsUrl); const j = await r.json();
+      if (j.ok) { window.__classes = j.classes || []; window.__classesFailed = false; renderDates(); updateSum(); setOverLinks && setOverLinks(); return; }
+      throw new Error('not ok');
+    } catch(_) {
+      if (!retry) { seatsAt = 0; setTimeout(() => loadSeats(true), 3000); return; }
+      if (!window.__classes) { window.__classesFailed = true; renderDates(); }
+    }
+  }
+  document.getElementById('date').addEventListener('focus', loadSeats);
   applyLang();
+  loadSeats();
 })();
 </script>
 </body>
