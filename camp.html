@@ -573,7 +573,7 @@ document.querySelectorAll('[data-lang-to]').forEach(function (a) {
         ? `<p class="time">${lang==='en' ? 'Dates could not load. Please refresh, or <a href="'+chatHref('')+'">message us</a>.' : '日期載入失敗，請重新整理，或<a href="'+chatHref('')+'">傳訊息給我們</a>。'}</p>`
         : `<p class="time">${lang==='en' ? 'Loading dates…' : '日期載入中…'}</p>`;
     }
-    const sorted = [...(list||[])].sort((a,b)=> isLite ? ((a.kind==='peak')-(b.kind==='peak')) || a.start.localeCompare(b.start) : a.start.localeCompare(b.start));
+    const sorted = [...(list||[])].sort((a,b)=> ((a.kind==='peak')-(b.kind==='peak')) || a.start.localeCompare(b.start));
     sorted.forEach(d => {
       const t = C.tiers[d.tier] || { zh: '', en: '' };
       const full = d.status === 'full' || d.left <= 0, ask = d.status === 'inquire';
