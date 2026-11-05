@@ -71,7 +71,7 @@ window.CAMP = {
     },
     // 自由搭配起價
     from: {
-      transfer: 80000,  // 機場接送（單程）
+      transfer: 43000,  // 機場接送（單程，最便宜路線；完整價目在 custom.html 的 window.CUSTOM）
       lodging: 11000,   // 住宿（每晚每人）
       storage: 16000,   // 倉儲（一年）
       lesson: 98000     // 課程（一天 6 小時）

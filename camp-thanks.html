@@ -100,13 +100,19 @@ document.querySelectorAll('[data-lang-to]').forEach(function (a) {
   document.body.classList.toggle('lang-en', lang === 'en');
   document.documentElement.lang = lang === 'en' ? 'en' : 'zh-Hant';
   const lite = p.get('plan') === 'lite';
-  const msg = lite ? (lang === 'en' ? `Hi! I'd like to ask about the 5-day lite camp${date ? ' (' + date + ')' : ''}.` : `你好，我想詢問旭川5天精簡版${date ? '（' + date + '）' : ''}`) : lang === 'en'
+  const custom = p.get('plan') === 'custom';
+  const msg = custom ? (lang === 'en' ? "Hi! I just sent a custom trip quote and have a question." : '你好，我剛送出自由搭配的估價，想詢問一下') : lite ? (lang === 'en' ? `Hi! I'd like to ask about the 5-day lite camp${date ? ' (' + date + ')' : ''}.` : `你好，我想詢問旭川5天精簡版${date ? '（' + date + '）' : ''}`) : lang === 'en'
     ? `Hi! I'd like to ask about the all-inclusive 5-day ski camp${date ? ' (' + date + ')' : ''}.`
     : `你好，我想詢問全包滑雪行程${date ? '（' + date + '）' : ''}`;
   const C = window.CONTACT;
   // LINE 官方帳號：開啟聊天並自動帶入訊息（未加好友會先顯示加好友）
   document.getElementById('lineBtn').href = `https://line.me/R/oaMessage/${encodeURIComponent(C.lineId)}/?${encodeURIComponent(msg)}`;
   document.getElementById('waBtn').href = `https://wa.me/${C.whatsapp}?text=${encodeURIComponent(msg)}`;
+  if (custom) {
+    document.querySelector('h1').innerHTML = lang==='en' ? 'Your quote is on its way' : '估價已寄到你的信箱';
+    document.querySelector('.sub').innerHTML = lang==='en' ? "We'll confirm everything within 24 hours, then email you a deposit link." : '我們會在 24 小時內確認，確認後寄訂金連結給你。';
+    document.querySelectorAll('.back').forEach(a => { a.href = 'custom.html'; a.innerHTML = lang==='en' ? '← Back' : '← 回到自由搭配'; });
+  }
   if (p.get('wait') === '1') {
     document.querySelector('h1').innerHTML = lang==='en' ? "You're on the list" : '已幫你登記';
     document.querySelector('.sub').innerHTML = lang==='en' ? "We'll email you first when the next release opens." : '下一批開放時，會第一個 Email 通知你。';
