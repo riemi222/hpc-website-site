@@ -968,9 +968,9 @@ details.table[open] summary::after{content:' ▴'}
   }
   function validShuttle(){
     const t = S.shuttle;
-    if (transferMismatch()) return { ok: false, msg: L('機場接送的地點不是旭川，請先回到第 1 頁修改。', 'Your airport transfer is not to/from Asahikawa. Please fix step 1 first.') };
     if (t.want === null || t.want === undefined) return { ok: false, msg: L('請選擇「要」或「不要」。', 'Please choose Yes or No.') };
-    if (!t.want) return { ok: true };
+    if (!t.want) return { ok: true }; // 不要雪場接送：接送地點不是旭川也可以直接下一步
+    if (transferMismatch()) return { ok: false, msg: L('機場接送的地點不是旭川，請先回到第 1 頁修改。', 'Your airport transfer is not to/from Asahikawa. Please fix step 1 first.') };
     if (!(n(S.people.adults) + n(S.people.kids))) return { ok: false, msg: L('請選人數。', 'Please choose the number of guests.') };
     if (!t.days.length) return { ok: false, msg: L('請加至少一天。', 'Please add at least one day.') };
     const seen = new Set();
