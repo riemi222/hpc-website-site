@@ -39,7 +39,7 @@
   .hpc-faq__q-mark{ font-family:'Bebas Neue', sans-serif; color:var(--accent-bright); flex-shrink:0; transition:transform .2s ease; }
   .hpc-faq__item.is-open .hpc-faq__q-mark{ transform:rotate(45deg); }
   .hpc-faq__a{ max-height:0; overflow:hidden; transition:max-height .25s ease; }
-  .hpc-faq__item.is-open .hpc-faq__a{ max-height:400px; }
+  .hpc-faq__item.is-open .hpc-faq__a{ max-height:1000px; }
   .hpc-faq__a-inner{ padding:0 18px 16px; font-family:'Noto Sans TC', sans-serif; font-size:13.5px; color:var(--muted); line-height:1.8; }
   .hpc-faq__a-inner ul{ margin:6px 0 0 1.1rem; padding:0; }
   .hpc-faq__a-inner li{ margin-bottom:4px; }
@@ -82,29 +82,9 @@ src="https://www.facebook.com/tr?id=1035447772859173&ev=PageView&noscript=1"
       <p class="hpc-faq__intro">Tap a question to expand the answer — can't find what you need? Feel free to contact us directly.</p>
     </div>
 
-    <div class="hpc-faq__section">
-      <p class="hpc-faq__section-title">General</p>
-      <div class="hpc-faq__list" id="faqGroup0"></div>
-    </div>
+    <div id="faqSections"></div>
 
     <div class="hpc-faq__section">
-      <p class="hpc-faq__section-title">Booking &amp; Packages</p>
-      <div class="hpc-faq__list" id="faqGroup1"></div>
-    </div>
-
-    <div class="hpc-faq__section">
-      <p class="hpc-faq__section-title">Lessons &amp; Training Camps</p>
-      <div class="hpc-faq__list" id="faqGroup2"></div>
-    </div>
-
-    <div class="hpc-faq__section">
-      <p class="hpc-faq__section-title">Lodging &amp; Gear Storage</p>
-      <div class="hpc-faq__list" id="faqGroup3"></div>
-    </div>
-
-    <div class="hpc-faq__section">
-      <p class="hpc-faq__section-title">Safety &amp; Cancellation Policy</p>
-      <div class="hpc-faq__list" id="faqGroup4"></div>
       <div class="hpc-faq__contact">Can't find your answer? Reach us directly through the contact form at the bottom of any package page and we'll reply as soon as we can.</div>
     </div>
 
@@ -113,99 +93,98 @@ src="https://www.facebook.com/tr?id=1035447772859173&ev=PageView&noscript=1"
 
 <script>
 (function () {
-  var GROUPS = {
-    faqGroup0: [
-      {
-        q: 'Can I join with zero skiing experience?',
-        a: "Yes. Our coaches adjust the teaching pace to your actual level, starting from putting on gear and riding the lift — no prior experience needed."
-      },
-      {
-        q: 'Do the coaches speak Chinese?',
-        a: 'Yes. The founder and most partner coaches can teach in Chinese; if a specific coach\'s language doesn\'t match your needs, we also offer an accompanying translator coach option (see the "Lessons" booking form for details).'
-      },
-      {
-        q: 'Will the trip be cancelled for bad weather or poor snow conditions?',
-        a: 'We decide whether to adjust or postpone based on on-site conditions and a safety assessment — see "Safety &amp; Cancellation Policy" below for details. Safety always comes before keeping to the original schedule.'
-      },
-      {
-        q: 'Do I need to bring my own ski gear?',
-        a: 'No. We can arrange gear rental for you; if you have your own gear, you can also use our <a href="storage-en.html">gear storage &amp; maintenance</a> service so you don\'t have to carry your board back and forth every trip.'
-      },
-      {
-        q: 'Can kids join the lessons?',
-        a: "Yes, we have extensive experience teaching families and children — we adjust our approach to the child's age and physical ability. Just let us know the child's age in the notes field of the booking form."
-      },
-      {
-        q: 'What payment methods are available?',
-        a: "We accept online credit card payment (securely encrypted via Stripe). For some offers that need availability confirmed first (like a room hold or a waitlisted lesson), we'll check with you first and send a payment link once confirmed."
-      }
-    ],
-    faqGroup1: [
-      {
-        q: 'What\'s the difference between the four "kits" on the homepage and the packages matched by the "30-second quiz"?',
-        a: 'The four kits (airport transfer, Asahikawa powder trip, gear storage &amp; maintenance, ski lessons) are pages for a single service on its own. The A/B/C/D packages matched by the quiz combine multiple services based on your situation. You can book directly from either side — just pick the level of detail you need.'
-      },
-      {
-        q: 'Are there any restrictions on the Hokkaido sightseeing charter／powder-chasing charter?',
-        a: 'This service is only available to guests who have also booked lodging, or added a course／guide — it\'s not open as a standalone booking (storage-only or transfer-only doesn\'t qualify). You can add a qualifying service directly on the relevant page.'
-      }
-    ],
-    faqGroup2: [
-      {
-        q: 'Does the lesson price include a lift ticket or gear rental?',
-        a: 'No. The lesson price covers instruction only — lift tickets and personal gear (board, boots, etc.) need to be arranged or rented separately.'
-      },
-      {
-        q: 'How is low season／high season pricing split for lessons?',
-        a: 'Low season: 2026/12/01–12/22, 2027/01/04–02/02, 2027/02/16–02/25, 2027/03/03–04/01, 2027/04/07 through resort closing.<br>High season: 2026/12/23–01/03, 2027/02/03–02/15, 2027/02/26–03/02, 2027/04/02–04/06. The system auto-detects the season from the lesson date you enter.'
-      },
-      {
-        q: 'Can the dates for the Former Team Japan Olympic Camp be guaranteed?',
-        a: "No. This camp is subject to the coach's actual availability — we'll do our best to arrange it, but can't guarantee your selected dates. The confirmed dates will be discussed with you by a team member via email."
-      }
-    ],
-    faqGroup3: [
-      {
-        q: 'What room types are available?',
-        a: 'Budget Japanese-Style Room: one person per room, ¥10,000／person／night.<br>Capsule Room: base 2 people ¥66,000／night, +¥8,800／night for each additional person from the 3rd on, up to 5 people.'
-      },
-      {
-        q: 'How many tiers does the gear storage membership have?',
-        a: 'BASIC: climate-controlled, dehumidified storage — your board and gear kept safe.<br>PLUS: includes board sealing/opening service and professional waxing.<br>VIP: everything in PLUS, plus unlimited free gear-bag shipping. First-time members also pay a one-time basic membership fee.'
-      }
-    ],
-    faqGroup4: [
-      {
-        q: 'Is there insurance coverage during the trip?',
-        a: "All trips include accident insurance coverage up to a maximum of ¥200,000,000; the actual terms and scope of any claim are subject to the insurer's official policy conditions."
-      },
-      {
-        q: "What's the cancellation policy?",
-        a: 'Applies regardless of reason:<ul><li>Cancelled 31+ days before the trip: 50% of amount paid refunded</li><li>Cancelled 8–30 days before the trip: 30% of amount paid refunded</li><li>Cancelled within 7 days of the trip: non-refundable</li><li>No-show: non-refundable</li></ul>The refunded amount is net of the Stripe processing fee.'
-      },
-      {
-        q: 'Will the trip be cancelled for poor snow conditions?',
-        a: 'We reserve the right to adjust, postpone, or cancel a day\'s itinerary or lesson based on on-site snow conditions, visibility, avalanche risk assessment, and other factors, with participant safety as our top priority.'
-      }
-    ]
-  };
+  // 常見問題內容：每個分類 title＝分類標題、items＝[問題, 答案]（答案可以用 HTML）
+  window.FAQ_EN = [
+    { title: 'Choosing a plan', items: [
+      ['I have never skied. Which plan should I choose?',
+       'The <a href="camp.html?lang=en">Asahikawa 5-Day Zero-to-Turns Camp</a>. Airport transfers, lodging, lessons, lift pass, gear and wear, and a daily slope shuttle are all included. If you can\'t link turns by Day 4, come back next season and retake the lessons for free.'],
+      ['What is the difference between the Camp, the Lite Camp and Custom?',
+       '<ul><li><b>Camp</b>: 5 days, 4 nights, all-inclusive, with New Chitose Airport transfers and bonuses.</li><li><b><a href="camp-lite.html?lang=en">Lite Camp</a></b>: the same lessons, lodging, lift pass, gear and shuttle, with the same Linked-Turns Guarantee, but no airport transfers or bonuses. Good if you arrange your own travel.</li><li><b><a href="custom.html?lang=en">Custom</a></b>: pick only what you need: airport transfers, sightseeing charters, Asahikawa lodging, lessons, slope shuttle, gear storage. Good for experienced skiers or tailor-made trips.</li></ul>'],
+      ['Can I join the Camp on my own?',
+       'Yes. We will group you with other beginners at your level. If your camp has fewer than 2 people 30 days before it starts, you can move dates or get a full refund.'],
+      ['Can a group of 4 or more book together?',
+       'Each Camp and Lite Camp takes up to 3 people. For 4 or more, message us and we will set up two camps on the same dates. For Custom airport transfers and charters, each vehicle takes up to 6 guests.'],
+    ]},
+    { title: 'Lessons & the Linked-Turns Guarantee', items: [
+      ['Can complete beginners join?',
+       'Yes, the Camp is built for people who have never skied. Ski or snowboard, with up to 3 students per instructor.'],
+      ['How does the Linked-Turns Guarantee work?',
+       'In the last lesson of Day 4 your instructor checks and films you riding a green run on your own, linking turns (snowboard: linking edge changes). If you can\'t, you get 3 free lesson days next season (lodging, transport, lift pass and rental at that season\'s prices).<br>Conditions: age 10+, complete beginner, attend every lesson on Days 2–4, and watch all three 1-minute warm-up videos before arrival. See the full <a href="camp-terms.html?lang=en">booking terms</a>.'],
+      ['I have tried skiing once or twice. Can I still join the Camp?',
+       'Yes. Lessons, lodging, bonuses and price are exactly the same; the guarantee just doesn\'t apply.'],
+      ['Can children take lessons?',
+       'The Camp and Lite Camp are for ages 10+. Custom lessons are open from first grade of elementary school. For safety and learning pace, we recommend separate groups for children and adults.'],
+      ['Where can I take Custom lessons?',
+       '<b>Central Hokkaido</b>: Asahikawa, Furano, Hoshino Resorts TOMAMU.<br><b>Western Hokkaido</b>: Sapporo Teine, Sapporo Kokusai, Onze, Niseko (Hirafu / Annupuri), Rusutsu, Kiroro (taught by our partner schools). Prices differ by region; your price is calculated once you pick a resort and dates.'],
+      ['How are Custom lesson prices calculated?',
+       'Prices are per instructor (one group) per day, with up to 4 students per instructor. Skiers and snowboarders are in separate groups.<br>Central Hokkaido: 3, 4 or 6 hours, priced by group size from 1:1 to 1:4. Western Hokkaido: full day (6h) or half day (3h); base price for 1–2 people, +¥5,000 for each extra person (3–4). Peak-season surcharges apply and are calculated automatically from your dates.'],
+      ['Do lessons include a lift pass and gear?',
+       'The Camp and Lite Camp include a 3-day lift pass and full gear and wear. Custom lessons cover instruction only; lift passes and gear are separate.'],
+    ]},
+    { title: 'Transport & lodging', items: [
+      ['Does the Camp include airport transfers?',
+       'Yes: private return transfers between New Chitose Airport and Asahikawa, straight from arrivals. The Lite Camp does not include transfers; take the JR train or bus to Asahikawa and check in at 14:00 on Day 1.'],
+      ['How are Custom airport transfers priced?',
+       'By destination and vehicle, from ¥43,000 one way (per vehicle). 1–2 guests ride in a Toyota Alphard; 3 or more guests, or 5+ pieces of luggage (suitcases plus board bags), ride in a Toyota HiAce. Up to 6 guests per vehicle; the final vehicle is confirmed by us.'],
+      ['What is the lodging like?',
+       'A Japanese apartment in Asahikawa city with a private room for each guest: ¥11,000 per person per night (children the same, each gets a bed), minimum 2 nights. Each apartment sleeps up to 3 and shares a bathroom, lounge and kitchen; if your group isn\'t a multiple of 3, you may share common areas with other guests. The Kiku-no-Yu public bathhouse is nearby (entry not included).'],
+      ['How does the slope shuttle work?',
+       'We drive you from your Asahikawa lodging to Kamui, Santa Present Park, Kurodake or Pippu: ¥10,000 per person per day. Departs 09:00, returns around 16:30 depending on that day\'s lessons.'],
+      ['Which sightseeing charters do you offer?',
+       'From Asahikawa: Asahikawa · Asahiyama Zoo · Biei, and Furano · Biei. From Sapporo: Sapporo city, Otaru, Lake Toya · Noboribetsu, and Yoichi · Shakotan. Every tour departs at 09:00; the vehicle depends on group size, and times vary with snow and road conditions.'],
+    ]},
+    { title: 'Gear storage & tuning', items: [
+      ['Do I need to bring my own gear?',
+       'Not on the Camp or Lite Camp: full gear and wear are included (skis/board, boots, helmet, goggles, gloves, jacket, pants). Just bring thermal base layers, ski socks and a neck gaiter.'],
+      ['What gear storage plans do you have?',
+       '<ul><li><b>Climate-controlled storage</b>: ¥16,000 per board per year.</li><li><b>Storage + pro tune</b>: ¥25,000 per board per year, including storage wax, base prep, edge sharpening and a pro wax.</li></ul>Each board\'s first year adds a ¥2,000 membership and handling fee. Renewals are handled by email.'],
+    ]},
+    { title: 'Payment, prices & cancellations', items: [
+      ['How do I pay for the Camp or Lite Camp?',
+       'After you fill in the form you get a quote email. Tap the button to pay the deposit (¥50,000 per person, by card) and your seats are confirmed; we hold them for 30 minutes while you pay. The balance is due 10 days before arrival, and we email you a payment link 30 days before. Book within 10 days of arrival and you pay in full.'],
+      ['How do I pay for a Custom trip?',
+       'You get a quote by email right away. Within 24 hours we confirm dates, instructors and vehicles, then send a deposit link (50% of the total). Pay it and you are booked.'],
+      ['Will the Camp price go up?',
+       'Yes. Early bird ¥268,000 until Nov 20, then ¥283,000 from Nov 21 and ¥298,000 from Dec 11; peak-season camps are ¥298,000. Your price is locked when you pay the deposit.'],
+      ['Can I get a refund if I cancel?',
+       'Whatever the reason, refunds depend on when you cancel:<ul><li>31+ days before arrival: 50% of the amount paid</li><li>8–30 days before: 30%</li><li>Within 7 days or no-show: no refund</li></ul>Refunds are less Stripe fees.'],
+    ]},
+    { title: 'Safety & weather', items: [
+      ['What if the snow is bad or the resort closes?',
+       'We adjust the plan based on snow, visibility and safety, and move lessons to another ski area around Asahikawa if needed; this is not grounds for a refund. Safety always comes first.'],
+      ['Are we insured? Do I still need my own insurance?',
+       'We carry accident insurance of up to ¥200 million during lesson time (claims are subject to the insurer\'s terms). Time outside lessons, such as transport, lodging and free time, is not covered, so please buy travel insurance that covers skiing and snowboarding before you travel.'],
+    ]},
+  ];
 
-  Object.keys(GROUPS).forEach(function (groupId) {
-    var container = document.getElementById(groupId);
-    GROUPS[groupId].forEach(function (item, idx) {
+  var FAQ = window.FAQ_EN;
+  var root = document.getElementById('faqSections');
+  FAQ.forEach(function (group) {
+    var section = document.createElement('div');
+    section.className = 'hpc-faq__section';
+    var title = document.createElement('p');
+    title.className = 'hpc-faq__section-title';
+    title.textContent = group.title;
+    var container = document.createElement('div');
+    container.className = 'hpc-faq__list';
+    section.appendChild(title);
+    section.appendChild(container);
+    root.appendChild(section);
+
+    group.items.forEach(function (item) {
       var wrap = document.createElement('div');
       wrap.className = 'hpc-faq__item';
 
       var btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'hpc-faq__q';
-      btn.innerHTML = '<span>' + item.q + '</span><span class="hpc-faq__q-mark">+</span>';
+      btn.className = 'hpc-faq__q cjk';
+      btn.innerHTML = '<span>' + item[0] + '</span><span class="hpc-faq__q-mark">+</span>';
 
       var aWrap = document.createElement('div');
       aWrap.className = 'hpc-faq__a';
       var aInner = document.createElement('div');
-      aInner.className = 'hpc-faq__a-inner';
-      aInner.innerHTML = item.a;
+      aInner.className = 'hpc-faq__a-inner cjk';
+      aInner.innerHTML = item[1];
       aWrap.appendChild(aInner);
 
       btn.addEventListener('click', function () {
