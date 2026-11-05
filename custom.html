@@ -77,6 +77,18 @@ window.CUSTOM = {
     peak: { 1: {3: 65000, 4: 90000, 6: 118000}, 2: {3: 75000, 4: 100000, 6: 128000}, 3: {3: 85000, 4: 110000, 6: 138000}, 4: {3: 95000, 4: 120000, 6: 148000} },
     lowText: ['2026/12/01–12/22・2027/01/04–02/02・02/16–02/25・03/03–04/01・04/07–04/30'],
     highText: ['2026/12/23–01/03・2027/02/03–02/15・02/26–03/02・04/02–04/06'],
+    // 北海道西部（合作學校）：每位教練一天的價格。1–2 人為基礎價，3–4 人每多 1 人 +¥5,000；旺季每天 +¥5,000
+    west: {
+      tiers: { a: { zh: '手稻／札幌國際／Onze', en: 'Teine / Sapporo Kokusai / Onze', 6: 75000, 3: 52000 },
+               b: { zh: '二世谷／留壽都', en: 'Niseko / Rusutsu', 6: 85000, 3: 58000 },
+               c: { zh: '喜樂樂', en: 'Kiroro', 6: 95000, 3: 68000 } },
+      basePeople: 2, extraPerPerson: 5000, peakPerDay: 5000,
+      high: [['2026-12-23','2027-01-05'],['2027-02-03','2027-02-15'],['2027-04-02','2027-04-06']],
+      highText: '2026/12/23–2027/01/05・2027/02/03–02/15・2027/04/02–04/06'
+    },
+    // 上課雪場：region central＝北海道中部（自家價目表）、west＝北海道西部（合作學校價目表）
+    resorts: [['asahikawa','旭川','Asahikawa','central'],['furano','富良野','Furano','central'],['tomamu','星野 TOMAMU','Hoshino Resorts TOMAMU','central'],
+      ['teine','手稻','Sapporo Teine','west','a'],['kokusai','札幌國際','Sapporo Kokusai','west','a'],['onze','Onze 暑寒別','Onze','west','a'],['hirafu','二世谷 Hirafu','Niseko Hirafu','west','b'],['annupuri','二世谷 Annupuri','Niseko Annupuri','west','b'],['rusutsu','留壽都','Rusutsu','west','b'],['kiroro','喜樂樂 Kiroro','Kiroro','west','c']],
     levels: [['完全沒滑過','Never skied/ridden'],['滑過 1–2 次','Tried 1–2 times'],['算初中階','Beginner–intermediate'],['想上進階課','Want advanced lessons']]
   },
   // 雪場接送：旭川住處 ⇄ 雪場，每人每天
@@ -381,7 +393,7 @@ details.table[open] summary::after{content:' ▴'}
     { key: 'stay', zh: '旭川住宿', en: 'Asahikawa stay', render: renderStay, valid: validStay, price: priceStay },
     { key: 'lesson', zh: '滑雪課程', en: 'Ski lessons', render: renderLesson, valid: validLesson, price: priceLesson },
     { key: 'rental', zh: '雪具租借', en: 'Gear rental', render: renderRental, valid: validRental, skip: () => !C.rental.code }, // 拿到折扣碼才會出現
-    { key: 'shuttle', zh: '雪場接送', en: 'Slope shuttle', render: renderShuttle, valid: validShuttle, price: priceShuttle, skip: () => !(S.stay.want || S.lesson.want) },
+    { key: 'shuttle', zh: '雪場接送', en: 'Slope shuttle', render: renderShuttle, valid: validShuttle, price: priceShuttle, skip: () => !needShuttle() },
     { key: 'storage', zh: '雪具倉儲', en: 'Gear storage', render: renderStorage, valid: validStorage, price: priceStorage },
     { key: 'summary', zh: '確認估價', en: 'Your quote', render: renderSummary, valid: validSummary, final: true },
   ];
@@ -771,11 +783,24 @@ details.table[open] summary::after{content:' ▴'}
     const t = S.lesson, ty = new Set(ix.map(i => t.members[i].type));
     return ty.size > 1 ? L('建議小孩和大人分開上課：為了安全，而且學習速度不同。', 'We recommend separate groups for children and adults, for safety and learning pace.') : '';
   }
+  const resortOf = () => LS.resorts.find(r => r[0] === S.lesson.resort);
+  const regionOf = () => { const r = resortOf(); return r ? r[3] : (S.lesson.tab === 'west' ? 'west' : 'central'); };
+  const hoursFor = reg => reg === 'west' ? [3, 6] : LS.hours;
+  const isPeakW = d => LS.west.high.some(([a, b]) => d >= a && d <= b);
+  const hLabel = (h, reg) => reg === 'west' ? (h === 6 ? L('全天 6h', 'Full day 6h') : L('半天 3h', 'Half day 3h')) : h + 'h';
   function dayPrice(d){
     if (!d.date || !d.h) return null;
-    const tbl = isPeak(d.date) ? LS.peak : LS.low;
-    const parts = groupsOf().filter(ix => ix.length && ix.length <= LS.maxPerCoach).map(ix => ({ r: ix.length, p: tbl[ix.length][d.h] }));
-    return { peak: isPeak(d.date), parts, total: parts.reduce((s, x) => s + x.p, 0) };
+    const rz = resortOf(); if (!rz) return null;
+    const G = groupsOf().filter(ix => ix.length && ix.length <= LS.maxPerCoach);
+    if (rz[3] === 'west') {
+      const W = LS.west, tier = W.tiers[rz[4]], pk = isPeakW(d.date); if (!tier[d.h]) return null;
+      const parts = G.map(ix => ({ r: ix.length, p: tier[d.h] + Math.max(0, ix.length - W.basePeople) * W.extraPerPerson + (pk ? W.peakPerDay : 0) }));
+      return { peak: pk, parts, total: parts.reduce((s, x) => s + x.p, 0) };
+    }
+    const pk = isPeak(d.date), tbl = pk ? LS.peak : LS.low;
+    if (!tbl[1][d.h]) return null;
+    const parts = G.map(ix => ({ r: ix.length, p: tbl[ix.length][d.h] }));
+    return { peak: pk, parts, total: parts.reduce((s, x) => s + x.p, 0) };
   }
   function renderLesson(){
     const t = S.lesson, pp = S.people;
@@ -785,16 +810,24 @@ details.table[open] summary::after{content:' ▴'}
       t.days = [{ date: d0, h: 6 }];
     }
     if (t.members.length && !n(t.coaches)) autoGroup();
-    const tab = t.tab || 'low', tbl = tab === 'peak' ? LS.peak : LS.low;
+    const reg = regionOf(), tab = reg;
+    t.days.forEach(d => { if (!hoursFor(reg).includes(d.h)) d.h = 6; });
     const G = groupsOf(), minC = Math.max(1, minCoaches()), maxC = Math.max(minC, t.members.length);
     app.innerHTML = `
     <section class="step">
       <h1>${L('需要滑雪課程嗎？', 'Want ski lessons?')}</h1>
       <p class="lead">${L('雙板、單板都可以，教練帶你從零開始，或幫你突破瓶頸。價格是一位教練帶一組、一天的費用。', 'Ski or snowboard, from your very first turn to breaking a plateau. Prices are per instructor (one group), per day.')}</p>
-      <div class="ptabs"><button type="button" data-tab="low" class="low${tab === 'low' ? ' on' : ''}">${L('平季', 'Low season')}</button><button type="button" data-tab="peak" class="peak${tab === 'peak' ? ' on' : ''}">${L('旺季', 'High season')}</button></div>
-      <table class="lt ${tab}"><thead><tr><th>${L('師生比', 'Ratio')}</th>${LS.hours.map(h => `<th>${h} ${L('小時', 'hours')}</th>`).join('')}</tr></thead>
-        <tbody>${[1, 2, 3, 4].map(r => `<tr><td>1:${r}</td>${LS.hours.map(h => `<td>${yen(tbl[r][h])}</td>`).join('')}</tr>`).join('')}</tbody></table>
-      <div class="period">📅 ${tab === 'peak' ? L('旺季期間：', 'High season: ') + LS.highText[0] : L('平季期間：', 'Low season: ') + LS.lowText[0]}<br>${L('雪場開放到 4/30。系統會依你選的日期自動套用平季或旺季價格。', 'Season ends Apr 30. The right price is applied automatically from your dates.')}</div>
+      <div class="ptabs"><button type="button" data-tab="central" class="low${tab === 'central' ? ' on' : ''}">${L('北海道中部', 'Central Hokkaido')}</button><button type="button" data-tab="west" class="low${tab === 'west' ? ' on' : ''}">${L('北海道西部', 'Western Hokkaido')}</button></div>
+      <div class="period" style="margin:0 0 8px">🎿 ${LS.resorts.filter(r => r[3] === tab).map(r => esc(en ? r[2] : r[1])).join('・')}</div>
+      ${tab === 'central' ? `
+      <table class="lt"><thead><tr><th>${L('師生比', 'Ratio')}</th>${LS.hours.map(h => `<th>${h} ${L('小時', 'hours')}</th>`).join('')}</tr></thead>
+        <tbody>${[1, 2, 3, 4].map(r => `<tr><td>1:${r}</td>${LS.hours.map(h => `<td>${yen(LS.low[r][h])}<small style="color:var(--muted)">${L(' 起', '+')}</small></td>`).join('')}</tr>`).join('')}</tbody></table>
+      <div class="period">${L('旺季另計：', 'Peak season priced separately: ')}${LS.highText[0]}<br>${L('選好日期後，系統會自動用正確的價格計算。雪場開放到 4/30。', 'Pick your dates and the right price is applied automatically. Season ends Apr 30.')}</div>`
+      : `
+      <table class="lt"><thead><tr><th></th>${Object.values(LS.west.tiers).map(x => `<th>${esc(en ? x.en : x.zh)}</th>`).join('')}</tr></thead>
+        <tbody><tr><td>${L('全天 6h', 'Full day 6h')}<br><small style="font-weight:400">${L('含 1 小時午休', 'incl. 1h lunch')}</small></td>${Object.values(LS.west.tiers).map(x => `<td>${yen(x[6])}</td>`).join('')}</tr>
+        <tr><td>${L('半天 3h', 'Half day 3h')}<br><small style="font-weight:400">9:30–12:30 / 13:30–16:30</small></td>${Object.values(LS.west.tiers).map(x => `<td>${yen(x[3])}</td>`).join('')}</tr></tbody></table>
+      <div class="period">${L(`價格為一位教練一天。1–2 人為基礎價，3–4 人每多 1 人 +${yen(LS.west.extraPerPerson)}。`, `Per instructor per day. Base price for 1–2 people; +${yen(LS.west.extraPerPerson)} for each extra person (3–4).`)}<br>${L(`旺季每天 +${yen(LS.west.peakPerDay)}：`, `Peak season +${yen(LS.west.peakPerDay)} per day: `)}${LS.west.highText}<br>${L('選好日期後，系統會自動計算。', 'Pick your dates and it is calculated automatically.')}</div>`}
       <div class="yn"><button type="button" data-yn="1" class="${t.want === true ? 'on' : ''}">${L('要', 'Yes, please')}</button><button type="button" data-yn="0" class="${t.want === false ? 'on' : ''}">${L('不要', 'No thanks')}</button></div>
       ${t.want ? `
       <div class="box"><h3><span class="n">1</span>${L('上課人數', 'Students')}</h3>
@@ -803,13 +836,20 @@ details.table[open] summary::after{content:' ▴'}
           <div class="field"><label>${L('小孩', 'Children')} <small>${L('（國小一年級～13 歲）', '(grade 1 – age 13)')}</small></label><select data-p="kids">${opts(nums(0, 6), pp.kids)}</select></div>
         </div>
       </div>
+      <div class="box"><h3><span class="n">2</span>${L('上課雪場', 'Ski resort')}</h3>
+        <div class="field"><label>${L('在哪個雪場上課？', 'Where do you want lessons?')}</label><select data-le="resort">
+          <option value="">${L('請選擇', 'Select')}</option>
+          <optgroup label="${L('北海道中部', 'Central Hokkaido')}">${LS.resorts.filter(r => r[3] === 'central').map(r => `<option value="${r[0]}"${t.resort === r[0] ? ' selected' : ''}>${esc(en ? r[2] : r[1])}</option>`).join('')}</optgroup>
+          <optgroup label="${L('北海道西部', 'Western Hokkaido')}">${LS.resorts.filter(r => r[3] === 'west').map(r => `<option value="${r[0]}"${t.resort === r[0] ? ' selected' : ''}>${esc(en ? r[2] : r[1])}</option>`).join('')}</optgroup>
+        </select></div>
+      </div>
       ${t.members.length ? `
-      <div class="box"><h3><span class="n">2</span>${L('每個人的板類和程度', 'Each student')}</h3>
+      <div class="box"><h3><span class="n">3</span>${L('每個人的板類和程度', 'Each student')}</h3>
         ${t.members.map((m, i) => `<div class="member" data-mi="${i}"><h4>${memName(m)}</h4>
           <div class="chips" data-k="disc">${['雙板', '單板'].map(d => `<button type="button" data-v="${d}" class="${m.disc === d ? 'on' : ''}">${discName(d)}</button>`).join('')}</div>
           <div class="chips" data-k="level">${LS.levels.map(l => `<button type="button" data-v="${l[0]}" class="${m.level === l[0] ? 'on' : ''}">${en ? l[1] : l[0]}</button>`).join('')}</div></div>`).join('')}
       </div>
-      <div class="box"><h3><span class="n">3</span>${L('教練人數與分組', 'Instructors & groups')}</h3>
+      <div class="box"><h3><span class="n">4</span>${L('教練人數與分組', 'Instructors & groups')}</h3>
         <div class="field"><label>${L('需要幾位教練？', 'How many instructors?')}</label><select data-le="coaches">${opts(nums(minC, maxC).map(([v]) => [v, L(`${v} 位`, `${v}`)]), t.coaches)}</select>
           <div class="hint">${L(`一位教練最多帶 ${LS.maxPerCoach} 位。雙板和單板、大人和小孩會先自動分開。`, `Max ${LS.maxPerCoach} per instructor. We split ski/snowboard and adults/children first.`)}</div></div>
         <div class="groups">${G.map((ix, g) => { const e = groupErr(ix), w = groupWarn(ix); const ds = [...new Set(ix.map(i => t.members[i].disc).filter(Boolean))];
@@ -818,16 +858,16 @@ details.table[open] summary::after{content:' ▴'}
           ${e ? `<div class="gerr">${e}</div>` : w ? `<div class="hint">ℹ️ ${w}</div>` : ''}</div>`; }).join('')}</div>
         <div class="hint" style="margin:-2px 0 10px">${L('想換組合（例如 1:4＋1:1），用每個人右邊的選單調整。', 'Want a different split (e.g. 1:4 + 1:1)? Move people with the menu next to their name.')}</div>
       </div>
-      <div class="box"><h3><span class="n">4</span>${L('上課日', 'Lesson days')}</h3>
+      <div class="box"><h3><span class="n">5</span>${L('上課日', 'Lesson days')}</h3>
         <div id="days">${t.days.map((d, i) => { const p = dayPrice(d); const bad = d.date && (d.date < LS.open || d.date > LS.close);
           return `<div class="day${bad ? ' err' : ''}" data-di="${i}"><div class="dn">${L(`第 ${i + 1} 天`, `Day ${i + 1}`)}</div>
-          <div class="dr"><input type="date" data-dd="date" min="${LS.open}" max="${LS.close}" value="${esc(d.date)}"><div class="hrs">${LS.hours.map(h => `<button type="button" data-h="${h}" class="${d.h === h ? 'on' : ''}">${h}h</button>`).join('')}</div>${i ? `<button type="button" class="x" data-del="${i}" aria-label="remove">×</button>` : ''}</div>
-          <div class="dp">${bad ? `<span style="color:var(--bad)">${L('只開放 12/1–4/30', 'Open Dec 1 – Apr 30 only')}</span>` : p ? `<span class="badge ${p.peak ? 'peak' : 'low'}">${p.peak ? L('旺季', 'High') : L('平季', 'Low')}</span> ${p.parts.map(x => `1:${x.r} ${yen(x.p)}`).join(' ＋ ')}　<b>${yen(p.total)}</b>` : ''}</div></div>`; }).join('')}</div>
+          <div class="dr"><input type="date" data-dd="date" min="${LS.open}" max="${LS.close}" value="${esc(d.date)}"><div class="hrs">${hoursFor(reg).map(h => `<button type="button" data-h="${h}" class="${d.h === h ? 'on' : ''}">${hLabel(h, reg)}</button>`).join('')}</div>${reg === 'west' && d.h === 3 ? `<select data-dd="slot" style="font:inherit;font-size:14px;padding:8px;border:1.5px solid var(--line);border-radius:10px"><option value="am"${d.slot !== 'pm' ? ' selected' : ''}>${L('上午 9:30–12:30', 'AM 9:30–12:30')}</option><option value="pm"${d.slot === 'pm' ? ' selected' : ''}>${L('下午 13:30–16:30', 'PM 13:30–16:30')}</option></select>` : ''}${i ? `<button type="button" class="x" data-del="${i}" aria-label="remove">×</button>` : ''}</div>
+          <div class="dp">${bad ? `<span style="color:var(--bad)">${L('只開放 12/1–4/30', 'Open Dec 1 – Apr 30 only')}</span>` : p ? `${p.peak ? `<span class="badge peak">${L('旺季', 'Peak')}</span>` : ''} ${p.parts.map(x => `1:${x.r} ${yen(x.p)}`).join(' ＋ ')}　<b>${yen(p.total)}</b>` : ''}</div></div>`; }).join('')}</div>
         <button type="button" class="addday" id="addDay">＋ ${L('再加一天（自動帶入隔天、同樣時數）', 'Add another day (next day, same hours)')}</button>
       </div>` : ''}` : ''}
     </section>`;
     const rerender = () => { save(); const y = window.scrollY; renderLesson(); refresh(); window.scrollTo(0, y); };
-    app.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { t.tab = b.dataset.tab; rerender(); });
+    app.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { t.tab = b.dataset.tab; const r = resortOf(); if (r && r[3] !== t.tab) t.resort = ''; rerender(); });
     app.querySelectorAll('[data-yn]').forEach(b => b.onclick = () => { t.want = b.dataset.yn === '1'; rerender(); });
     app.querySelectorAll('[data-p]').forEach(el => el.onchange = () => { pp[el.dataset.p] = el.value; syncMembers(); t.coaches = ''; t.manual = false; autoGroup(); rerender(); });
     app.querySelectorAll('.member .chips button').forEach(b => b.onclick = () => {
@@ -835,8 +875,10 @@ details.table[open] summary::after{content:' ▴'}
       if (k === 'disc') { if (!t.manual || n(t.coaches) < minCoaches()) { t.coaches = ''; t.manual = false; } autoGroup(); }
       rerender();
     });
+    const rs = app.querySelector('[data-le="resort"]'); if (rs) rs.onchange = () => { t.resort = rs.value; const r = resortOf(); if (r) t.tab = r[3]; rerender(); };
     const cs = app.querySelector('[data-le="coaches"]'); if (cs) cs.onchange = () => { t.coaches = cs.value; t.manual = true; autoGroup(); rerender(); };
     app.querySelectorAll('[data-move]').forEach(el => el.onchange = () => { t.members[+el.dataset.move].g = +el.value; rerender(); });
+    app.querySelectorAll('[data-dd="slot"]').forEach(el => el.onchange = () => { t.days[+el.closest('.day').dataset.di].slot = el.value; rerender(); });
     app.querySelectorAll('[data-dd="date"]').forEach(el => el.onchange = () => { t.days[+el.closest('.day').dataset.di].date = el.value; rerender(); });
     app.querySelectorAll('[data-h]').forEach(b => b.onclick = () => { t.days[+b.closest('.day').dataset.di].h = +b.dataset.h; rerender(); });
     app.querySelectorAll('[data-del]').forEach(b => b.onclick = () => { t.days.splice(+b.dataset.del, 1); rerender(); });
@@ -847,6 +889,7 @@ details.table[open] summary::after{content:' ▴'}
     if (t.want === null || t.want === undefined) return { ok: false, msg: L('請選擇「要」或「不要」。', 'Please choose Yes or No.') };
     if (!t.want) return { ok: true };
     if (!t.members.length) return { ok: false, msg: L('請選上課人數。', 'Please choose the number of students.') };
+    if (!t.resort) return { ok: false, msg: L('請選上課雪場。', 'Please choose a ski resort.') };
     const miss = t.members.findIndex(m => !m.disc || !m.level);
     if (miss >= 0) { if (mark) app.querySelectorAll('.member').forEach((el, i) => el.querySelectorAll('.chips').forEach(c => c.classList.toggle('err', !t.members[i][c.dataset.k]))); return { ok: false, msg: L(`請幫${memName(t.members[miss])}選板類和程度。`, `Please choose ski/snowboard and level for ${memName(t.members[miss])}.`) }; }
     const ge = groupsOf().map(groupErr).find(Boolean); if (ge) return { ok: false, msg: ge };
@@ -863,19 +906,29 @@ details.table[open] summary::after{content:' ▴'}
   function priceLesson(){
     const t = S.lesson; if (!t.want || !t.members.length || groupsOf().some(groupErr)) return null;
     let total = 0; const lines = [];
-    t.days.forEach((d, i) => { const p = dayPrice(d); if (!p) return; total += p.total; lines.push(`${md(d.date)} ${d.h}h ${p.peak ? L('旺季', 'High') : L('平季', 'Low')}：${p.parts.map(x => '1:' + x.r).join('＋')}　${yen(p.total)}`); });
+    t.days.forEach((d, i) => { const p = dayPrice(d); if (!p) return; total += p.total; const reg = regionOf(); lines.push(`${md(d.date)} ${hLabel(d.h, reg)}${reg === 'west' && d.h === 3 ? (d.slot === 'pm' ? L(' 下午', ' PM') : L(' 上午', ' AM')) : ''}${p.peak ? L(' 旺季', ' peak') : ''}：${p.parts.map(x => '1:' + x.r).join('＋')}　${yen(p.total)}`); });
     if (!total) return null;
-    lines.unshift(`🎿 ${t.members.length} ${L('位學員', 'students')}・${t.coaches} ${L('位教練', 'instructors')}・${t.days.length} ${L('天', 'days')}`);
+    const rz = LS.resorts.find(r => r[0] === t.resort);
+    lines.unshift(`🎿 ${rz ? (en ? rz[2] : rz[1]) + '・' : ''}${t.members.length} ${L('位學員', 'students')}・${t.coaches} ${L('位教練', 'instructors')}・${t.days.length} ${L('天', 'days')}`);
     return { total, lines };
   }
 
 
   // ================= 第 5 頁：雪場接送 =================
+  // 只有住旭川、或在旭川上課的人才需要
+  function needShuttle(){ return !!(S.stay.want || (S.lesson.want && S.lesson.resort === 'asahikawa')); }
+  function transferMismatch(){
+    const t = S.transfer; if (!t.want || !needShuttle()) return '';
+    const bad = [];
+    if (t.legs !== 'dep' && t.arr.to && t.arr.to !== 'asahikawa') bad.push(L('接機目的地', 'arrival drop-off'));
+    if (t.legs !== 'arr' && t.dep.from && t.dep.from !== 'asahikawa') bad.push(L('送機出發地', 'departure pick-up'));
+    return bad.join(L('和', ' and '));
+  }
   const SH = C.shuttle;
   const resortOpts = v => opts(SH.resorts.map(r => [r[0], en ? r[2] : r[1]]), v);
   function renderShuttle(){
     const t = S.shuttle, pp = S.people;
-    const lessonDays = S.lesson.want ? S.lesson.days.filter(d => d.date).map(d => d.date) : [];
+    const lessonDays = S.lesson.want && S.lesson.resort === 'asahikawa' ? S.lesson.days.filter(d => d.date).map(d => d.date) : [];
     if (!t.days.length) {
       if (lessonDays.length) t.days = lessonDays.map(d => ({ date: d, resort: '' }));
       else if (S.stay.want && S.stay.checkin) t.days = [{ date: addDay(S.stay.checkin, 1), resort: '' }];
@@ -888,6 +941,7 @@ details.table[open] summary::after{content:' ▴'}
       <p class="lead">${L('每天從旭川住處接你去雪場，上完課再送你回來。', 'We pick you up at your Asahikawa stay each morning and bring you back after skiing.')}</p>
       <div class="tip">💡 ${L(`每人每天 ${yen(SH.perPersonDay)}。去程 ${SH.depart} 出發、回程 ${SH.back}；回程時間會依當天課程時數調整，以當天通知為準。`, `${yen(SH.perPersonDay)} per person per day. Departs ${SH.depart}, returns ${SH.back}. Return time depends on that day's lessons; we confirm it on the day.`)}</div>
       <ul class="facts">${SH.resorts.map(r => `<li>🎿 ${esc(en ? r[2] : r[1])}</li>`).join('')}</ul>
+      ${transferMismatch() ? `<div class="warn">⚠️ ${L(`你選了住在旭川或在旭川上課，但機場接送的${transferMismatch()}不是旭川。請回到第 1 頁改成旭川，或確認你的行程。`, `You chose to stay or take lessons in Asahikawa, but your airport transfer ${transferMismatch()} is not Asahikawa. Please change it to Asahikawa in step 1.`)}<br><button type="button" class="addday" id="fixTransfer" style="margin:10px 0 0;background:#fff">${L('← 回到機場接送修改', '← Fix the airport transfer')}</button></div>` : ''}
       <div class="yn"><button type="button" data-yn="1" class="${t.want === true ? 'on' : ''}">${L('要', 'Yes, please')}</button><button type="button" data-yn="0" class="${t.want === false ? 'on' : ''}">${L('不要', 'No thanks')}</button></div>
       ${t.want ? `
       <div class="box"><h3><span class="n">1</span>${L('人數', 'Guests')}</h3>
@@ -908,11 +962,13 @@ details.table[open] summary::after{content:' ▴'}
     app.querySelectorAll('[data-yn]').forEach(b => b.onclick = () => { t.want = b.dataset.yn === '1'; rerender(); });
     app.querySelectorAll('[data-p]').forEach(el => el.onchange = () => { pp[el.dataset.p] = el.value; rerender(); });
     app.querySelectorAll('[data-sd]').forEach(el => el.onchange = () => { t.days[+el.closest('.day').dataset.si][el.dataset.sd] = el.value; rerender(); });
+    const ft = document.getElementById('fixTransfer'); if (ft) ft.onclick = () => go(0);
     app.querySelectorAll('[data-sdel]').forEach(b => b.onclick = () => { t.days.splice(+b.dataset.sdel, 1); rerender(); });
     const ad = document.getElementById('addSDay'); if (ad) ad.onclick = () => { const last = t.days[t.days.length - 1] || {}; let nd = last.date ? addDay(last.date, 1) : ''; if (nd > LS.close) nd = ''; t.days.push({ date: nd, resort: last.resort || '' }); rerender(); };
   }
   function validShuttle(){
     const t = S.shuttle;
+    if (transferMismatch()) return { ok: false, msg: L('機場接送的地點不是旭川，請先回到第 1 頁修改。', 'Your airport transfer is not to/from Asahikawa. Please fix step 1 first.') };
     if (t.want === null || t.want === undefined) return { ok: false, msg: L('請選擇「要」或「不要」。', 'Please choose Yes or No.') };
     if (!t.want) return { ok: true };
     if (!(n(S.people.adults) + n(S.people.kids))) return { ok: false, msg: L('請選人數。', 'Please choose the number of guests.') };
@@ -1064,11 +1120,7 @@ details.table[open] summary::after{content:' ▴'}
         <div class="field"><label>${L('備註', 'Anything else?')} <small>${L('（選填）', '(optional)')}</small></label><textarea data-c="note" placeholder="${L('例：小孩 7 歲、想要中文教練', 'e.g. kids are 7, prefer an English-speaking instructor')}">${esc(c.note)}</textarea></div>
         <input type="text" id="hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
       </div>
-      <p class="lead" style="font-size:14px;margin-bottom:6px">${L('想先問問題？直接傳訊息給我們：', 'Questions first? Message us:')}</p>
-      <div class="chat">
-        <a href="https://line.me/R/oaMessage/${encodeURIComponent(lineId)}/?${lineMsg}" target="_blank" rel="noopener" style="background:#06C755">LINE</a>
-        <a href="https://wa.me/${wa}?text=${lineMsg}" target="_blank" rel="noopener" style="background:#25D366">WhatsApp</a>
-      </div>`
+      `
       : `<p class="lead">${L('你還沒有選任何項目。', "You haven't picked anything yet.")}</p>`}
     </section>`;
     app.querySelectorAll('[data-goto]').forEach(b => b.onclick = () => go(+b.dataset.goto));
