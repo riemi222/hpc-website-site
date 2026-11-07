@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>我的訂單｜Hokkaido Powder Club</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site-shell.css">
+<style>
+:root{--ink:#16222e;--ink-2:#4a5a69;--muted:#7a8996;--line:#e3e9ee;--snow:#f6f9fb;--blue:#1d5fa8;--blue-d:#123f73;--orange:#e8662c;--orange-d:#c9531d;--ok:#2f8f5b;--bad:#c0392b}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Noto Sans TC',-apple-system,'PingFang TC',sans-serif;color:var(--ink);background:var(--snow);line-height:1.75;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+body.lang-en .zh, body:not(.lang-en) .en{display:none!important}
+main{flex:1 0 auto;width:100%}
+.wrap{max-width:640px;margin:0 auto;padding:28px 16px 60px}
+h1{font-size:clamp(24px,5vw,30px);margin:0 0 6px;font-weight:900}
+.lead{color:var(--ink-2);margin:0 0 20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin:0 0 14px}
+label{display:block;font-size:14px;font-weight:700;color:var(--ink-2);margin:0 0 6px}
+input[type=email]{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--orange);color:#fff;border:0;border-radius:999px;padding:13px 22px;font:inherit;font-weight:700;font-size:15px;text-decoration:none;cursor:pointer}
+.btn:hover{background:var(--orange-d)}
+.btn.full{width:100%;margin-top:12px}
+.btn.ghost{background:#fff;color:var(--blue-d);border:1.5px solid var(--line)}
+.msg{font-size:14px;margin-top:10px}
+.msg.err{color:var(--bad)}
+.ok{font-size:44px;text-align:center;margin:4px 0}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 16px}
+.who{font-size:14px;color:var(--ink-2)}
+.who b{color:var(--ink)}
+.link{background:none;border:0;padding:0;font:inherit;font-size:14px;color:var(--blue);cursor:pointer;text-decoration:underline}
+.order .oh{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px}
+.order h3{margin:0;font-size:17px;line-height:1.4}
+.order .sub{font-size:13.5px;color:var(--ink-2)}
+.tag{flex:none;font-size:12.5px;font-weight:700;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.t-wait{background:#fdecef;color:#a3324a}.t-quote{background:#eaf2fb;color:var(--blue-d)}.t-dep{background:#e7f4ec;color:#1f6b42}.t-full{background:#efe9fb;color:#5b3aa0}.t-next{background:#fff1e6;color:#a8541a}
+.money{width:100%;border-collapse:collapse;font-size:14.5px;margin:10px 0}
+.money td{padding:7px 0;border-top:1px solid var(--line)}
+.money td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.money tr.due td{font-weight:900;color:var(--orange-d)}
+details{margin:6px 0 0}
+summary{cursor:pointer;font-size:14px;color:var(--blue);font-weight:700}
+.members{font-size:13.5px;color:var(--ink-2);padding-left:18px;margin:6px 0 0}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.acts .btn{padding:10px 16px;font-size:14px}
+.cancel{font-size:12.5px;color:var(--muted);margin-top:10px}
+.empty{text-align:center;color:var(--ink-2)}
+.side{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.switch{position:relative;width:48px;height:28px;flex:none}
+.switch input{opacity:0;width:0;height:0}
+.switch span{position:absolute;inset:0;background:#cfd8e0;border-radius:99px;transition:.2s;cursor:pointer}
+.switch span::after{content:'';position:absolute;left:3px;top:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.2s}
+.switch input:checked+span{background:var(--ok)}
+.switch input:checked+span::after{transform:translateX(20px)}
+.coupon{background:#fff4ee;border:1.5px dashed #f0b89c}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a class="site-nav__brand zh" href="index.html">HOKKAIDO POWDER <span>CLUB</span></a>
+  <a class="site-nav__brand en" href="en.html">HOKKAIDO POWDER <span>CLUB</span></a>
+  <div class="site-nav__right">
+    <div class="site-nav__links">
+      <a class="zh" href="blog.html">部落格</a><a class="en" href="blog-en.html">Blog</a>
+      <a class="zh" href="faq.html">FAQ</a><a class="en" href="faq-en.html">FAQ</a>
+      <a class="zh" href="account.html?lang=en" data-lang-to="en">EN</a><a class="en" href="account.html?lang=zh" data-lang-to="zh">中文</a>
+    </div>
+  </div>
+</nav>
+
+<main><div class="wrap">
+
+  <!-- 1. 登入 -->
+  <section id="vLogin" class="hidden">
+    <h1><span class="zh">我的訂單</span><span class="en">My bookings</span></h1>
+    <p class="lead"><span class="zh">輸入報名時填的 Email，我們會寄一封登入連結給你，不用密碼。</span><span class="en">Enter the email you booked with and we'll send you a login link. No password needed.</span></p>
+    <form class="card" id="loginForm">
+      <label for="email">Email</label>
+      <input type="email" id="email" autocomplete="email" inputmode="email" required>
+      <button class="btn full" type="submit" id="loginBtn"><span class="zh">寄登入連結給我</span><span class="en">Email me a login link</span></button>
+      <div class="msg err" id="loginErr"></div>
+    </form>
+  </section>
+
+  <!-- 2. 已寄出 -->
+  <section id="vSent" class="hidden">
+    <div class="card" style="text-align:center">
+      <div class="ok">📩</div>
+      <h1><span class="zh">請到信箱收信</span><span class="en">Check your inbox</span></h1>
+      <p class="lead" style="margin:0"><span class="zh">登入連結已寄到 <b id="sentTo"></b>，1 小時內有效。沒看到的話，請檢查垃圾郵件。寄件者是 hello@yukiway.com。</span><span class="en">We sent a login link to <b id="sentToEn"></b>. It works for 1 hour. Can't find it? Check your spam folder. It's from hello@yukiway.com.</span></p>
+      <p style="margin:16px 0 0"><button class="link" id="again"><span class="zh">換一個 Email</span><span class="en">Use a different email</span></button></p>
+    </div>
+  </section>
+
+  <!-- 3. 處理中 -->
+  <section id="vLoading" class="hidden"><p class="lead" style="text-align:center;padding:40px 0"><span class="zh">載入中…</span><span class="en">Loading…</span></p></section>
+
+  <!-- 4. 我的訂單 -->
+  <section id="vOrders" class="hidden">
+    <div class="top">
+      <h1 style="margin:0"><span class="zh">我的訂單</span><span class="en">My bookings</span></h1>
+      <div class="who"><b id="who"></b>・<button class="link" id="logout"><span class="zh">登出</span><span class="en">Log out</span></button></div>
+    </div>
+    <div id="orders"></div>
+    <div class="card" id="rentalCard" style="display:none"></div>
+    <div class="card side">
+      <div><b><span class="zh">開放預約與優惠通知</span><span class="en">Booking & offer updates</span></b><div class="who"><span class="zh">新梯次開放、限時優惠時用 Email 通知你</span><span class="en">We'll email you when new dates open or offers start</span></div></div>
+      <label class="switch" style="margin:0"><input type="checkbox" id="optin"><span></span></label>
+    </div>
+    <div class="acts" style="justify-content:center">
+      <a class="btn ghost" id="addLink" href="custom.html"><span class="zh">＋ 加購其他服務</span><span class="en">＋ Add more services</span></a>
+      <a class="btn ghost" id="campLink" href="camp.html"><span class="zh">看保證班日期</span><span class="en">See camp dates</span></a>
+    </div>
+  </section>
+
+</div></main>
+
+<footer class="site-footer"><span class="zh">Hokkaido Powder Club｜旭川・北海道</span><span class="en">Hokkaido Powder Club｜Asahikawa, Hokkaido</span></footer>
+
+<script>
+(function(){
+  const API = 'https://hpc-camp-backend-production.up.railway.app';
+  const LINE = 'https://line.me/R/ti/p/@414sdfly', WA = 'https://wa.me/817044204150';
+  const p = new URLSearchParams(location.search);
+  const lang = p.get('lang') === 'en' ? 'en' : (p.get('lang') === 'zh' ? 'zh' : ((navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'en'));
+  const en = lang === 'en';
+  document.body.classList.toggle('lang-en', en);
+  document.documentElement.lang = en ? 'en' : 'zh-Hant';
+  document.title = en ? 'My bookings | Hokkaido Powder Club' : '我的訂單｜Hokkaido Powder Club';
+  document.querySelectorAll('[data-lang-to]').forEach(a => a.href = 'account.html?lang=' + a.dataset.langTo);
+  ['addLink', 'campLink'].forEach(id => { const a = document.getElementById(id); a.href += '?lang=' + lang; });
+  const L = (z, e) => en ? e : z;
+  const yen = n => '¥' + Number(n || 0).toLocaleString('en-US');
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const KEY = 'hpc-session';
+  const get = () => { try { return localStorage.getItem(KEY) || ''; } catch (_) { return ''; } };
+  const set = v => { try { v ? localStorage.setItem(KEY, v) : localStorage.removeItem(KEY); } catch (_) {} };
+  const show = id => ['vLogin', 'vSent', 'vLoading', 'vOrders'].forEach(v => document.getElementById(v).classList.toggle('hidden', v !== id));
+
+  // 登入
+  document.getElementById('loginForm').onsubmit = async e => {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim(), err = document.getElementById('loginErr'), b = document.getElementById('loginBtn');
+    err.textContent = '';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = L('請輸入正確的 Email。', 'Please enter a valid email.'); return; }
+    b.disabled = true; b.style.opacity = .6;
+    try { await fetch(API + '/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, lang }) }); } catch (_) {}
+    b.disabled = false; b.style.opacity = 1;
+    document.getElementById('sentTo').textContent = email; document.getElementById('sentToEn').textContent = email;
+    show('vSent');
+  };
+  document.getElementById('again').onclick = () => show('vLogin');
+  document.getElementById('logout').onclick = () => { set(''); show('vLogin'); };
+
+  const PLAN = { camp: ['旭川5天保證班', '5-Day Zero-to-Turns Camp'], lite: ['旭川5天精簡版', '5-Day Lite Camp'], custom: ['北海道自由搭配', 'Custom Hokkaido trip'] };
+  const STATUS = {
+    '待確認': ['t-wait', '確認中', 'Confirming'], '已報價': ['t-quote', '待付訂金', 'Deposit due'], '已回覆': ['t-quote', '待付訂金', 'Deposit due'],
+    '已付款': ['t-dep', '已付訂金', 'Deposit paid'], '已付清': ['t-full', '已付清', 'Fully paid'], '等下一批': ['t-next', '等下一批開放', 'Waiting list']
+  };
+  function card(o){
+    const st = STATUS[o.status] || ['t-quote', o.status, o.status];
+    const custom = o.plan === 'custom';
+    const money = (o.total && o.status !== '等下一批') ? `<table class="money">
+      <tr><td>${L('總價', 'Total')}</td><td>${yen(o.total)}</td></tr>
+      <tr><td>${L('已付', 'Paid')}</td><td>${yen(o.paid)}</td></tr>
+      ${o.balance > 0 ? `<tr class="${o.balanceUrl || o.payUrl ? 'due' : ''}"><td>${o.paid ? L('尾款', 'Balance') : L('未付', 'Unpaid')}</td><td>${yen(o.balance)}</td></tr>` : ''}
+    </table>` : '';
+    const detail = custom ? (o.summary ? `<details><summary>${L('內容', 'Details')}</summary><div class="members">${esc(o.summary).split('｜').join('<br>')}</div></details>` : '')
+      : (o.members.length ? `<details><summary>${L('成員', 'Guests')}（${o.members.length}）</summary><ol class="members">${o.members.map(m => `<li>${esc(m)}</li>`).join('')}</ol></details>` : '');
+    const acts = [];
+    if (o.payUrl) acts.push(`<a class="btn" href="${o.payUrl}">${custom ? L('付訂金（50%）', 'Pay deposit (50%)') : L('付訂金・保留名額', 'Pay deposit')}</a>`);
+    if (o.balanceUrl) acts.push(`<a class="btn" href="${o.balanceUrl}">${L('付尾款 ', 'Pay balance ') + yen(o.balance)}</a>`);
+    o.warmup.forEach(u => acts.push(`<a class="btn ghost" href="${u}&lang=${lang}">${/d=sb/.test(u) ? L('單板暖身影片', 'Snowboard warm-up') : L('雙板暖身影片', 'Ski warm-up')}</a>`));
+    const note = o.status === '待確認' ? `<p class="sub" style="margin:8px 0 0">${L('我們正在確認日期、教練和車輛，確認後會寄訂金連結給你（通常 24 小時內）。', "We're confirming dates, instructors and vehicles. We'll email a deposit link soon (usually within 24 hours).")}</p>`
+      : o.status === '等下一批' ? `<p class="sub" style="margin:8px 0 0">${L('下一批開放時，我們會第一個通知你。', "We'll let you know first when the next release opens.")}</p>` : '';
+    return `<div class="card order">
+      <div class="oh"><div><h3>${esc(L(PLAN[o.plan][0], PLAN[o.plan][1]))}</h3><div class="sub">${o.title ? esc(o.title) + '・' : ''}${o.persons} ${L('位', o.persons > 1 ? 'guests' : 'guest')}</div></div><span class="tag ${st[0]}">${L(st[1], st[2])}</span></div>
+      ${money}${detail}${note}
+      ${acts.length ? `<div class="acts">${acts.join('')}</div>` : ''}
+      <div class="cancel">${L('要改期或取消，請', 'To change or cancel, please ')}<a href="${en ? WA : LINE}" target="_blank" rel="noopener">${L('聯絡我們', 'message us')}</a>${L('。', '.')}</div>
+    </div>`;
+  }
+  async function load(){
+    const s = get(); if (!s) return show('vLogin');
+    show('vLoading');
+    try {
+      const r = await fetch(API + '/api/orders', { headers: { Authorization: 'Bearer ' + s } });
+      if (r.status === 401) { set(''); return show('vLogin'); }
+      const j = await r.json(); if (!j.ok) throw 0;
+      document.getElementById('who').textContent = j.email;
+      document.getElementById('orders').innerHTML = j.orders.length ? j.orders.map(card).join('')
+        : `<div class="card empty">${L('目前沒有訂單。', 'No bookings yet.')}</div>`;
+      document.getElementById('optin').checked = j.orders.some(o => o.optin);
+      const rc = document.getElementById('rentalCard');
+      if (j.rental && j.orders.some(o => o.plan === 'custom' && ['已付款', '已付清'].includes(o.status))) {
+        rc.style.display = ''; rc.className = 'card coupon';
+        rc.innerHTML = `<b>${L('雪具租借：ASAHI FLOW 學員 95 折', 'Rental gear: 5% off at ASAHI FLOW')}</b><div class="sub">${L('折扣碼', 'Code')} <b>${esc(j.rental.code)}</b>（${L('結帳時貼上', 'paste at checkout')}）</div><div class="acts"><a class="btn ghost" href="${j.rental.url}" target="_blank" rel="noopener">${L('前往預約雪具', 'Book gear')}</a></div>`;
+      }
+      show('vOrders');
+    } catch (_) {
+      show('vOrders');
+      document.getElementById('orders').innerHTML = `<div class="card empty">${L('暫時載入不了，請稍後再試。', "Couldn't load your bookings. Please try again later.")}</div>`;
+    }
+  }
+  document.getElementById('optin').onchange = async e => {
+    try { await fetch(API + '/api/optin', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + get() }, body: JSON.stringify({ on: e.target.checked }) }); } catch (_) {}
+  };
+
+  // 從信裡的登入連結進來：#t=...
+  const m = location.hash.match(/t=([^&]+)/);
+  if (m) {
+    history.replaceState(null, '', location.pathname + location.search);
+    show('vLoading');
+    fetch(API + '/api/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ t: m[1] }) })
+      .then(r => r.json()).then(j => {
+        if (j.ok) { set(j.session); load(); }
+        else { show('vLogin'); document.getElementById('loginErr').textContent = L('登入連結已過期，請再寄一次。', 'That link has expired. Please request a new one.'); }
+      }).catch(() => show('vLogin'));
+  } else load();
+})();
+</script>
+</body>
+</html>

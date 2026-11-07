@@ -339,6 +339,7 @@ details.table[open] summary::after{content:' ▴'}
     <div class="site-nav__links">
       <a class="zh" href="blog.html">部落格</a><a class="en" href="blog-en.html">Blog</a>
       <a class="zh" href="faq.html">FAQ</a><a class="en" href="faq-en.html">FAQ</a>
+      <a class="zh site-nav__acct" href="account.html?lang=zh" aria-label="我的訂單"><svg class="i" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span class="t">我的訂單</span></a><a class="en site-nav__acct" href="account.html?lang=en" aria-label="My bookings"><svg class="i" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span class="t">My bookings</span></a>
       <a id="langLink" href="custom.html?lang=en">EN</a>
     </div>
   </div>
@@ -1118,12 +1119,14 @@ details.table[open] summary::after{content:' ▴'}
         <div class="field"><label>${L('姓名', 'Name')}</label><input type="text" data-c="name" autocomplete="name" value="${esc(c.name)}"></div>
         <div class="field"><label>Email</label><input type="email" data-c="email" autocomplete="email" inputmode="email" value="${esc(c.email)}"></div>
         <div class="field"><label>${L('備註', 'Anything else?')} <small>${L('（選填）', '(optional)')}</small></label><textarea data-c="note" placeholder="${L('例：小孩 7 歲、想要中文教練', 'e.g. kids are 7, prefer an English-speaking instructor')}">${esc(c.note)}</textarea></div>
+        <label style="display:flex;gap:8px;align-items:flex-start;font-size:13.5px;color:var(--ink-2);margin:0 0 12px;cursor:pointer"><input type="checkbox" id="optin" ${c.optin === false ? '' : 'checked'} style="margin-top:4px"><span>${L('我願意收到開放預約與優惠通知（隨時可以取消）', 'Email me when new dates open and about offers (unsubscribe anytime)')}</span></label>
         <input type="text" id="hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
       </div>
       `
       : `<p class="lead">${L('你還沒有選任何項目。', "You haven't picked anything yet.")}</p>`}
     </section>`;
     app.querySelectorAll('[data-goto]').forEach(b => b.onclick = () => go(+b.dataset.goto));
+    const oi = document.getElementById('optin'); if (oi) oi.onchange = () => { c.optin = oi.checked; save(); };
     app.querySelectorAll('[data-c]').forEach(el => el.oninput = () => { c[el.dataset.c] = el.value; save(); const f = el.closest('.field'); if (f && el.value) f.classList.remove('err'); refresh(); });
     document.getElementById('subLine').innerHTML = ''; document.getElementById('subDetail').innerHTML = '';
   }
@@ -1139,7 +1142,7 @@ details.table[open] summary::after{content:' ▴'}
     const nb = document.getElementById('nextBtn'); nb.textContent = L('送出中…', 'Sending…'); nb.setAttribute('aria-disabled', 'true');
     const list = chosen(), total = list.reduce((s, st) => s + st.price().total, 0);
     const payload = {
-      plan: 'custom', lang, name: S.contact.name.trim(), email: S.contact.email.trim(), note: S.contact.note || '',
+      plan: 'custom', lang, optin: !!(document.getElementById('optin') || {}).checked, name: S.contact.name.trim(), email: S.contact.email.trim(), note: S.contact.note || '',
       website: (document.getElementById('hp') || {}).value || '',
       people: S.people, total, deposit: Math.round(total * C.depositRate),
       items: list.map(st => ({ key: st.key, title: st.zh, total: st.price().total, lines: st.price().lines, car: st.price().car || null })),

@@ -242,6 +242,7 @@ footer a{color:#fff}
     <div class="site-nav__links">
       <a class="zh" href="blog.html">部落格</a><a class="en" href="blog-en.html">Blog</a>
       <a class="zh" href="faq.html">FAQ</a><a class="en" href="faq-en.html">FAQ</a>
+      <a class="zh site-nav__acct" href="account.html?lang=zh" aria-label="我的訂單"><svg class="i" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span class="t">我的訂單</span></a><a class="en site-nav__acct" href="account.html?lang=en" aria-label="My bookings"><svg class="i" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span class="t">My bookings</span></a>
       <a class="zh" href="camp-lite.html?lang=en" data-lang-to="en">EN</a><a class="en" href="camp-lite.html?lang=zh" data-lang-to="zh">中文</a>
     </div>
     <a class="site-nav__cta" href="#book"><span class="zh">選日期報名</span><span class="en">Pick dates</span></a>
@@ -453,6 +454,7 @@ document.querySelectorAll('[data-lang-to]').forEach(function (a) {
 
       <div class="sumline" id="sumline"></div>
       <input class="hp" name="website" tabindex="-1" autocomplete="off">
+      <label class="optin" style="display:flex;gap:8px;align-items:flex-start;font-size:13.5px;color:#4a5a69;margin:4px 0 12px;font-weight:400;cursor:pointer"><input type="checkbox" name="optin" checked style="margin-top:4px;width:auto"><span><span class="zh">我願意收到開放預約與優惠通知（隨時可以取消）</span><span class="en">Email me when new dates open and about offers (unsubscribe anytime)</span></span></label>
       <button class="btn" type="submit" id="submitBtn"><span class="zh">寄給我完整報價</span><span class="en">Email me the full quote</span></button>
       <div class="err" id="err"></div>
       <p style="text-align:center;font-size:12.5px;color:var(--muted);margin:12px 0 0"><span class="zh">送出後不會自動扣款。看完報價再決定。</span><span class="en">No payment now. Decide after you see the quote.</span></p>
@@ -692,7 +694,7 @@ document.querySelectorAll('[data-lang-to]').forEach(function (a) {
     const data = {
       name: document.getElementById('name').value.trim(), email: f.email.value.trim(), date: f.date.value,
       tier: opt && opt.dataset.tier || '', classId: opt && opt.dataset.id || '', people: readPeople(),
-      website: f.website.value, lang, page: location.href, plan: C.plan || 'camp'
+      website: f.website.value, optin: !!(f.optin && f.optin.checked), lang, page: location.href, plan: C.plan || 'camp'
     };
     if (!data.name) return show('請填寫姓名。','Please enter your name.');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return show('請輸入正確的 Email。','Please enter a valid email.');

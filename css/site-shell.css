@@ -43,3 +43,8 @@
   border-top:1px solid rgba(138,153,168,0.18);
 }
 .site-footer a{ color:#7DBDE8; }
+
+/* 我的訂單：手機只顯示人像圖示 */
+.site-nav__acct{display:inline-flex;align-items:center;gap:.3rem}
+.site-nav__acct .i{display:none;vertical-align:middle}
+@media (max-width:560px){ .site-nav__acct .t{display:none} .site-nav__acct .i{display:inline-block} }
