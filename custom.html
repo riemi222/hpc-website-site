@@ -1072,13 +1072,7 @@ details.table[open] summary::after{content:' ▴'}
         <table class="pl">${RT.prices.map(x => `<tr><td>${esc(en ? x[1] : x[0])}</td><td class="p">${yen(x[2])} ${L('起／首日', 'from / day 1')}</td></tr>`).join('')}</table>
         <div class="hint">${L('價格以 ASAHI FLOW 官網為準。', 'Prices as listed on the ASAHI FLOW website.')}</div>
       </div>
-      <div class="coupon">
-        <div class="ct">${L('HPC 學員專屬 95 折', 'HPC guest discount: 5% off')}</div>
-        <div class="code"><span id="cpCode">${esc(code)}</span>${RT.code ? `<button type="button" id="cpBtn">${L('複製', 'Copy')}</button>` : ''}</div>
-        <p class="hint">${L('在 ASAHI FLOW 網站結帳時貼上折扣碼。', 'Paste the code at checkout on the ASAHI FLOW website.')}</p>
-      </div>
-      <a class="gobtn" href="${RT.url}" target="_blank" rel="noopener">${L('前往 ASAHI FLOW 預約雪具 →', 'Book gear at ASAHI FLOW →')}</a>
-      <div class="hint" style="text-align:center">${L('雪具直接向 ASAHI FLOW 預約、付款，不會算進這份估價。折扣碼也會寫在估價信裡。', 'You book and pay ASAHI FLOW directly; it is not part of this quote. The code is also in your quote email.')}</div>` : ''}
+      <div class="hint" style="text-align:center;margin-top:10px">${L('🎟 送出估價後，HPC 學員 95 折折扣碼和預約連結會出現在完成頁，也會寫在估價信裡。雪具直接向 ASAHI FLOW 預約、付款，不會算進這份估價。', '🎟 After you send your quote, your 5% discount code and booking link appear on the next page and in your quote email. You book and pay ASAHI FLOW directly; it is not part of this quote.')}</div>` : ''}
     </section>`;
     app.querySelectorAll('[data-yn]').forEach(b => b.onclick = () => { t.want = b.dataset.yn === '1'; save(); renderRental(); refresh(); });
     const cb = document.getElementById('cpBtn');
@@ -1110,7 +1104,7 @@ details.table[open] summary::after{content:' ▴'}
         <ul>${p.lines.map(x => `<li>${esc(x)}</li>`).join('')}</ul>${p.car ? `<div class="note">${L('最終車型由我們確認', 'Final vehicle confirmed by us')}</div>` : ''}
         <button type="button" class="edit" data-goto="${i}">${L('修改', 'Edit')}</button></div>`; }).join('')}
       ${S.rental.want && needRental() ? `<div class="sum-card"><div class="sh"><b>${L('雪具租借', 'Gear rental')}</b><span class="v" style="font-size:13px;font-weight:700;color:var(--ink-2)">${L('自行預約', 'Book directly')}</span></div>
-        <ul><li>ASAHI FLOW・${L('HPC 學員 95 折', '5% off for HPC guests')}${C.rental.code ? `（${L('折扣碼', 'code')} ${esc(C.rental.code)}）` : ''}</li></ul>
+        <ul><li>ASAHI FLOW・${L('HPC 學員 95 折（送出估價後提供折扣碼）', '5% off for HPC guests (code shown after you send your quote)')}</li></ul>
         <button type="button" class="edit" data-goto="${STEPS.findIndex(x => x.key === 'rental')}">${L('查看', 'View')}</button></div>` : ''}
       <div class="total"><div class="tr"><span>${L('總額', 'Total')}</span><b>${yen(total)}</b></div>
         <div class="dep"><span>${L('確認後訂金（50%）', 'Deposit after we confirm (50%)')}</span><span>${yen(dep)}</span></div>
@@ -1170,7 +1164,7 @@ details.table[open] summary::after{content:' ▴'}
     if (ok) {
       try { fbq('track', 'Lead', { value: total, currency: 'JPY' }); } catch(_) {}
       try { sessionStorage.removeItem(KEY); } catch(_) {}
-      location.href = 'camp-thanks.html?plan=custom&lang=' + lang;
+      location.href = 'camp-thanks.html?plan=custom&lang=' + lang + (payload.rental ? '&rental=1' : '');
     } else { refresh(); document.getElementById('why').textContent = L('送出失敗，請再試一次，或直接用 LINE／WhatsApp 聯絡我們。', 'Something went wrong. Please try again, or message us on WhatsApp/LINE.'); }
   }
 

@@ -83,6 +83,13 @@ document.querySelectorAll('[data-lang-to]').forEach(function (a) {
     </a>
   </div>
 
+
+  <div class="card rental-card" id="rentalCard" style="display:none;border:1.5px dashed #f0b89c;background:#fff4ee;text-align:center">
+    <h2><span class="zh">雪具租借：HPC 學員 95 折</span><span class="en">Rental gear: 5% off for HPC guests</span></h2>
+    <p><span class="zh">在 ASAHI FLOW 網站結帳時貼上折扣碼（旭川車站前・步行 3 分鐘）。</span><span class="en">Paste the code at checkout on the ASAHI FLOW website (3 min walk from Asahikawa Station).</span></p>
+    <div style="display:inline-flex;align-items:center;gap:10px;margin:8px 0 12px;background:#fff;border:1.5px solid #f0b89c;border-radius:10px;padding:8px 8px 8px 16px;font-size:20px;font-weight:900;letter-spacing:.08em"><span id="rcCode">snowi2627</span><button type="button" id="rcCopy" style="font:inherit;font-size:13px;font-weight:700;letter-spacing:0;background:#e8662c;color:#fff;border:0;border-radius:8px;padding:8px 12px;cursor:pointer"><span class="zh">複製</span><span class="en">Copy</span></button></div>
+    <a class="big" id="rcGo" href="https://www.asahiflow.com/?utm_source=yukiway&utm_medium=referral&utm_campaign=hpc" target="_blank" rel="noopener" style="background:#123f73;color:#fff"><span class="zh">前往 ASAHI FLOW 預約雪具 →</span><span class="en">Book gear at ASAHI FLOW →</span></a>
+  </div>
   <div class="spam">
     <b><span class="zh">⚠️ 沒看到報價信？</span><span class="en">⚠️ Can't see the email?</span></b>
     <span class="zh">請檢查「垃圾郵件」或「促銷內容」資料夾。寄件者是 <strong>hello@yukiway.com</strong>，找到後請標記為「不是垃圾郵件」，之後的通知才收得到。</span>
@@ -113,6 +120,11 @@ document.querySelectorAll('[data-lang-to]').forEach(function (a) {
     document.querySelector('h1').innerHTML = lang==='en' ? 'Your quote is on its way' : '估價已寄到你的信箱';
     document.querySelector('.sub').innerHTML = lang==='en' ? "We'll confirm everything within 24 hours, then email you a deposit link." : '我們會在 24 小時內確認，確認後寄訂金連結給你。';
     document.querySelectorAll('.back').forEach(a => { a.href = 'custom.html'; a.innerHTML = lang==='en' ? '← Back' : '← 回到自由搭配'; });
+  }
+  if (custom && p.get('rental') === '1') {
+    document.getElementById('rentalCard').style.display = '';
+    const cp = document.getElementById('rcCopy');
+    cp.onclick = async () => { try { await navigator.clipboard.writeText(document.getElementById('rcCode').textContent); } catch (_) {} cp.innerHTML = lang === 'en' ? 'Copied ✓' : '已複製 ✓'; };
   }
   if (p.get('wait') === '1') {
     document.querySelector('h1').innerHTML = lang==='en' ? "You're on the list" : '已幫你登記';
