@@ -1165,7 +1165,7 @@ details.table[open] summary::after{content:' ▴'}
       try { fbq('track', 'Lead', { value: total, currency: 'JPY' }); } catch(_) {}
       try { sessionStorage.removeItem(KEY); } catch(_) {}
       location.href = 'camp-thanks.html?plan=custom&lang=' + lang + (payload.rental ? '&rental=1' : '');
-    } else { refresh(); document.getElementById('why').textContent = L('送出失敗，請再試一次，或直接用 LINE／WhatsApp 聯絡我們。', 'Something went wrong. Please try again, or message us on WhatsApp/LINE.'); }
+    } else { refresh(); document.getElementById('why').textContent = L('送出失敗，請再試一次，或直接用 LINE／WhatsApp 聯絡我們。', 'Something went wrong. Please try again, or message us on WhatsApp.'); }
   }
 
   // ================= 之後的頁面（下一輪做） =================
