@@ -102,7 +102,7 @@ window.CUSTOM = {
     ] },
   // 雪具租借：特約店 ASAHI FLOW（客人自己到他們網站預約，用 HPC 折扣碼 95 折）
   rental: {
-    code: '',   // ★ 拿到折扣碼後填在這裡，例如 'HPC2027'
+    code: 'snowi2627',   // ASAHI FLOW 折扣碼（95 折）
     url: 'https://www.asahiflow.com/?utm_source=yukiway&utm_medium=referral&utm_campaign=hpc',
     prices: [['大全配（7 件）', 'Full set (7 items)', 13000], ['小全配（不含雪鏡、手套）', 'Set without goggles & gloves', 11500], ['三件組（板／雪杖＋固定器＋鞋）', 'Gear only (board/skis, bindings, boots)', 7500]]
   },
@@ -393,19 +393,20 @@ details.table[open] summary::after{content:' ▴'}
     { key: 'tour', zh: '觀光包車', en: 'Sightseeing charter', render: renderTour, valid: validTour, price: priceTour },
     { key: 'stay', zh: '旭川住宿', en: 'Asahikawa stay', render: renderStay, valid: validStay, price: priceStay },
     { key: 'lesson', zh: '滑雪課程', en: 'Ski lessons', render: renderLesson, valid: validLesson, price: priceLesson },
-    { key: 'rental', zh: '雪具租借', en: 'Gear rental', render: renderRental, valid: validRental, skip: () => !C.rental.code }, // 拿到折扣碼才會出現
+    { key: 'rental', zh: '雪具租借', en: 'Gear rental', render: renderRental, valid: validRental, skip: () => !needRental() }, // 有折扣碼，且接送到旭川／在旭川上課／有訂住宿才會出現
     { key: 'shuttle', zh: '雪場接送', en: 'Slope shuttle', render: renderShuttle, valid: validShuttle, price: priceShuttle, skip: () => !needShuttle() },
     { key: 'storage', zh: '雪具倉儲', en: 'Gear storage', render: renderStorage, valid: validStorage, price: priceStorage },
     { key: 'summary', zh: '確認估價', en: 'Your quote', render: renderSummary, valid: validSummary, final: true },
   ];
-  const NSTEP = STEPS.filter(x => !x.final && !(x.key === 'rental' && !C.rental.code)).length;
-  const stepNo = () => STEPS.slice(0, S.step + 1).filter(x => !x.final && !(x.key === 'rental' && !C.rental.code)).length;
+  const countable = x => !x.final && !(x.key === 'rental' && !needRental());
+  const nStep = () => STEPS.filter(countable).length;
+  const stepNo = () => STEPS.slice(0, S.step + 1).filter(countable).length;
   const app = document.getElementById('app');
 
   function go(i){
     S.step = Math.max(0, Math.min(STEPS.length - 1, i)); save();
     const st = STEPS[S.step];
-    document.getElementById('progLbl').textContent = st.final ? L('最後一步・確認估價', 'Last step · Your quote') : L(`第 ${stepNo()} 步／共 ${NSTEP} 步・${st.zh}`, `Step ${stepNo()} of ${NSTEP} · ${st.en}`);
+    document.getElementById('progLbl').textContent = st.final ? L('最後一步・確認估價', 'Last step · Your quote') : L(`第 ${stepNo()} 步／共 ${nStep()} 步・${st.zh}`, `Step ${stepNo()} of ${nStep()} · ${st.en}`);
     document.getElementById('progBar').style.width = ((S.step + 1) / STEPS.length * 100) + '%';
     st.render();
     refresh();
@@ -917,6 +918,12 @@ details.table[open] summary::after{content:' ▴'}
 
   // ================= 第 5 頁：雪場接送 =================
   // 只有住旭川、或在旭川上課的人才需要
+  function needRental(){
+    if (!C.rental.code) return false;
+    const tr = S.transfer || {};
+    const toAsa = !!(tr.want && ((tr.legs !== 'dep' && tr.arr && tr.arr.to === 'asahikawa') || (tr.legs !== 'arr' && tr.dep && tr.dep.from === 'asahikawa')));
+    return !!(toAsa || S.stay.want || (S.lesson.want && S.lesson.resort === 'asahikawa'));
+  }
   function needShuttle(){ return !!(S.stay.want || (S.lesson.want && S.lesson.resort === 'asahikawa')); }
   function transferMismatch(){
     const t = S.transfer; if (!t.want || !needShuttle()) return '';
@@ -1102,7 +1109,7 @@ details.table[open] summary::after{content:' ▴'}
       ${list.map(st => { const p = st.price(), i = STEPS.indexOf(st); return `<div class="sum-card"><div class="sh"><b>${L(st.zh, st.en)}</b><span class="v">${yen(p.total)}</span></div>
         <ul>${p.lines.map(x => `<li>${esc(x)}</li>`).join('')}</ul>${p.car ? `<div class="note">${L('最終車型由我們確認', 'Final vehicle confirmed by us')}</div>` : ''}
         <button type="button" class="edit" data-goto="${i}">${L('修改', 'Edit')}</button></div>`; }).join('')}
-      ${S.rental.want && C.rental.code ? `<div class="sum-card"><div class="sh"><b>${L('雪具租借', 'Gear rental')}</b><span class="v" style="font-size:13px;font-weight:700;color:var(--ink-2)">${L('自行預約', 'Book directly')}</span></div>
+      ${S.rental.want && needRental() ? `<div class="sum-card"><div class="sh"><b>${L('雪具租借', 'Gear rental')}</b><span class="v" style="font-size:13px;font-weight:700;color:var(--ink-2)">${L('自行預約', 'Book directly')}</span></div>
         <ul><li>ASAHI FLOW・${L('HPC 學員 95 折', '5% off for HPC guests')}${C.rental.code ? `（${L('折扣碼', 'code')} ${esc(C.rental.code)}）` : ''}</li></ul>
         <button type="button" class="edit" data-goto="${STEPS.findIndex(x => x.key === 'rental')}">${L('查看', 'View')}</button></div>` : ''}
       <div class="total"><div class="tr"><span>${L('總額', 'Total')}</span><b>${yen(total)}</b></div>
@@ -1146,7 +1153,7 @@ details.table[open] summary::after{content:' ▴'}
       website: (document.getElementById('hp') || {}).value || '',
       people: S.people, total, deposit: Math.round(total * C.depositRate),
       items: list.map(st => ({ key: st.key, title: st.zh, total: st.price().total, lines: st.price().lines, car: st.price().car || null })),
-      rental: !!S.rental.want,
+      rental: !!(S.rental.want && needRental()),
       raw: { rental: S.rental, transfer: S.transfer, tour: S.tour, stay: S.stay, lesson: S.lesson, shuttle: S.shuttle, storage: S.storage }
     };
     let ok = false;
