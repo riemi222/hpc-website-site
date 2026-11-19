@@ -1,0 +1,4 @@
+/blog.html      https://blog.yukiway.com/blog.html     301!
+/blog-en.html   https://blog.yukiway.com/blog-en.html  301!
+/blog           https://blog.yukiway.com/blog.html     301!
+/blog/*         https://blog.yukiway.com/blog.html     301!
