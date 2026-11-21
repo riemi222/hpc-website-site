@@ -58,12 +58,22 @@ window.CAMP = {
   // '2026/11/20' → '11/20'
   var md = function (d) { var p = String(d).split('/'); return Number(p[1]) + '/' + Number(p[2]); };
 
+  // 依日本時間自動判斷目前價格：早鳥 → 第二梯 → 正價
+  var now = Date.now();
+  var T = now <= Date.parse(CAMP.price.earlyDeadlineISO) ? { price: CAMP.tiers.early.price, d: CAMP.price.deadline, zh: '早鳥價', en: 'Early bird' }
+        : now <= Date.parse(CAMP.price.secondDeadlineISO) ? { price: CAMP.tiers.second.price, d: CAMP.price.secondDeadline, zh: '第二梯價格', en: 'Second release' }
+        : { price: CAMP.tiers.regular.price, d: '', zh: '正價', en: 'Regular price' };
+  var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var mdEn = function (d) { var p = String(d).split('/'); return MON[Number(p[1]) - 1] + ' ' + Number(p[2]); };
+
   var SITE_CONFIG = {
     // 全包保證班（數值都從上面的 window.CAMP 讀）
     camp: {
-      earlyBird: CAMP.tiers.early.price,         // 早鳥價（每人）
-      earlyBirdDeadline: md(CAMP.price.deadline), // 早鳥截止（月/日）
-      totalValue: CAMP.price.totalValue           // 總價值
+      earlyBird: T.price,                          // 目前價格（每人，會自動切換）
+      earlyBirdDeadline: md(CAMP.price.deadline),  // 早鳥截止（月/日）
+      noteZh: T.zh + (T.d ? '・' + md(T.d) + ' 截止' : ''),   // 例：第二梯價格・12/10 截止
+      noteEn: T.en + (T.d ? ' · ends ' + mdEn(T.d) : ''),
+      totalValue: CAMP.price.totalValue            // 總價值
     },
     // 精簡版
     lite: {
