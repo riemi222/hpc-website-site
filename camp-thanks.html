@@ -110,8 +110,8 @@ document.querySelectorAll('[data-lang-to]').forEach(function (a) {
   const lite = p.get('plan') === 'lite';
   const custom = p.get('plan') === 'custom';
   const msg = custom ? (lang === 'en' ? "Hi! I just sent a custom trip quote and have a question." : '你好，我剛送出自由搭配的估價，想詢問一下') : lite ? (lang === 'en' ? `Hi! I'd like to ask about the 5-day lite camp${date ? ' (' + date + ')' : ''}.` : `你好，我想詢問旭川5天精簡版${date ? '（' + date + '）' : ''}`) : lang === 'en'
-    ? `Hi! I'd like to ask about the all-inclusive 5-day ski camp${date ? ' (' + date + ')' : ''}.`
-    : `你好，我想詢問全包滑雪行程${date ? '（' + date + '）' : ''}`;
+    ? `Hi! I'd like to ask about the 5-Day All-Inclusive Ski Week${date ? ' (' + date + ')' : ''}.`
+    : `你好，我想詢問旭川5天4夜一條龍全包${date ? '（' + date + '）' : ''}`;
   const C = window.CONTACT;
   // LINE 官方帳號：開啟聊天並自動帶入訊息（未加好友會先顯示加好友）
   document.getElementById('lineBtn').href = `https://line.me/R/oaMessage/${encodeURIComponent(C.lineId)}/?${encodeURIComponent(msg)}`;

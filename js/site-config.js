@@ -1,83 +1,55 @@
 /* ============================================================
    site-config.js — 全站共用設定
-   要改價格、截止日、班次、聯絡方式，只改這個檔案。
+   要改價格、聯絡方式，只改這個檔案。
 
-   1) window.CAMP：保證班／精簡版設定（從 camp.html 原封不動搬過來）
-      camp.html 和 camp-lite.html 直接讀 window.CAMP（精簡版在自己的頁面裡把 plan 換成 'lite'）。
-      開班日期不放這裡：由後端 /api/classes 提供。
-      首頁全包卡的價格、截止日、總價值和精簡版價格也從這裡來。
+   1) window.CAMP：旭川5天4夜 滑雪一條龍全包的設定
+      camp.html 直接讀 window.CAMP。開班日期和剩餘名額不放這裡：由後端 /api/classes 提供。
+      ⚠️ 價目表要跟後端 schedule.js 的 prices、transfer 一致（報價信和付款以後端為準）。
    2) window.SITE_CONFIG：首頁和其他頁面用的值
       頁面上寫 data-cfg="路徑" 的元素會自動填入：
-        data-cfg="camp.earlyBird"                → ¥268,000
-        data-cfg="camp.earlyBirdDeadline"        → 11/20
-        data-cfg="camp.earlyBirdDeadline" data-cfg-format="date-en" → Nov 20
+        data-cfg="allin.price3"  → ¥278,000（淡季 3 人同行的每人價格）
+        data-cfg="allin.save3"   → ¥180,000（3 人同行每人比 1 人報名省多少）
    ============================================================ */
 
 /* ================================================================
    ★ 這裡是你唯一需要改的地方 ★
    ================================================================ */
 window.CAMP = {
-  plan: 'camp',                 // 這一頁的方案：camp＝保證班、lite＝精簡版
-  // 後端網址：Railway 部署完成後，把網址換成你的（結尾要有 /api/camp-lead）
+  plan: 'allin',                // 一條龍全包
+  // 後端網址（結尾要有 /api/camp-lead）
   backend: 'https://hpc-camp-backend-production.up.railway.app/api/camp-lead',
-  // 後端掛掉時的備援：仍會用 Web3Forms 寄到你的信箱
+  // 每次送出也會用 Web3Forms 寄一封通知到你的信箱（後端掛掉時是備援）
   web3formsKey: 'a2a66d84-31b8-4e10-ad64-29181cca53d1',
 
-  price: {
-    current: 268000,            // 目前顯示的價格
-    labelZh: '早鳥第一梯', labelEn: 'Early bird · first release',
-    deadline: '2026/11/20',     // 這一批截止日
-    earlyDeadlineISO: '2026-11-20T23:59:59+09:00', // 過了這個時間（日本時間），早鳥自動變第二批
-    secondDeadline: '2026/12/10',  // 第二梯截止日
-    secondDeadlineISO: '2026-12-10T23:59:59+09:00', // 過了這個時間，自動變正價
-    next: 283000,               // 下一批價格
-    regular: 298000,            // 正價
-    totalValue: 475400          // 總價值（方案 403,400＋贈品 72,000）
+  // 每人價格：依同一筆報名的人數（1–6 人）。旺季日期由後端班次決定
+  prices: {
+    regular: { 1: 458000, 2: 328000, 3: 278000, 4: 248000, 5: 238000, 6: 228000 }, // 淡季
+    peak:    { 1: 518000, 2: 358000, 3: 298000, 4: 268000, 5: 258000, 6: 248000 }  // 旺季
   },
+  // 機場接送（加購）：新千歲 ⇄ 旭川，一台車單程
+  transfer: {
+    small: 85000,           // 1–3 人小車
+    large: 90000,           // 4–6 人大車
+    largeFrom: 4,           // 幾人以上派大車
+    nightSurcharge: 20000,  // 22:00–05:00 每趟加收（人工確認，不算進試算）
+    latestLanding: '10:30'  // 加購接機：班機要在幾點前降落（Day 1 14:00 旭川集合）
+  },
+  classSize: 6,                 // 每班最多人數
   deposit: 50000,               // 每人訂金
-  lineUrl: 'https://line.me/R/ti/p/@414sdfly',   // 加購區的 LINE 連結
-  whatsappUrl: 'https://wa.me/817044204150',
-
-  // 每個價格等級的金額
-  tiers: {
-    early:   { price: 268000, zh: '早鳥', en: 'Early bird' },
-    second:  { price: 283000, zh: '第二梯', en: 'Second release' },
-    regular: { price: 298000, zh: '正價', en: 'Regular' },
-    peak:    { price: 298000, zh: '旺季', en: 'Peak season' },
-    // 精簡版（camp-lite.html）用：平日 248,000／旺季 278,000，沒有早鳥
-    liteRegular: { price: 248000, zh: '精簡版', en: 'Lite' },
-    litePeak:    { price: 278000, zh: '精簡版・旺季', en: 'Lite · peak season' }
-  },
-
-  // 開班日期、梯次、剩餘名額都由後端自動決定（後端 repo 的 schedule.js），這裡不用改。
-  // 平日班永遠顯示 6 個日期、旺季 7 個；滿班自動換下一班，梯次截止自動換日期和價格。
+  lineUrl: 'https://line.me/R/ti/p/@414sdfly',
+  whatsappUrl: 'https://wa.me/817044204150'
 };
 
 (function () {
   var CAMP = window.CAMP;
-  // '2026/11/20' → '11/20'
-  var md = function (d) { var p = String(d).split('/'); return Number(p[1]) + '/' + Number(p[2]); };
-
-  // 依日本時間自動判斷目前價格：早鳥 → 第二梯 → 正價
-  var now = Date.now();
-  var T = now <= Date.parse(CAMP.price.earlyDeadlineISO) ? { price: CAMP.tiers.early.price, d: CAMP.price.deadline, zh: '早鳥價', en: 'Early bird' }
-        : now <= Date.parse(CAMP.price.secondDeadlineISO) ? { price: CAMP.tiers.second.price, d: CAMP.price.secondDeadline, zh: '第二梯價格', en: 'Second release' }
-        : { price: CAMP.tiers.regular.price, d: '', zh: '正價', en: 'Regular price' };
-  var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  var mdEn = function (d) { var p = String(d).split('/'); return MON[Number(p[1]) - 1] + ' ' + Number(p[2]); };
+  var P = CAMP.prices.regular;
 
   var SITE_CONFIG = {
-    // 全包保證班（數值都從上面的 window.CAMP 讀）
-    camp: {
-      earlyBird: T.price,                          // 目前價格（每人，會自動切換）
-      earlyBirdDeadline: md(CAMP.price.deadline),  // 早鳥截止（月/日）
-      noteZh: T.zh + (T.d ? '・' + md(T.d) + ' 截止' : ''),   // 例：第二梯價格・12/10 截止
-      noteEn: T.en + (T.d ? ' · ends ' + mdEn(T.d) : ''),
-      totalValue: CAMP.price.totalValue            // 總價值
-    },
-    // 精簡版
-    lite: {
-      price: CAMP.tiers.liteRegular.price        // 精簡版平日價
+    // 一條龍全包（數值都從上面的 window.CAMP 讀）
+    allin: {
+      price3: P[3],          // 淡季 3 人同行的每人價格（首頁主價格）
+      save3: P[1] - P[3],    // 3 人同行每人比 1 人報名省多少
+      priceFrom: P[6]        // 最低每人價格（淡季 6 人同行）
     },
     // 自由搭配起價
     from: {

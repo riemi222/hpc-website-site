@@ -112,7 +112,7 @@ summary{cursor:pointer;font-size:14px;color:var(--blue);font-weight:700}
     </div>
     <div class="acts" style="justify-content:center">
       <a class="btn ghost" id="addLink" href="custom.html"><span class="zh">＋ 加購其他服務</span><span class="en">＋ Add more services</span></a>
-      <a class="btn ghost" id="campLink" href="camp.html"><span class="zh">看保證班日期</span><span class="en">See camp dates</span></a>
+      <a class="btn ghost" id="campLink" href="camp.html"><span class="zh">看一條龍全包日期</span><span class="en">See ski week dates</span></a>
     </div>
   </section>
 
@@ -155,7 +155,7 @@ summary{cursor:pointer;font-size:14px;color:var(--blue);font-weight:700}
   document.getElementById('again').onclick = () => show('vLogin');
   document.getElementById('logout').onclick = () => { set(''); show('vLogin'); };
 
-  const PLAN = { camp: ['旭川5天保證班', '5-Day Zero-to-Turns Camp'], lite: ['旭川5天精簡版', '5-Day Lite Camp'], custom: ['北海道自由搭配', 'Custom Hokkaido trip'] };
+  const PLAN = { allin: ['旭川5天4夜 滑雪一條龍全包', '5-Day All-Inclusive Ski Week'], camp: ['旭川5天保證班', '5-Day Zero-to-Turns Camp'], lite: ['旭川5天精簡版', '5-Day Lite Camp'], custom: ['北海道自由搭配', 'Custom Hokkaido trip'] }; // camp／lite：舊訂單
   const STATUS = {
     '待確認': ['t-wait', '確認中', 'Confirming'], '已報價': ['t-quote', '待付訂金', 'Deposit due'], '已回覆': ['t-quote', '待付訂金', 'Deposit due'],
     '已付款': ['t-dep', '已付訂金', 'Deposit paid'], '已付清': ['t-full', '已付清', 'Fully paid'], '等下一批': ['t-next', '等下一批開放', 'Waiting list']

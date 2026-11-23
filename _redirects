@@ -2,3 +2,6 @@
 /blog-en.html   https://blog.yukiway.com/blog-en.html  301!
 /blog           https://blog.yukiway.com/blog.html     301!
 /blog/*         https://blog.yukiway.com/blog.html     301!
+# 精簡版已併入一條龍全包（camp.html）；! ＝檔案還在也照樣轉址
+/camp-lite.html   /camp.html   301!
+/camp-lite        /camp        301!

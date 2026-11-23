@@ -8,7 +8,7 @@
 <style>
   /* ============================================================
      en.html — English homepage (step 1 redesign)
-     Same layout as index.html: nav (Blog | FAQ | 中文) → headline + three-way
+     Same layout as index.html: nav (Blog | FAQ | 中文) → headline + two-way
      chooser → reviews → trust (about, policies) → footer.
      Prices and deadline come from js/site-config.js.
      ============================================================ */
@@ -80,7 +80,9 @@
     .camp__list li{ font-size:.92rem; }
   }
 
-  /* 精簡版小卡 */
+  .choose__right .camp{ flex:1; }   /* 右欄只剩一張卡：高度跟左欄自由搭配一樣 */
+  .camp__save{ margin-top:.45rem; font-size:.92rem; color:#9fe0b7; font-weight:700; }
+  /* 精簡版小卡（已停用，樣式保留） */
   .lite{ background:#fff; border:1px solid #dde3ea; border-radius:16px; padding:1.1rem 1.3rem; color:#0d2846; }
   .lite__kicker{ font-size:.8rem; color:#7a8798; }
   .lite__title{ font-weight:700; font-size:1.05rem; margin:.15rem 0 .35rem; }
@@ -182,43 +184,36 @@ src="https://www.facebook.com/tr?id=1035447772859173&ev=PageView&noscript=1"
   </div>
 </nav>
 
-<!-- 第一屏：標題 + 三選一（價格從 js/site-config.js 讀） -->
-<section class="choose" id="choose" aria-label="Choose: guaranteed camp, lite version or build your own">
+<!-- 第一屏：標題 + 二選一（價格從 js/site-config.js 讀） -->
+<section class="choose" id="choose" aria-label="Choose: all-inclusive ski week or build your own">
   <div class="choose__head">
     <h1 class="choose__title">How do you want to ski Hokkaido?</h1>
     <p class="choose__sub">First time on snow? Go all-inclusive — it's the easiest. Experienced and like planning your own trip? Build it yourself.</p>
   </div>
 
   <div class="choose__grid">
-    <!-- 右欄（手機排第一）：全包卡 + 精簡版小卡 -->
+    <!-- 右欄（手機排第一）：一條龍全包 -->
     <div class="choose__right">
       <article class="camp">
         <span class="camp__tag">Best for beginners</span>
         <div class="camp__kicker">Asahikawa · 5 days 4 nights · all-inclusive</div>
-        <h2 class="camp__title">Zero-to-Turns <span class="nw">Guaranteed Camp</span></h2>
+        <h2 class="camp__title">All-Inclusive <span class="nw">Ski Week</span></h2>
         <div class="camp__price">
-          <span><span class="camp__amount" data-cfg="camp.earlyBird">¥283,000</span><span class="camp__per"> per person</span></span>
-          <span class="camp__early" data-cfg="camp.noteEn">Second release · ends Dec 10</span>
+          <span><span class="camp__amount" data-cfg="allin.price3">¥278,000</span><span class="camp__per"> per person</span></span>
+          <span class="camp__early">Low season · group of 3</span>
         </div>
-        <div class="camp__value">Total value <span data-cfg="camp.totalValue">¥475,400</span></div>
+        <div class="camp__save">Each saves <span data-cfg="allin.save3">¥180,000</span> vs. booking alone</div>
         <ul class="camp__list">
-          <li>New Chitose Airport ⇄ Asahikawa private return transfers</li>
-          <li>4 nights' lodging</li>
-          <li>3 lesson days (max 1:3)</li>
+          <li>4 nights in a private room</li>
+          <li>3 lesson days (one instructor, up to 6)</li>
           <li>Lift pass + full gear and ski wear rental</li>
           <li>Daily slope shuttle</li>
+          <li>Airport transfer available as an add-on</li>
         </ul>
-        <div class="camp__badge">Can't link turns? Retake free next season</div>
+        <div class="camp__badge">Runs with 1 · cheaper with friends</div>
         <a class="camp__btn" href="camp.html?lang=en">See dates &amp; seats left →</a>
       </article>
 
-      <aside class="lite">
-        <div class="lite__kicker">Sorting your own transport?</div>
-        <h3 class="lite__title">Lite version · 5 days 4 nights</h3>
-        <p class="lite__text">Lessons + lodging + lift pass + gear and ski wear + slope shuttle · <span data-cfg="lite.price">¥248,000</span> per person</p>
-        <p class="lite__note">Airport transfers and bonuses not included</p>
-        <a class="lite__link" href="camp-lite.html?lang=en">See the lite version →</a>
-      </aside>
     </div>
 
     <!-- 左欄（手機排最後）：自由搭配 -->
